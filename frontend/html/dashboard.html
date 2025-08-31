@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Mentally</title>
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body class="dashboard">
+    <header>
+        <nav class="navbar">
+            <a href="../html/landing.html" class="logo">Mentally</a>
+            <ul class="nav-links">
+                <li><a href="#community">Community</a></li>
+                <li><a href="#resources">Resources</a></li>
+                <li><a href="#profile">My Profile</a></li>
+                <li><a href="#" id="logout" class="button">Logout</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="dashboard-container">
+        <section class="user-welcome">
+            <h1>Welcome back, <span id="username">Friend</span>!</h1>
+            <div class="mood-tracker">
+                <h2>How are you feeling today?</h2>
+                <div class="mood-options">
+                    <button class="mood-option" data-mood="awful">😢</button>
+                    <button class="mood-option" data-mood="sad">😔</button>
+                    <button class="mood-option" data-mood="neutral">😐</button>
+                    <button class="mood-option" data-mood="good">😊</button>
+                    <button class="mood-option" data-mood="great">😄</button>
+                </div>
+            </div>
+        </section>
+
+        <section class="ai-chat-section">
+            <h2>Chat with Mindy, your AI companion</h2>
+            <div class="chat-container">
+                <div class="chat-messages">
+                    <div class="message ai-message">
+                        <p>Hi there! I'm Mindy, here to listen and support you. Remember, I'm a first step toward feeling better, not a replacement for professional care. How are you doing today?</p>
+                    </div>
+                </div>
+                <div class="chat-input">
+                    <textarea placeholder="Type your message here..."></textarea>
+                    <button class="send-button">Send</button>
+                </div>
+                <div class="chat-timer">
+                    <p>Time remaining today: <span id="chat-time">15:00</span></p>
+                </div>
+            </div>
+            <div class="ai-suggestions">
+                <h3>Mindy suggests:</h3>
+                <button class="suggestion-button">Connect with a counselor</button>
+                <button class="suggestion-button">Find local support groups</button>
+                <button class="suggestion-button">Breathing exercise</button>
+            </div>
+        </section>
+
+        <section class="wellness-tools">
+            <h2>Wellness Tools</h2>
+            <div class="tools-grid">
+                <article class="tool-card">
+                    <h3>Meditation</h3>
+                    <p>5-minute breathing exercise</p>
+                    <button class="tool-button">Start</button>
+                </article>
+                <article class="tool-card">
+                    <h3>Gratitude Journal</h3>
+                    <p>What are you thankful for today?</p>
+                    <button class="tool-button">Write</button>
+                </article>
+                <article class="tool-card">
+                    <h3>Daily Challenge</h3>
+                    <p>Take a 10-minute walk outside</p>
+                    <button class="tool-button">Accept</button>
+                </article>
+            </div>
+        </section>
+
+        <section class="community-section">
+            <h2>Community Support</h2>
+            <div class="community-options">
+                <article class="community-card">
+                    <h3>Support Groups</h3>
+                    <p>Join others with similar experiences</p>
+                    <button class="community-button">Find Groups</button>
+                </article>
+                <article class="community-card">
+                    <h3>Local Activities</h3>
+                    <p>Find events happening near you</p>
+                    <button class="community-button">Explore</button>
+                </article>
+            </div>
+        </section>
+
+        <section class="progress-section">
+            <h2>Your Progress</h2>
+            <div class="progress-chart">
+                <div class="chart-container">
+                    <canvas id="mood-chart" width="400" height="200"></canvas>
+                </div>
+                <div class="achievements">
+                    <h3>Achievements</h3>
+                    <div class="badges">
+                        <span class="badge">🔥 7-day streak</span>
+                        <span class="badge">📝 Journaling</span>
+                        <span class="badge">🧘 Meditated</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <button id="emergency-button" class="emergency-button">Emergency Help</button>
+
+    <script src="../js/dashboard.js"></script>
+</body>
+</html>
