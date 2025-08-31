@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mentaly - Find Help</title>
+    <link rel="stylesheet" href="../css/dash.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+        <section class="nav-container">
+            <a href="../html/dash.html" class="logo-link">
+                <h1 class="logo">Mentaly</h1>
+            </a>
+            
+            <button class="hamburger" id="hamburger">
+                <i class="fas fa-bars"></i>
+            </button>
+            
+            <ul class="nav-menu">
+                <li>
+                    <a href="../html/dash.html" class="nav-link" data-page="dashboard">
+                        <i class="fas fa-chart-line"></i>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="../html/ai-support.html" class="nav-link" data-page="ai-chat">
+                        <i class="fas fa-robot"></i>
+                        <span>AI Support</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="../html/mood-tracker.html" class="nav-link" data-page="mood-tracker">
+                        <i class="fas fa-heart"></i>
+                        <span>Mood Tracker</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="../html/community.html" class="nav-link" data-page="community">
+                        <i class="fas fa-users"></i>
+                        <span>Community</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="../html/wellness-tools.html" class="nav-link" data-page="wellness-tools">
+                        <i class="fas fa-leaf"></i>
+                        <span>Wellness Tools</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="../html/professionals.html" class="nav-link active" data-page="professionals">
+                        <i class="fas fa-user-md"></i>
+                        <span>Find Help</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="../html/progress.html" class="nav-link" data-page="progress">
+                        <i class="fas fa-trophy"></i>
+                        <span>Progress</span>
+                    </a>
+                </li>
+            </ul>
+            
+            <section class="nav-actions">
+                <button class="emergency-btn" id="emergencyBtn">
+                    <i class="fas fa-phone"></i>
+                    <span>Emergency</span>
+                </button>
+                <button class="settings-btn" id="settingsBtn">
+                    <i class="fas fa-cog"></i>
+                    <span>Settings</span>
+                </button>
+            </section>
+        </section>
+    </nav>
+
+    <main class="main-content">
+        <section class="content-area">
+            <!-- Professionals Page -->
+            <article class="page active" id="professionals-page">
+                <header class="page-header">
+                    <h2>Find Professional Help</h2>
+                    <p>Connect with licensed mental health professionals</p>
+                </header>
+                
+                <section class="professionals-container">
+                    <section class="help-options">
+                        <h3>Ways to Get Help</h3>
+                        <section class="options-grid">
+                            <article class="help-option-card">
+                                <figure class="option-icon">
+                                    <i class="fas fa-video"></i>
+                                </figure>
+                                <section class="option-content">
+                                    <h4>Online Therapy</h4>
+                                    <p>Connect with licensed therapists via video sessions from the comfort of your home</p>
+                                    <button class="option-btn">Find Online Therapists</button>
+                                </section>
+                            </article>
+                            <article class="help-option-card">
+                                <figure class="option-icon">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                </figure>
+                                <section class="option-content">
+                                    <h4>Local Professionals</h4>
+                                    <p>Find mental health professionals practicing in your local area</p>
+                                    <button class="option-btn">Search Local Help</button>
+                                </section>
+                            </article>
+                            <article class="help-option-card">
+                                <figure class="option-icon">
+                                    <i class="fas fa-phone-alt"></i>
+                                </figure>
+                                <section class="option-content">
+                                    <h4>Hotlines & Crisis Support</h4>
+                                    <p>Immediate help available 24/7 through various crisis hotlines</p>
+                                    <button class="option-btn">View Crisis Resources</button>
+                                </section>
+                            </article>
+                            <article class="help-option-card">
+                                <figure class="option-icon">
+                                    <i class="fas fa-hand-holding-heart"></i>
+                                </figure>
+                                <section class="option-content">
+                                    <h4>Support Groups</h4>
+                                    <p>Join group therapy sessions and connect with others facing similar challenges</p>
+                                    <button class="option-btn">Find Support Groups</button>
+                                </section>
+                            </article>
+                        </section>
+                    </section>
+                    
+                    <section class="featured-professionals">
+                        <header class="section-header">
+                            <h3>Featured Professionals</h3>
+                            <button class="view-all-btn">View All Professionals</button>
+                        </header>
+                        <section class="professionals-grid">
+                            <article class="professional-card">
+                                <figure class="professional-photo">
+                                    <i class="fas fa-user-md"></i>
+                                </figure>
+                                <section class="professional-info">
+                                    <h4>Dr. Sarah Johnson</h4>
+                                    <p class="professional-title">Clinical Psychologist</p>
+                                    <p class="professional-specialty">Specializes in: Anxiety, Depression, CBT</p>
+                                    <section class="professional-meta">
+                                        <span class="experience">15 years experience</span>
+                                        <span class="rating">4.9 ★</span>
+                                    </section>
+                                    <section class="professional-actions">
+                                        <button class="profile-btn">View Profile</button>
+                                        <button class="book-btn">Book Session</button>
+                                    </section>
+                                </section>
+                            </article>
+                            <article class="professional-card">
+                                <figure class="professional-photo">
+                                    <i class="fas fa-user-md"></i>
+                                </figure>
+                                <section class="professional-info">
+                                    <h4>Michael Rodriguez, LCSW</h4>
+                                    <p class="professional-title">Licensed Clinical Social Worker</p>
+                                    <p class="professional-specialty">Specializes in: Trauma, PTSD, Mindfulness</p>
+                                    <section class="professional-meta">
+                                        <span class="experience">8 years experience</span>
+                                        <span class="rating">4.8 ★</span>
+                                    </section>
+                                    <section class="professional-actions">
+                                        <button class="profile-btn">View Profile</button>
+                                        <button class="book-btn">Book Session</button>
+                                    </section>
+                                </section>
+                            </article>
+                            <article class="professional-card">
+                                <figure class="professional-photo">
+                                    <i class="fas fa-user-md"></i>
+                                </figure>
+                                <section class="professional-info">
+                                    <h4>Dr. Amina Patel</h4>
+                                    <p class="professional-title">Psychiatrist</p>
+                                    <p class="professional-specialty">Specializes in: Medication Management, Mood Disorders</p>
+                                    <section class="professional-meta">
+                                        <span class="experience">12 years experience</span>
+                                        <span class="rating">4.7 ★</span>
+                                    </section>
+                                    <section class="professional-actions">
+                                        <button class="profile-btn">View Profile</button>
+                                        <button class="book-btn">Book Session</button>
+                                    </section>
+                                </section>
+                            </article>
+                        </section>
+                    </section>
+                    
+                    <section class="search-professionals">
+                        <h3>Find the Right Professional for You</h3>
+                        <form class="search-form">
+                            <section class="form-row">
+                                <section class="form-group">
+                                    <label class="form-label">Specialty</label>
+                                    <select class="form-select">
+                                        <option>Any Specialty</option>
+                                        <option>Anxiety</option>
+                                        <option>Depression</option>
+                                        <option>Trauma</option>
+                                        <option>Relationship Issues</option>
+                                        <option>Addiction</option>
+                                        <option>Eating Disorders</option>
+                                        <option>OCD</option>
+                                        <option>PTSD</option>
+                                    </select>
+                                </section>
+                                <section class="form-group">
+                                    <label class="form-label">Type of Professional</label>
+                                    <select class="form-select">
+                                        <option>Any Professional</option>
+                                        <option>Psychologist</option>
+                                        <option>Psychiatrist</option>
+                                        <option>Therapist</option>
+                                        <option>Counselor</option>
+                                        <option>Social Worker</option>
+                                    </select>
+                                </section>
+                                <section class="form-group">
+                                    <label class="form-label">Location</label>
+                                    <input type="text" class="form-input" placeholder="City or Zip Code">
+                                </section>
+                            </section>
+                            <section class="form-row">
+                                <section class="form-group">
+                                    <label class="form-label">Insurance</label>
+                                    <select class="form-select">
+                                        <option>Any Insurance</option>
+                                        <option>Discovery Health</option>
+                                        <option>Bonitas</option>
+                                        <option>Momentum</option>
+                                        <option>Self-Pay</option>
+                                    </select>
+                                </section>
+                                <section class="form-group">
+                                    <label class="form-label">Session Type</label>
+                                    <select class="form-select">
+                                        <option>Any Type</option>
+                                        <option>In-Person</option>
+                                        <option>Online</option>
+                                        <option>Both</option>
+                                    </select>
+                                </section>
+                                <button type="submit" class="search-btn">Search Professionals</button>
+                            </section>
+                        </form>
+                    </section>
+                    
+                    <section class="resources-section">
+                        <header class="section-header">
+                            <h3>Mental Health Resources</h3>
+                        </header>
+                        <section class="resources-grid">
+                            <article class="resource-card">
+                                <figure class="resource-icon">
+                                    <i class="fas fa-book"></i>
+                                </figure>
+                                <section class="resource-content">
+                                    <h4>Understanding Therapy</h4>
+                                    <p>A comprehensive guide to different types of therapy and what to expect</p>
+                                    <button class="resource-btn">Read Guide</button>
+                                </section>
+                            </article>
+                            <article class="resource-card">
+                                <figure class="resource-icon">
+                                    <i class="fas fa-question-circle"></i>
+                                </figure>
+                                <section class="resource-content">
+                                    <h4>FAQ: Starting Therapy</h4>
+                                    <p>Answers to common questions about beginning your therapy journey</p>
+                                    <button class="resource-btn">View FAQs</button>
+                                </section>
+                            </article>
+                            <article class="resource-card">
+                                <figure class="resource-icon">
+                                    <i class="fas fa-dollar-sign"></i>
+                                </figure>
+                                <section class="resource-content">
+                                    <h4>Affordability Options</h4>
+                                    <p>Information about insurance, sliding scale fees, and financial assistance</p>
+                                    <button class="resource-btn">Learn More</button>
+                                </section>
+                            </article>
+                        </section>
+                    </section>
+                </section>
+            </article>
+        </section>
+    </main>
+
+    <!-- Emergency Modal -->
+    <dialog class="modal" id="emergencyModal">
+        <article class="modal-content emergency-modal">
+            <header class="modal-header">
+                <h2>Immediate Help Resources</h2>
+                <button class="modal-close" id="closeEmergencyModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </header>
+            <section class="modal-body">
+                <p class="emergency-text">If you're in crisis or experiencing thoughts of self-harm, please reach out to these resources immediately:</p>
+                <section class="emergency-list">
+                    <article class="emergency-item">
+                        <h3>Crisis Hotline</h3>
+                        <p>24/7 Confidential Support</p>
+                        <a href="tel:0800567567" class="emergency-call-link">
+                            <i class="fas fa-phone"></i>
+                            0800 567 567
+                        </a>
+                    </article>
+                    <article class="emergency-item">
+                        <h3>SADAG Helpline</h3>
+                        <p>South African Depression & Anxiety Group</p>
+                        <a href="tel:0800121314" class="emergency-call-link">
+                            <i class="fas fa-phone"></i>
+                            0800 121 314
+                        </a>
+                    </article>
+                    <article class="emergency-item">
+                        <h3>Emergency Services</h3>
+                        <p>Medical Emergency</p>
+                        <a href="tel:10177" class="emergency-call-link">
+                            <i class="fas fa-phone"></i>
+                            10177
+                        </a>
+                    </article>
+                </section>
+                <p class="emergency-note">You are not alone. Please reach out for support.</p>
+            </section>
+        </article>
+    </dialog>
+
+    <!-- Settings Modal -->
+    <dialog class="modal" id="settingsModal">
+        <article class="modal-content settings-modal">
+            <header class="modal-header">
+                <h2>Settings</h2>
+                <button class="modal-close" id="closeSettingsModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </header>
+            <section class="modal-body">
+                <nav class="settings-nav">
+                    <button class="settings-nav-btn active" data-tab="account">Account</button>
+                    <button class="settings-nav-btn" data-tab="privacy">Privacy</button>
+                    <button class="settings-nav-btn" data-tab="notifications">Notifications</button>
+                    <button class="settings-nav-btn" data-tab="appearance">Appearance</button>
+                </nav>
+                <section class="settings-content">
+                    <article class="settings-tab active" id="account-tab">
+                        <h3>Account Settings</h3>
+                        <form class="settings-form">
+                            <section class="form-group">
+                                <label class="form-label">Display Name</label>
+                                <input type="text" class="form-input" value="Anonymous User">
+                            </section>
+                            <section class="form-group">
+                                <label class="form-label">Email Address</label>
+                                <input type="email" class="form-input" value="user@example.com">
+                            </section>
+                            <section class="form-group">
+                                <label class="form-label">Password</label>
+                                <input type="password" class="form-input" value="********">
+                            </section>
+                            <button type="submit" class="save-settings-btn">Save Changes</button>
+                        </form>
+                    </article>
+                    <article class="settings-tab" id="privacy-tab">
+                        <h3>Privacy Settings</h3>
+                        <form class="settings-form">
+                            <section class="form-group checkbox-group">
+                                <input type="checkbox" id="dataCollection" checked>
+                                <label for="dataCollection">Allow anonymous data collection to improve services</label>
+                            </section>
+                            <section class="form-group checkbox-group">
+                                <input type="checkbox" id="personalizedInsights" checked>
+                                <label for="personalizedInsights">Receive personalized insights based on my data</label>
+                            </section>
+                            <section class="form-group">
+                                <label class="form-label">Data Retention</label>
+                                <select class="form-select">
+                                    <option>Keep data indefinitely</option>
+                                    <option>Delete after 1 year</option>
+                                    <option>Delete after 6 months</option>
+                                </select>
+                            </section>
+                            <button type="submit" class="save-settings-btn">Save Preferences</button>
+                        </form>
+                    </article>
+                    <article class="settings-tab" id="notifications-tab">
+                        <h3>Notification Settings</h3>
+                        <form class="settings-form">
+                            <section class="form-group checkbox-group">
+                                <input type="checkbox" id="dailyReminders" checked>
+                                <label for="dailyReminders">Daily check-in reminders</label>
+                            </section>
+                            <section class="form-group checkbox-group">
+                                <input type="checkbox" id="weeklyReports" checked>
+                                <label for="weeklyReports">Weekly progress reports</label>
+                            </section>
+                            <section class="form-group checkbox-group">
+                                <input type="checkbox" id="communityUpdates">
+                                <label for="communityUpdates">Community updates and events</label>
+                            </section>
+                            <section class="form-group">
+                                <label class="form-label">Notification Frequency</label>
+                                <select class="form-select">
+                                    <option>Only important updates</option>
+                                    <option>Regular (recommended)</option>
+                                    <option>All notifications</option>
+                                </select>
+                            </section>
+                            <button type="submit" class="save-settings-btn">Save Preferences</button>
+                        </form>
+                    </article>
+                    <article class="settings-tab" id="appearance-tab">
+                        <h3>Appearance Settings</h3>
+                        <form class="settings-form">
+                            <section class="form-group">
+                                <label class="form-label">Theme</label>
+                                <select class="form-select">
+                                    <option>Light (Default)</option>
+                                    <option>Dark</option>
+                                    <option>Auto (System)</option>
+                                </select>
+                            </section>
+                            <section class="form-group">
+                                <label class="form-label">Font Size</label>
+                                <select class="form-select">
+                                    <option>Small</option>
+                                    <option>Medium (Default)</option>
+                                    <option>Large</option>
+                                </select>
+                            </section>
+                            <section class="form-group checkbox-group">
+                                <input type="checkbox" id="reduceAnimations">
+                                <label for="reduceAnimations">Reduce animations and transitions</label>
+                            </section>
+                            <button type="submit" class="save-settings-btn">Save Preferences</button>
+                        </form>
+                    </article>
+                </section>
+            </section>
+        </article>
+    </dialog>
+
+    <script src="../js/dash.js"></script>
+</body>
+</html>

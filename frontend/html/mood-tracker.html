@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mentaly - Mood Tracker</title>
+    <link rel="stylesheet" href="../css/dash.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+        <section class="nav-container">
+            <a href="../html/dash.html" class="logo-link">
+                <h1 class="logo">Mentaly</h1>
+            </a>
+            
+            <button class="hamburger" id="hamburger">
+                <i class="fas fa-bars"></i>
+            </button>
+            
+            <ul class="nav-menu">
+                <li>
+                    <a href="../html/dash.html" class="nav-link" data-page="dashboard">
+                        <i class="fas fa-chart-line"></i>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="../html/ai-support.html" class="nav-link" data-page="ai-chat">
+                        <i class="fas fa-robot"></i>
+                        <span>AI Support</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="../html/mood-tracker.html" class="nav-link active" data-page="mood-tracker">
+                        <i class="fas fa-heart"></i>
+                        <span>Mood Tracker</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="../html/community.html" class="nav-link" data-page="community">
+                        <i class="fas fa-users"></i>
+                        <span>Community</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="../html/wellness-tools.html" class="nav-link" data-page="wellness-tools">
+                        <i class="fas fa-leaf"></i>
+                        <span>Wellness Tools</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="../html/professionals.html" class="nav-link" data-page="professionals">
+                        <i class="fas fa-user-md"></i>
+                        <span>Find Help</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="../html/progress.html" class="nav-link" data-page="progress">
+                        <i class="fas fa-trophy"></i>
+                        <span>Progress</span>
+                    </a>
+                </li>
+            </ul>
+            
+            <section class="nav-actions">
+                <button class="emergency-btn" id="emergencyBtn">
+                    <i class="fas fa-phone"></i>
+                    <span>Emergency</span>
+                </button>
+                <button class="settings-btn" id="settingsBtn">
+                    <i class="fas fa-cog"></i>
+                    <span>Settings</span>
+                </button>
+            </section>
+        </section>
+    </nav>
+
+    <main class="main-content">
+        <section class="content-area">
+            <!-- Mood Tracker Page -->
+            <article class="page active" id="mood-tracker-page">
+                <header class="page-header">
+                    <h2>Mood Tracker</h2>
+                    <p>Track your emotional patterns and gain insights</p>
+                </header>
+                
+                <section class="mood-tracker-container">
+                    <section class="current-mood-section">
+                        <h3>How are you feeling today?</h3>
+                        <section class="mood-options">
+                            <button class="mood-option" data-mood="1">
+                                <figure class="mood-icon">
+                                    <i class="fas fa-sad-tear"></i>
+                                </figure>
+                                <span class="mood-label">Awful</span>
+                            </button>
+                            <button class="mood-option" data-mood="2">
+                                <figure class="mood-icon">
+                                    <i class="fas fa-frown"></i>
+                                </figure>
+                                <span class="mood-label">Bad</span>
+                            </button>
+                            <button class="mood-option" data-mood="3">
+                                <figure class="mood-icon">
+                                    <i class="fas fa-meh"></i>
+                                </figure>
+                                <span class="mood-label">Okay</span>
+                            </button>
+                            <button class="mood-option" data-mood="4">
+                                <figure class="mood-icon">
+                                    <i class="fas fa-smile"></i>
+                                </figure>
+                                <span class="mood-label">Good</span>
+                            </button>
+                            <button class="mood-option" data-mood="5">
+                                <figure class="mood-icon">
+                                    <i class="fas fa-laugh"></i>
+                                </figure>
+                                <span class="mood-label">Great</span>
+                            </button>
+                        </section>
+                    </section>
+                    
+                    <section class="mood-details-section">
+                        <h3>Tell us more about your feelings</h3>
+                        <form class="mood-details-form">
+                            <section class="form-group">
+                                <label class="form-label">What emotions are you experiencing?</label>
+                                <section class="emotion-tags">
+                                    <button type="button" class="emotion-tag">Anxious</button>
+                                    <button type="button" class="emotion-tag">Stressed</button>
+                                    <button type="button" class="emotion-tag">Sad</button>
+                                    <button type="button" class="emotion-tag">Angry</button>
+                                    <button type="button" class="emotion-tag">Happy</button>
+                                    <button type="button" class="emotion-tag">Calm</button>
+                                    <button type="button" class="emotion-tag">Excited</button>
+                                    <button type="button" class="emotion-tag">Tired</button>
+                                    <button type="button" class="emotion-tag">Confused</button>
+                                    <button type="button" class="emotion-tag">Grateful</button>
+                                </section>
+                            </section>
+                            
+                            <section class="form-group">
+                                <label class="form-label">What's contributing to how you feel?</label>
+                                <textarea class="form-textarea" placeholder="Describe what's affecting your mood today..." rows="3"></textarea>
+                            </section>
+                            
+                            <section class="form-group">
+                                <label class="form-label">Energy Level</label>
+                                <section class="slider-container">
+                                    <input type="range" min="1" max="10" value="5" class="energy-slider" id="energySlider">
+                                    <section class="slider-labels">
+                                        <span>Low Energy</span>
+                                        <span>High Energy</span>
+                                    </section>
+                                </section>
+                            </section>
+                            
+                            <section class="form-group">
+                                <label class="form-label">Sleep Quality (last night)</label>
+                                <section class="sleep-quality">
+                                    <button type="button" class="sleep-option">Poor</button>
+                                    <button type="button" class="sleep-option">Fair</button>
+                                    <button type="button" class="sleep-option">Good</button>
+                                    <button type="button" class="sleep-option">Excellent</button>
+                                </section>
+                            </section>
+                            
+                            <button type="submit" class="save-mood-btn" id="saveMoodBtn">
+                                <i class="fas fa-save"></i>
+                                Save Mood Entry
+                            </button>
+                        </form>
+                    </section>
+                    
+                    <section class="mood-history-section">
+                        <header class="section-header">
+                            <h3>Recent Mood History</h3>
+                            <button class="view-all-btn">View Full History</button>
+                        </header>
+                        <section class="mood-history-chart">
+                            <canvas id="moodHistoryChart"></canvas>
+                        </section>
+                        <section class="mood-history-list">
+                            <article class="mood-history-item">
+                                <time class="mood-date">Today, 10:30 AM</time>
+                                <section class="mood-info">
+                                    <figure class="mood-indicator good"></figure>
+                                    <section class="mood-details">
+                                        <h4>Good</h4>
+                                        <p>Feeling positive after morning meditation</p>
+                                    </section>
+                                </section>
+                            </article>
+                            <article class="mood-history-item">
+                                <time class="mood-date">Yesterday, 6:45 PM</time>
+                                <section class="mood-info">
+                                    <figure class="mood-indicator okay"></figure>
+                                    <section class="mood-details">
+                                        <h4>Okay</h4>
+                                        <p>Tired after work but managed to relax</p>
+                                    </section>
+                                </section>
+                            </article>
+                            <article class="mood-history-item">
+                                <time class="mood-date">Yesterday, 9:15 AM</time>
+                                <section class="mood-info">
+                                    <figure class="mood-indicator great"></figure>
+                                    <section class="mood-details">
+                                        <h4>Great</h4>
+                                        <p>Started the day with energy and motivation</p>
+                                    </section>
+                                </section>
+                            </article>
+                        </section>
+                    </section>
+                </section>
+            </article>
+        </section>
+    </main>
+
+    <!-- Emergency Modal -->
+    <dialog class="modal" id="emergencyModal">
+        <article class="modal-content emergency-modal">
+            <header class="modal-header">
+                <h2>Immediate Help Resources</h2>
+                <button class="modal-close" id="closeEmergencyModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </header>
+            <section class="modal-body">
+                <p class="emergency-text">If you're in crisis or experiencing thoughts of self-harm, please reach out to these resources immediately:</p>
+                <section class="emergency-list">
+                    <article class="emergency-item">
+                        <h3>Crisis Hotline</h3>
+                        <p>24/7 Confidential Support</p>
+                        <a href="tel:0800567567" class="emergency-call-link">
+                            <i class="fas fa-phone"></i>
+                            0800 567 567
+                        </a>
+                    </article>
+                    <article class="emergency-item">
+                        <h3>SADAG Helpline</h3>
+                        <p>South African Depression & Anxiety Group</p>
+                        <a href="tel:0800121314" class="emergency-call-link">
+                            <i class="fas fa-phone"></i>
+                            0800 121 314
+                        </a>
+                    </article>
+                    <article class="emergency-item">
+                        <h3>Emergency Services</h3>
+                        <p>Medical Emergency</p>
+                        <a href="tel:10177" class="emergency-call-link">
+                            <i class="fas fa-phone"></i>
+                            10177
+                        </a>
+                    </article>
+                </section>
+                <p class="emergency-note">You are not alone. Please reach out for support.</p>
+            </section>
+        </article>
+    </dialog>
+
+    <!-- Settings Modal -->
+    <dialog class="modal" id="settingsModal">
+        <article class="modal-content settings-modal">
+            <header class="modal-header">
+                <h2>Settings</h2>
+                <button class="modal-close" id="closeSettingsModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </header>
+            <section class="modal-body">
+                <nav class="settings-nav">
+                    <button class="settings-nav-btn active" data-tab="account">Account</button>
+                    <button class="settings-nav-btn" data-tab="privacy">Privacy</button>
+                    <button class="settings-nav-btn" data-tab="notifications">Notifications</button>
+                    <button class="settings-nav-btn" data-tab="appearance">Appearance</button>
+                </nav>
+                <section class="settings-content">
+                    <article class="settings-tab active" id="account-tab">
+                        <h3>Account Settings</h3>
+                        <form class="settings-form">
+                            <section class="form-group">
+                                <label class="form-label">Display Name</label>
+                                <input type="text" class="form-input" value="Anonymous User">
+                            </section>
+                            <section class="form-group">
+                                <label class="form-label">Email Address</label>
+                                <input type="email" class="form-input" value="user@example.com">
+                            </section>
+                            <section class="form-group">
+                                <label class="form-label">Password</label>
+                                <input type="password" class="form-input" value="********">
+                            </section>
+                            <button type="submit" class="save-settings-btn">Save Changes</button>
+                        </form>
+                    </article>
+                    <article class="settings-tab" id="privacy-tab">
+                        <h3>Privacy Settings</h3>
+                        <form class="settings-form">
+                            <section class="form-group checkbox-group">
+                                <input type="checkbox" id="dataCollection" checked>
+                                <label for="dataCollection">Allow anonymous data collection to improve services</label>
+                            </section>
+                            <section class="form-group checkbox-group">
+                                <input type="checkbox" id="personalizedInsights" checked>
+                                <label for="personalizedInsights">Receive personalized insights based on my data</label>
+                            </section>
+                            <section class="form-group">
+                                <label class="form-label">Data Retention</label>
+                                <select class="form-select">
+                                    <option>Keep data indefinitely</option>
+                                    <option>Delete after 1 year</option>
+                                    <option>Delete after 6 months</option>
+                                </select>
+                            </section>
+                            <button type="submit" class="save-settings-btn">Save Preferences</button>
+                        </form>
+                    </article>
+                    <article class="settings-tab" id="notifications-tab">
+                        <h3>Notification Settings</h3>
+                        <form class="settings-form">
+                            <section class="form-group checkbox-group">
+                                <input type="checkbox" id="dailyReminders" checked>
+                                <label for="dailyReminders">Daily check-in reminders</label>
+                            </section>
+                            <section class="form-group checkbox-group">
+                                <input type="checkbox" id="weeklyReports" checked>
+                                <label for="weeklyReports">Weekly progress reports</label>
+                            </section>
+                            <section class="form-group checkbox-group">
+                                <input type="checkbox" id="communityUpdates">
+                                <label for="communityUpdates">Community updates and events</label>
+                            </section>
+                            <section class="form-group">
+                                <label class="form-label">Notification Frequency</label>
+                                <select class="form-select">
+                                    <option>Only important updates</option>
+                                    <option>Regular (recommended)</option>
+                                    <option>All notifications</option>
+                                </select>
+                            </section>
+                            <button type="submit" class="save-settings-btn">Save Preferences</button>
+                        </form>
+                    </article>
+                    <article class="settings-tab" id="appearance-tab">
+                        <h3>Appearance Settings</h3>
+                        <form class="settings-form">
+                            <section class="form-group">
+                                <label class="form-label">Theme</label>
+                                <select class="form-select">
+                                    <option>Light (Default)</option>
+                                    <option>Dark</option>
+                                    <option>Auto (System)</option>
+                                </select>
+                            </section>
+                            <section class="form-group">
+                                <label class="form-label">Font Size</label>
+                                <select class="form-select">
+                                    <option>Small</option>
+                                    <option>Medium (Default)</option>
+                                    <option>Large</option>
+                                </select>
+                            </section>
+                            <section class="form-group checkbox-group">
+                                <input type="checkbox" id="reduceAnimations">
+                                <label for="reduceAnimations">Reduce animations and transitions</label>
+                            </section>
+                            <button type="submit" class="save-settings-btn">Save Preferences</button>
+                        </form>
+                    </article>
+                </section>
+            </section>
+        </article>
+    </dialog>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="../js/dash.js"></script>
+</body>
+</html>
