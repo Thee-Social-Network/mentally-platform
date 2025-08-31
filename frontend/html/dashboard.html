@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+                            <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -9,16 +9,14 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 </head>
 <body>
-    <aside class="sidebar">
-        <header class="sidebar-header">
+    <!-- Top Navigation Bar -->
+    <nav class="top-navbar">
+        <section class="nav-container">
             <a href="../html/landing.html" class="logo-link">
                 <h1 class="logo">Mentaly</h1>
             </a>
-            <p class="welcome-text">Welcome back!</p>
-        </header>
-
-        <nav class="sidebar-nav">
-            <ul class="nav-list">
+            
+            <ul class="nav-menu">
                 <li class="nav-item">
                     <button class="nav-button active" data-page="dashboard">
                         <i class="fas fa-chart-line"></i>
@@ -62,43 +60,43 @@
                     </button>
                 </li>
             </ul>
-        </nav>
 
-        <section class="sidebar-footer">
-            <button class="emergency-btn" id="dashboardEmergencyBtn">
-                <i class="fas fa-phone"></i>
-                <span>Emergency</span>
-            </button>
-            <button class="settings-btn" id="settingsBtn">
-                <i class="fas fa-cog"></i>
-                <span>Settings</span>
-            </button>
+            <section class="nav-actions">
+                <button class="emergency-btn" id="dashboardEmergencyBtn">
+                    <i class="fas fa-phone"></i>
+                    <span>Emergency</span>
+                </button>
+                
+                <button class="notification-btn" id="notificationBtn">
+                    <i class="fas fa-bell"></i>
+                    <span class="notification-badge">3</span>
+                </button>
+                
+                <section class="user-profile">
+                    <button class="profile-btn" id="profileBtn">
+                        <figure class="avatar">
+                            <i class="fas fa-user"></i>
+                        </figure>
+                        <span class="username">Anonymous User</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                </section>
+                
+                <button class="settings-btn" id="settingsBtn">
+                    <i class="fas fa-cog"></i>
+                </button>
+                
+                <button class="menu-toggle" id="menuToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </section>
         </section>
-    </aside>
+    </nav>
 
     <main class="main-content">
-        <header class="top-bar">
-            <button class="menu-toggle" id="menuToggle">
-                <i class="fas fa-bars"></i>
-            </button>
-            <section class="top-bar-content">
-                <h1 class="page-title" id="pageTitle">Dashboard</h1>
-                <section class="user-actions">
-                    <button class="notification-btn" id="notificationBtn">
-                        <i class="fas fa-bell"></i>
-                        <span class="notification-badge">3</span>
-                    </button>
-                    <section class="user-profile">
-                        <button class="profile-btn" id="profileBtn">
-                            <figure class="avatar">
-                                <i class="fas fa-user"></i>
-                            </figure>
-                            <span class="username">Anonymous User</span>
-                            <i class="fas fa-chevron-down"></i>
-                        </button>
-                    </section>
-                </section>
-            </section>
+        <header class="content-header">
+            <h1 class="page-title" id="pageTitle">Dashboard</h1>
+            <time class="date-info">Today, August 31, 2025</time>
         </header>
 
         <section class="content-area">
@@ -108,7 +106,6 @@
                     <article class="stats-overview">
                         <header class="card-header">
                             <h2>Your Wellness Overview</h2>
-                            <time class="date-info">Today, August 31, 2025</time>
                         </header>
                         <section class="stats-grid">
                             <article class="stat-card">
@@ -851,14 +848,6 @@
                                     <p>24/7 Crisis Support</p>
                                 </section>
                                 <a href="tel:0800567567" class="emergency-call-btn">0800 567 567</a>
-                            </article>
-                            <article class="emergency-contact">
-                                <i class="fas fa-hands-helping"></i>
-                                <section class="contact-info">
-                                    <h4>SADAG Helpline</h4>
-                                    <p>South African Depression & Anxiety Group</p>
-                                </section>
-                                <a href="tel:0800121314" class="emergency-call-btn">0800 121 314</a>
                             </article>
                             <article class="emergency-contact">
                                 <i class="fas fa-hospital"></i>

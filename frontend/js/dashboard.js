@@ -45,7 +45,7 @@ function setupEventListeners() {
     const menuToggle = document.getElementById('menuToggle');
     if (menuToggle) {
         menuToggle.addEventListener('click', function() {
-            document.querySelector('.sidebar').classList.toggle('open');
+            document.querySelector('.nav-menu').classList.toggle('open');
         });
     }
     
@@ -192,9 +192,9 @@ function showPage(pageId) {
         }
     }
     
-    // Close sidebar on mobile
+    // Close mobile menu
     if (window.innerWidth < 992) {
-        document.querySelector('.sidebar').classList.remove('open');
+        document.querySelector('.nav-menu').classList.remove('open');
     }
 }
 
@@ -209,11 +209,11 @@ function initCharts() {
             datasets: [{
                 label: 'Mood Level',
                 data: [5.2, 6.1, 5.8, 7.2, 6.5, 7.0, 7.2],
-                borderColor: '#5B8FB9',
-                backgroundColor: 'rgba(91, 143, 185, 0.1)',
+                borderColor: '#FDBB30',
+                backgroundColor: 'rgba(253, 187, 48, 0.1)',
                 tension: 0.4,
                 fill: true,
-                pointBackgroundColor: '#5B8FB9',
+                pointBackgroundColor: '#FDBB30',
                 pointBorderColor: '#fff',
                 pointRadius: 5,
                 pointHoverRadius: 7
@@ -290,8 +290,8 @@ function initProgressCharts() {
             datasets: [{
                 label: 'Average Mood',
                 data: [5.8, 6.2, 6.7, 6.8],
-                borderColor: '#5B8FB9',
-                backgroundColor: 'rgba(91, 143, 185, 0.1)',
+                borderColor: '#FDBB30',
+                backgroundColor: 'rgba(253, 187, 48, 0.1)',
                 tension: 0.4,
                 fill: true
             }]
@@ -329,7 +329,7 @@ function initProgressCharts() {
             datasets: [{
                 data: [30, 25, 20, 15, 10],
                 backgroundColor: [
-                    '#5B8FB9',
+                    '#FDBB30',
                     '#61A0AF',
                     '#B6E2D3',
                     '#FFAD61',
