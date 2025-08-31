@@ -4,291 +4,272 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mentaly - Find Help</title>
-    <link rel="stylesheet" href="../css/dash.css">
+    <link rel="stylesheet" href="../css/dashboard.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 </head>
 <body>
-    <nav class="navbar">
+    <!-- Top Navigation Bar -->
+    <nav class="top-navbar">
         <section class="nav-container">
-            <a href="../html/dash.html" class="logo-link">
+            <a href="../html/landing.html" class="logo-link">
                 <h1 class="logo">Mentaly</h1>
             </a>
             
-            <button class="hamburger" id="hamburger">
-                <i class="fas fa-bars"></i>
-            </button>
-            
             <ul class="nav-menu">
-                <li>
-                    <a href="../html/dash.html" class="nav-link" data-page="dashboard">
+                <li class="nav-item">
+                    <button class="nav-button" data-page="dashboard">
                         <i class="fas fa-chart-line"></i>
                         <span>Dashboard</span>
-                    </a>
+                    </button>
                 </li>
-                <li>
-                    <a href="../html/ai-support.html" class="nav-link" data-page="ai-chat">
+                <li class="nav-item">
+                    <button class="nav-button" data-page="ai-support">
                         <i class="fas fa-robot"></i>
                         <span>AI Support</span>
-                    </a>
+                    </button>
                 </li>
-                <li>
-                    <a href="../html/mood-tracker.html" class="nav-link" data-page="mood-tracker">
+                <li class="nav-item">
+                    <button class="nav-button" data-page="mood-tracker">
                         <i class="fas fa-heart"></i>
                         <span>Mood Tracker</span>
-                    </a>
+                    </button>
                 </li>
-                <li>
-                    <a href="../html/community.html" class="nav-link" data-page="community">
+                <li class="nav-item">
+                    <button class="nav-button" data-page="community">
                         <i class="fas fa-users"></i>
                         <span>Community</span>
-                    </a>
+                    </button>
                 </li>
-                <li>
-                    <a href="../html/wellness-tools.html" class="nav-link" data-page="wellness-tools">
+                <li class="nav-item">
+                    <button class="nav-button" data-page="wellness-tools">
                         <i class="fas fa-leaf"></i>
                         <span>Wellness Tools</span>
-                    </a>
+                    </button>
                 </li>
-                <li>
-                    <a href="../html/professionals.html" class="nav-link active" data-page="professionals">
+                <li class="nav-item">
+                    <button class="nav-button active" data-page="professionals">
                         <i class="fas fa-user-md"></i>
                         <span>Find Help</span>
-                    </a>
+                    </button>
                 </li>
-                <li>
-                    <a href="../html/progress.html" class="nav-link" data-page="progress">
+                <li class="nav-item">
+                    <button class="nav-button" data-page="progress">
                         <i class="fas fa-trophy"></i>
                         <span>Progress</span>
-                    </a>
+                    </button>
                 </li>
             </ul>
-            
+
             <section class="nav-actions">
-                <button class="emergency-btn" id="emergencyBtn">
+                <button class="emergency-btn" id="dashboardEmergencyBtn">
                     <i class="fas fa-phone"></i>
                     <span>Emergency</span>
                 </button>
+                
+                <button class="notification-btn" id="notificationBtn">
+                    <i class="fas fa-bell"></i>
+                    <span class="notification-badge">3</span>
+                </button>
+                
+                <section class="user-profile">
+                    <button class="profile-btn" id="profileBtn">
+                        <figure class="avatar">
+                            <i class="fas fa-user"></i>
+                        </figure>
+                        <span class="username">Anonymous User</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                </section>
+                
                 <button class="settings-btn" id="settingsBtn">
                     <i class="fas fa-cog"></i>
-                    <span>Settings</span>
+                </button>
+                
+                <button class="menu-toggle" id="menuToggle">
+                    <i class="fas fa-bars"></i>
                 </button>
             </section>
         </section>
     </nav>
 
     <main class="main-content">
+        <header class="content-header">
+            <h1 class="page-title" id="pageTitle">Find Professional Help</h1>
+            <time class="date-info">Today, August 31, 2025</time>
+        </header>
+
         <section class="content-area">
             <!-- Professionals Page -->
             <article class="page active" id="professionals-page">
-                <header class="page-header">
-                    <h2>Find Professional Help</h2>
-                    <p>Connect with licensed mental health professionals</p>
-                </header>
-                
                 <section class="professionals-container">
-                    <section class="help-options">
-                        <h3>Ways to Get Help</h3>
-                        <section class="options-grid">
-                            <article class="help-option-card">
-                                <figure class="option-icon">
-                                    <i class="fas fa-video"></i>
-                                </figure>
-                                <section class="option-content">
-                                    <h4>Online Therapy</h4>
-                                    <p>Connect with licensed therapists via video sessions from the comfort of your home</p>
-                                    <button class="option-btn">Find Online Therapists</button>
-                                </section>
-                            </article>
-                            <article class="help-option-card">
-                                <figure class="option-icon">
-                                    <i class="fas fa-map-marker-alt"></i>
-                                </figure>
-                                <section class="option-content">
-                                    <h4>Local Professionals</h4>
-                                    <p>Find mental health professionals practicing in your local area</p>
-                                    <button class="option-btn">Search Local Help</button>
-                                </section>
-                            </article>
-                            <article class="help-option-card">
-                                <figure class="option-icon">
-                                    <i class="fas fa-phone-alt"></i>
-                                </figure>
-                                <section class="option-content">
-                                    <h4>Hotlines & Crisis Support</h4>
-                                    <p>Immediate help available 24/7 through various crisis hotlines</p>
-                                    <button class="option-btn">View Crisis Resources</button>
-                                </section>
-                            </article>
-                            <article class="help-option-card">
-                                <figure class="option-icon">
-                                    <i class="fas fa-hand-holding-heart"></i>
-                                </figure>
-                                <section class="option-content">
-                                    <h4>Support Groups</h4>
-                                    <p>Join group therapy sessions and connect with others facing similar challenges</p>
-                                    <button class="option-btn">Find Support Groups</button>
-                                </section>
-                            </article>
+                    <header class="professionals-header">
+                        <h2>Connect with Mental Health Professionals</h2>
+                        <p>Find qualified therapists, counselors, and psychiatrists who can support your mental health journey</p>
+                    </header>
+
+                    <section class="search-filters">
+                        <section class="filter-group">
+                            <label class="filter-label">Specialty</label>
+                            <select class="filter-select">
+                                <option>All Specialties</option>
+                                <option>Anxiety</option>
+                                <option>Depression</option>
+                                <option>PTSD</option>
+                                <option>Addiction</option>
+                                <option>Relationships</option>
+                            </select>
+                        </section>
+                        <section class="filter-group">
+                            <label class="filter-label">Location</label>
+                            <select class="filter-select">
+                                <option>Johannesburg Area</option>
+                                <option>Sandton</option>
+                                <option>Rosebank</option>
+                                <option>Randburg</option>
+                                <option>Online Only</option>
+                            </select>
+                        </section>
+                        <section class="filter-group">
+                            <label class="filter-label">Insurance</label>
+                            <select class="filter-select">
+                                <option>All Insurance</option>
+                                <option>Discovery Health</option>
+                                <option>Momentum</option>
+                                <option>Medihelp</option>
+                                <option>Self-Pay</option>
+                            </select>
                         </section>
                     </section>
-                    
-                    <section class="featured-professionals">
-                        <header class="section-header">
-                            <h3>Featured Professionals</h3>
-                            <button class="view-all-btn">View All Professionals</button>
-                        </header>
-                        <section class="professionals-grid">
-                            <article class="professional-card">
-                                <figure class="professional-photo">
-                                    <i class="fas fa-user-md"></i>
-                                </figure>
-                                <section class="professional-info">
-                                    <h4>Dr. Sarah Johnson</h4>
-                                    <p class="professional-title">Clinical Psychologist</p>
-                                    <p class="professional-specialty">Specializes in: Anxiety, Depression, CBT</p>
-                                    <section class="professional-meta">
-                                        <span class="experience">15 years experience</span>
-                                        <span class="rating">4.9 ★</span>
+
+                    <section class="professionals-list">
+                        <article class="professional-card">
+                            <figure class="professional-image">
+                                <i class="fas fa-user-md"></i>
+                            </figure>
+                            <section class="professional-info">
+                                <header class="professional-header">
+                                    <h3>Dr. Sarah Johnson</h3>
+                                    <section class="rating">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <span class="rating-text">4.9 (127 reviews)</span>
                                     </section>
-                                    <section class="professional-actions">
-                                        <button class="profile-btn">View Profile</button>
-                                        <button class="book-btn">Book Session</button>
-                                    </section>
+                                </header>
+                                <p class="professional-specialty">Clinical Psychologist • Anxiety & Depression Specialist</p>
+                                <p class="professional-location">Sandton • 2.3 km away</p>
+                                <section class="professional-details">
+                                    <span class="detail-item">15+ years experience</span>
+                                    <span class="detail-item">Discovery Health accepted</span>
+                                    <span class="detail-item">Online sessions available</span>
                                 </section>
-                            </article>
-                            <article class="professional-card">
-                                <figure class="professional-photo">
-                                    <i class="fas fa-user-md"></i>
-                                </figure>
-                                <section class="professional-info">
-                                    <h4>Michael Rodriguez, LCSW</h4>
-                                    <p class="professional-title">Licensed Clinical Social Worker</p>
-                                    <p class="professional-specialty">Specializes in: Trauma, PTSD, Mindfulness</p>
-                                    <section class="professional-meta">
-                                        <span class="experience">8 years experience</span>
-                                        <span class="rating">4.8 ★</span>
-                                    </section>
-                                    <section class="professional-actions">
-                                        <button class="profile-btn">View Profile</button>
-                                        <button class="book-btn">Book Session</button>
-                                    </section>
-                                </section>
-                            </article>
-                            <article class="professional-card">
-                                <figure class="professional-photo">
-                                    <i class="fas fa-user-md"></i>
-                                </figure>
-                                <section class="professional-info">
-                                    <h4>Dr. Amina Patel</h4>
-                                    <p class="professional-title">Psychiatrist</p>
-                                    <p class="professional-specialty">Specializes in: Medication Management, Mood Disorders</p>
-                                    <section class="professional-meta">
-                                        <span class="experience">12 years experience</span>
-                                        <span class="rating">4.7 ★</span>
-                                    </section>
-                                    <section class="professional-actions">
-                                        <button class="profile-btn">View Profile</button>
-                                        <button class="book-btn">Book Session</button>
-                                    </section>
-                                </section>
-                            </article>
-                        </section>
-                    </section>
-                    
-                    <section class="search-professionals">
-                        <h3>Find the Right Professional for You</h3>
-                        <form class="search-form">
-                            <section class="form-row">
-                                <section class="form-group">
-                                    <label class="form-label">Specialty</label>
-                                    <select class="form-select">
-                                        <option>Any Specialty</option>
-                                        <option>Anxiety</option>
-                                        <option>Depression</option>
-                                        <option>Trauma</option>
-                                        <option>Relationship Issues</option>
-                                        <option>Addiction</option>
-                                        <option>Eating Disorders</option>
-                                        <option>OCD</option>
-                                        <option>PTSD</option>
-                                    </select>
-                                </section>
-                                <section class="form-group">
-                                    <label class="form-label">Type of Professional</label>
-                                    <select class="form-select">
-                                        <option>Any Professional</option>
-                                        <option>Psychologist</option>
-                                        <option>Psychiatrist</option>
-                                        <option>Therapist</option>
-                                        <option>Counselor</option>
-                                        <option>Social Worker</option>
-                                    </select>
-                                </section>
-                                <section class="form-group">
-                                    <label class="form-label">Location</label>
-                                    <input type="text" class="form-input" placeholder="City or Zip Code">
-                                </section>
+                                <p class="professional-bio">
+                                    Specializing in cognitive-behavioral therapy and mindfulness-based interventions. 
+                                    Experienced in treating anxiety disorders, depression, and stress-related conditions.
+                                </p>
                             </section>
-                            <section class="form-row">
-                                <section class="form-group">
-                                    <label class="form-label">Insurance</label>
-                                    <select class="form-select">
-                                        <option>Any Insurance</option>
-                                        <option>Discovery Health</option>
-                                        <option>Bonitas</option>
-                                        <option>Momentum</option>
-                                        <option>Self-Pay</option>
-                                    </select>
-                                </section>
-                                <section class="form-group">
-                                    <label class="form-label">Session Type</label>
-                                    <select class="form-select">
-                                        <option>Any Type</option>
-                                        <option>In-Person</option>
-                                        <option>Online</option>
-                                        <option>Both</option>
-                                    </select>
-                                </section>
-                                <button type="submit" class="search-btn">Search Professionals</button>
+                            <section class="professional-actions">
+                                <p class="availability">Next available: Tomorrow 2:00 PM</p>
+                                <button class="contact-btn">Contact</button>
+                                <button class="book-btn">Book Appointment</button>
                             </section>
-                        </form>
+                        </article>
+
+                        <article class="professional-card">
+                            <figure class="professional-image">
+                                <i class="fas fa-user-md"></i>
+                            </figure>
+                            <section class="professional-info">
+                                <header class="professional-header">
+                                    <h3>Dr. Michael Chen</h3>
+                                    <section class="rating">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <span class="rating-text">4.8 (89 reviews)</span>
+                                    </section>
+                                </header>
+                                <p class="professional-specialty">Licensed Counselor • PTSD & Trauma Specialist</p>
+                                <p class="professional-location">Rosebank • 4.1 km away</p>
+                                <section class="professional-details">
+                                    <span class="detail-item">12+ years experience</span>
+                                    <span class="detail-item">Momentum accepted</span>
+                                    <span class="detail-item">Evening appointments</span>
+                                </section>
+                                <p class="professional-bio">
+                                    Experienced in EMDR therapy and trauma-informed care. Specializes in helping individuals 
+                                    recover from traumatic experiences and develop healthy coping mechanisms.
+                                </p>
+                            </section>
+                            <section class="professional-actions">
+                                <p class="availability">Next available: Monday 6:00 PM</p>
+                                <button class="contact-btn">Contact</button>
+                                <button class="book-btn">Book Appointment</button>
+                            </section>
+                        </article>
+
+                        <article class="professional-card">
+                            <figure class="professional-image">
+                                <i class="fas fa-user-md"></i>
+                            </figure>
+                            <section class="professional-info">
+                                <header class="professional-header">
+                                    <h3>Dr. Priya Patel</h3>
+                                    <section class="rating">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <span class="rating-text">4.9 (156 reviews)</span>
+                                    </section>
+                                </header>
+                                <p class="professional-specialty">Psychiatrist • Medication Management</p>
+                                <p class="professional-location">Randburg • 6.8 km away</p>
+                                <section class="professional-details">
+                                    <span class="detail-item">20+ years experience</span>
+                                    <span class="detail-item">All insurance accepted</span>
+                                    <span class="detail-item">Bilingual services</span>
+                                </section>
+                                <p class="professional-bio">
+                                    Board-certified psychiatrist specializing in medication management and integrated treatment approaches. 
+                                    Fluent in English, Hindi, and Gujarati.
+                                </p>
+                            </section>
+                            <section class="professional-actions">
+                                <p class="availability">Next available: Friday 10:00 AM</p>
+                                <button class="contact-btn">Contact</button>
+                                <button class="book-btn">Book Appointment</button>
+                            </section>
+                        </article>
                     </section>
-                    
-                    <section class="resources-section">
-                        <header class="section-header">
-                            <h3>Mental Health Resources</h3>
+
+                    <section class="emergency-resources">
+                        <header class="resources-header">
+                            <h3>Immediate Help Resources</h3>
+                            <p>If you're in crisis, please reach out immediately</p>
                         </header>
-                        <section class="resources-grid">
-                            <article class="resource-card">
-                                <figure class="resource-icon">
-                                    <i class="fas fa-book"></i>
-                                </figure>
-                                <section class="resource-content">
-                                    <h4>Understanding Therapy</h4>
-                                    <p>A comprehensive guide to different types of therapy and what to expect</p>
-                                    <button class="resource-btn">Read Guide</button>
+                        <section class="emergency-contacts">
+                            <article class="emergency-contact">
+                                <i class="fas fa-phone"></i>
+                                <section class="contact-info">
+                                    <h4>Crisis Hotline</h4>
+                                    <p>24/7 Crisis Support</p>
                                 </section>
+                                <a href="tel:0800567567" class="emergency-call-btn">0800 567 567</a>
                             </article>
-                            <article class="resource-card">
-                                <figure class="resource-icon">
-                                    <i class="fas fa-question-circle"></i>
-                                </figure>
-                                <section class="resource-content">
-                                    <h4>FAQ: Starting Therapy</h4>
-                                    <p>Answers to common questions about beginning your therapy journey</p>
-                                    <button class="resource-btn">View FAQs</button>
+                            <article class="emergency-contact">
+                                <i class="fas fa-hospital"></i>
+                                <section class="contact-info">
+                                    <h4>Emergency Services</h4>
+                                    <p>Medical Emergency</p>
                                 </section>
-                            </article>
-                            <article class="resource-card">
-                                <figure class="resource-icon">
-                                    <i class="fas fa-dollar-sign"></i>
-                                </figure>
-                                <section class="resource-content">
-                                    <h4>Affordability Options</h4>
-                                    <p>Information about insurance, sliding scale fees, and financial assistance</p>
-                                    <button class="resource-btn">Learn More</button>
-                                </section>
+                                <a href="tel:10177" class="emergency-call-btn">10177</a>
                             </article>
                         </section>
                     </section>
@@ -298,7 +279,7 @@
     </main>
 
     <!-- Emergency Modal -->
-    <dialog class="modal" id="emergencyModal">
+    <dialog class="modal" id="emergeryModal">
         <article class="modal-content emergency-modal">
             <header class="modal-header">
                 <h2>Immediate Help Resources</h2>
@@ -453,6 +434,7 @@
         </article>
     </dialog>
 
-    <script src="../js/dash.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="../js/dashboard.js"></script>
 </body>
 </html>

@@ -4,253 +4,301 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mentaly - Community</title>
-    <link rel="stylesheet" href="../css/dash.css">
+    <link rel="stylesheet" href="../css/dashboard.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 </head>
 <body>
-    <nav class="navbar">
+    <!-- Top Navigation Bar -->
+    <nav class="top-navbar">
         <section class="nav-container">
-            <a href="../html/dash.html" class="logo-link">
+            <a href="../html/landing.html" class="logo-link">
                 <h1 class="logo">Mentaly</h1>
             </a>
             
-            <button class="hamburger" id="hamburger">
-                <i class="fas fa-bars"></i>
-            </button>
-            
             <ul class="nav-menu">
-                <li>
-                    <a href="../html/dash.html" class="nav-link" data-page="dashboard">
+                <li class="nav-item">
+                    <button class="nav-button" data-page="dashboard">
                         <i class="fas fa-chart-line"></i>
                         <span>Dashboard</span>
-                    </a>
+                    </button>
                 </li>
-                <li>
-                    <a href="../html/ai-support.html" class="nav-link" data-page="ai-chat">
+                <li class="nav-item">
+                    <button class="nav-button" data-page="ai-support">
                         <i class="fas fa-robot"></i>
                         <span>AI Support</span>
-                    </a>
+                    </button>
                 </li>
-                <li>
-                    <a href="../html/mood-tracker.html" class="nav-link" data-page="mood-tracker">
+                <li class="nav-item">
+                    <button class="nav-button" data-page="mood-tracker">
                         <i class="fas fa-heart"></i>
                         <span>Mood Tracker</span>
-                    </a>
+                    </button>
                 </li>
-                <li>
-                    <a href="../html/community.html" class="nav-link active" data-page="community">
+                <li class="nav-item">
+                    <button class="nav-button active" data-page="community">
                         <i class="fas fa-users"></i>
                         <span>Community</span>
-                    </a>
+                    </button>
                 </li>
-                <li>
-                    <a href="../html/wellness-tools.html" class="nav-link" data-page="wellness-tools">
+                <li class="nav-item">
+                    <button class="nav-button" data-page="wellness-tools">
                         <i class="fas fa-leaf"></i>
                         <span>Wellness Tools</span>
-                    </a>
+                    </button>
                 </li>
-                <li>
-                    <a href="../html/professionals.html" class="nav-link" data-page="professionals">
+                <li class="nav-item">
+                    <button class="nav-button" data-page="professionals">
                         <i class="fas fa-user-md"></i>
                         <span>Find Help</span>
-                    </a>
+                    </button>
                 </li>
-                <li>
-                    <a href="../html/progress.html" class="nav-link" data-page="progress">
+                <li class="nav-item">
+                    <button class="nav-button" data-page="progress">
                         <i class="fas fa-trophy"></i>
                         <span>Progress</span>
-                    </a>
+                    </button>
                 </li>
             </ul>
-            
+
             <section class="nav-actions">
-                <button class="emergency-btn" id="emergencyBtn">
+                <button class="emergency-btn" id="dashboardEmergencyBtn">
                     <i class="fas fa-phone"></i>
                     <span>Emergency</span>
                 </button>
+                
+                <button class="notification-btn" id="notificationBtn">
+                    <i class="fas fa-bell"></i>
+                    <span class="notification-badge">3</span>
+                </button>
+                
+                <section class="user-profile">
+                    <button class="profile-btn" id="profileBtn">
+                        <figure class="avatar">
+                            <i class="fas fa-user"></i>
+                        </figure>
+                        <span class="username">Anonymous User</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                </section>
+                
                 <button class="settings-btn" id="settingsBtn">
                     <i class="fas fa-cog"></i>
-                    <span>Settings</span>
+                </button>
+                
+                <button class="menu-toggle" id="menuToggle">
+                    <i class="fas fa-bars"></i>
                 </button>
             </section>
         </section>
     </nav>
 
     <main class="main-content">
+        <header class="content-header">
+            <h1 class="page-title" id="pageTitle">Community</h1>
+            <time class="date-info">Today, August 31, 2025</time>
+        </header>
+
         <section class="content-area">
             <!-- Community Page -->
             <article class="page active" id="community-page">
-                <header class="page-header">
-                    <h2>Community</h2>
-                    <p>Connect with others who understand your journey</p>
-                </header>
-                
                 <section class="community-container">
-                    <section class="community-stats">
-                        <article class="community-stat">
-                            <h3>1,245</h3>
-                            <p>Active Members</p>
+                    <header class="community-header">
+                        <h2>Connect with Your Community</h2>
+                        <p>Find support, share experiences, and connect with others on similar journeys</p>
+                    </header>
+
+                    <section class="community-options">
+                        <article class="community-card">
+                            <header class="community-card-header">
+                                <i class="fas fa-comments"></i>
+                                <h3>Anonymous Chat Rooms</h3>
+                            </header>
+                            <p>Join ongoing conversations in safe, moderated spaces</p>
+                            <section class="active-rooms">
+                                <article class="room-item">
+                                    <span class="room-name">General Support</span>
+                                    <span class="room-count">23 active</span>
+                                </article>
+                                <article class="room-item">
+                                    <span class="room-name">Anxiety Circle</span>
+                                    <span class="room-count">15 active</span>
+                                </article>
+                                <article class="room-item">
+                                    <span class="room-name">Depression Support</span>
+                                    <span class="room-count">31 active</span>
+                                </article>
+                            </section>
+                            <button class="community-action-btn">Join Chat Rooms</button>
                         </article>
-                        <article class="community-stat">
-                            <h3>327</h3>
-                            <p>Support Groups</p>
+
+                        <article class="community-card">
+                            <header class="community-card-header">
+                                <i class="fas fa-calendar-alt"></i>
+                                <h3>Local Support Groups</h3>
+                            </header>
+                            <p>Attend in-person support meetings in Johannesburg area</p>
+                            <section class="upcoming-groups">
+                                <article class="group-item">
+                                    <section class="group-info">
+                                        <h4>Anxiety Support Circle</h4>
+                                        <p>Sandton Community Center</p>
+                                        <time>Today, 6:00 PM</time>
+                                    </section>
+                                    <button class="group-join-btn">Join</button>
+                                </article>
+                                <article class="group-item">
+                                    <section class="group-info">
+                                        <h4>Young Adults Mental Health</h4>
+                                        <p>Rosebank Library</p>
+                                        <time>Tomorrow, 7:30 PM</time>
+                                    </section>
+                                    <button class="group-join-btn">Join</button>
+                                </article>
+                            </section>
+                            <button class="community-action-btn">View All Groups</button>
                         </article>
-                        <article class="community-stat">
-                            <h3>42</h3>
-                            <p>Live Discussions</p>
+
+                        <article class="community-card">
+                            <header class="community-card-header">
+                                <i class="fas fa-handshake"></i>
+                                <h3>Peer Support Network</h3>
+                            </header>
+                            <p>Connect one-on-one with peer supporters who understand your journey</p>
+                            <section class="peer-stats">
+                                <article class="stat-item">
+                                    <span class="stat-number">156</span>
+                                    <span class="stat-label">Active Peers</span>
+                                </article>
+                                <article class="stat-item">
+                                    <span class="stat-number">4.8</span>
+                                    <span class="stat-label">Avg Rating</span>
+                                </article>
+                            </section>
+                            <button class="community-action-btn">Find Peer Support</button>
                         </article>
                     </section>
-                    
-                    <section class="community-featured">
-                        <h3>Featured Support Groups</h3>
-                        <section class="groups-grid">
-                            <article class="group-card">
-                                <figure class="group-icon">
-                                    <i class="fas fa-hands-helping"></i>
-                                </figure>
-                                <section class="group-content">
-                                    <h4>Anxiety Support Circle</h4>
-                                    <p>A safe space for those dealing with anxiety disorders</p>
-                                    <section class="group-meta">
-                                        <span class="member-count">243 members</span>
-                                        <span class="online-count">18 online</span>
+
+                    <section class="community-feed">
+                        <header class="feed-header">
+                            <h3>Community Highlights</h3>
+                            <section class="feed-filters">
+                                <button class="filter-btn active">All</button>
+                                <button class="filter-btn">Success Stories</button>
+                                <button class="filter-btn">Tips & Advice</button>
+                                <button class="filter-btn">Events</button>
+                            </section>
+                        </header>
+                        <section class="feed-items">
+                            <article class="feed-item">
+                                <header class="feed-item-header">
+                                    <figure class="user-avatar">
+                                        <i class="fas fa-user"></i>
+                                    </figure>
+                                    <section class="user-info">
+                                        <h4>Anonymous User</h4>
+                                        <time>2 hours ago</time>
                                     </section>
+                                </header>
+                                <p class="feed-content">
+                                    Just wanted to share that after 3 months of using the daily breathing exercises, 
+                                    my anxiety has significantly improved. Thank you to this amazing community for the support! 💙
+                                </p>
+                                <section class="feed-actions">
+                                    <button class="feed-action-btn">
+                                        <i class="fas fa-heart"></i>
+                                        <span>24</span>
+                                    </button>
+                                    <button class="feed-action-btn">
+                                        <i class="fas fa-comment"></i>
+                                        <span>8</span>
+                                    </button>
                                 </section>
-                                <button class="join-group-btn">Join Group</button>
                             </article>
-                            <article class="group-card">
-                                <figure class="group-icon">
-                                    <i class="fas fa-heart"></i>
-                                </figure>
-                                <section class="group-content">
-                                    <h4>Depression Warriors</h4>
-                                    <p>Support and encouragement for depression recovery</p>
-                                    <section class="group-meta">
-                                        <span class="member-count">187 members</span>
-                                        <span class="online-count">12 online</span>
+
+                            <article class="feed-item">
+                                <header class="feed-item-header">
+                                    <figure class="user-avatar">
+                                        <i class="fas fa-user"></i>
+                                    </figure>
+                                    <section class="user-info">
+                                        <h4>Community Helper</h4>
+                                        <time>1 day ago</time>
                                     </section>
+                                </header>
+                                <p class="feed-content">
+                                    Remember: It's okay to have bad days. What matters is that you keep showing up for yourself. 
+                                    Small steps are still progress. 🌱
+                                </p>
+                                <section class="feed-actions">
+                                    <button class="feed-action-btn">
+                                        <i class="fas fa-heart"></i>
+                                        <span>42</span>
+                                    </button>
+                                    <button class="feed-action-btn">
+                                        <i class="fas fa-comment"></i>
+                                        <span>15</span>
+                                    </button>
                                 </section>
-                                <button class="join-group-btn">Join Group</button>
                             </article>
-                            <article class="group-card">
-                                <figure class="group-icon">
-                                    <i class="fas fa-balance-scale"></i>
-                                </figure>
-                                <section class="group-content">
-                                    <h4>Mindfulness Practitioners</h4>
-                                    <p>Daily meditation and mindfulness practice group</p>
-                                    <section class="group-meta">
-                                        <span class="member-count">356 members</span>
-                                        <span class="online-count">27 online</span>
+                            
+                            <article class="feed-item">
+                                <header class="feed-item-header">
+                                    <figure class="user-avatar">
+                                        <i class="fas fa-user"></i>
+                                    </figure>
+                                    <section class="user-info">
+                                        <h4>MindfulJourney</h4>
+                                        <time>3 days ago</time>
                                     </section>
+                                </header>
+                                <p class="feed-content">
+                                    Started my meditation practice 30 days ago and can already feel the difference in how I handle stress. 
+                                    Consistency really is key! Anyone else on a meditation streak?
+                                </p>
+                                <section class="feed-actions">
+                                    <button class="feed-action-btn">
+                                        <i class="fas fa-heart"></i>
+                                        <span>37</span>
+                                    </button>
+                                    <button class="feed-action-btn">
+                                        <i class="fas fa-comment"></i>
+                                        <span>12</span>
+                                    </button>
                                 </section>
-                                <button class="join-group-btn">Join Group</button>
                             </article>
                         </section>
                     </section>
                     
-                    <section class="community-discussions">
-                        <header class="section-header">
-                            <h3>Recent Discussions</h3>
-                            <button class="new-discussion-btn">Start New Discussion</button>
+                    <section class="community-resources">
+                        <header class="resources-header">
+                            <h3>Community Resources</h3>
+                            <p>Helpful materials and guides from our community</p>
                         </header>
-                        <section class="discussions-list">
-                            <article class="discussion-item">
-                                <figure class="user-avatar">
-                                    <i class="fas fa-user-circle"></i>
-                                </figure>
-                                <section class="discussion-content">
-                                    <h4>Coping with panic attacks</h4>
-                                    <p>I've been struggling with panic attacks lately and would appreciate any advice on what helps you manage them...</p>
-                                    <section class="discussion-meta">
-                                        <span class="author">AnonymousUser23</span>
-                                        <span class="time">2 hours ago</span>
-                                        <span class="replies">14 replies</span>
-                                    </section>
-                                </section>
+                        <section class="resources-grid">
+                            <article class="resource-card">
+                                <header class="resource-header">
+                                    <i class="fas fa-book"></i>
+                                    <h4>Anxiety Management Guide</h4>
+                                </header>
+                                <p>Practical strategies for managing anxiety in daily life, compiled by community members.</p>
+                                <button class="resource-btn">View Guide</button>
                             </article>
-                            <article class="discussion-item">
-                                <figure class="user-avatar">
-                                    <i class="fas fa-user-circle"></i>
-                                </figure>
-                                <section class="discussion-content">
-                                    <h4>Meditation techniques that work</h4>
-                                    <p>I've found that guided meditation works best for me, but I'm curious what techniques others have found helpful...</p>
-                                    <section class="discussion-meta">
-                                        <span class="author">MindfulWalker</span>
-                                        <span class="time">5 hours ago</span>
-                                        <span class="replies">23 replies</span>
-                                    </section>
-                                </section>
+                            <article class="resource-card">
+                                <header class="resource-header">
+                                    <i class="fas fa-download"></i>
+                                    <h4>Self-Care Checklist</h4>
+                                </header>
+                                <p>Daily and weekly self-care practices recommended by mental health professionals.</p>
+                                <button class="resource-btn">Download</button>
                             </article>
-                            <article class="discussion-item">
-                                <figure class="user-avatar">
-                                    <i class="fas fa-user-circle"></i>
-                                </figure>
-                                <section class="discussion-content">
-                                    <h4>Celebrating small wins</h4>
-                                    <p>Today I managed to get out of bed and take a shower, which has been difficult lately. Celebrating small victories!</p>
-                                    <section class="discussion-meta">
-                                        <span class="author">ProgressMaker</span>
-                                        <span class="time">Yesterday</span>
-                                        <span class="replies">42 replies</span>
-                                    </section>
-                                </section>
-                            </article>
-                        </section>
-                    </section>
-                    
-                    <section class="community-events">
-                        <header class="section-header">
-                            <h3>Upcoming Events</h3>
-                            <button class="view-all-btn">View All Events</button>
-                        </header>
-                        <section class="events-list">
-                            <article class="event-item">
-                                <time class="event-date">
-                                    <span class="event-day">15</span>
-                                    <span class="event-month">Sep</span>
-                                </time>
-                                <section class="event-content">
-                                    <h4>Mindfulness Workshop</h4>
-                                    <p>Learn practical mindfulness techniques to reduce stress and anxiety</p>
-                                    <section class="event-meta">
-                                        <span class="event-time"><i class="fas fa-clock"></i> 6:00 PM - 7:30 PM</span>
-                                        <span class="event-type"><i class="fas fa-video"></i> Virtual</span>
-                                    </section>
-                                </section>
-                                <button class="rsvp-btn">RSVP</button>
-                            </article>
-                            <article class="event-item">
-                                <time class="event-date">
-                                    <span class="event-day">18</span>
-                                    <span class="event-month">Sep</span>
-                                </time>
-                                <section class="event-content">
-                                    <h4>Anxiety Support Group Meeting</h4>
-                                    <p>Weekly support group for those dealing with anxiety</p>
-                                    <section class="event-meta">
-                                        <span class="event-time"><i class="fas fa-clock"></i> 7:00 PM - 8:30 PM</span>
-                                        <span class="event-type"><i class="fas fa-video"></i> Virtual</span>
-                                    </section>
-                                </section>
-                                <button class="rsvp-btn">RSVP</button>
-                            </article>
-                            <article class="event-item">
-                                <time class="event-date">
-                                    <span class="event-day">22</span>
-                                    <span class="event-month">Sep</span>
-                                </time>
-                                <section class="event-content">
-                                    <h4>Yoga for Mental Health</h4>
-                                    <p>Gentle yoga session focused on mental wellbeing</p>
-                                    <section class="event-meta">
-                                        <span class="event-time"><i class="fas fa-clock"></i> 9:00 AM - 10:30 AM</span>
-                                        <span class="event-type"><i class="fas fa-video"></i> Virtual</span>
-                                    </section>
-                                </section>
-                                <button class="rsvp-btn">RSVP</button>
+                            <article class="resource-card">
+                                <header class="resource-header">
+                                    <i class="fas fa-video"></i>
+                                    <h4>Community Stories</h4>
+                                </header>
+                                <p>Video testimonials from community members sharing their mental health journeys.</p>
+                                <button class="resource-btn">Watch Videos</button>
                             </article>
                         </section>
                     </section>
@@ -415,6 +463,7 @@
         </article>
     </dialog>
 
-    <script src="../js/dash.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="../js/dashboard.js"></script>
 </body>
 </html>

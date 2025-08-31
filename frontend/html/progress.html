@@ -4,328 +4,253 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mentaly - Progress</title>
-    <link rel="stylesheet" href="../css/dash.css">
+    <link rel="stylesheet" href="../css/dashboard.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 </head>
 <body>
-    <nav class="navbar">
+    <!-- Top Navigation Bar -->
+    <nav class="top-navbar">
         <section class="nav-container">
-            <a href="../html/dash.html" class="logo-link">
+            <a href="../html/landing.html" class="logo-link">
                 <h1 class="logo">Mentaly</h1>
             </a>
             
-            <button class="hamburger" id="hamburger">
-                <i class="fas fa-bars"></i>
-            </button>
-            
             <ul class="nav-menu">
-                <li>
-                    <a href="../html/dash.html" class="nav-link" data-page="dashboard">
+                <li class="nav-item">
+                    <button class="nav-button" data-page="dashboard">
                         <i class="fas fa-chart-line"></i>
                         <span>Dashboard</span>
-                    </a>
+                    </button>
                 </li>
-                <li>
-                    <a href="../html/ai-support.html" class="nav-link" data-page="ai-chat">
+                <li class="nav-item">
+                    <button class="nav-button" data-page="ai-chat">
                         <i class="fas fa-robot"></i>
                         <span>AI Support</span>
-                    </a>
+                    </button>
                 </li>
-                <li>
-                    <a href="../html/mood-tracker.html" class="nav-link" data-page="mood-tracker">
+                <li class="nav-item">
+                    <button class="nav-button" data-page="mood-tracker">
                         <i class="fas fa-heart"></i>
                         <span>Mood Tracker</span>
-                    </a>
+                    </button>
                 </li>
-                <li>
-                    <a href="../html/community.html" class="nav-link" data-page="community">
+                <li class="nav-item">
+                    <button class="nav-button" data-page="community">
                         <i class="fas fa-users"></i>
                         <span>Community</span>
-                    </a>
+                    </button>
                 </li>
-                <li>
-                    <a href="../html/wellness-tools.html" class="nav-link" data-page="wellness-tools">
+                <li class="nav-item">
+                    <button class="nav-button" data-page="wellness-tools">
                         <i class="fas fa-leaf"></i>
                         <span>Wellness Tools</span>
-                    </a>
+                    </button>
                 </li>
-                <li>
-                    <a href="../html/professionals.html" class="nav-link" data-page="professionals">
+                <li class="nav-item">
+                    <button class="nav-button" data-page="professionals">
                         <i class="fas fa-user-md"></i>
                         <span>Find Help</span>
-                    </a>
+                    </button>
                 </li>
-                <li>
-                    <a href="../html/progress.html" class="nav-link active" data-page="progress">
+                <li class="nav-item">
+                    <button class="nav-button active" data-page="progress">
                         <i class="fas fa-trophy"></i>
                         <span>Progress</span>
-                    </a>
+                    </button>
                 </li>
             </ul>
-            
+
             <section class="nav-actions">
-                <button class="emergency-btn" id="emergencyBtn">
+                <button class="emergency-btn" id="dashboardEmergencyBtn">
                     <i class="fas fa-phone"></i>
                     <span>Emergency</span>
                 </button>
+                
+                <button class="notification-btn" id="notificationBtn">
+                    <i class="fas fa-bell"></i>
+                    <span class="notification-badge">3</span>
+                </button>
+                
+                <section class="user-profile">
+                    <button class="profile-btn" id="profileBtn">
+                        <figure class="avatar">
+                            <i class="fas fa-user"></i>
+                        </figure>
+                        <span class="username">Anonymous User</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                </section>
+                
                 <button class="settings-btn" id="settingsBtn">
                     <i class="fas fa-cog"></i>
-                    <span>Settings</span>
+                </button>
+                
+                <button class="menu-toggle" id="menuToggle">
+                    <i class="fas fa-bars"></i>
                 </button>
             </section>
         </section>
     </nav>
 
     <main class="main-content">
+        <header class="content-header">
+            <h1 class="page-title" id="pageTitle">Your Progress</h1>
+            <time class="date-info">Today, August 31, 2025</time>
+        </header>
+
         <section class="content-area">
             <!-- Progress Page -->
             <article class="page active" id="progress-page">
-                <header class="page-header">
-                    <h2>Your Progress</h2>
-                    <p>Track your mental health journey and celebrate your achievements</p>
-                </header>
-                
                 <section class="progress-container">
+                    <header class="progress-header">
+                        <h2>Your Progress Journey</h2>
+                        <p>Track your growth and celebrate your achievements</p>
+                    </header>
+
                     <section class="progress-overview">
-                        <article class="progress-stat-card">
-                            <figure class="progress-icon">
-                                <i class="fas fa-fire"></i>
-                            </figure>
-                            <section class="progress-content">
-                                <h3>14</h3>
-                                <p>Day Streak</p>
-                                <small>Keep going! You're doing great.</small>
+                        <article class="progress-summary">
+                            <h3>Monthly Summary</h3>
+                            <section class="summary-stats">
+                                <article class="summary-stat">
+                                    <span class="stat-number">78%</span>
+                                    <span class="stat-label">Consistency</span>
+                                    <small class="stat-change positive">+12% from last month</small>
+                                </article>
+                                <article class="summary-stat">
+                                    <span class="stat-number">6.8</span>
+                                    <span class="stat-label">Avg Mood</span>
+                                    <small class="stat-change positive">+0.7 from last month</small>
+                                </article>
+                                <article class="summary-stat">
+                                    <span class="stat-number">42</span>
+                                    <span class="stat-label">Activities</span>
+                                    <small class="stat-change positive">+15 from last month</small>
+                                </article>
                             </section>
                         </article>
-                        <article class="progress-stat-card">
-                            <figure class="progress-icon">
-                                <i class="fas fa-chart-line"></i>
-                            </figure>
-                            <section class="progress-content">
-                                <h3>72%</h3>
-                                <p>Weekly Consistency</p>
-                                <small>+8% from last week</small>
-                            </section>
-                        </article>
-                        <article class="progress-stat-card">
-                            <figure class="progress-icon">
-                                <i class="fas fa-trophy"></i>
-                            </figure>
-                            <section class="progress-content">
-                                <h3>23</h3>
-                                <p>Achievements Unlocked</p>
-                                <small>5 more to next level</small>
-                            </section>
-                        </article>
-                        <article class="progress-stat-card">
-                            <figure class="progress-icon">
-                                <i class="fas fa-heart"></i>
-                            </figure>
-                            <section class="progress-content">
-                                <h3>7.2</h3>
-                                <p>Average Mood Score</p>
-                                <small>+0.5 from last month</small>
+
+                        <article class="achievements">
+                            <h3>Recent Achievements</h3>
+                            <section class="achievements-grid">
+                                <article class="achievement-item">
+                                    <figure class="achievement-icon">
+                                        <i class="fas fa-fire"></i>
+                                    </figure>
+                                    <section class="achievement-info">
+                                        <h4>14-Day Streak</h4>
+                                        <p>Consistent daily practice for 14 days</p>
+                                    </section>
+                                </article>
+                                <article class="achievement-item">
+                                    <figure class="achievement-icon">
+                                        <i class="fas fa-heart"></i>
+                                    </figure>
+                                    <section class="achievement-info">
+                                        <h4>Mood Master</h4>
+                                        <p>Logged mood for 7 consecutive days</p>
+                                    </section>
+                                </article>
+                                <article class="achievement-item">
+                                    <figure class="achievement-icon">
+                                        <i class="fas fa-pen"></i>
+                                    </figure>
+                                    <section class="achievement-info">
+                                        <h4>Reflection Pro</h4>
+                                        <p>Completed 10 journal entries</p>
+                                    </section>
+                                </article>
                             </section>
                         </article>
                     </section>
-                    
+
                     <section class="progress-charts">
                         <article class="chart-card">
                             <header class="chart-header">
                                 <h3>Mood Trends</h3>
-                                <select class="time-selector">
+                                <select class="chart-selector">
                                     <option>Last 30 Days</option>
-                                    <option>Last 7 Days</option>
                                     <option>Last 3 Months</option>
+                                    <option>Last 6 Months</option>
                                 </select>
                             </header>
                             <figure class="chart-container">
-                                <canvas id="moodTrendChart"></canvas>
+                                <canvas class="progress-chart" id="moodTrendChart"></canvas>
                             </figure>
                         </article>
+
                         <article class="chart-card">
                             <header class="chart-header">
-                                <h3>Activity Frequency</h3>
-                                <select class="time-selector">
-                                    <option>Last 30 Days</option>
-                                    <option>Last 7 Days</option>
-                                    <option>Last 3 Months</option>
+                                <h3>Activity Distribution</h3>
+                                <select class="chart-selector">
+                                    <option>This Month</option>
+                                    <option>Last Month</option>
+                                    <option>All Time</option>
                                 </select>
                             </header>
                             <figure class="chart-container">
-                                <canvas id="activityChart"></canvas>
+                                <canvas class="progress-chart" id="activityChart"></canvas>
                             </figure>
                         </article>
                     </section>
-                    
-                    <section class="achievements-section">
-                        <header class="section-header">
-                            <h3>Your Achievements</h3>
-                            <button class="view-all-btn">View All</button>
-                        </header>
-                        <section class="achievements-grid">
-                            <article class="achievement-card unlocked">
-                                <figure class="achievement-icon">
-                                    <i class="fas fa-calendar-check"></i>
-                                </figure>
-                                <section class="achievement-content">
-                                    <h4>7-Day Streak</h4>
-                                    <p>Logged your mood for 7 consecutive days</p>
-                                    <time class="achievement-date">Unlocked: August 24, 2025</time>
-                                </section>
-                            </article>
-                            <article class="achievement-card unlocked">
-                                <figure class="achievement-icon">
-                                    <i class="fas fa-meditation"></i>
-                                </figure>
-                                <section class="achievement-content">
-                                    <h4>Mindfulness Master</h4>
-                                    <p>Completed 10 mindfulness sessions</p>
-                                    <time class="achievement-date">Unlocked: August 18, 2025</time>
-                                </section>
-                            </article>
-                            <article class="achievement-card unlocked">
-                                <figure class="achievement-icon">
-                                    <i class="fas fa-journal-whills"></i>
-                                </figure>
-                                <section class="achievement-content">
-                                    <h4>Reflective Writer</h4>
-                                    <p>Wrote 15 journal entries</p>
-                                    <time class="achievement-date">Unlocked: August 12, 2025</time>
-                                </section>
-                            </article>
-                            <article class="achievement-card locked">
-                                <figure class="achievement-icon">
-                                    <i class="fas fa-fire"></i>
-                                </figure>
-                                <section class="achievement-content">
-                                    <h4>30-Day Streak</h4>
-                                    <p>Log your mood for 30 consecutive days</p>
-                                    <small class="progress-to-unlock">16/30 days completed</small>
-                                </section>
-                            </article>
-                            <article class="achievement-card locked">
-                                <figure class="achievement-icon">
-                                    <i class="fas fa-users"></i>
-                                </figure>
-                                <section class="achievement-content">
-                                    <h4>Community Helper</h4>
-                                    <p>Participate in 5 community discussions</p>
-                                    <small class="progress-to-unlock">3/5 discussions completed</small>
-                                </section>
-                            </article>
-                            <article class="achievement-card locked">
-                                <figure class="achievement-icon">
-                                    <i class="fas fa-tools"></i>
-                                </figure>
-                                <section class="achievement-content">
-                                    <h4>Tool Explorer</h4>
-                                    <p>Try all available wellness tools at least once</p>
-                                    <small class="progress-to-unlock">4/8 tools tried</small>
-                                </section>
-                            </article>
-                        </section>
-                    </section>
-                    
-                    <section class="progress-insights">
-                        <header class="section-header">
-                            <h3>Personalized Insights</h3>
-                            <button class="refresh-btn">
-                                <i class="fas fa-sync-alt"></i>
-                            </button>
-                        </header>
-                        <section class="insights-list">
-                            <article class="insight-item">
-                                <figure class="insight-icon">
-                                    <i class="fas fa-chart-line"></i>
-                                </figure>
-                                <section class="insight-content">
-                                    <h4>Consistent Improvement</h4>
-                                    <p>Your mood has shown a steady upward trend over the past two weeks, with a 15% improvement in average mood score.</p>
-                                </section>
-                            </article>
-                            <article class="insight-item">
-                                <figure class="insight-icon">
-                                    <i class="fas fa-clock"></i>
-                                </figure>
-                                <section class="insight-content">
-                                    <h4>Best Time for Practice</h4>
-                                    <p>You're most consistent with your mindfulness practice in the mornings. Try scheduling your sessions before 10 AM for better adherence.</p>
-                                </section>
-                            </article>
-                            <article class="insight-item">
-                                <figure class="insight-icon">
-                                    <i class="fas fa-heart"></i>
-                                </figure>
-                                <section class="insight-content">
-                                    <h4>Mood Patterns</h4>
-                                    <p>Your mood tends to be highest on days when you practice breathing exercises. Consider making this a daily habit.</p>
-                                </section>
-                            </article>
-                        </section>
-                    </section>
-                    
+
                     <section class="progress-history">
-                        <header class="section-header">
-                            <h3>Progress History</h3>
-                            <select class="time-selector">
-                                <option>Last 30 Days</option>
-                                <option>Last 3 Months</option>
-                                <option>Last 6 Months</option>
-                                <option>All Time</option>
-                            </select>
+                        <header class="history-header">
+                            <h3>Activity History</h3>
+                            <button class="export-btn">Export Data</button>
                         </header>
-                        <section class="history-timeline">
+                        <section class="activity-timeline">
                             <article class="timeline-item">
-                                <time class="timeline-date">Today</time>
-                                <figure class="timeline-icon">
-                                    <i class="fas fa-heart"></i>
-                                </figure>
+                                <time class="timeline-date">Today, 2:30 PM</time>
                                 <section class="timeline-content">
-                                    <h4>Mood Logged: Good</h4>
-                                    <p>"Feeling positive after morning meditation"</p>
+                                    <h4>Mood Logged</h4>
+                                    <p>Logged mood as "Good" with notes about positive conversation with AI companion</p>
                                 </section>
                             </article>
                             <article class="timeline-item">
-                                <time class="timeline-date">Yesterday</time>
-                                <figure class="timeline-icon">
-                                    <i class="fas fa-wind"></i>
-                                </figure>
+                                <time class="timeline-date">Today, 1:15 PM</time>
                                 <section class="timeline-content">
-                                    <h4>Breathing Exercise Completed</h4>
-                                    <p>5-minute deep breathing session</p>
+                                    <h4>Breathing Exercise</h4>
+                                    <p>Completed 5-minute box breathing exercise</p>
                                 </section>
                             </article>
                             <article class="timeline-item">
-                                <time class="timeline-date">August 29</time>
-                                <figure class="timeline-icon">
-                                    <i class="fas fa-trophy"></i>
-                                </figure>
+                                <time class="timeline-date">Today, 9:00 AM</time>
                                 <section class="timeline-content">
-                                    <h4>Achievement Unlocked</h4>
-                                    <p>7-Day Streak: Logged your mood for 7 consecutive days</p>
+                                    <h4>Journal Entry</h4>
+                                    <p>Wrote about plans for the day and gratitude for good sleep</p>
                                 </section>
                             </article>
                             <article class="timeline-item">
-                                <time class="timeline-date">August 28</time>
-                                <figure class="timeline-icon">
-                                    <i class="fas fa-meditation"></i>
-                                </figure>
+                                <time class="timeline-date">Yesterday, 7:30 PM</time>
                                 <section class="timeline-content">
-                                    <h4>Meditation Session</h4>
-                                    <p>10-minute guided meditation</p>
+                                    <h4>Meditation</h4>
+                                    <p>Completed 10-minute guided meditation for stress relief</p>
                                 </section>
                             </article>
-                            <article class="timeline-item">
-                                <time class="timeline-date">August 27</time>
-                                <figure class="timeline-icon">
-                                    <i class="fas fa-heart"></i>
-                                </figure>
-                                <section class="timeline-content">
-                                    <h4>Mood Logged: Okay</h4>
-                                    <p>"Tired but managed to complete daily tasks"</p>
-                                </section>
+                        </section>
+                    </section>
+
+                    <section class="insights-section">
+                        <header class="insights-header">
+                            <h3>Personalized Insights</h3>
+                            <p>Based on your data patterns and activities</p>
+                        </header>
+                        <section class="insights-grid">
+                            <article class="insight-card">
+                                <i class="fas fa-lightbulb"></i>
+                                <h4>Best Time for Activities</h4>
+                                <p>Your mood and energy are highest in the morning. Consider scheduling important activities before noon.</p>
+                            </article>
+                            <article class="insight-card">
+                                <i class="fas fa-chart-line"></i>
+                                <h4>Mood Patterns</h4>
+                                <p>Your mood shows a positive trend on days when you complete morning journaling and breathing exercises.</p>
+                            </article>
+                            <article class="insight-card">
+                                <i class="fas fa-heart"></i>
+                                <h4>Wellness Impact</h4>
+                                <p>Meditation has the strongest positive correlation with your overall mood scores (+22% on meditation days).</p>
                             </article>
                         </section>
                     </section>
@@ -376,121 +301,121 @@
         </article>
     </dialog>
 
-<!-- Settings Modal -->
-<dialog class="modal" id="settingsModal">
-    <article class="modal-content settings-modal">
-        <header class="modal-header">
-            <h2>Settings</h2>
-            <button class="modal-close" id="closeSettingsModal">
-                <i class="fas fa-times"></i>
-            </button>
-        </header>
-        <section class="modal-body">
-            <nav class="settings-nav">
-                <button class="settings-nav-btn active" data-tab="account">Account</button>
-                <button class="settings-nav-btn" data-tab="privacy">Privacy</button>
-                <button class="settings-nav-btn" data-tab="notifications">Notifications</button>
-                <button class="settings-nav-btn" data-tab="appearance">Appearance</button>
-            </nav>
-            <section class="settings-content">
-                <article class="settings-tab active" id="account-tab">
-                    <h3>Account Settings</h3>
-                    <form class="settings-form">
-                        <section class="form-group">
-                            <label class="form-label">Display Name</label>
-                            <input type="text" class="form-input" value="Anonymous User">
-                        </section>
-                        <section class="form-group">
-                            <label class="form-label">Email Address</label>
-                            <input type="email" class="form-input" value="user@example.com">
-                        </section>
-                        <section class="form-group">
-                            <label class="form-label">Password</label>
-                            <input type="password" class="form-input" value="********">
-                        </section>
-                        <button type="submit" class="save-settings-btn">Save Changes</button>
-                    </form>
-                </article>
-                <article class="settings-tab" id="privacy-tab">
-                    <h3>Privacy Settings</h3>
-                    <form class="settings-form">
-                        <section class="form-group checkbox-group">
-                            <input type="checkbox" id="dataCollection" checked>
-                            <label for="dataCollection">Allow anonymous data collection to improve services</label>
-                        </section>
-                        <section class="form-group checkbox-group">
-                            <input type="checkbox" id="personalizedInsights" checked>
-                            <label for="personalizedInsights">Receive personalized insights based on my data</label>
-                        </section>
-                        <section class="form-group">
-                            <label class="form-label">Data Retention</label>
-                            <select class="form-select">
-                                <option>Keep data indefinitely</option>
-                                <option>Delete after 1 year</option>
-                                <option>Delete after 6 months</option>
-                            </select>
-                        </section>
-                        <button type="submit" class="save-settings-btn">Save Preferences</button>
-                    </form>
-                </article>
-                <article class="settings-tab" id="notifications-tab">
-                    <h3>Notification Settings</h3>
-                    <form class="settings-form">
-                        <section class="form-group checkbox-group">
-                            <input type="checkbox" id="dailyReminders" checked>
-                            <label for="dailyReminders">Daily check-in reminders</label>
-                        </section>
-                        <section class="form-group checkbox-group">
-                            <input type="checkbox" id="weeklyReports" checked>
-                            <label for="weeklyReports">Weekly progress reports</label>
-                        </section>
-                        <section class="form-group checkbox-group">
-                            <input type="checkbox" id="communityUpdates">
-                            <label for="communityUpdates">Community updates and events</label>
-                        </section>
-                        <section class="form-group">
-                            <label class="form-label">Notification Frequency</label>
-                            <select class="form-select">
-                                <option>Only important updates</option>
-                                <option>Regular (recommended)</option>
-                                <option>All notifications</option>
-                            </select>
-                        </section>
-                        <button type="submit" class="save-settings-btn">Save Preferences</button>
-                    </form>
-                </article>
-                <article class="settings-tab" id="appearance-tab">
-                    <h3>Appearance Settings</h3>
-                    <form class="settings-form">
-                        <section class="form-group">
-                            <label class="form-label">Theme</label>
-                            <select class="form-select">
-                                <option>Light (Default)</option>
-                                <option>Dark</option>
-                                <option>Auto (System)</option>
-                            </select>
-                        </section>
-                        <section class="form-group">
-                            <label class="form-label">Font Size</label>
-                            <select class="form-select">
-                                <option>Small</option>
-                                <option>Medium (Default)</option>
-                                <option>Large</option>
-                            </select>
-                        </section>
-                        <section class="form-group checkbox-group">
-                            <input type="checkbox" id="reduceAnimations">
-                            <label for="reduceAnimations">Reduce animations and transitions</label>
-                        </section>
-                        <button type="submit" class="save-settings-btn">Save Preferences</button>
-                    </form>
-                </article>
+    <!-- Settings Modal -->
+    <dialog class="modal" id="settingsModal">
+        <article class="modal-content settings-modal">
+            <header class="modal-header">
+                <h2>Settings</h2>
+                <button class="modal-close" id="closeSettingsModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </header>
+            <section class="modal-body">
+                <nav class="settings-nav">
+                    <button class="settings-nav-btn active" data-tab="account">Account</button>
+                    <button class="settings-nav-btn" data-tab="privacy">Privacy</button>
+                    <button class="settings-nav-btn" data-tab="notifications">Notifications</button>
+                    <button class="settings-nav-btn" data-tab="appearance">Appearance</button>
+                </nav>
+                <section class="settings-content">
+                    <article class="settings-tab active" id="account-tab">
+                        <h3>Account Settings</h3>
+                        <form class="settings-form">
+                            <section class="form-group">
+                                <label class="form-label">Display Name</label>
+                                <input type="text" class="form-input" value="Anonymous User">
+                            </section>
+                            <section class="form-group">
+                                <label class="form-label">Email Address</label>
+                                <input type="email" class="form-input" value="user@example.com">
+                            </section>
+                            <section class="form-group">
+                                <label class="form-label">Password</label>
+                                <input type="password" class="form-input" value="********">
+                            </section>
+                            <button type="submit" class="save-settings-btn">Save Changes</button>
+                        </form>
+                    </article>
+                    <article class="settings-tab" id="privacy-tab">
+                        <h3>Privacy Settings</h3>
+                        <form class="settings-form">
+                            <section class="form-group checkbox-group">
+                                <input type="checkbox" id="dataCollection" checked>
+                                <label for="dataCollection">Allow anonymous data collection to improve services</label>
+                            </section>
+                            <section class="form-group checkbox-group">
+                                <input type="checkbox" id="personalizedInsights" checked>
+                                <label for="personalizedInsights">Receive personalized insights based on my data</label>
+                            </section>
+                            <section class="form-group">
+                                <label class="form-label">Data Retention</label>
+                                <select class="form-select">
+                                    <option>Keep data indefinitely</option>
+                                    <option>Delete after 1 year</option>
+                                    <option>Delete after 6 months</option>
+                                </select>
+                            </section>
+                            <button type="submit" class="save-settings-btn">Save Preferences</button>
+                        </form>
+                    </article>
+                    <article class="settings-tab" id="notifications-tab">
+                        <h3>Notification Settings</h3>
+                        <form class="settings-form">
+                            <section class="form-group checkbox-group">
+                                <input type="checkbox" id="dailyReminders" checked>
+                                <label for="dailyReminders">Daily check-in reminders</label>
+                            </section>
+                            <section class="form-group checkbox-group">
+                                <input type="checkbox" id="weeklyReports" checked>
+                                <label for="weeklyReports">Weekly progress reports</label>
+                            </section>
+                            <section class="form-group checkbox-group">
+                                <input type="checkbox" id="communityUpdates">
+                                <label for="communityUpdates">Community updates and events</label>
+                            </section>
+                            <section class="form-group">
+                                <label class="form-label">Notification Frequency</label>
+                                <select class="form-select">
+                                    <option>Only important updates</option>
+                                    <option>Regular (recommended)</option>
+                                    <option>All notifications</option>
+                                </select>
+                            </section>
+                            <button type="submit" class="save-settings-btn">Save Preferences</button>
+                        </form>
+                    </article>
+                    <article class="settings-tab" id="appearance-tab">
+                        <h3>Appearance Settings</h3>
+                        <form class="settings-form">
+                            <section class="form-group">
+                                <label class="form-label">Theme</label>
+                                <select class="form-select">
+                                    <option>Light (Default)</option>
+                                    <option>Dark</option>
+                                    <option>Auto (System)</option>
+                                </select>
+                            </section>
+                            <section class="form-group">
+                                <label class="form-label">Font Size</label>
+                                <select class="form-select">
+                                    <option>Small</option>
+                                    <option>Medium (Default)</option>
+                                    <option>Large</option>
+                                </select>
+                            </section>
+                            <section class="form-group checkbox-group">
+                                <input type="checkbox" id="reduceAnimations">
+                                <label for="reduceAnimations">Reduce animations and transitions</label>
+                            </section>
+                            <button type="submit" class="save-settings-btn">Save Preferences</button>
+                        </form>
+                    </article>
+                </section>
             </section>
-        </section>
-    </article>
-</dialog>
+        </article>
+    </dialog>
 
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script src="../js/dash.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="../js/dashboard.js"></script>
 </body>
 </html>

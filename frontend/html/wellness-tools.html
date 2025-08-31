@@ -4,246 +4,290 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mentaly - Wellness Tools</title>
-    <link rel="stylesheet" href="../css/dash.css">
+    <link rel="stylesheet" href="../css/dashboard.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 </head>
 <body>
-    <nav class="navbar">
+    <!-- Top Navigation Bar -->
+    <nav class="top-navbar">
         <section class="nav-container">
-            <a href="../html/dash.html" class="logo-link">
+            <a href="../html/landing.html" class="logo-link">
                 <h1 class="logo">Mentaly</h1>
             </a>
             
-            <button class="hamburger" id="hamburger">
-                <i class="fas fa-bars"></i>
-            </button>
-            
             <ul class="nav-menu">
-                <li>
-                    <a href="../html/dash.html" class="nav-link" data-page="dashboard">
+                <li class="nav-item">
+                    <button class="nav-button" data-page="dashboard">
                         <i class="fas fa-chart-line"></i>
                         <span>Dashboard</span>
-                    </a>
+                    </button>
                 </li>
-                <li>
-                    <a href="../html/ai-support.html" class="nav-link" data-page="ai-chat">
+                <li class="nav-item">
+                    <button class="nav-button" data-page="ai-support">
                         <i class="fas fa-robot"></i>
                         <span>AI Support</span>
-                    </a>
+                    </button>
                 </li>
-                <li>
-                    <a href="../html/mood-tracker.html" class="nav-link" data-page="mood-tracker">
+                <li class="nav-item">
+                    <button class="nav-button" data-page="mood-tracker">
                         <i class="fas fa-heart"></i>
                         <span>Mood Tracker</span>
-                    </a>
+                    </button>
                 </li>
-                <li>
-                    <a href="../html/community.html" class="nav-link" data-page="community">
+                <li class="nav-item">
+                    <button class="nav-button" data-page="community">
                         <i class="fas fa-users"></i>
                         <span>Community</span>
-                    </a>
+                    </button>
                 </li>
-                <li>
-                    <a href="../html/wellness-tools.html" class="nav-link active" data-page="wellness-tools">
+                <li class="nav-item">
+                    <button class="nav-button active" data-page="wellness-tools">
                         <i class="fas fa-leaf"></i>
                         <span>Wellness Tools</span>
-                    </a>
+                    </button>
                 </li>
-                <li>
-                    <a href="../html/professionals.html" class="nav-link" data-page="professionals">
+                <li class="nav-item">
+                    <button class="nav-button" data-page="professionals">
                         <i class="fas fa-user-md"></i>
                         <span>Find Help</span>
-                    </a>
+                    </button>
                 </li>
-                <li>
-                    <a href="../html/progress.html" class="nav-link" data-page="progress">
+                <li class="nav-item">
+                    <button class="nav-button" data-page="progress">
                         <i class="fas fa-trophy"></i>
                         <span>Progress</span>
-                    </a>
+                    </button>
                 </li>
             </ul>
-            
+
             <section class="nav-actions">
-                <button class="emergency-btn" id="emergencyBtn">
+                <button class="emergency-btn" id="dashboardEmergencyBtn">
                     <i class="fas fa-phone"></i>
                     <span>Emergency</span>
                 </button>
+                
+                <button class="notification-btn" id="notificationBtn">
+                    <i class="fas fa-bell"></i>
+                    <span class="notification-badge">3</span>
+                </button>
+                
+                <section class="user-profile">
+                    <button class="profile-btn" id="profileBtn">
+                        <figure class="avatar">
+                            <i class="fas fa-user"></i>
+                        </figure>
+                        <span class="username">Anonymous User</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                </section>
+                
                 <button class="settings-btn" id="settingsBtn">
                     <i class="fas fa-cog"></i>
-                    <span>Settings</span>
+                </button>
+                
+                <button class="menu-toggle" id="menuToggle">
+                    <i class="fas fa-bars"></i>
                 </button>
             </section>
         </section>
     </nav>
 
     <main class="main-content">
+        <header class="content-header">
+            <h1 class="page-title" id="pageTitle">Wellness Tools</h1>
+            <time class="date-info">Today, August 31, 2025</time>
+        </header>
+
         <section class="content-area">
             <!-- Wellness Tools Page -->
             <article class="page active" id="wellness-tools-page">
-                <header class="page-header">
-                    <h2>Wellness Tools</h2>
-                    <p>Tools and exercises to support your mental wellbeing</p>
-                </header>
-                
                 <section class="wellness-tools-container">
+                    <header class="tools-header">
+                        <h2>Wellness Tools</h2>
+                        <p>Interactive tools to support your daily mental health practice</p>
+                    </header>
+
+                    <section class="tools-grid">
+                        <article class="tool-card breathing-tool">
+                            <header class="tool-header">
+                                <i class="fas fa-wind"></i>
+                                <h3>Breathing Exercises</h3>
+                            </header>
+                            <p class="tool-description">Guided breathing techniques to reduce stress and anxiety</p>
+                            <section class="tool-preview">
+                                <section class="breathing-animation"></section>
+                            </section>
+                            <section class="tool-options">
+                                <button class="tool-option" data-exercise="4-7-8">4-7-8 Breathing</button>
+                                <button class="tool-option" data-exercise="box">Box Breathing</button>
+                                <button class="tool-option" data-exercise="calm">Calming Breath</button>
+                            </section>
+                            <button class="start-tool-btn" data-tool="breathing">Start Exercise</button>
+                        </article>
+
+                        <article class="tool-card meditation-tool">
+                            <header class="tool-header">
+                                <i class="fas fa-om"></i>
+                                <h3>Guided Meditation</h3>
+                            </header>
+                            <p class="tool-description">Mindfulness sessions for inner peace and mental clarity</p>
+                            <section class="tool-preview">
+                                <section class="meditation-waves"></section>
+                            </section>
+                            <section class="tool-options">
+                                <button class="tool-option" data-duration="5">5 Minutes</button>
+                                <button class="tool-option" data-duration="10">10 Minutes</button>
+                                <button class="tool-option" data-duration="20">20 Minutes</button>
+                            </section>
+                            <button class="start-tool-btn" data-tool="meditation">Start Session</button>
+                        </article>
+
+                        <article class="tool-card journal-tool">
+                            <header class="tool-header">
+                                <i class="fas fa-pen"></i>
+                                <h3>Gratitude Journal</h3>
+                            </header>
+                            <p class="tool-description">Daily reflection and gratitude practice</p>
+                            <section class="journal-stats">
+                                <article class="journal-stat">
+                                    <span class="stat-number">12</span>
+                                    <span class="stat-label">Entries This Month</span>
+                                </article>
+                                <article class="journal-stat">
+                                    <span class="stat-number">7</span>
+                                    <span class="stat-label">Day Streak</span>
+                                </article>
+                            </section>
+                            <button class="start-tool-btn" data-tool="journal">Write Entry</button>
+                        </article>
+
+                        <article class="tool-card music-tool">
+                            <header class="tool-header">
+                                <i class="fas fa-music"></i>
+                                <h3>Therapeutic Music</h3>
+                            </header>
+                            <p class="tool-description">Curated soundscapes for relaxation and focus</p>
+                            <section class="music-categories">
+                                <button class="music-category" data-category="nature">Nature Sounds</button>
+                                <button class="music-category" data-category="ambient">Ambient</button>
+                                <button class="music-category" data-category="classical">Classical</button>
+                            </section>
+                            <button class="start-tool-btn" data-tool="music">Browse Music</button>
+                        </article>
+
+                        <article class="tool-card exercise-tool">
+                            <header class="tool-header">
+                                <i class="fas fa-dumbbell"></i>
+                                <h3>Mindful Movement</h3>
+                            </header>
+                            <p class="tool-description">Gentle exercises and stretches for mental wellbeing</p>
+                            <section class="exercise-options">
+                                <button class="exercise-option" data-type="yoga">Yoga</button>
+                                <button class="exercise-option" data-type="stretch">Stretching</button>
+                                <button class="exercise-option" data-type="walk">Walking</button>
+                            </section>
+                            <button class="start-tool-btn" data-tool="exercise">Start Movement</button>
+                        </article>
+
+                        <article class="tool-card sleep-tool">
+                            <header class="tool-header">
+                                <i class="fas fa-moon"></i>
+                                <h3>Sleep Support</h3>
+                            </header>
+                            <p class="tool-description">Tools and techniques for better sleep quality</p>
+                            <section class="sleep-options">
+                                <button class="sleep-option" data-type="story">Sleep Stories</button>
+                                <button class="sleep-option" data-type="sounds">Sleep Sounds</button>
+                                <button class="sleep-option" data-type="meditation">Sleep Meditation</button>
+                            </section>
+                            <button class="start-tool-btn" data-tool="sleep">Prepare for Sleep</button>
+                        </article>
+                    </section>
+
                     <section class="tools-categories">
-                        <h3>Browse by Category</h3>
+                        <header class="categories-header">
+                            <h3>Browse by Category</h3>
+                        </header>
                         <nav class="categories-nav">
                             <button class="category-btn active" data-category="all">All Tools</button>
-                            <button class="category-btn" data-category="meditation">Meditation</button>
-                            <button class="category-btn" data-category="breathing">Breathing</button>
                             <button class="category-btn" data-category="relaxation">Relaxation</button>
                             <button class="category-btn" data-category="mindfulness">Mindfulness</button>
+                            <button class="category-btn" data-category="sleep">Sleep</button>
+                            <button class="category-btn" data-category="movement">Movement</button>
                         </nav>
                     </section>
-                    
-                    <section class="featured-tools">
-                        <h3>Featured Tools</h3>
-                        <section class="tools-grid">
-                            <article class="tool-card" data-category="breathing">
-                                <figure class="tool-icon">
+
+                    <section class="recent-activities">
+                        <header class="activities-header">
+                            <h3>Your Recent Activities</h3>
+                            <button class="view-all-btn">View All</button>
+                        </header>
+                        <section class="activities-list">
+                            <article class="activity-item">
+                                <figure class="activity-icon">
                                     <i class="fas fa-wind"></i>
                                 </figure>
-                                <section class="tool-content">
-                                    <h4>Deep Breathing Exercise</h4>
-                                    <p>Calm your nervous system with guided breathing patterns</p>
-                                    <section class="tool-meta">
-                                        <span class="tool-duration">5-10 min</span>
-                                        <span class="tool-difficulty">Beginner</span>
-                                    </section>
+                                <section class="activity-info">
+                                    <h4>Breathing Exercise</h4>
+                                    <p>4-7-8 Technique • 5 minutes</p>
+                                    <time class="activity-time">Today, 2:30 PM</time>
                                 </section>
-                                <button class="start-tool-btn" data-tool="breathing">Start</button>
                             </article>
-                            <article class="tool-card" data-category="meditation">
-                                <figure class="tool-icon">
+                            <article class="activity-item">
+                                <figure class="activity-icon">
+                                    <i class="fas fa-pen"></i>
+                                </figure>
+                                <section class="activity-info">
+                                    <h4>Journal Entry</h4>
+                                    <p>Gratitude Journal • 10 minutes</p>
+                                    <time class="activity-time">Today, 9:00 AM</time>
+                                </section>
+                            </article>
+                            <article class="activity-item">
+                                <figure class="activity-icon">
                                     <i class="fas fa-om"></i>
                                 </figure>
-                                <section class="tool-content">
-                                    <h4>Guided Meditation</h4>
-                                    <p>Find peace and clarity with our guided meditation sessions</p>
-                                    <section class="tool-meta">
-                                        <span class="tool-duration">10-20 min</span>
-                                        <span class="tool-difficulty">All Levels</span>
-                                    </section>
+                                <section class="activity-info">
+                                    <h4>Meditation</h4>
+                                    <p>Mindfulness • 15 minutes</p>
+                                    <time class="activity-time">Yesterday, 7:30 PM</time>
                                 </section>
-                                <button class="start-tool-btn" data-tool="meditation">Start</button>
                             </article>
-                            <article class="tool-card" data-category="mindfulness">
-                                <figure class="tool-icon">
-                                    <i class="fas fa-brain"></i>
-                                </figure>
-                                <section class="tool-content">
-                                    <h4>Mindfulness Practice</h4>
-                                    <p>Stay present and aware with mindfulness techniques</p>
-                                    <section class="tool-meta">
-                                        <span class="tool-duration">5-15 min</span>
-                                        <span class="tool-difficulty">Beginner</span>
-                                    </section>
-                                </section>
-                                <button class="start-tool-btn" data-tool="mindfulness">Start</button>
-                            </article>
-                            <article class="tool-card" data-category="relaxation">
-                                <figure class="tool-icon">
-                                    <i class="fas fa-spa"></i>
-                                </figure>
-                                <section class="tool-content">
-                                    <h4>Progressive Muscle Relaxation</h4>
-                                    <p>Release tension throughout your body systematically</p>
-                                    <section class="tool-meta">
-                                        <span class="tool-duration">15-20 min</span>
-                                        <span class="tool-difficulty">Intermediate</span>
-                                    </section>
-                                </section>
-                                <button class="start-tool-btn" data-tool="relaxation">Start</button>
-                            </article>
-                            <article class="tool-card" data-category="meditation">
-                                <figure class="tool-icon">
-                                    <i class="fas fa-moon"></i>
-                                </figure>
-                                <section class="tool-content">
+                        </section>
+                    </section>
+
+                    <section class="recommended-tools">
+                        <header class="recommended-header">
+                            <h3>Recommended For You</h3>
+                            <p>Based on your recent activities and mood patterns</p>
+                        </header>
+                        <section class="recommended-grid">
+                            <article class="recommended-card">
+                                <header class="recommended-card-header">
+                                    <i class="fas fa-cloud-moon"></i>
                                     <h4>Sleep Meditation</h4>
-                                    <p>Gentle guidance to help you fall asleep peacefully</p>
-                                    <section class="tool-meta">
-                                        <span class="tool-duration">20-30 min</span>
-                                        <span class="tool-difficulty">All Levels</span>
-                                    </section>
-                                </section>
-                                <button class="start-tool-btn" data-tool="sleep-meditation">Start</button>
+                                </header>
+                                <p>Guided meditation to help you fall asleep faster and improve sleep quality</p>
+                                <button class="start-tool-btn small">Start Now</button>
                             </article>
-                            <article class="tool-card" data-category="mindfulness">
-                                <figure class="tool-icon">
-                                    <i class="fas fa-journal-whills"></i>
-                                </figure>
-                                <section class="tool-content">
-                                    <h4>Gratitude Journaling</h4>
-                                    <p>Focus on the positive aspects of your life with guided prompts</p>
-                                    <section class="tool-meta">
-                                        <span class="tool-duration">5-10 min</span>
-                                        <span class="tool-difficulty">Beginner</span>
-                                    </section>
-                                </section>
-                                <button class="start-tool-btn" data-tool="journaling">Start</button>
+                            <article class="recommended-card">
+                                <header class="recommended-card-header">
+                                    <i class="fas fa-walking"></i>
+                                    <h4>Mindful Walking</h4>
+                                </header>
+                                <p>Combine physical activity with mindfulness practice for dual benefits</p>
+                                <button class="start-tool-btn small">Start Now</button>
+                            </article>
+                            <article class="recommended-card">
+                                <header class="recommended-card-header">
+                                    <i class="fas fa-feather"></i>
+                                    <h4>Thought Journal</h4>
+                                </header>
+                                <p>Identify and reframe negative thought patterns using CBT techniques</p>
+                                <button class="start-tool-btn small">Start Now</button>
                             </article>
                         </section>
-                    </section>
-                    
-                    <section class="recent-tools">
-                        <header class="section-header">
-                            <h3>Recently Used</h3>
-                        </header>
-                        <section class="recent-tools-list">
-                            <article class="recent-tool-item">
-                                <figure class="recent-tool-icon">
-                                    <i class="fas fa-wind"></i>
-                                </figure>
-                                <section class="recent-tool-info">
-                                    <h4>Deep Breathing Exercise</h4>
-                                    <p>Last used: Today, 9:15 AM</p>
-                                </section>
-                                <button class="start-tool-btn" data-tool="breathing">Start Again</button>
-                            </article>
-                            <article class="recent-tool-item">
-                                <figure class="recent-tool-icon">
-                                    <i class="fas fa-om"></i>
-                                </figure>
-                                <section class="recent-tool-info">
-                                    <h4>Morning Meditation</h4>
-                                    <p>Last used: Yesterday, 7:30 AM</p>
-                                </section>
-                                <button class="start-tool-btn" data-tool="meditation">Start Again</button>
-                            </article>
-                            <article class="recent-tool-item">
-                                <figure class="recent-tool-icon">
-                                    <i class="fas fa-brain"></i>
-                                </figure>
-                                <section class="recent-tool-info">
-                                    <h4>Mindfulness Check-in</h4>
-                                    <p>Last used: 2 days ago</p>
-                                </section>
-                                <button class="start-tool-btn" data-tool="mindfulness">Start Again</button>
-                            </article>
-                        </section>
-                    </section>
-                    
-                    <section class="tool-of-the-day">
-                        <header class="section-header">
-                            <h3>Tool of the Day</h3>
-                        </header>
-                        <article class="featured-tool-card">
-                            <figure class="featured-tool-illustration">
-                                <i class="fas fa-leaf"></i>
-                            </figure>
-                            <section class="featured-tool-content">
-                                <h4>Nature Sound Immersion</h4>
-                                <p>Today's featured tool helps you reconnect with nature through immersive soundscapes. Research shows that natural sounds can significantly reduce stress and improve mood.</p>
-                                <section class="featured-tool-meta">
-                                    <span class="featured-tool-duration">15 minutes</span>
-                                    <span class="featured-tool-benefits">Reduces stress • Improves focus</span>
-                                </section>
-                                <button class="start-featured-tool-btn" data-tool="nature-sounds">Start Experience</button>
-                            </section>
-                        </article>
                     </section>
                 </section>
             </article>
@@ -406,6 +450,7 @@
         </article>
     </dialog>
 
-    <script src="../js/dash.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="../js/dashboard.js"></script>
 </body>
 </html>

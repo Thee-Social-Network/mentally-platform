@@ -4,88 +4,104 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mentaly - AI Support</title>
-    <link rel="stylesheet" href="../css/dash.css">
+    <link rel="stylesheet" href="../css/dashboard.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 </head>
 <body>
-    <nav class="navbar">
+    <!-- Top Navigation Bar -->
+    <nav class="top-navbar">
         <section class="nav-container">
-            <a href="../html/dash.html" class="logo-link">
+            <a href="../html/landing.html" class="logo-link">
                 <h1 class="logo">Mentaly</h1>
             </a>
             
-            <button class="hamburger" id="hamburger">
-                <i class="fas fa-bars"></i>
-            </button>
-            
             <ul class="nav-menu">
-                <li>
-                    <a href="../html/dash.html" class="nav-link" data-page="dashboard">
+                <li class="nav-item">
+                    <button class="nav-button" data-page="dashboard">
                         <i class="fas fa-chart-line"></i>
                         <span>Dashboard</span>
-                    </a>
+                    </button>
                 </li>
-                <li>
-                    <a href="../html/ai-support.html" class="nav-link active" data-page="ai-chat">
+                <li class="nav-item">
+                    <button class="nav-button active" data-page="ai-support">
                         <i class="fas fa-robot"></i>
                         <span>AI Support</span>
-                    </a>
+                    </button>
                 </li>
-                <li>
-                    <a href="../html/mood-tracker.html" class="nav-link" data-page="mood-tracker">
+                <li class="nav-item">
+                    <button class="nav-button" data-page="mood-tracker">
                         <i class="fas fa-heart"></i>
                         <span>Mood Tracker</span>
-                    </a>
+                    </button>
                 </li>
-                <li>
-                    <a href="../html/community.html" class="nav-link" data-page="community">
+                <li class="nav-item">
+                    <button class="nav-button" data-page="community">
                         <i class="fas fa-users"></i>
                         <span>Community</span>
-                    </a>
+                    </button>
                 </li>
-                <li>
-                    <a href="../html/wellness-tools.html" class="nav-link" data-page="wellness-tools">
+                <li class="nav-item">
+                    <button class="nav-button" data-page="wellness-tools">
                         <i class="fas fa-leaf"></i>
                         <span>Wellness Tools</span>
-                    </a>
+                    </button>
                 </li>
-                <li>
-                    <a href="../html/professionals.html" class="nav-link" data-page="professionals">
+                <li class="nav-item">
+                    <button class="nav-button" data-page="professionals">
                         <i class="fas fa-user-md"></i>
                         <span>Find Help</span>
-                    </a>
+                    </button>
                 </li>
-                <li>
-                    <a href="../html/progress.html" class="nav-link" data-page="progress">
+                <li class="nav-item">
+                    <button class="nav-button" data-page="progress">
                         <i class="fas fa-trophy"></i>
                         <span>Progress</span>
-                    </a>
+                    </button>
                 </li>
             </ul>
-            
+
             <section class="nav-actions">
-                <button class="emergency-btn" id="emergencyBtn">
+                <button class="emergency-btn" id="dashboardEmergencyBtn">
                     <i class="fas fa-phone"></i>
                     <span>Emergency</span>
                 </button>
+                
+                <button class="notification-btn" id="notificationBtn">
+                    <i class="fas fa-bell"></i>
+                    <span class="notification-badge">3</span>
+                </button>
+                
+                <section class="user-profile">
+                    <button class="profile-btn" id="profileBtn">
+                        <figure class="avatar">
+                            <i class="fas fa-user"></i>
+                        </figure>
+                        <span class="username">Anonymous User</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                </section>
+                
                 <button class="settings-btn" id="settingsBtn">
                     <i class="fas fa-cog"></i>
-                    <span>Settings</span>
+                </button>
+                
+                <button class="menu-toggle" id="menuToggle">
+                    <i class="fas fa-bars"></i>
                 </button>
             </section>
         </section>
     </nav>
 
     <main class="main-content">
+        <header class="content-header">
+            <h1 class="page-title" id="pageTitle">AI Support</h1>
+            <time class="date-info">Today, August 31, 2025</time>
+        </header>
+
         <section class="content-area">
             <!-- AI Chat Page -->
-            <article class="page active" id="ai-chat-page">
-                <header class="page-header">
-                    <h2>AI Support</h2>
-                    <p>Chat with our AI companion for support and guidance</p>
-                </header>
-                
+            <article class="page active" id="ai-support-page">
                 <section class="chat-container">
                     <header class="chat-header">
                         <section class="chat-info">
@@ -118,33 +134,23 @@
                         </article>
                     </section>
                     <section class="chat-timer">
-                        <p class="timer-text">Response time: <span id="responseTimer">00:00</span></p>
-                    </section>
-                    <section class="quick-responses">
-                        <button class="quick-response" data-response="I'm feeling anxious today">
-                            <span>I'm feeling anxious today</span>
-                        </button>
-                        <button class="quick-response" data-response="I need help with stress">
-                            <span>I need help with stress</span>
-                        </button>
-                        <button class="quick-response" data-response="I'm feeling depressed">
-                            <span>I'm feeling depressed</span>
-                        </button>
-                        <button class="quick-response" data-response="I need coping strategies">
-                            <span>I need coping strategies</span>
-                        </button>
+                        <p class="timer-text">Session time remaining: <span id="sessionTimer">15:00</span></p>
+                        <progress class="timer-progress" value="100" max="100"></progress>
                     </section>
                     <form class="chat-input-form" id="chatForm">
                         <section class="input-container">
-                            <input type="text" class="chat-input" id="chatInput" placeholder="Type your message here..." autocomplete="off">
-                            <button type="submit" class="send-button">
+                            <textarea class="chat-input" id="chatInput" placeholder="Type your message... I'm here to listen." rows="1"></textarea>
+                            <button type="submit" class="send-btn" id="sendBtn">
                                 <i class="fas fa-paper-plane"></i>
                             </button>
                         </section>
+                        <section class="quick-responses">
+                            <button type="button" class="quick-response" data-response="I'm feeling anxious today">I'm feeling anxious</button>
+                            <button type="button" class="quick-response" data-response="I need someone to talk to">Need to talk</button>
+                            <button type="button" class="quick-response" data-response="I'm having trouble sleeping">Sleep issues</button>
+                            <button type="button" class="quick-response" data-response="I want to find a therapist">Find therapist</button>
+                        </section>
                     </form>
-                    <footer class="chat-footer">
-                        <p class="disclaimer">AI responses are generated based on mental health best practices. This is not a substitute for professional medical advice.</p>
-                    </footer>
                 </section>
             </article>
         </section>
@@ -281,7 +287,7 @@
                             <section class="form-group">
                                 <label class="form-label">Theme</label>
                                 <select class="form-select">
-                                    <option>Light (Default)</option>
+                                    <option>Light (Default</option>
                                     <option>Dark</option>
                                     <option>Auto (System)</option>
                                 </select>
@@ -306,6 +312,7 @@
         </article>
     </dialog>
 
-    <script src="../js/dash.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="../js/dashboard.js"></script>
 </body>
 </html>

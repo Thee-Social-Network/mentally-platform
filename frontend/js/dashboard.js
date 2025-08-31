@@ -1,4 +1,4 @@
-// Mentaly Dashboard JavaScript
+// Mentaly Dashboard JavaScript - Multi-Page Version
 document.addEventListener('DOMContentLoaded', function() {
     // Initialize the dashboard
     initDashboard();
@@ -6,8 +6,12 @@ document.addEventListener('DOMContentLoaded', function() {
     // Set up event listeners
     setupEventListeners();
     
-    // Initialize charts
-    initCharts();
+    // Initialize charts if on a page that needs them
+    if (document.getElementById('moodChart') || 
+        document.getElementById('moodTrendChart') || 
+        document.getElementById('activityChart')) {
+        initCharts();
+    }
     
     // Load user data
     loadUserData();
@@ -21,12 +25,52 @@ function initDashboard() {
         document.documentElement.setAttribute('data-theme', savedTheme);
     }
     
-    // Show the dashboard page by default
-    showPage('dashboard');
+    // Set current page as active in navigation
+    setActiveNavButton();
     
-    // Initialize the AI chat if it's the active page
-    if (document.getElementById('ai-chat-page').classList.contains('active')) {
-        initAIChat();
+    // Initialize page-specific functionality
+    initPageSpecificFeatures();
+}
+
+// Set active nav button based on current page
+function setActiveNavButton() {
+    // Get current page from URL
+    const currentPage = window.location.pathname.split('/').pop().replace('.html', '') || 'dashboard';
+    
+    // Remove active class from all nav buttons
+    const navButtons = document.querySelectorAll('.nav-button');
+    navButtons.forEach(button => {
+        button.classList.remove('active');
+    });
+    
+    // Add active class to current page button
+    const currentButton = document.querySelector(`.nav-button[data-page="${currentPage}"]`);
+    if (currentButton) {
+        currentButton.classList.add('active');
+        
+        // Update page title
+        const pageTitle = document.getElementById('pageTitle');
+        if (pageTitle) {
+            pageTitle.textContent = currentButton.querySelector('span').textContent;
+        }
+    }
+}
+
+// Initialize page-specific functionality
+function initPageSpecificFeatures() {
+    // Get current page from URL
+    const currentPage = window.location.pathname.split('/').pop().replace('.html', '') || 'dashboard';
+    
+    switch(currentPage) {
+        case 'ai-support':
+            initAIChat();
+            break;
+        case 'mood-tracker':
+            initMoodTracker();
+            break;
+        case 'progress':
+            initProgressCharts();
+            break;
     }
 }
 
@@ -35,9 +79,10 @@ function setupEventListeners() {
     // Navigation buttons
     const navButtons = document.querySelectorAll('.nav-button');
     navButtons.forEach(button => {
-        button.addEventListener('click', function() {
+        button.addEventListener('click', function(e) {
+            e.preventDefault();
             const page = this.getAttribute('data-page');
-            showPage(page);
+            navigateToPage(page);
         });
     });
     
@@ -98,43 +143,47 @@ function setupEventListeners() {
         });
     });
     
-    // Mood tracking
-    const moodOptions = document.querySelectorAll('.mood-option');
-    moodOptions.forEach(option => {
-        option.addEventListener('click', function() {
-            selectMood(this);
+    // Mood tracking - only if on mood tracker page
+    if (window.location.pathname.includes('mood-tracker')) {
+        const moodOptions = document.querySelectorAll('.mood-option');
+        moodOptions.forEach(option => {
+            option.addEventListener('click', function() {
+                selectMood(this);
+            });
         });
-    });
-    
-    const emotionTags = document.querySelectorAll('.emotion-tag');
-    emotionTags.forEach(tag => {
-        tag.addEventListener('click', function() {
-            toggleEmotionTag(this);
+        
+        const emotionTags = document.querySelectorAll('.emotion-tag');
+        emotionTags.forEach(tag => {
+            tag.addEventListener('click', function() {
+                toggleEmotionTag(this);
+            });
         });
-    });
-    
-    const saveMoodBtn = document.getElementById('saveMoodBtn');
-    if (saveMoodBtn) {
-        saveMoodBtn.addEventListener('click', saveMoodEntry);
+        
+        const saveMoodBtn = document.getElementById('saveMoodBtn');
+        if (saveMoodBtn) {
+            saveMoodBtn.addEventListener('click', saveMoodEntry);
+        }
     }
     
-    // AI Chat
-    const chatForm = document.getElementById('chatForm');
-    if (chatForm) {
-        chatForm.addEventListener('submit', handleChatSubmit);
-    }
-    
-    const quickResponses = document.querySelectorAll('.quick-response');
-    quickResponses.forEach(response => {
-        response.addEventListener('click', function() {
-            const responseText = this.getAttribute('data-response');
-            useQuickResponse(responseText);
+    // AI Chat - only if on AI chat page
+    if (window.location.pathname.includes('ai-support')) {
+        const chatForm = document.getElementById('chatForm');
+        if (chatForm) {
+            chatForm.addEventListener('submit', handleChatSubmit);
+        }
+        
+        const quickResponses = document.querySelectorAll('.quick-response');
+        quickResponses.forEach(response => {
+            response.addEventListener('click', function() {
+                const responseText = this.getAttribute('data-response');
+                useQuickResponse(responseText);
+            });
         });
-    });
-    
-    const clearChatBtn = document.getElementById('clearChat');
-    if (clearChatBtn) {
-        clearChatBtn.addEventListener('click', clearChat);
+        
+        const clearChatBtn = document.getElementById('clearChat');
+        if (clearChatBtn) {
+            clearChatBtn.addEventListener('click', clearChat);
+        }
     }
     
     // Wellness tools
@@ -147,54 +196,12 @@ function setupEventListeners() {
     });
 }
 
-// Show a specific page
-function showPage(pageId) {
-    // Hide all pages
-    const pages = document.querySelectorAll('.page');
-    pages.forEach(page => {
-        page.classList.remove('active');
-    });
-    
-    // Remove active class from all nav buttons
-    const navButtons = document.querySelectorAll('.nav-button');
-    navButtons.forEach(button => {
-        button.classList.remove('active');
-    });
-    
-    // Show the selected page
-    const pageElement = document.getElementById(`${pageId}-page`);
-    if (pageElement) {
-        pageElement.classList.add('active');
-        
-        // Update the page title
-        const pageTitle = document.getElementById('pageTitle');
-        if (pageTitle) {
-            pageTitle.textContent = pageElement.querySelector('h2')?.textContent || 'Mentaly';
-        }
-        
-        // Add active class to the corresponding nav button
-        const navButton = document.querySelector(`.nav-button[data-page="${pageId}"]`);
-        if (navButton) {
-            navButton.classList.add('active');
-        }
-        
-        // Initialize page-specific functionality
-        switch(pageId) {
-            case 'ai-chat':
-                initAIChat();
-                break;
-            case 'mood-tracker':
-                initMoodTracker();
-                break;
-            case 'progress':
-                initProgressCharts();
-                break;
-        }
-    }
-    
-    // Close mobile menu
-    if (window.innerWidth < 992) {
-        document.querySelector('.nav-menu').classList.remove('open');
+// Navigate to a specific page
+function navigateToPage(pageId) {
+    if (pageId === 'dashboard') {
+        window.location.href = 'dashboard.html';
+    } else {
+        window.location.href = `${pageId}.html`;
     }
 }
 
@@ -438,11 +445,11 @@ function showSettingsTab(tabId) {
 // Handle quick actions
 function handleQuickAction(action) {
     switch(action) {
-        case 'ai-chat':
-            showPage('ai-chat');
+        case 'ai-support':
+            navigateToPage('ai-support');
             break;
         case 'mood-log':
-            showPage('mood-tracker');
+            navigateToPage('mood-tracker');
             break;
         case 'breathing':
             startWellnessTool('breathing');
@@ -454,7 +461,7 @@ function handleQuickAction(action) {
             startWellnessTool('meditation');
             break;
         case 'community':
-            showPage('community');
+            navigateToPage('community');
             break;
         default:
             console.log('Action not implemented:', action);
