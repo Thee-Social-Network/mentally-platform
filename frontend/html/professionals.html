@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mentaly - Find Help</title>
+    <link rel="stylesheet" href="../css/dashboard.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Top Navigation Bar -->
+    <nav class="top-navbar">
+        <section class="nav-container">
+            <a href="../html/landing.html" class="logo-link">
+                <h1 class="logo">Mentaly</h1>
+            </a>
+            
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <button class="nav-button" data-page="dashboard">
+                        <i class="fas fa-chart-line"></i>
+                        <span>Dashboard</span>
+                    </button>
+                </li>
+                <li class="nav-item">
+                    <button class="nav-button" data-page="ai-support">
+                        <i class="fas fa-robot"></i>
+                        <span>AI Support</span>
+                    </button>
+                </li>
+                <li class="nav-item">
+                    <button class="nav-button" data-page="mood-tracker">
+                        <i class="fas fa-heart"></i>
+                        <span>Mood Tracker</span>
+                    </button>
+                </li>
+                <li class="nav-item">
+                    <button class="nav-button" data-page="community">
+                        <i class="fas fa-users"></i>
+                        <span>Community</span>
+                    </button>
+                </li>
+                <li class="nav-item">
+                    <button class="nav-button" data-page="wellness-tools">
+                        <i class="fas fa-leaf"></i>
+                        <span>Wellness Tools</span>
+                    </button>
+                </li>
+                <li class="nav-item">
+                    <button class="nav-button active" data-page="professionals">
+                        <i class="fas fa-user-md"></i>
+                        <span>Find Help</span>
+                    </button>
+                </li>
+                <li class="nav-item">
+                    <button class="nav-button" data-page="progress">
+                        <i class="fas fa-trophy"></i>
+                        <span>Progress</span>
+                    </button>
+                </li>
+            </ul>
+
+            <section class="nav-actions">
+                <button class="emergency-btn" id="dashboardEmergencyBtn">
+                    <i class="fas fa-phone"></i>
+                    <span>Emergency</span>
+                </button>
+                
+                <button class="notification-btn" id="notificationBtn">
+                    <i class="fas fa-bell"></i>
+                    <span class="notification-badge">3</span>
+                </button>
+                
+                <section class="user-profile">
+                    <button class="profile-btn" id="profileBtn">
+                        <figure class="avatar">
+                            <i class="fas fa-user"></i>
+                        </figure>
+                        <span class="username">Anonymous User</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                </section>
+                
+                <button class="settings-btn" id="settingsBtn">
+                    <i class="fas fa-cog"></i>
+                </button>
+                
+                <button class="menu-toggle" id="menuToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </section>
+        </section>
+    </nav>
+
+    <main class="main-content">
+        <header class="content-header">
+            <h1 class="page-title" id="pageTitle">Find Professional Help</h1>
+            <time class="date-info">Today, August 31, 2025</time>
+        </header>
+
+        <section class="content-area">
+            <!-- Professionals Page -->
+            <article class="page active" id="professionals-page">
+                <section class="professionals-container">
+                    <header class="professionals-header">
+                        <h2>Connect with Mental Health Professionals</h2>
+                        <p>Find qualified therapists, counselors, and psychiatrists who can support your mental health journey</p>
+                    </header>
+
+                    <section class="search-filters">
+                        <section class="filter-group">
+                            <label class="filter-label">Specialty</label>
+                            <select class="filter-select">
+                                <option>All Specialties</option>
+                                <option>Anxiety</option>
+                                <option>Depression</option>
+                                <option>PTSD</option>
+                                <option>Addiction</option>
+                                <option>Relationships</option>
+                            </select>
+                        </section>
+                        <section class="filter-group">
+                            <label class="filter-label">Location</label>
+                            <select class="filter-select">
+                                <option>Johannesburg Area</option>
+                                <option>Sandton</option>
+                                <option>Rosebank</option>
+                                <option>Randburg</option>
+                                <option>Online Only</option>
+                            </select>
+                        </section>
+                        <section class="filter-group">
+                            <label class="filter-label">Insurance</label>
+                            <select class="filter-select">
+                                <option>All Insurance</option>
+                                <option>Discovery Health</option>
+                                <option>Momentum</option>
+                                <option>Medihelp</option>
+                                <option>Self-Pay</option>
+                            </select>
+                        </section>
+                    </section>
+
+                    <section class="professionals-list">
+                        <article class="professional-card">
+                            <figure class="professional-image">
+                                <i class="fas fa-user-md"></i>
+                            </figure>
+                            <section class="professional-info">
+                                <header class="professional-header">
+                                    <h3>Dr. Sarah Johnson</h3>
+                                    <section class="rating">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <span class="rating-text">4.9 (127 reviews)</span>
+                                    </section>
+                                </header>
+                                <p class="professional-specialty">Clinical Psychologist • Anxiety & Depression Specialist</p>
+                                <p class="professional-location">Sandton • 2.3 km away</p>
+                                <section class="professional-details">
+                                    <span class="detail-item">15+ years experience</span>
+                                    <span class="detail-item">Discovery Health accepted</span>
+                                    <span class="detail-item">Online sessions available</span>
+                                </section>
+                                <p class="professional-bio">
+                                    Specializing in cognitive-behavioral therapy and mindfulness-based interventions. 
+                                    Experienced in treating anxiety disorders, depression, and stress-related conditions.
+                                </p>
+                            </section>
+                            <section class="professional-actions">
+                                <p class="availability">Next available: Tomorrow 2:00 PM</p>
+                                <button class="contact-btn">Contact</button>
+                                <button class="book-btn">Book Appointment</button>
+                            </section>
+                        </article>
+
+                        <article class="professional-card">
+                            <figure class="professional-image">
+                                <i class="fas fa-user-md"></i>
+                            </figure>
+                            <section class="professional-info">
+                                <header class="professional-header">
+                                    <h3>Dr. Michael Chen</h3>
+                                    <section class="rating">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <span class="rating-text">4.8 (89 reviews)</span>
+                                    </section>
+                                </header>
+                                <p class="professional-specialty">Licensed Counselor • PTSD & Trauma Specialist</p>
+                                <p class="professional-location">Rosebank • 4.1 km away</p>
+                                <section class="professional-details">
+                                    <span class="detail-item">12+ years experience</span>
+                                    <span class="detail-item">Momentum accepted</span>
+                                    <span class="detail-item">Evening appointments</span>
+                                </section>
+                                <p class="professional-bio">
+                                    Experienced in EMDR therapy and trauma-informed care. Specializes in helping individuals 
+                                    recover from traumatic experiences and develop healthy coping mechanisms.
+                                </p>
+                            </section>
+                            <section class="professional-actions">
+                                <p class="availability">Next available: Monday 6:00 PM</p>
+                                <button class="contact-btn">Contact</button>
+                                <button class="book-btn">Book Appointment</button>
+                            </section>
+                        </article>
+
+                        <article class="professional-card">
+                            <figure class="professional-image">
+                                <i class="fas fa-user-md"></i>
+                            </figure>
+                            <section class="professional-info">
+                                <header class="professional-header">
+                                    <h3>Dr. Priya Patel</h3>
+                                    <section class="rating">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <span class="rating-text">4.9 (156 reviews)</span>
+                                    </section>
+                                </header>
+                                <p class="professional-specialty">Psychiatrist • Medication Management</p>
+                                <p class="professional-location">Randburg • 6.8 km away</p>
+                                <section class="professional-details">
+                                    <span class="detail-item">20+ years experience</span>
+                                    <span class="detail-item">All insurance accepted</span>
+                                    <span class="detail-item">Bilingual services</span>
+                                </section>
+                                <p class="professional-bio">
+                                    Board-certified psychiatrist specializing in medication management and integrated treatment approaches. 
+                                    Fluent in English, Hindi, and Gujarati.
+                                </p>
+                            </section>
+                            <section class="professional-actions">
+                                <p class="availability">Next available: Friday 10:00 AM</p>
+                                <button class="contact-btn">Contact</button>
+                                <button class="book-btn">Book Appointment</button>
+                            </section>
+                        </article>
+                    </section>
+
+                    <section class="emergency-resources">
+                        <header class="resources-header">
+                            <h3>Immediate Help Resources</h3>
+                            <p>If you're in crisis, please reach out immediately</p>
+                        </header>
+                        <section class="emergency-contacts">
+                            <article class="emergency-contact">
+                                <i class="fas fa-phone"></i>
+                                <section class="contact-info">
+                                    <h4>Crisis Hotline</h4>
+                                    <p>24/7 Crisis Support</p>
+                                </section>
+                                <a href="tel:0800567567" class="emergency-call-btn">0800 567 567</a>
+                            </article>
+                            <article class="emergency-contact">
+                                <i class="fas fa-hospital"></i>
+                                <section class="contact-info">
+                                    <h4>Emergency Services</h4>
+                                    <p>Medical Emergency</p>
+                                </section>
+                                <a href="tel:10177" class="emergency-call-btn">10177</a>
+                            </article>
+                        </section>
+                    </section>
+                </section>
+            </article>
+        </section>
+    </main>
+
+    <!-- Emergency Modal -->
+    <dialog class="modal" id="emergeryModal">
+        <article class="modal-content emergency-modal">
+            <header class="modal-header">
+                <h2>Immediate Help Resources</h2>
+                <button class="modal-close" id="closeEmergencyModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </header>
+            <section class="modal-body">
+                <p class="emergency-text">If you're in crisis or experiencing thoughts of self-harm, please reach out to these resources immediately:</p>
+                <section class="emergency-list">
+                    <article class="emergency-item">
+                        <h3>Crisis Hotline</h3>
+                        <p>24/7 Confidential Support</p>
+                        <a href="tel:0800567567" class="emergency-call-link">
+                            <i class="fas fa-phone"></i>
+                            0800 567 567
+                        </a>
+                    </article>
+                    <article class="emergency-item">
+                        <h3>SADAG Helpline</h3>
+                        <p>South African Depression & Anxiety Group</p>
+                        <a href="tel:0800121314" class="emergency-call-link">
+                            <i class="fas fa-phone"></i>
+                            0800 121 314
+                        </a>
+                    </article>
+                    <article class="emergency-item">
+                        <h3>Emergency Services</h3>
+                        <p>Medical Emergency</p>
+                        <a href="tel:10177" class="emergency-call-link">
+                            <i class="fas fa-phone"></i>
+                            10177
+                        </a>
+                    </article>
+                </section>
+                <p class="emergency-note">You are not alone. Please reach out for support.</p>
+            </section>
+        </article>
+    </dialog>
+
+    <!-- Settings Modal -->
+    <dialog class="modal" id="settingsModal">
+        <article class="modal-content settings-modal">
+            <header class="modal-header">
+                <h2>Settings</h2>
+                <button class="modal-close" id="closeSettingsModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </header>
+            <section class="modal-body">
+                <nav class="settings-nav">
+                    <button class="settings-nav-btn active" data-tab="account">Account</button>
+                    <button class="settings-nav-btn" data-tab="privacy">Privacy</button>
+                    <button class="settings-nav-btn" data-tab="notifications">Notifications</button>
+                    <button class="settings-nav-btn" data-tab="appearance">Appearance</button>
+                </nav>
+                <section class="settings-content">
+                    <article class="settings-tab active" id="account-tab">
+                        <h3>Account Settings</h3>
+                        <form class="settings-form">
+                            <section class="form-group">
+                                <label class="form-label">Display Name</label>
+                                <input type="text" class="form-input" value="Anonymous User">
+                            </section>
+                            <section class="form-group">
+                                <label class="form-label">Email Address</label>
+                                <input type="email" class="form-input" value="user@example.com">
+                            </section>
+                            <section class="form-group">
+                                <label class="form-label">Password</label>
+                                <input type="password" class="form-input" value="********">
+                            </section>
+                            <button type="submit" class="save-settings-btn">Save Changes</button>
+                        </form>
+                    </article>
+                    <article class="settings-tab" id="privacy-tab">
+                        <h3>Privacy Settings</h3>
+                        <form class="settings-form">
+                            <section class="form-group checkbox-group">
+                                <input type="checkbox" id="dataCollection" checked>
+                                <label for="dataCollection">Allow anonymous data collection to improve services</label>
+                            </section>
+                            <section class="form-group checkbox-group">
+                                <input type="checkbox" id="personalizedInsights" checked>
+                                <label for="personalizedInsights">Receive personalized insights based on my data</label>
+                            </section>
+                            <section class="form-group">
+                                <label class="form-label">Data Retention</label>
+                                <select class="form-select">
+                                    <option>Keep data indefinitely</option>
+                                    <option>Delete after 1 year</option>
+                                    <option>Delete after 6 months</option>
+                                </select>
+                            </section>
+                            <button type="submit" class="save-settings-btn">Save Preferences</button>
+                        </form>
+                    </article>
+                    <article class="settings-tab" id="notifications-tab">
+                        <h3>Notification Settings</h3>
+                        <form class="settings-form">
+                            <section class="form-group checkbox-group">
+                                <input type="checkbox" id="dailyReminders" checked>
+                                <label for="dailyReminders">Daily check-in reminders</label>
+                            </section>
+                            <section class="form-group checkbox-group">
+                                <input type="checkbox" id="weeklyReports" checked>
+                                <label for="weeklyReports">Weekly progress reports</label>
+                            </section>
+                            <section class="form-group checkbox-group">
+                                <input type="checkbox" id="communityUpdates">
+                                <label for="communityUpdates">Community updates and events</label>
+                            </section>
+                            <section class="form-group">
+                                <label class="form-label">Notification Frequency</label>
+                                <select class="form-select">
+                                    <option>Only important updates</option>
+                                    <option>Regular (recommended)</option>
+                                    <option>All notifications</option>
+                                </select>
+                            </section>
+                            <button type="submit" class="save-settings-btn">Save Preferences</button>
+                        </form>
+                    </article>
+                    <article class="settings-tab" id="appearance-tab">
+                        <h3>Appearance Settings</h3>
+                        <form class="settings-form">
+                            <section class="form-group">
+                                <label class="form-label">Theme</label>
+                                <select class="form-select">
+                                    <option>Light (Default)</option>
+                                    <option>Dark</option>
+                                    <option>Auto (System)</option>
+                                </select>
+                            </section>
+                            <section class="form-group">
+                                <label class="form-label">Font Size</label>
+                                <select class="form-select">
+                                    <option>Small</option>
+                                    <option>Medium (Default)</option>
+                                    <option>Large</option>
+                                </select>
+                            </section>
+                            <section class="form-group checkbox-group">
+                                <input type="checkbox" id="reduceAnimations">
+                                <label for="reduceAnimations">Reduce animations and transitions</label>
+                            </section>
+                            <button type="submit" class="save-settings-btn">Save Preferences</button>
+                        </form>
+                    </article>
+                </section>
+            </section>
+        </article>
+    </dialog>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="../js/dashboard.js"></script>
+</body>
+</html>

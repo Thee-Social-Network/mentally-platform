@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up - Mentally</title>
+    <link rel="stylesheet" href="../css/auth.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Animated background elements -->
+    <div class="bg-orbs">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+    </div>
+
+    <div class="auth-container">
+        <!-- Left Panel - Join Community -->
+        <div class="auth-left">
+            <div class="auth-left-content">
+                <div class="logo-section">
+                    <div class="logo-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h1 class="brand-name">Mentally</h1>
+                </div>
+                
+                <div class="welcome-content">
+                    <h2 class="welcome-title">Join Our Community 💙</h2>
+                    <p class="welcome-subtitle">
+                        Together, we create a<br>
+                        <span class="highlight">healthier, stronger, and kinder</span> tomorrow.
+                    </p>
+                    
+                    <div class="benefits-list">
+                        <div class="benefit-item">
+                            <div class="benefit-icon">
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <span>Build healthy mental habits</span>
+                        </div>
+                        <div class="benefit-item">
+                            <div class="benefit-icon">
+                                <i class="fas fa-globe"></i>
+                            </div>
+                            <span>Share and support each other</span>
+                        </div>
+                        <div class="benefit-item">
+                            <div class="benefit-icon">
+                                <i class="fas fa-chart-bar"></i>
+                            </div>
+                            <span>Track progress over time</span>
+                        </div>
+                        <div class="benefit-item">
+                            <div class="benefit-icon">
+                                <i class="fas fa-comments"></i>
+                            </div>
+                            <span>Talk to professionals & peers</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="illustration">
+                    <div class="floating-elements">
+                        <div class="float-card card-1">
+                            <i class="fas fa-seedling"></i>
+                            <span>Growth</span>
+                        </div>
+                        <div class="float-card card-2">
+                            <i class="fas fa-hands-helping"></i>
+                            <span>Support</span>
+                        </div>
+                        <div class="float-card card-3">
+                            <i class="fas fa-smile"></i>
+                            <span>Wellness</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Panel - Signup Form -->
+        <div class="auth-right">
+            <div class="auth-form-container">
+                <div class="form-header">
+                    <h2>Create Account</h2>
+                    <p>Start your mental wellness journey today</p>
+                </div>
+                
+                <form id="signupForm" class="auth-form" method="POST" action="/api/signup">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="firstName">First Name</label>
+                            <div class="input-container">
+                                <i class="fas fa-user input-icon"></i>
+                                <input type="text" id="firstName" name="first_name" placeholder="First name" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="lastName">Last Name</label>
+                            <div class="input-container">
+                                <i class="fas fa-user input-icon"></i>
+                                <input type="text" id="lastName" name="last_name" placeholder="Last name" required>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <div class="input-container">
+                            <i class="fas fa-envelope input-icon"></i>
+                            <input type="email" id="email" name="email" placeholder="Enter your email" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <div class="input-container">
+                            <i class="fas fa-lock input-icon"></i>
+                            <input type="password" id="password" name="password" placeholder="Create a strong password" required minlength="8">
+                            <button type="button" class="toggle-password" onclick="togglePassword('password')">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                        <div class="password-strength">
+                            <div class="strength-bar">
+                                <div class="strength-fill"></div>
+                            </div>
+                            <span class="strength-text">Password strength</span>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="role">I am a...</label>
+                        <div class="role-selection">
+                            <label class="role-option">
+                                <input type="radio" name="role" value="user" required>
+                                <div class="role-card">
+                                    <i class="fas fa-user-circle"></i>
+                                    <div>
+                                        <h4>user</h4>
+                                        <p>Seeking support and wellness resources</p>
+                                    </div>
+                                </div>
+                            </label>
+                            
+                            <label class="role-option">
+                                <input type="radio" name="role" value="counselor" required>
+                                <div class="role-card">
+                                    <i class="fas fa-user-md"></i>
+                                    <div>
+                                        <h4>counselor</h4>
+                                        <p>Mental health professional</p>
+                                    </div>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="form-options">
+                        <label class="checkbox-container">
+                            <input type="checkbox" name="terms" required>
+                            <span class="checkmark"></span>
+                            I agree to the <a href="#" class="link">Terms of Service</a> and <a href="#" class="link">Privacy Policy</a>
+                        </label>
+                        
+                        <label class="checkbox-container">
+                            <input type="checkbox" name="newsletter">
+                            <span class="checkmark"></span>
+                            Send me wellness tips and updates
+                        </label>
+                    </div>
+                    
+                    <button type="submit" class="auth-btn primary">
+                        <span>Create Account</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </button>
+                </form>
+                
+                <div class="divider">
+                    <span>or continue with</span>
+                </div>
+                
+                <div class="social-login">
+                    <button type="button" class="social-btn google">
+                        <i class="fab fa-google"></i>
+                        <span>Google</span>
+                    </button>
+                    <button type="button" class="social-btn microsoft">
+                        <i class="fab fa-microsoft"></i>
+                        <span>Microsoft</span>
+                    </button>
+                </div>
+                
+                <p class="auth-switch">
+                    Already have an account? 
+                    <a href="login.html">Sign in here</a>
+                </p>
+                
+                <div class="emergency-support">
+                    <p>Need immediate support?</p>
+                    <a href="tel:988" class="emergency-link">
+                        <i class="fas fa-phone"></i>
+                        Crisis Hotline: 988
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    function togglePassword(inputId) {
+        const input = document.getElementById(inputId);
+        const button = input.nextElementSibling;
+        const icon = button.querySelector('i');
+        
+        if (input.type === 'password') {
+            input.type = 'text';
+            icon.classList.remove('fa-eye');
+            icon.classList.add('fa-eye-slash');
+        } else {
+            input.type = 'password';
+            icon.classList.remove('fa-eye-slash');
+            icon.classList.add('fa-eye');
+        }
+    }
+
+    // Password strength checker
+    document.getElementById('password').addEventListener('input', function() {
+        const password = this.value;
+        const strengthBar = document.querySelector('.strength-fill');
+        const strengthText = document.querySelector('.strength-text');
+        
+        let strength = 0;
+        let text = 'Very weak';
+        let color = '#DC3545';
+        
+        if (password.length >= 8) strength++;
+        if (/[a-z]/.test(password)) strength++;
+        if (/[A-Z]/.test(password)) strength++;
+        if (/[0-9]/.test(password)) strength++;
+        if (/[^A-Za-z0-9]/.test(password)) strength++;
+        
+        const strengthMap = {
+            1: { text: 'Very weak', color: '#DC3545' },
+            2: { text: 'Weak', color: '#FD7E14' },
+            3: { text: 'Fair', color: '#FFC107' },
+            4: { text: 'Good', color: '#FDBB30' },
+            5: { text: 'Strong', color: '#28A745' }
+        };
+        
+        if (strength > 0) {
+            const result = strengthMap[strength];
+            text = result.text;
+            color = result.color;
+        }
+        
+        strengthBar.style.width = `${(strength / 5) * 100}%`;
+        strengthBar.style.backgroundColor = color;
+        strengthText.textContent = text;
+    });
+
+    // Form submission
+    document.getElementById('signupForm').addEventListener('submit', async function(e) {
+        e.preventDefault();
+        const button = this.querySelector('.auth-btn');
+        const originalText = button.innerHTML;
+        
+        button.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Creating account...';
+        button.disabled = true;
+
+        // Collect form data
+        const first_name = document.getElementById("firstName").value.trim();
+        const last_name = document.getElementById("lastName").value.trim();
+        const email = document.getElementById("email").value.trim();
+        const password = document.getElementById("password").value.trim();
+        const role = document.querySelector('input[name="role"]:checked')?.value;
+
+        try {
+            const res = await fetch("/api/signup", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ first_name, last_name, email, password, role })
+            });
+
+            const data = await res.json();
+
+            if (res.ok && data.success) {
+                alert("Account created successfully!");
+                window.location.href = "/login";
+            } else {
+                alert(data.message || "Signup failed. Please try again.");
+            }
+        } catch (err) {
+            alert("Server error. Please try again later.");
+            console.error(err);
+        }
+
+        button.innerHTML = originalText;
+        button.disabled = false;
+    });
+
+    // Add floating animation to cards
+    document.addEventListener('DOMContentLoaded', function() {
+        const cards = document.querySelectorAll('.float-card');
+        cards.forEach((card, index) => {
+            card.style.animationDelay = `${index * 0.5}s`;
+        });
+    });
+</script>
+
+</body>
+</html>
