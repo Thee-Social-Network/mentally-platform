@@ -156,49 +156,71 @@
             </div>
         </div>
     </div>
-
-    <script>
-        function togglePassword(inputId) {
-            const input = document.getElementById(inputId);
-            const button = input.nextElementSibling;
-            const icon = button.querySelector('i');
-            
-            if (input.type === 'password') {
-                input.type = 'text';
-                icon.classList.remove('fa-eye');
-                icon.classList.add('fa-eye-slash');
-            } else {
-                input.type = 'password';
-                icon.classList.remove('fa-eye-slash');
-                icon.classList.add('fa-eye');
-            }
+<script>
+    function togglePassword(inputId) {
+        const input = document.getElementById(inputId);
+        const button = input.nextElementSibling;
+        const icon = button.querySelector('i');
+        
+        if (input.type === 'password') {
+            input.type = 'text';
+            icon.classList.remove('fa-eye');
+            icon.classList.add('fa-eye-slash');
+        } else {
+            input.type = 'password';
+            icon.classList.remove('fa-eye-slash');
+            icon.classList.add('fa-eye');
         }
+    }
 
-        // Form validation and submission
-        document.getElementById('loginForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const button = this.querySelector('.auth-btn');
-            const originalText = button.innerHTML;
-            
-            button.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Signing in...';
-            button.disabled = true;
-            
-            // Simulate API call
-            setTimeout(() => {
-                button.innerHTML = originalText;
-                button.disabled = false;
-                // Replace with actual login logic
-                alert('Login functionality would be implemented here');
-            }, 2000);
-        });
+    // Handle login form submission
+    document.getElementById('loginForm').addEventListener('submit', async function(e) {
+        e.preventDefault();
+        const button = this.querySelector('.auth-btn');
+        const originalText = button.innerHTML;
 
-        // Add floating animation to cards
-        document.addEventListener('DOMContentLoaded', function() {
-            const cards = document.querySelectorAll('.float-card');
-            cards.forEach((card, index) => {
-                card.style.animationDelay = `${index * 0.5}s`;
+        const email = document.getElementById('email').value.trim();
+        const password = document.getElementById('password').value.trim();
+
+        button.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Signing in...';
+        button.disabled = true;
+
+        try {
+            const res = await fetch('/api/login', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email, password })
             });
+
+            const data = await res.json();
+
+            if (res.ok && data.success) {
+                // ✅ store user info (later replace with JWT token storage)
+                localStorage.setItem('user', JSON.stringify(data.user));
+
+                // Redirect to dashboard
+                window.location.href = '/dashboard';
+            } else {
+                alert('❌ ' + data.message);
+            }
+        } catch (err) {
+            console.error('Login error:', err);
+            alert('⚠️ Server error. Please try again.');
+        } finally {
+            button.innerHTML = originalText;
+            button.disabled = false;
+        }
+    });
+
+    // Add floating animation to cards
+    document.addEventListener('DOMContentLoaded', function() {
+        const cards = document.querySelectorAll('.float-card');
+        cards.forEach((card, index) => {
+            card.style.animationDelay = `${index * 0.5}s`;
         });
-    </script>
+    });
+</script>
+
+    
 </body>
 </html>

@@ -143,7 +143,7 @@
                                 <div class="role-card">
                                     <i class="fas fa-user-circle"></i>
                                     <div>
-                                        <h4>User</h4>
+                                        <h4>user</h4>
                                         <p>Seeking support and wellness resources</p>
                                     </div>
                                 </div>
@@ -154,7 +154,7 @@
                                 <div class="role-card">
                                     <i class="fas fa-user-md"></i>
                                     <div>
-                                        <h4>Counselor</h4>
+                                        <h4>counselor</h4>
                                         <p>Mental health professional</p>
                                     </div>
                                 </div>
@@ -214,82 +214,105 @@
     </div>
 
     <script>
-        function togglePassword(inputId) {
-            const input = document.getElementById(inputId);
-            const button = input.nextElementSibling;
-            const icon = button.querySelector('i');
-            
-            if (input.type === 'password') {
-                input.type = 'text';
-                icon.classList.remove('fa-eye');
-                icon.classList.add('fa-eye-slash');
+    function togglePassword(inputId) {
+        const input = document.getElementById(inputId);
+        const button = input.nextElementSibling;
+        const icon = button.querySelector('i');
+        
+        if (input.type === 'password') {
+            input.type = 'text';
+            icon.classList.remove('fa-eye');
+            icon.classList.add('fa-eye-slash');
+        } else {
+            input.type = 'password';
+            icon.classList.remove('fa-eye-slash');
+            icon.classList.add('fa-eye');
+        }
+    }
+
+    // Password strength checker
+    document.getElementById('password').addEventListener('input', function() {
+        const password = this.value;
+        const strengthBar = document.querySelector('.strength-fill');
+        const strengthText = document.querySelector('.strength-text');
+        
+        let strength = 0;
+        let text = 'Very weak';
+        let color = '#DC3545';
+        
+        if (password.length >= 8) strength++;
+        if (/[a-z]/.test(password)) strength++;
+        if (/[A-Z]/.test(password)) strength++;
+        if (/[0-9]/.test(password)) strength++;
+        if (/[^A-Za-z0-9]/.test(password)) strength++;
+        
+        const strengthMap = {
+            1: { text: 'Very weak', color: '#DC3545' },
+            2: { text: 'Weak', color: '#FD7E14' },
+            3: { text: 'Fair', color: '#FFC107' },
+            4: { text: 'Good', color: '#FDBB30' },
+            5: { text: 'Strong', color: '#28A745' }
+        };
+        
+        if (strength > 0) {
+            const result = strengthMap[strength];
+            text = result.text;
+            color = result.color;
+        }
+        
+        strengthBar.style.width = `${(strength / 5) * 100}%`;
+        strengthBar.style.backgroundColor = color;
+        strengthText.textContent = text;
+    });
+
+    // Form submission
+    document.getElementById('signupForm').addEventListener('submit', async function(e) {
+        e.preventDefault();
+        const button = this.querySelector('.auth-btn');
+        const originalText = button.innerHTML;
+        
+        button.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Creating account...';
+        button.disabled = true;
+
+        // Collect form data
+        const first_name = document.getElementById("firstName").value.trim();
+        const last_name = document.getElementById("lastName").value.trim();
+        const email = document.getElementById("email").value.trim();
+        const password = document.getElementById("password").value.trim();
+        const role = document.querySelector('input[name="role"]:checked')?.value;
+
+        try {
+            const res = await fetch("/api/signup", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ first_name, last_name, email, password, role })
+            });
+
+            const data = await res.json();
+
+            if (res.ok && data.success) {
+                alert("Account created successfully!");
+                window.location.href = "/login";
             } else {
-                input.type = 'password';
-                icon.classList.remove('fa-eye-slash');
-                icon.classList.add('fa-eye');
+                alert(data.message || "Signup failed. Please try again.");
             }
+        } catch (err) {
+            alert("Server error. Please try again later.");
+            console.error(err);
         }
 
-        // Password strength checker
-        document.getElementById('password').addEventListener('input', function() {
-            const password = this.value;
-            const strengthBar = document.querySelector('.strength-fill');
-            const strengthText = document.querySelector('.strength-text');
-            
-            let strength = 0;
-            let text = 'Very weak';
-            let color = '#DC3545';
-            
-            if (password.length >= 8) strength++;
-            if (/[a-z]/.test(password)) strength++;
-            if (/[A-Z]/.test(password)) strength++;
-            if (/[0-9]/.test(password)) strength++;
-            if (/[^A-Za-z0-9]/.test(password)) strength++;
-            
-            const strengthMap = {
-                1: { text: 'Very weak', color: '#DC3545' },
-                2: { text: 'Weak', color: '#FD7E14' },
-                3: { text: 'Fair', color: '#FFC107' },
-                4: { text: 'Good', color: '#FDBB30' },
-                5: { text: 'Strong', color: '#28A745' }
-            };
-            
-            if (strength > 0) {
-                const result = strengthMap[strength];
-                text = result.text;
-                color = result.color;
-            }
-            
-            strengthBar.style.width = `${(strength / 5) * 100}%`;
-            strengthBar.style.backgroundColor = color;
-            strengthText.textContent = text;
-        });
+        button.innerHTML = originalText;
+        button.disabled = false;
+    });
 
-        // Form submission
-        document.getElementById('signupForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const button = this.querySelector('.auth-btn');
-            const originalText = button.innerHTML;
-            
-            button.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Creating account...';
-            button.disabled = true;
-            
-            // Simulate API call
-            setTimeout(() => {
-                button.innerHTML = originalText;
-                button.disabled = false;
-                // Replace with actual signup logic
-                alert('Signup functionality would be implemented here');
-            }, 2000);
+    // Add floating animation to cards
+    document.addEventListener('DOMContentLoaded', function() {
+        const cards = document.querySelectorAll('.float-card');
+        cards.forEach((card, index) => {
+            card.style.animationDelay = `${index * 0.5}s`;
         });
+    });
+</script>
 
-        // Add floating animation to cards
-        document.addEventListener('DOMContentLoaded', function() {
-            const cards = document.querySelectorAll('.float-card');
-            cards.forEach((card, index) => {
-                card.style.animationDelay = `${index * 0.5}s`;
-            });
-        });
-    </script>
 </body>
 </html>

@@ -100,7 +100,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 
                 setTimeout(() => {
                     // For demo, we'll redirect to dashboard
-                    window.location.href = 'dashboard.html';
+                    window.location.href = 'landing.html';
                 }, 1000);
             });
         }

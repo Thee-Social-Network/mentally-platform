@@ -12,12 +12,14 @@ const userSchema = new mongoose.Schema({
     },
     email: {
         type: String,
-        required: true
+        required: true,
+        unique: true
 
     },
     role: {
         type: String,
-        enum: ["member", "professional"] // value must be one of this options
+        enum: ["user", "counselor"], 
+        required: true// value must be one of this options
     },
     password: {
         type: String,
