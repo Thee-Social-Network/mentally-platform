@@ -1,4 +1,4 @@
-// Mentaly Dashboard JavaScript
+// Mentaly Dashboard JavaScript - Updated for AI Chatbot
 document.addEventListener('DOMContentLoaded', function() {
     // DOM Elements
     const body = document.body;
@@ -858,21 +858,102 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     // Send chat message
-    function sendChatMessage() {
+    async function sendChatMessage() {
         if (!chatInput.value.trim()) return;
         
         // Add user message
-        addChatMessage('user', chatInput.value, new Date());
+        const userMessage = chatInput.value;
+        addChatMessage('user', userMessage, new Date());
         
-        // Simulate AI response after a short delay
-        setTimeout(() => {
-            const aiResponse = generateAIResponse(chatInput.value);
-            addChatMessage('ai', aiResponse, new Date());
-        }, 1000 + Math.random() * 2000); // Random delay between 1-3 seconds
+        // Get the language of the user's message
+        const detectedLanguage = detectLanguage(userMessage);
+        
+        // Show typing indicator
+        showTypingIndicator();
+        
+        try {
+            // Send message to backend for AI processing
+            const response = await fetch('/api/chat', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    message: userMessage,
+                    language: detectedLanguage
+                })
+            });
+            
+            if (!response.ok) {
+                throw new Error('Failed to get AI response');
+            }
+            
+            const data = await response.json();
+            
+            // Remove typing indicator
+            removeTypingIndicator();
+            
+            // Add AI response
+            addChatMessage('ai', data.response, new Date());
+        } catch (error) {
+            console.error('Error getting AI response:', error);
+            // Remove typing indicator
+            removeTypingIndicator();
+            
+            // Fallback to simple response if API fails
+            const fallbackResponse = generateFallbackResponse(userMessage, detectedLanguage);
+            addChatMessage('ai', fallbackResponse, new Date());
+        }
         
         // Clear input
         chatInput.value = '';
         adjustTextareaHeight(chatInput);
+    }
+    
+    // Detect language from text
+    function detectLanguage(text) {
+        // Simple language detection - in a real app you might use a library
+        if (/[\u0600-\u06FF]/.test(text)) return 'arabic';
+        if (/[\u4E00-\u9FFF]/.test(text)) return 'chinese';
+        if (/[\uAC00-\uD7AF]/.test(text)) return 'korean';
+        if (/[\u3040-\u309F\u30A0-\u30FF]/.test(text)) return 'japanese';
+        if (/[\u0E00-\u0E7F]/.test(text)) return 'thai';
+        if (/[\u0900-\u097F]/.test(text)) return 'hindi';
+        
+        // Default to English
+        return 'english';
+    }
+    
+    // Show typing indicator
+    function showTypingIndicator() {
+        const chatMessages = document.querySelector('.chat-messages');
+        if (!chatMessages) return;
+        
+        const typingElement = document.createElement('div');
+        typingElement.id = 'typing-indicator';
+        typingElement.classList.add('message', 'ai-message', 'typing');
+        
+        typingElement.innerHTML = `
+            <div class="message-avatar">AI</div>
+            <div class="message-content">
+                <div class="typing-indicator">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        `;
+        
+        chatMessages.appendChild(typingElement);
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+    
+    // Remove typing indicator
+    function removeTypingIndicator() {
+        const typingElement = document.getElementById('typing-indicator');
+        if (typingElement) {
+            typingElement.remove();
+        }
     }
     
     // Add chat message to UI
@@ -910,36 +991,48 @@ document.addEventListener('DOMContentLoaded', function() {
         chatMessages.scrollTop = chatMessages.scrollHeight;
     }
     
-    // Generate AI response
-    function generateAIResponse(userMessage) {
+    // Generate fallback response if API fails
+    function generateFallbackResponse(userMessage, language) {
         // Simple response generation based on keywords
-        // In a real application, this would connect to an AI API
+        // This is just a fallback when the AI API is not available
         
         const lowerCaseMessage = userMessage.toLowerCase();
         
-        if (lowerCaseMessage.includes('anxious') || lowerCaseMessage.includes('anxiety')) {
-            return "I understand that you're feeling anxious. Have you tried any breathing exercises today? They can help calm your nervous system.";
-        } else if (lowerCaseMessage.includes('sad') || lowerCaseMessage.includes('depressed')) {
-            return "I'm sorry to hear you're feeling down. Remember that it's okay to not be okay. Would you like to talk about what's bothering you?";
-        } else if (lowerCaseMessage.includes('happy') || lowerCaseMessage.includes('good')) {
-            return "That's wonderful to hear! I'm glad you're feeling good today. What do you think contributed to your positive mood?";
-        } else if (lowerCaseMessage.includes('stress') || lowerCaseMessage.includes('stressed')) {
-            return "Stress can be challenging to manage. Have you considered trying a quick mindfulness exercise? I can guide you through one if you'd like.";
-        } else if (lowerCaseMessage.includes('sleep') || lowerCaseMessage.includes('tired')) {
-            return "Sleep issues can significantly impact your mental health. Maintaining a consistent sleep schedule might help. Would you like some tips for better sleep hygiene?";
-        } else {
-            // Default responses
-            const defaultResponses = [
+        // Responses in different languages
+        const responses = {
+            english: [
                 "I hear you. How has that been affecting your day?",
                 "Thank you for sharing. Would you like to explore that feeling further?",
                 "I understand. What do you think might help you right now?",
                 "That's interesting. Tell me more about that.",
                 "I'm here to listen. How can I support you with this?",
                 "I appreciate you opening up about this. How long have you been feeling this way?"
-            ];
-            
-            return defaultResponses[Math.floor(Math.random() * defaultResponses.length)];
-        }
+            ],
+            // Add responses in other languages as needed
+            spanish: [
+                "Te escucho. ¿Cómo ha estado afectando eso tu día?",
+                "Gracias por compartir. ¿Te gustaría explorar más ese sentimiento?",
+                "Entiendo. ¿Qué crees que podría ayudarte en este momento?",
+                "Eso es interesante. Cuéntame más sobre eso.",
+                "Estoy aquí para escuchar. ¿Cómo puedo apoyarte con esto?",
+                "Aprecio que compartas esto. ¿Cuánto tiempo has estado sintiéndote así?"
+            ],
+            french: [
+                "Je t'entends. Comment cela a-t-il affecté ta journée?",
+                "Merci d'avoir partagé. Aimeriais-tu explorer ce sentiment plus avant?",
+                "Je comprends. Que penses-tu qui pourrait t'aider en ce moment?",
+                "C'est intéressant. Dis-m'en plus.",
+                "Je suis là pour écouter. Comment puis-je te soutenir dans cela?",
+                "J'apprécie que tu m'en parles. Depuis combien de temps te sens-tu ainsi?"
+            ]
+            // Add more languages as needed
+        };
+        
+        // Default to English if language not supported
+        const languageResponses = responses[language] || responses.english;
+        
+        // Return a random response from the selected language
+        return languageResponses[Math.floor(Math.random() * languageResponses.length)];
     }
     
     // Use quick response

@@ -17,6 +17,9 @@ document.addEventListener('DOMContentLoaded', function() {
     loadUserData();
 });
 
+// Store conversation history for AI context
+let conversationHistory = [];
+
 // Initialize the dashboard
 function initDashboard() {
     // Check if user has a preferred theme
@@ -470,6 +473,8 @@ function handleQuickAction(action) {
 
 // Initialize AI Chat
 function initAIChat() {
+    console.log('🚀 Frontend: Initializing AI Chat');
+    
     // Start the session timer
     startSessionTimer();
     
@@ -484,6 +489,21 @@ function initAIChat() {
             this.style.height = (this.scrollHeight) + 'px';
         });
     }
+    
+    // Add welcome message if chat is empty
+    const chatMessages = document.getElementById('chatMessages');
+    if (chatMessages && chatMessages.children.length === 0) {
+        console.log('💬 Frontend: Adding welcome message');
+        addAIMessage("Hello! I'm here to listen and support you. Feel free to share what's on your mind - whether you're having a great day or going through something difficult. What would you like to talk about?");
+        
+        // Add welcome message to conversation history
+        conversationHistory.push({
+            role: 'assistant',
+            content: "Hello! I'm here to listen and support you. Feel free to share what's on your mind - whether you're having a great day or going through something difficult. What would you like to talk about?"
+        });
+    }
+    
+    console.log('✅ Frontend: AI Chat initialized, conversation history length:', conversationHistory.length);
 }
 
 // Start session timer
@@ -519,21 +539,115 @@ function startSessionTimer() {
 }
 
 // Handle chat form submission
-function handleChatSubmit(e) {
+async function handleChatSubmit(e) {
     e.preventDefault();
     
     const chatInput = document.getElementById('chatInput');
     if (!chatInput || !chatInput.value.trim()) return;
     
-    // Add user message
-    addUserMessage(chatInput.value.trim());
+    const userMessage = chatInput.value.trim();
+    console.log('🚀 Frontend: Sending message:', userMessage);
+    
+    // Add user message to UI
+    addUserMessage(userMessage);
+    
+    // Add to conversation history
+    conversationHistory.push({
+        role: 'user',
+        content: userMessage
+    });
+    
+    console.log('📚 Frontend: Conversation history length:', conversationHistory.length);
     
     // Clear input
     chatInput.value = '';
     chatInput.style.height = 'auto';
     
-    // Simulate AI response after a short delay
-    setTimeout(generateAIResponse, 1000);
+    // Show typing indicator
+    showTypingIndicator();
+    
+    try {
+        console.log('📡 Frontend: Making API call to /api/chat');
+        
+        // Send message to AI backend
+        const response = await fetch('http://localhost:5000/api/chat', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                message: userMessage,
+                conversationHistory: conversationHistory.slice(-10) // Only send last 10 messages to avoid too large payload
+            })
+        });
+        
+        console.log('📡 Frontend: Response received, status:', response.status);
+        console.log('📡 Frontend: Response ok:', response.ok);
+        
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        
+        const data = await response.json();
+        console.log('📨 Frontend: Response data:', data);
+        
+        // Remove typing indicator
+        removeTypingIndicator();
+        
+        if (data.success && data.message) {
+            console.log('✅ Frontend: Adding AI message to UI');
+            // Add AI response to UI
+            addAIMessage(data.message);
+            
+            // Add to conversation history
+            conversationHistory.push({
+                role: 'assistant',
+                content: data.message
+            });
+        } else {
+            console.error('❌ Frontend: API returned unsuccessful response:', data);
+            addAIMessage(data.message || "I'm sorry, I'm having trouble connecting right now. Please try again in a moment.");
+        }
+    } catch (error) {
+        console.error('❌ Frontend: Error sending message:', error);
+        console.error('❌ Frontend: Error details:', error.message);
+        console.error('❌ Frontend: Error stack:', error.stack);
+        removeTypingIndicator();
+        addAIMessage("I'm experiencing some technical difficulties. Please try again in a moment.");
+    }
+}
+
+// Show typing indicator
+function showTypingIndicator() {
+    const chatMessages = document.getElementById('chatMessages');
+    if (!chatMessages) return;
+    
+    const typingElement = document.createElement('article');
+    typingElement.className = 'message ai-message typing-indicator';
+    typingElement.id = 'typingIndicator';
+    typingElement.innerHTML = `
+        <figure class="message-avatar">
+            <i class="fas fa-robot"></i>
+        </figure>
+        <section class="message-content">
+            <div class="typing-dots">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </section>
+    `;
+    
+    chatMessages.appendChild(typingElement);
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+}
+
+// Remove typing indicator
+function removeTypingIndicator() {
+    const typingIndicator = document.getElementById('typingIndicator');
+    if (typingIndicator) {
+        typingIndicator.remove();
+    }
 }
 
 // Add user message to chat
@@ -578,23 +692,6 @@ function addAIMessage(message) {
     chatMessages.scrollTop = chatMessages.scrollHeight;
 }
 
-// Generate AI response
-function generateAIResponse() {
-    // In a real app, this would call an API
-    // For now, we'll use predefined responses
-    
-    const responses = [
-        "I understand how you're feeling. It's completely normal to have ups and downs. Would you like to talk more about what's bothering you?",
-        "Thank you for sharing that with me. It takes courage to open up about your feelings. How has this been affecting your daily life?",
-        "I hear you. It sounds like you're going through a challenging time. Remember that it's okay to not be okay. Would you like to try a quick breathing exercise to help you feel more centered?",
-        "I appreciate you being open with me. Let's explore this together. What's one small thing you could do today to help yourself feel even a little bit better?",
-        "It sounds like you're dealing with a lot right now. Remember to be kind to yourself during difficult times. Would it help to discuss some coping strategies that have worked for you in the past?"
-    ];
-    
-    const randomResponse = responses[Math.floor(Math.random() * responses.length)];
-    addAIMessage(randomResponse);
-}
-
 // Use quick response
 function useQuickResponse(responseText) {
     const chatInput = document.getElementById('chatInput');
@@ -610,12 +707,26 @@ function useQuickResponse(responseText) {
 
 // Clear chat
 function clearChat() {
+    console.log('🧹 Frontend: Clearing chat');
     const chatMessages = document.getElementById('chatMessages');
     if (chatMessages) {
-        // Keep only the first message (the AI's introduction)
-        while (chatMessages.children.length > 1) {
-            chatMessages.removeChild(chatMessages.lastChild);
-        }
+        // Clear all messages
+        chatMessages.innerHTML = '';
+        
+        // Clear conversation history
+        conversationHistory = [];
+        console.log('🧹 Frontend: Conversation history cleared');
+        
+        // Add welcome message
+        addAIMessage("Hello! I'm here to listen and support you. Feel free to share what's on your mind - whether you're having a great day or going through something difficult. What would you like to talk about?");
+        
+        // Add welcome message to conversation history
+        conversationHistory.push({
+            role: 'assistant',
+            content: "Hello! I'm here to listen and support you. Feel free to share what's on your mind - whether you're having a great day or going through something difficult. What would you like to talk about?"
+        });
+        
+        console.log('✅ Frontend: Chat cleared and reset');
     }
 }
 
