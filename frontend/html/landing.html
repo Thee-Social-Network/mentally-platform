@@ -386,5 +386,19 @@
     </footer>
 
     <script src="../js/landing.js"></script>
+    <script>
+ document.addEventListener("DOMContentLoaded", () => {
+  document.getElementById("signupBtn").addEventListener("click", () => {
+    window.location.href = "/signup";
+  });
+
+  document.getElementById("loginBtn").addEventListener("click", () => {
+    window.location.href = "/login";
+  });
+});
+
+</script>
+
+
 </body>
 </html>
