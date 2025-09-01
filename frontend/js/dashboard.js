@@ -202,9 +202,9 @@ function setupEventListeners() {
 // Navigate to a specific page
 function navigateToPage(pageId) {
     if (pageId === 'dashboard') {
-        window.location.href = 'dashboard.html';
+        window.location.href = '/dashboard.html';
     } else {
-        window.location.href = `${pageId}.html`;
+        window.location.href = `/${pageId}.html`;
     }
 }
 
