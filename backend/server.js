@@ -7,6 +7,8 @@ import {User} from './models/user_model.js';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { GoogleGenerativeAI } from '@google/generative-ai';
+import { Mood } from './models/mood_model.js';
+import { Assessment } from './models/assessment_model.js';
 
 //API entry point
 
@@ -109,6 +111,548 @@ app.post("/api/login", async (req, res) => {
         res.status(500).json({ success: false, message: "Server Error" });
     }
 });
+
+
+// Replace your current /api/mood endpoint with this:
+app.post("/api/mood", async (req, res) => {
+    try {
+        const { mood, tags, notes, userId } = req.body;
+        
+        if (!mood || !userId) {
+            return res.status(400).json({ success: false, message: "Mood and user ID are required" });
+        }
+        
+        // Create new mood entry
+        const moodEntry = new Mood({
+            userId,
+            mood: parseInt(mood),
+            tags: tags || [],
+            notes: notes || "",
+            date: new Date()
+        });
+        
+        // Save to database
+        await moodEntry.save();
+        
+        res.json({ 
+            success: true, 
+            message: "Mood entry saved successfully",
+            data: moodEntry
+        });
+        
+    } catch (error) {
+        console.error("Error saving mood entry:", error);
+        res.status(500).json({ success: false, message: "Server error" });
+    }
+});
+
+// Replace your current /api/mood/:userId endpoint with this:
+app.get("/api/mood/:userId", async (req, res) => {
+    try {
+        const { userId } = req.params;
+        const { days = 30 } = req.query;
+        
+        // Calculate date range
+        const startDate = new Date();
+        startDate.setDate(startDate.getDate() - parseInt(days));
+        
+        // Fetch mood data from database
+        const moodData = await Mood.find({
+            userId: userId,
+            date: { $gte: startDate }
+        }).sort({ date: 1 });
+        
+        res.json({ 
+            success: true, 
+            data: moodData
+        });
+        
+    } catch (error) {
+        console.error("Error fetching mood history:", error);
+        res.status(500).json({ success: false, message: "Server error" });
+    }
+});
+
+app.get("/api/assessments/:type", async (req, res) => {
+    try {
+        const { type } = req.params;
+        const validTypes = ['PHQ-9', 'GAD-7', 'PHQ-15', 'WHO-5'];
+        
+        if (!validTypes.includes(type)) {
+            return res.status(400).json({ success: false, message: "Invalid assessment type" });
+        }
+        
+        const assessment = getAssessmentQuestions(type);
+        res.json({ success: true, data: assessment });
+        
+    } catch (error) {
+        console.error("Error fetching assessment:", error);
+        res.status(500).json({ success: false, message: "Server error" });
+    }
+});
+
+app.post("/api/assessments", async (req, res) => {
+    try {
+        const { userId, type, answers } = req.body;
+        
+        if (!userId || !type || !answers) {
+            return res.status(400).json({ success: false, message: "Missing required fields" });
+        }
+        
+        // Calculate score based on assessment type
+        const score = calculateAssessmentScore(type, answers);
+        const severity = determineSeverity(type, score);
+        
+        // Save assessment
+        const assessment = new Assessment({
+            userId,
+            type,
+            answers,
+            score,
+            severity,
+            date: new Date()
+        });
+        
+        await assessment.save();
+        
+        res.json({ 
+            success: true, 
+            message: "Assessment completed successfully",
+            data: {
+                score,
+                severity,
+                interpretation: getInterpretation(type, score, severity),
+                recommendations: getRecommendations(type, score, severity)
+            }
+        });
+        
+    } catch (error) {
+        console.error("Error saving assessment:", error);
+        res.status(500).json({ success: false, message: "Server error" });
+    }
+});
+
+app.get("/api/assessments/history/:userId", async (req, res) => {
+    try {
+        const { userId } = req.params;
+        const { type, limit = 10 } = req.query;
+        
+        const query = { userId };
+        if (type) query.type = type;
+        
+        const assessments = await Assessment.find(query)
+            .sort({ date: -1 })
+            .limit(parseInt(limit));
+        
+        res.json({ success: true, data: assessments });
+        
+    } catch (error) {
+        console.error("Error fetching assessment history:", error);
+        res.status(500).json({ success: false, message: "Server error" });
+    }
+});
+
+// Helper functions for assessments
+function getAssessmentQuestions(type) {
+    const assessments = {
+        'PHQ-9': {
+            title: "PHQ-9 Depression Questionnaire",
+            description: "Over the last 2 weeks, how often have you been bothered by any of the following problems?",
+            instructions: "Select the option that best describes how often you've experienced each symptom",
+            questions: [
+                { id: 1, text: "Little interest or pleasure in doing things", },
+                { id: 2, text: "Feeling down, depressed, or hopeless", },
+                { id: 3, text: "Trouble falling or staying asleep, or sleeping too much", },
+                { id: 4, text: "Feeling tired or having little energy", },
+                { id: 5, text: "Poor appetite or overeating", },
+                { id: 6, text: "Feeling bad about yourself - or that you are a failure or have let yourself or your family down", },
+                { id: 7, text: "Trouble concentrating on things, such as reading the newspaper or watching television", },
+                { id: 8, text: "Moving or speaking so slowly that other people could have noticed? Or the opposite - being so fidgety or restless that you have been moving around a lot more than usual", },
+                { id: 9, text: "Thoughts that you would be better off dead or of hurting yourself in some way", }
+            ],
+            options: [
+                { value: 0, label: "Not at all" },
+                { value: 1, label: "Several days" },
+                { value: 2, label: "More than half the days" },
+                { value: 3, label: "Nearly every day" }
+            ]
+        },
+        'GAD-7': {
+            title: "GAD-7 Anxiety Questionnaire",
+            description: "Over the last 2 weeks, how often have you been bothered by the following problems?",
+            instructions: "Select the option that best describes how often you've experienced each symptom",
+            questions: [
+                { id: 1, text: "Feeling nervous, anxious, or on edge", },
+                { id: 2, text: "Not being able to stop or control worrying", },
+                { id: 3, text: "Worrying too much about different things", },
+                { id: 4, text: "Trouble relaxing", },
+                { id: 5, text: "Being so restless that it is hard to sit still", },
+                { id: 6, text: "Becoming easily annoyed or irritable", },
+                { id: 7, text: "Feeling afraid as if something awful might happen", }
+            ],
+            options: [
+                { value: 0, label: "Not at all" },
+                { value: 1, label: "Several days" },
+                { value: 2, label: "More than half the days" },
+                { value: 3, label: "Nearly every day" }
+            ]
+        }
+    };
+    
+    return assessments[type] || null;
+}
+
+function calculateAssessmentScore(type, answers) {
+    return answers.reduce((total, answer) => total + answer.value, 0);
+}
+
+function determineSeverity(type, score) {
+    if (type === 'PHQ-9') {
+        if (score >= 20) return 'Severe';
+        if (score >= 15) return 'Moderately Severe';
+        if (score >= 10) return 'Moderate';
+        if (score >= 5) return 'Mild';
+        return 'None';
+    }
+    
+    if (type === 'GAD-7') {
+        if (score >= 15) return 'Severe';
+        if (score >= 10) return 'Moderate';
+        if (score >= 5) return 'Mild';
+        return 'None';
+    }
+    
+    return 'None';
+}
+
+function getInterpretation(type, score, severity) {
+    if (type === 'PHQ-9') {
+        return {
+            title: `Depression Severity: ${severity}`,
+            description: `Your PHQ-9 score is ${score}, which suggests ${severity.toLowerCase()} depression.`,
+            details: getPHQ9InterpretationDetails(score, severity)
+        };
+    }
+    
+    if (type === 'GAD-7') {
+        return {
+            title: `Anxiety Severity: ${severity}`,
+            description: `Your GAD-7 score is ${score}, which suggests ${severity.toLowerCase()} anxiety.`,
+            details: getGAD7InterpretationDetails(score, severity)
+        };
+    }
+    
+    return { title: "Assessment Complete", description: `Your score is ${score}` };
+}
+
+function getRecommendations(type, score, severity) {
+    const recommendations = [];
+    
+    if (type === 'PHQ-9') {
+        if (score >= 15) {
+            recommendations.push("Consider consulting with a mental health professional");
+            recommendations.push("Regular follow-up is recommended for monitoring");
+        }
+        if (score >= 10) {
+            recommendations.push("Consider therapy options such as CBT");
+            recommendations.push("Practice regular self-care activities");
+        }
+        if (score >= 5) {
+            recommendations.push("Increase physical activity and social connection");
+            recommendations.push("Practice mindfulness and relaxation techniques");
+        }
+        
+        recommendations.push("Consider retaking this assessment in 2 weeks");
+    }
+    
+    if (type === 'GAD-7') {
+        if (score >= 10) {
+            recommendations.push("Consider consulting with a mental health professional");
+            recommendations.push("Practice anxiety management techniques regularly");
+        }
+        if (score >= 5) {
+            recommendations.push("Try relaxation exercises like deep breathing");
+            recommendations.push("Limit caffeine and ensure adequate sleep");
+        }
+        
+        recommendations.push("Consider retaking this assessment in 2 weeks");
+    }
+    
+    // Add crisis resources for high scores
+    if (score >= 15) {
+        recommendations.push("If you're in crisis, please contact emergency services or a crisis hotline immediately");
+    }
+    
+    return recommendations;
+}
+
+function getPHQ9InterpretationDetails(score, severity) {
+    const details = {
+        'None': "Your responses suggest minimal depressive symptoms. Continue practicing good mental health habits.",
+        'Mild': "You may be experiencing mild depressive symptoms. Monitoring your mood and practicing self-care may be helpful.",
+        'Moderate': "Your responses suggest moderate depressive symptoms. Consider seeking support from a mental health professional.",
+        'Moderately Severe': "You may be experiencing moderately severe depressive symptoms. Professional support is recommended.",
+        'Severe': "Your responses suggest severe depressive symptoms. We strongly recommend consulting with a mental health professional as soon as possible."
+    };
+    
+    return details[severity] || details['None'];
+}
+
+function getGAD7InterpretationDetails(score, severity) {
+    const details = {
+        'None': "Your responses suggest minimal anxiety symptoms. Continue practicing good mental health habits.",
+        'Mild': "You may be experiencing mild anxiety symptoms. Stress management techniques may be helpful.",
+        'Moderate': "Your responses suggest moderate anxiety symptoms. Consider learning anxiety management strategies.",
+        'Severe': "Your responses suggest severe anxiety symptoms. We recommend consulting with a mental health professional for support."
+    };
+    
+    return details[severity] || details['None'];
+}
+
+// Helper function for mock data
+function generateMockMoodData(days = 30) {
+    const data = [];
+    const tags = ['work', 'family', 'friends', 'health', 'sleep', 'exercise', 'weather', 'news'];
+    
+    for (let i = 0; i < days; i++) {
+        const date = new Date();
+        date.setDate(date.getDate() - (days - i - 1));
+        
+        data.push({
+            date: date.toISOString().split('T')[0],
+            mood: Math.floor(Math.random() * 5) + 1,
+            tags: [tags[Math.floor(Math.random() * tags.length)]],
+            notes: i % 5 === 0 ? 'Had a pretty good day today' : ''
+        });
+    }
+    
+    return data;
+}
+
+// Enhanced Mood Analytics API Endpoints
+
+// Get advanced mood analytics
+app.get("/api/mood/analytics/:userId", async (req, res) => {
+    try {
+        const { userId } = req.params;
+        const { days = 30 } = req.query;
+        
+        // Calculate date range
+        const startDate = new Date();
+        startDate.setDate(startDate.getDate() - parseInt(days));
+        
+        // Fetch mood data from database
+        const moodData = await Mood.find({
+            userId: userId,
+            date: { $gte: startDate }
+        }).sort({ date: 1 });
+        
+        if (moodData.length < 5) {
+            return res.json({ 
+                success: true, 
+                data: {} // Not enough data for analytics
+            });
+        }
+        
+        // Perform advanced analytics
+        const patterns = detectMoodPatterns(moodData);
+        const correlations = findMoodCorrelations(moodData);
+        const predictions = generateMoodPredictions(moodData);
+        
+        res.json({ 
+            success: true, 
+            data: { patterns, correlations, predictions }
+        });
+        
+    } catch (error) {
+        console.error("Error fetching mood analytics:", error);
+        res.status(500).json({ success: false, message: "Analytics error" });
+    }
+});
+
+// Advanced pattern detection
+function detectMoodPatterns(moodData) {
+    const patterns = [];
+    
+    // Group by time of day
+    const timeSlots = {
+        morning: { sum: 0, count: 0 }, // 6am-12pm
+        afternoon: { sum: 0, count: 0 }, // 12pm-6pm
+        evening: { sum: 0, count: 0 }, // 6pm-12am
+        night: { sum: 0, count: 0 } // 12am-6am
+    };
+    
+    // Group by day of week
+    const dayAverages = Array(7).fill(0).map(() => ({ sum: 0, count: 0 }));
+    
+    moodData.forEach(entry => {
+        const date = new Date(entry.date);
+        const hours = date.getHours();
+        const day = date.getDay();
+        
+        // Time slot analysis
+        if (hours >= 6 && hours < 12) {
+            timeSlots.morning.sum += entry.mood;
+            timeSlots.morning.count++;
+        } else if (hours >= 12 && hours < 18) {
+            timeSlots.afternoon.sum += entry.mood;
+            timeSlots.afternoon.count++;
+        } else if (hours >= 18 && hours < 24) {
+            timeSlots.evening.sum += entry.mood;
+            timeSlots.evening.count++;
+        } else {
+            timeSlots.night.sum += entry.mood;
+            timeSlots.night.count++;
+        }
+        
+        // Day of week analysis
+        dayAverages[day].sum += entry.mood;
+        dayAverages[day].count++;
+    });
+    
+    // Find best/worst time of day
+    const timeResults = [];
+    Object.entries(timeSlots).forEach(([time, data]) => {
+        if (data.count > 0) {
+            timeResults.push({
+                time,
+                average: data.sum / data.count,
+                count: data.count
+            });
+        }
+    });
+    
+    timeResults.sort((a, b) => b.average - a.average);
+    
+    if (timeResults.length > 1) {
+        patterns.push({
+            type: "daily_pattern",
+            message: `Your mood is best during ${timeResults[0].time} (avg: ${timeResults[0].average.toFixed(1)}) and lowest during ${timeResults[timeResults.length-1].time} (avg: ${timeResults[timeResults.length-1].average.toFixed(1)})`
+        });
+    }
+    
+    // Find best/worst day of week
+    const dayResults = dayAverages
+        .map((data, index) => ({
+            day: index,
+            average: data.count > 0 ? data.sum / data.count : 0,
+            count: data.count
+        }))
+        .filter(data => data.count > 0);
+    
+    dayResults.sort((a, b) => b.average - a.average);
+    
+    if (dayResults.length > 1) {
+        const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+        patterns.push({
+            type: "weekly_pattern",
+            message: `Your best mood days are ${days[dayResults[0].day]}s (avg: ${dayResults[0].average.toFixed(1)}) and most challenging are ${days[dayResults[dayResults.length-1].day]}s (avg: ${dayResults[dayResults.length-1].average.toFixed(1)})`
+        });
+    }
+    
+    // Tag-based patterns
+    const tagAnalysis = {};
+    moodData.forEach(entry => {
+        entry.tags.forEach(tag => {
+            if (!tagAnalysis[tag]) tagAnalysis[tag] = { sum: 0, count: 0 };
+            tagAnalysis[tag].sum += entry.mood;
+            tagAnalysis[tag].count++;
+        });
+    });
+    
+    const tagResults = Object.entries(tagAnalysis)
+        .map(([tag, data]) => ({
+            tag,
+            average: data.sum / data.count,
+            count: data.count
+        }))
+        .filter(data => data.count >= 3); // Only include tags with sufficient data
+    
+    if (tagResults.length > 0) {
+        tagResults.sort((a, b) => b.average - a.average);
+        
+        patterns.push({
+            type: "tag_based",
+            message: `Your mood is highest when tagging "${tagResults[0].tag}" (avg: ${tagResults[0].average.toFixed(1)}) and lowest with "${tagResults[tagResults.length-1].tag}" (avg: ${tagResults[tagResults.length-1].average.toFixed(1)})`
+        });
+    }
+    
+    return patterns;
+}
+
+// Find mood correlations
+function findMoodCorrelations(moodData) {
+    const correlations = [];
+    
+    // This would typically involve more complex statistical analysis
+    // For now, we'll provide some basic insights
+    
+    if (moodData.length > 10) {
+        // Simple trend analysis
+        const recentMood = moodData.slice(-7).map(entry => entry.mood);
+        const averageRecent = recentMood.reduce((a, b) => a + b, 0) / recentMood.length;
+        const overallAverage = moodData.reduce((sum, entry) => sum + entry.mood, 0) / moodData.length;
+        
+        if (averageRecent > overallAverage + 0.5) {
+            correlations.push({
+                factor: "Recent improvement",
+                strength: 75,
+                message: "Your mood has been improving recently"
+            });
+        } else if (averageRecent < overallAverage - 0.5) {
+            correlations.push({
+                factor: "Recent decline",
+                strength: 75,
+                message: "Your mood has been declining recently"
+            });
+        }
+    }
+    
+    return correlations;
+}
+
+// Generate mood predictions
+function generateMoodPredictions(moodData) {
+    const predictions = [];
+    
+    if (moodData.length > 14) {
+        // Simple prediction based on recent trend
+        const recentMood = moodData.slice(-7).map(entry => entry.mood);
+        const trend = calculateTrend(recentMood);
+        
+        if (trend > 0.1) {
+            predictions.push({
+                trend: "improving",
+                message: "Based on your recent upward trend, your mood is likely to continue improving"
+            });
+        } else if (trend < -0.1) {
+            predictions.push({
+                trend: "declining",
+                message: "Your recent pattern suggests your mood may continue to be challenging"
+            });
+        }
+    }
+    
+    return predictions;
+}
+
+function calculateTrend(data) {
+    if (data.length < 2) return 0;
+    
+    const n = data.length;
+    let sumX = 0, sumY = 0, sumXY = 0, sumXX = 0;
+    
+    data.forEach((y, i) => {
+        const x = i;
+        sumX += x;
+        sumY += y;
+        sumXY += x * y;
+        sumXX += x * x;
+    });
+    
+    const slope = (n * sumXY - sumX * sumY) / (n * sumXX - sumX * sumX);
+    return slope;
+}
 
 // AI Chat endpoint
 app.post("/api/chat", async (req, res) => {
@@ -334,7 +878,9 @@ app.get('/community', (req, res) => {
 app.get('/professionals', (req, res) => {
   res.sendFile(path.join(__dirname, '../frontend/html/professionals.html'));
 });
-
+app.get('/assessments', (req, res) => {
+  res.sendFile(path.join(__dirname, '../frontend/html/assessments.html'));
+});
 app.listen(PORT, () =>{
     connectDB();
     console.log(`Server started on http://localhost:${PORT}`);

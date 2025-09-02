@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clinical Assessments - Mentaly</title>
+    <link rel="stylesheet" href="../css/dashboard.css">
+    <link rel="stylesheet" href="../css/assessments.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Reuse your navigation from other pages -->
+    <nav class="top-navbar">
+        <!-- Same navigation as your dashboard -->
+    </nav>
+
+    <main class="main-content">
+        <header class="content-header">
+            <h1 class="page-title">Clinical Assessments</h1>
+            <p class="page-subtitle">Professional screening tools to better understand your mental health</p>
+        </header>
+
+        <section class="content-area">
+            <!-- Assessment Selection -->
+            <section class="assessment-selection" id="assessmentSelection">
+                <h2>Choose an Assessment</h2>
+                <div class="assessment-cards">
+                    <div class="assessment-card" data-type="PHQ-9">
+                        <div class="card-icon">
+                            <i class="fas fa-brain"></i>
+                        </div>
+                        <h3>PHQ-9</h3>
+                        <p>Depression Screening Questionnaire</p>
+                        <div class="card-details">
+                            <span>9 questions · 5 minutes</span>
+                            <button class="start-assessment">Start Assessment</button>
+                        </div>
+                    </div>
+                    
+                    <div class="assessment-card" data-type="GAD-7">
+                        <div class="card-icon">
+                            <i class="fas fa-heartbeat"></i>
+                        </div>
+                        <h3>GAD-7</h3>
+                        <p>Anxiety Screening Questionnaire</p>
+                        <div class="card-details">
+                            <span>7 questions · 3 minutes</span>
+                            <button class="start-assessment">Start Assessment</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Assessment Container -->
+            <section class="assessment-container hidden" id="assessmentContainer">
+                <div class="assessment-header">
+                    <button class="back-button" id="backToSelection">
+                        <i class="fas fa-arrow-left"></i> Back
+                    </button>
+                    <h2 id="assessmentTitle"></h2>
+                    <div class="progress-container">
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="progressFill"></div>
+                        </div>
+                        <span class="progress-text" id="progressText">Question 1 of 9</span>
+                    </div>
+                </div>
+
+                <div class="assessment-content">
+                    <div class="assessment-description">
+                        <p id="assessmentDescription"></p>
+                        <p class="instructions" id="assessmentInstructions"></p>
+                    </div>
+
+                    <form id="assessmentForm">
+                        <div class="question-container" id="questionContainer">
+                            <!-- Questions will be dynamically inserted here -->
+                        </div>
+
+                        <div class="assessment-navigation">
+                            <button type="button" class="nav-button prev-button hidden" id="prevButton">
+                                <i class="fas fa-chevron-left"></i> Previous
+                            </button>
+                            <button type="button" class="nav-button next-button" id="nextButton">
+                                Next <i class="fas fa-chevron-right"></i>
+                            </button>
+                            <button type="submit" class="submit-button hidden" id="submitButton">
+                                Complete Assessment
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </section>
+
+            <!-- Results Container -->
+            <section class="results-container hidden" id="resultsContainer">
+                <div class="results-header">
+                    <h2>Assessment Results</h2>
+                    <p id="resultsSubtitle"></p>
+                </div>
+
+                <div class="results-content">
+                    <div class="score-display">
+                        <div class="score-circle">
+                            <span id="scoreValue">0</span>
+                            <span class="score-label">Total Score</span>
+                        </div>
+                        <div class="severity-badge" id="severityBadge">
+                            <span id="severityText">None</span>
+                        </div>
+                    </div>
+
+                    <div class="interpretation">
+                        <h3>What This Means</h3>
+                        <p id="interpretationText"></p>
+                    </div>
+
+                    <div class="recommendations">
+                        <h3>Recommendations</h3>
+                        <ul id="recommendationsList"></ul>
+                    </div>
+
+                    <div class="results-actions">
+                        <button class="action-button" id="saveResults">
+                            <i class="fas fa-download"></i> Save Results
+                        </button>
+                        <button class="action-button primary" id="newAssessment">
+                            <i class="fas fa-plus"></i> Take Another Assessment
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Assessment History -->
+            <section class="assessment-history">
+                <h2>Your Assessment History</h2>
+                <div class="history-container" id="historyContainer">
+                    <div class="empty-state">
+                        <i class="fas fa-clipboard-list"></i>
+                        <p>You haven't completed any assessments yet</p>
+                    </div>
+                </div>
+            </section>
+        </section>
+    </main>
+
+    <script src="../js/assessments.js"></script>
+</body>
+</html>

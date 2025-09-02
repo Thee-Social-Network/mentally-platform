@@ -1,0 +1,787 @@
+/* Mood Tracker Specific Styles */
+.mood-option {
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid transparent;
+    border-radius: 15px;
+    padding: 1.5rem;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    flex: 1;
+}
+
+.mood-option:hover {
+    background: rgba(253, 187, 48, 0.1);
+    border-color: #FDBB30;
+    transform: translateY(-2px);
+}
+
+.mood-option.active {
+    background: rgba(253, 187, 48, 0.2);
+    border-color: #FDBB30;
+    transform: translateY(-2px);
+}
+
+.mood-option i {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+    display: block;
+}
+
+.mood-option span {
+    font-weight: 500;
+    color: #fff;
+}
+
+.mood-scale {
+    display: flex;
+    gap: 1rem;
+    justify-content: space-between;
+    margin: 2rem 0;
+}
+
+.mood-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin: 1rem 0;
+}
+
+.mood-tag {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 20px;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.mood-tag:hover,
+.mood-tag.active {
+    background: rgba(253, 187, 48, 0.2);
+    border-color: #FDBB30;
+}
+
+.mood-notes {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    padding: 1rem;
+    color: #fff;
+    resize: vertical;
+    min-height: 100px;
+}
+
+.mood-notes:focus {
+    outline: none;
+    border-color: #FDBB30;
+}
+
+.save-mood-btn {
+    background: linear-gradient(45deg, #FDBB30, #FFD700);
+    border: none;
+    color: #002D62;
+    padding: 1rem 2rem;
+    border-radius: 25px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.save-mood-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(253, 187, 48, 0.3);
+}
+
+.mood-chart-container {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 15px;
+    padding: 1.5rem;
+    margin: 2rem 0;
+}
+
+.insight-card {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin: 0.5rem 0;
+}
+
+.insight-card i {
+    font-size: 1.5rem;
+    color: #FDBB30;
+}
+
+/* Enhanced Mood Tracker Styles */
+.mood-wheel {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 12px;
+    margin: 20px 0;
+}
+
+.mood-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 15px 10px;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background: rgba(255, 255, 255, 0.05);
+    border: 2px solid transparent;
+    min-height: 80px;
+}
+
+.mood-item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.mood-item.active {
+    border-color: #FDBB30;
+    background: rgba(253, 187, 48, 0.1);
+    transform: scale(1.05);
+}
+
+.mood-emoji {
+    font-size: 2.2rem;
+    margin-bottom: 8px;
+    transition: transform 0.3s ease;
+}
+
+.mood-item.active .mood-emoji {
+    transform: scale(1.2);
+}
+
+.mood-label {
+    font-size: 0.8rem;
+    text-align: center;
+    color: rgba(255, 255, 255, 0.9);
+    font-weight: 500;
+}
+
+/* Emotional mapping colors */
+.mood-happy { 
+    background: rgba(76, 175, 80, 0.1); 
+    border-color: rgba(76, 175, 80, 0.3);
+}
+.mood-happy.active { 
+    border-color: #4CAF50;
+    background: rgba(76, 175, 80, 0.2);
+}
+
+.mood-sad { 
+    background: rgba(33, 150, 243, 0.1);
+    border-color: rgba(33, 150, 243, 0.3);
+}
+.mood-sad.active { 
+    border-color: #2196F3;
+    background: rgba(33, 150, 243, 0.2);
+}
+
+.mood-anxious { 
+    background: rgba(156, 39, 176, 0.1);
+    border-color: rgba(156, 39, 176, 0.3);
+}
+.mood-anxious.active { 
+    border-color: #9C27B0;
+    background: rgba(156, 39, 176, 0.2);
+}
+
+.mood-angry { 
+    background: rgba(244, 67, 54, 0.1);
+    border-color: rgba(244, 67, 54, 0.3);
+}
+.mood-angry.active { 
+    border-color: #F44336;
+    background: rgba(244, 67, 54, 0.2);
+}
+
+.mood-tired { 
+    background: rgba(121, 85, 72, 0.1);
+    border-color: rgba(121, 85, 72, 0.3);
+}
+.mood-tired.active { 
+    border-color: #795548;
+    background: rgba(121, 85, 72, 0.2);
+}
+
+.mood-stressed { 
+    background: rgba(255, 152, 0, 0.1);
+    border-color: rgba(255, 152, 0, 0.3);
+}
+.mood-stressed.active { 
+    border-color: #FF9800;
+    background: rgba(255, 152, 0, 0.2);
+}
+
+.mood-neutral { 
+    background: rgba(158, 158, 158, 0.1);
+    border-color: rgba(158, 158, 158, 0.3);
+}
+.mood-neutral.active { 
+    border-color: #9E9E9E;
+    background: rgba(158, 158, 158, 0.2);
+}
+
+/* Advanced Analytics Styles */
+.advanced-analytics {
+    margin-top: 2rem;
+    padding: 1.5rem;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 15px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.analytics-section {
+    margin-bottom: 1.5rem;
+}
+
+.analytics-section h4 {
+    color: #FDBB30;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.pattern-cards, .correlation-cards, .prediction-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1rem;
+}
+
+.pattern-card, .correlation-card, .prediction-card {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 1rem;
+    border-radius: 10px;
+    border-left: 4px solid #FDBB30;
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+}
+
+.pattern-card i, .prediction-card i {
+    font-size: 1.2rem;
+    color: #FDBB30;
+    margin-top: 0.2rem;
+}
+
+.correlation-card {
+    border-left-color: #4CAF50;
+}
+
+.correlation-strength {
+    background: #4CAF50;
+    color: white;
+    padding: 0.3rem 0.6rem;
+    border-radius: 20px;
+    font-weight: bold;
+    font-size: 0.8rem;
+}
+
+.prediction-card {
+    border-left-color: #2196F3;
+}
+
+.prediction-card i {
+    color: #2196F3;
+}
+
+/* Notification System */
+.notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: white;
+    color: #333;
+    padding: 1rem 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    z-index: 10000;
+    animation: slideIn 0.3s ease;
+    max-width: 350px;
+}
+
+.notification-success {
+    border-left: 4px solid #4CAF50;
+}
+
+.notification-error {
+    border-left: 4px solid #F44336;
+}
+
+.notification i {
+    font-size: 1.2rem;
+}
+
+.notification-success i {
+    color: #4CAF50;
+}
+
+.notification-error i {
+    color: #F44336;
+}
+
+.notification-close {
+    background: none;
+    border: none;
+    font-size: 1.2rem;
+    cursor: pointer;
+    margin-left: auto;
+    color: #666;
+}
+
+.notification.fade-out {
+    animation: slideOut 0.3s ease forwards;
+}
+
+@keyframes slideIn {
+    from { transform: translateX(100%); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes slideOut {
+    from { transform: translateX(0); opacity: 1; }
+    to { transform: translateX(100%); opacity: 0; }
+}
+
+/* Check-in Reminder */
+.checkin-reminder {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: linear-gradient(135deg, #002D62, #001a3a);
+    color: white;
+    border-radius: 12px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+    z-index: 9999;
+    animation: slideUp 0.5s ease;
+    border: 1px solid rgba(253, 187, 48, 0.3);
+}
+
+.reminder-content {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+}
+
+.reminder-content i {
+    font-size: 1.5rem;
+    color: #FDBB30;
+}
+
+.reminder-content h4 {
+    margin: 0 0 0.25rem 0;
+    font-size: 1rem;
+}
+
+.reminder-content p {
+    margin: 0;
+    opacity: 0.8;
+    font-size: 0.9rem;
+}
+
+.reminder-action {
+    background: #FDBB30;
+    color: #002D62;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-weight: 600;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.reminder-dismiss {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 0;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@keyframes slideUp {
+    from { transform: translateY(100px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+/* No Data Message */
+.no-data-message {
+    text-align: center;
+    padding: 2rem;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.no-data-message i {
+    font-size: 3rem;
+    color: #FDBB30;
+    margin-bottom: 1rem;
+    display: block;
+}
+
+.no-data-message h4 {
+    margin: 0 0 0.5rem 0;
+    color: white;
+}
+
+.login-prompt-btn {
+    background: linear-gradient(45deg, #FDBB30, #FFD700);
+    color: #002D62;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 25px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 1rem;
+}
+
+/* Enhanced Mood Tracker Styles */
+.mood-wheel {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 12px;
+    margin: 20px 0;
+}
+
+.mood-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 15px 10px;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background: rgba(255, 255, 255, 0.05);
+    border: 2px solid transparent;
+    min-height: 80px;
+}
+
+.mood-item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.mood-item.active {
+    border-color: #FDBB30;
+    background: rgba(253, 187, 48, 0.1);
+    transform: scale(1.05);
+}
+
+.mood-emoji {
+    font-size: 2.2rem;
+    margin-bottom: 8px;
+    transition: transform 0.3s ease;
+}
+
+.mood-item.active .mood-emoji {
+    transform: scale(1.2);
+}
+
+.mood-label {
+    font-size: 0.8rem;
+    text-align: center;
+    color: rgba(255, 255, 255, 0.9);
+    font-weight: 500;
+}
+
+/* Emotional mapping colors */
+.mood-happy { 
+    background: rgba(76, 175, 80, 0.1); 
+    border-color: rgba(76, 175, 80, 0.3);
+}
+.mood-happy.active { 
+    border-color: #4CAF50;
+    background: rgba(76, 175, 80, 0.2);
+}
+
+.mood-sad { 
+    background: rgba(33, 150, 243, 0.1);
+    border-color: rgba(33, 150, 243, 0.3);
+}
+.mood-sad.active { 
+    border-color: #2196F3;
+    background: rgba(33, 150, 243, 0.2);
+}
+
+.mood-anxious { 
+    background: rgba(156, 39, 176, 0.1);
+    border-color: rgba(156, 39, 176, 0.3);
+}
+.mood-anxious.active { 
+    border-color: #9C27B0;
+    background: rgba(156, 39, 176, 0.2);
+}
+
+.mood-angry { 
+    background: rgba(244, 67, 54, 0.1);
+    border-color: rgba(244, 67, 54, 0.3);
+}
+.mood-angry.active { 
+    border-color: #F44336;
+    background: rgba(244, 67, 54, 0.2);
+}
+
+.mood-tired { 
+    background: rgba(121, 85, 72, 0.1);
+    border-color: rgba(121, 85, 72, 0.3);
+}
+.mood-tired.active { 
+    border-color: #795548;
+    background: rgba(121, 85, 72, 0.2);
+}
+
+.mood-stressed { 
+    background: rgba(255, 152, 0, 0.1);
+    border-color: rgba(255, 152, 0, 0.3);
+}
+.mood-stressed.active { 
+    border-color: #FF9800;
+    background: rgba(255, 152, 0, 0.2);
+}
+
+.mood-neutral { 
+    background: rgba(158, 158, 158, 0.1);
+    border-color: rgba(158, 158, 158, 0.3);
+}
+.mood-neutral.active { 
+    border-color: #9E9E9E;
+    background: rgba(158, 158, 158, 0.2);
+}
+
+/* Advanced Analytics Styles */
+.advanced-analytics {
+    margin-top: 2rem;
+    padding: 1.5rem;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 15px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.analytics-section {
+    margin-bottom: 1.5rem;
+}
+
+.analytics-section h4 {
+    color: #FDBB30;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.pattern-cards, .correlation-cards, .prediction-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1rem;
+}
+
+.pattern-card, .correlation-card, .prediction-card {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 1rem;
+    border-radius: 10px;
+    border-left: 4px solid #FDBB30;
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+}
+
+.pattern-card i, .prediction-card i {
+    font-size: 1.2rem;
+    color: #FDBB30;
+    margin-top: 0.2rem;
+}
+
+.correlation-card {
+    border-left-color: #4CAF50;
+}
+
+.correlation-strength {
+    background: #4CAF50;
+    color: white;
+    padding: 0.3rem 0.6rem;
+    border-radius: 20px;
+    font-weight: bold;
+    font-size: 0.8rem;
+}
+
+.prediction-card {
+    border-left-color: #2196F3;
+}
+
+.prediction-card i {
+    color: #2196F3;
+}
+
+/* Notification System */
+.notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: white;
+    color: #333;
+    padding: 1rem 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    z-index: 10000;
+    animation: slideIn 0.3s ease;
+    max-width: 350px;
+}
+
+.notification-success {
+    border-left: 4px solid #4CAF50;
+}
+
+.notification-error {
+    border-left: 4px solid #F44336;
+}
+
+.notification i {
+    font-size: 1.2rem;
+}
+
+.notification-success i {
+    color: #4CAF50;
+}
+
+.notification-error i {
+    color: #F44336;
+}
+
+.notification-close {
+    background: none;
+    border: none;
+    font-size: 1.2rem;
+    cursor: pointer;
+    margin-left: auto;
+    color: #666;
+}
+
+.notification.fade-out {
+    animation: slideOut 0.3s ease forwards;
+}
+
+@keyframes slideIn {
+    from { transform: translateX(100%); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes slideOut {
+    from { transform: translateX(0); opacity: 1; }
+    to { transform: translateX(100%); opacity: 0; }
+}
+
+/* Check-in Reminder */
+.checkin-reminder {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: linear-gradient(135deg, #002D62, #001a3a);
+    color: white;
+    border-radius: 12px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+    z-index: 9999;
+    animation: slideUp 0.5s ease;
+    border: 1px solid rgba(253, 187, 48, 0.3);
+}
+
+.reminder-content {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+}
+
+.reminder-content i {
+    font-size: 1.5rem;
+    color: #FDBB30;
+}
+
+.reminder-content h4 {
+    margin: 0 0 0.25rem 0;
+    font-size: 1rem;
+}
+
+.reminder-content p {
+    margin: 0;
+    opacity: 0.8;
+    font-size: 0.9rem;
+}
+
+.reminder-action {
+    background: #FDBB30;
+    color: #002D62;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-weight: 600;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.reminder-dismiss {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 0;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@keyframes slideUp {
+    from { transform: translateY(100px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+/* No Data Message */
+.no-data-message {
+    text-align: center;
+    padding: 2rem;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.no-data-message i {
+    font-size: 3rem;
+    color: #FDBB30;
+    margin-bottom: 1rem;
+    display: block;
+}
+
+.no-data-message h4 {
+    margin: 0 0 0.5rem 0;
+    color: white;
+}
+
+.login-prompt-btn {
+    background: linear-gradient(45deg, #FDBB30, #FFD700);
+    color: #002D62;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 25px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 1rem;
+}

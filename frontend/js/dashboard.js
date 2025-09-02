@@ -17,6 +17,72 @@ document.addEventListener('DOMContentLoaded', function() {
     loadUserData();
 });
 
+function initDashboardFeatures() {
+    // Navigation buttons
+    const navButtons = document.querySelectorAll('.nav-button');
+    navButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const page = this.getAttribute('data-page');
+            if (page) {
+                window.location.href = page;
+            }
+        });
+    });
+    
+    // Emergency button
+    const emergencyBtn = document.getElementById('dashboardEmergencyBtn');
+    if (emergencyBtn) {
+        emergencyBtn.addEventListener('click', function() {
+            const modal = document.getElementById('emergencyModal');
+            if (modal) {
+                modal.showModal();
+            }
+        });
+    }
+    
+    // Close modal buttons
+    const closeEmergencyModal = document.getElementById('closeEmergencyModal');
+    if (closeEmergencyModal) {
+        closeEmergencyModal.addEventListener('click', function() {
+            const modal = document.getElementById('emergencyModal');
+            if (modal) {
+                modal.close();
+            }
+        });
+    }
+    
+    // Settings button
+    const settingsBtn = document.getElementById('settingsBtn');
+    if (settingsBtn) {
+        settingsBtn.addEventListener('click', function() {
+            const modal = document.getElementById('settingsModal');
+            if (modal) {
+                modal.showModal();
+            }
+        });
+    }
+    
+    // Close settings modal
+    const closeSettingsModal = document.getElementById('closeSettingsModal');
+    if (closeSettingsModal) {
+        closeSettingsModal.addEventListener('click', function() {
+            const modal = document.getElementById('settingsModal');
+            if (modal) {
+                modal.close();
+            }
+        });
+    }
+    
+    // Check if user is logged in
+    const userData = JSON.parse(localStorage.getItem('user') || '{}');
+    if (userData.id) {
+        const usernameElement = document.querySelector('.username');
+        if (usernameElement && userData.first_name) {
+            usernameElement.textContent = `${userData.first_name} ${userData.last_name || ''}`;
+        }
+    }
+}
+
 // Store conversation history for AI context
 let conversationHistory = [];
 

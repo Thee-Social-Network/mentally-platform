@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mentaly - Mood Tracker</title>
     <link rel="stylesheet" href="../css/dashboard.css">
+    <link rel="stylesheet" href="../css/mood-tracker.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 </head>
@@ -66,6 +67,13 @@
                     </button>
                 </li>
             </ul>
+
+            <li class="nav-item">
+    <button class="nav-button" data-page="../html/assessments">
+        <i class="fas fa-clipboard-check"></i>
+        <span>Assessments</span>
+    </button>
+</li>
 
             <section class="nav-actions">
                 <button class="emergency-btn" id="dashboardEmergencyBtn">
@@ -179,6 +187,15 @@
                         <section class="mood-chart-container">
                             <canvas class="mood-history-chart" id="moodHistoryChart"></canvas>
                         </section>
+
+                        <!-- Add this section after the mood-history section -->
+<section class="advanced-analytics" id="advancedAnalytics">
+    <h3>Advanced Mood Analytics</h3>
+    <div class="analytics-placeholder">
+        <i class="fas fa-chart-line"></i>
+        <p>Your advanced analytics will appear here as you track more moods</p>
+    </div>
+</section>
                         
                         <section class="mood-insights">
                             <h4>Your Mood Insights</h4>
@@ -368,5 +385,6 @@
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="../js/dashboard.js"></script>
+    <script src="../js/mood-tracker.js"></script>
 </body>
 </html>
