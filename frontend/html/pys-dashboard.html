@@ -1,0 +1,1116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mentaly - Psychologist Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        /* Navigation */
+        .top-navbar {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 70px;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            text-decoration: none;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 1rem;
+        }
+
+        .nav-button {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            background: none;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: #666;
+            font-weight: 500;
+        }
+
+        .nav-button.active {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+        }
+
+        .nav-button:hover:not(.active) {
+            background: rgba(102, 126, 234, 0.1);
+            transform: translateY(-1px);
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .emergency-btn, .notification-btn, .settings-btn {
+            padding: 0.75rem;
+            background: none;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: #666;
+            position: relative;
+        }
+
+        .emergency-btn {
+            background: linear-gradient(135deg, #ff6b6b, #ee5a52);
+            color: white;
+            padding: 0.75rem 1rem;
+        }
+
+        .emergency-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(255, 107, 107, 0.3);
+        }
+
+        .notification-btn:hover, .settings-btn:hover {
+            background: rgba(102, 126, 234, 0.1);
+            transform: translateY(-1px);
+        }
+
+        .notification-badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: #ff6b6b;
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            font-size: 0.75rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .user-profile .profile-btn {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: none;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .avatar {
+            width: 35px;
+            height: 35px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+
+        /* Main Content */
+        .main-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .content-header {
+            margin-bottom: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .page-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: white;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .date-info {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 1.1rem;
+        }
+
+        /* Dashboard Grid */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 2rem;
+        }
+
+        /* Cards */
+        .card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .card-header h2, .card-header h3 {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: #333;
+        }
+
+        /* Stats Overview */
+        .stats-overview {
+            grid-column: 1 / -1;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
+            border-radius: 16px;
+            padding: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.2);
+        }
+
+        .stat-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: white;
+        }
+
+        .stat-icon.patients {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+        }
+
+        .stat-icon.sessions {
+            background: linear-gradient(135deg, #f093fb, #f5576c);
+        }
+
+        .stat-icon.community {
+            background: linear-gradient(135deg, #4facfe, #00f2fe);
+        }
+
+        .stat-icon.schedule {
+            background: linear-gradient(135deg, #43e97b, #38f9d7);
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #333;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 0.25rem;
+        }
+
+        .stat-trend {
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .stat-trend.positive {
+            color: #22c55e;
+        }
+
+        .stat-trend.neutral {
+            color: #f59e0b;
+        }
+
+        /* Patient List */
+        .patient-list {
+            max-height: 500px;
+            overflow-y: auto;
+        }
+
+        .patient-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            border-radius: 12px;
+            margin-bottom: 1rem;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .patient-item:hover {
+            background: rgba(102, 126, 234, 0.05);
+            transform: translateX(5px);
+        }
+
+        .patient-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+        }
+
+        .patient-info h4 {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 0.25rem;
+        }
+
+        .patient-status {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .patient-actions {
+            margin-left: auto;
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .action-btn {
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .view-btn {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+        }
+
+        .message-btn {
+            background: rgba(102, 126, 234, 0.1);
+            color: #667eea;
+        }
+
+        .action-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Community Insights */
+        .community-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .community-stat {
+            text-align: center;
+            padding: 1rem;
+            background: rgba(102, 126, 234, 0.05);
+            border-radius: 12px;
+        }
+
+        .community-stat-value {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #667eea;
+        }
+
+        .community-stat-label {
+            font-size: 0.9rem;
+            color: #666;
+            margin-top: 0.25rem;
+        }
+
+        .recent-activity {
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .activity-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            border-radius: 12px;
+            margin-bottom: 1rem;
+            background: rgba(0, 0, 0, 0.02);
+        }
+
+        .activity-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #4facfe, #00f2fe);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+
+        .activity-content h4 {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 0.25rem;
+        }
+
+        .activity-content p {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .activity-time {
+            margin-left: auto;
+            font-size: 0.8rem;
+            color: #999;
+        }
+
+        /* Schedule */
+        .schedule-list {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .schedule-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            border-radius: 12px;
+            margin-bottom: 1rem;
+            border-left: 4px solid #667eea;
+            background: rgba(102, 126, 234, 0.05);
+        }
+
+        .schedule-time {
+            font-weight: 600;
+            color: #667eea;
+            min-width: 80px;
+        }
+
+        .schedule-content h4 {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 0.25rem;
+        }
+
+        .schedule-content p {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        /* Modals */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(5px);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            max-width: 500px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            position: relative;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            font-size: 1.2rem;
+            cursor: pointer;
+            color: #666;
+            padding: 0.5rem;
+            border-radius: 50%;
+        }
+
+        .modal-close:hover {
+            background: rgba(0, 0, 0, 0.1);
+        }
+
+        /* Emergency Modal */
+        .emergency-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .emergency-item {
+            padding: 1.5rem;
+            background: rgba(255, 107, 107, 0.1);
+            border-radius: 12px;
+            border-left: 4px solid #ff6b6b;
+        }
+
+        .emergency-item h3 {
+            color: #ff6b6b;
+            margin-bottom: 0.5rem;
+        }
+
+        .emergency-call-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #ff6b6b;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-top: 0.5rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+            }
+            
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        /* Additional Styles for Professional Look */
+        .filter-tabs {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .filter-tab {
+            padding: 0.5rem 1rem;
+            background: rgba(102, 126, 234, 0.1);
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: #667eea;
+        }
+
+        .filter-tab.active {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+        }
+
+        .search-bar {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            border-radius: 12px;
+            font-size: 1rem;
+            margin-bottom: 1rem;
+            background: rgba(255, 255, 255, 0.8);
+        }
+
+        .priority-badge {
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .priority-high {
+            background: rgba(255, 107, 107, 0.2);
+            color: #ff6b6b;
+        }
+
+        .priority-medium {
+            background: rgba(245, 158, 11, 0.2);
+            color: #f59e0b;
+        }
+
+        .priority-low {
+            background: rgba(34, 197, 94, 0.2);
+            color: #22c55e;
+        }
+    </style>
+</head>
+<body>
+    <!-- Top Navigation Bar -->
+    <nav class="top-navbar">
+        <section class="nav-container">
+            <a href="../html/landing.html" class="logo-link">
+                <h1 class="logo">Mentaly</h1>
+            </a>
+            
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <button class="nav-button active" data-page="dashboard">
+                        <i class="fas fa-chart-line"></i>
+                        <span>Dashboard</span>
+                    </button>
+                </li>
+                <li class="nav-item">
+                    <button class="nav-button" data-page="patients">
+                        <i class="fas fa-user-friends"></i>
+                        <span>Patients</span>
+                    </button>
+                </li>
+                <li class="nav-item">
+                    <button class="nav-button" data-page="community">
+                        <i class="fas fa-users"></i>
+                        <span>Community</span>
+                    </button>
+                </li>
+            </ul>
+
+            <section class="nav-actions">
+                <button class="emergency-btn" id="emergencyBtn">
+                    <i class="fas fa-phone"></i>
+                    <span>Emergency</span>
+                </button>
+                
+                <button class="notification-btn" id="notificationBtn">
+                    <i class="fas fa-bell"></i>
+                    <span class="notification-badge">5</span>
+                </button>
+                
+                <section class="user-profile">
+                    <button class="profile-btn" id="profileBtn">
+                        <figure class="avatar">
+                            <i class="fas fa-user-md"></i>
+                        </figure>
+                        <span class="username">Dr. Sarah Johnson</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                </section>
+                
+                <button class="settings-btn" id="settingsBtn">
+                    <i class="fas fa-cog"></i>
+                </button>
+            </section>
+        </section>
+    </nav>
+
+    <main class="main-content">
+        <header class="content-header">
+            <h1 class="page-title" id="pageTitle">Psychologist Dashboard</h1>
+            <time class="date-info">Today, September 2, 2025</time>
+        </header>
+
+        <section class="content-area">
+            <!-- Dashboard Overview -->
+            <article class="dashboard-grid">
+                <!-- Stats Overview -->
+                <article class="card stats-overview">
+                    <header class="card-header">
+                        <h2>Practice Overview</h2>
+                    </header>
+                    <section class="stats-grid">
+                        <article class="stat-card">
+                            <figure class="stat-icon patients">
+                                <i class="fas fa-user-friends"></i>
+                            </figure>
+                            <section class="stat-content">
+                                <h3 class="stat-value">47</h3>
+                                <p class="stat-label">Active Patients</p>
+                                <small class="stat-trend positive">+3 this month</small>
+                            </section>
+                        </article>
+                        <article class="stat-card">
+                            <figure class="stat-icon sessions">
+                                <i class="fas fa-calendar-check"></i>
+                            </figure>
+                            <section class="stat-content">
+                                <h3 class="stat-value">18</h3>
+                                <p class="stat-label">Sessions This Week</p>
+                                <small class="stat-trend positive">2 more than last week</small>
+                            </section>
+                        </article>
+                        <article class="stat-card">
+                            <figure class="stat-icon community">
+                                <i class="fas fa-comments"></i>
+                            </figure>
+                            <section class="stat-content">
+                                <h3 class="stat-value">156</h3>
+                                <p class="stat-label">Community Interactions</p>
+                                <small class="stat-trend positive">+12% this week</small>
+                            </section>
+                        </article>
+                        <article class="stat-card">
+                            <figure class="stat-icon schedule">
+                                <i class="fas fa-clock"></i>
+                            </figure>
+                            <section class="stat-content">
+                                <h3 class="stat-value">6</h3>
+                                <p class="stat-label">Today's Sessions</p>
+                                <small class="stat-trend neutral">Next in 30 min</small>
+                            </section>
+                        </article>
+                    </section>
+                </article>
+
+                <!-- Recent Patients -->
+                <article class="card">
+                    <header class="card-header">
+                        <h3>Recent Patients</h3>
+                        <button class="view-all-btn" onclick="showPatients()">View All</button>
+                    </header>
+                    <input type="text" class="search-bar" placeholder="Search patients..." id="patientSearch">
+                    <section class="patient-list">
+                        <article class="patient-item">
+                            <figure class="patient-avatar">JD</figure>
+                            <section class="patient-info">
+                                <h4>John Doe</h4>
+                                <p class="patient-status">Last session: 2 days ago</p>
+                                <span class="priority-badge priority-medium">Follow-up needed</span>
+                            </section>
+                            <section class="patient-actions">
+                                <button class="action-btn view-btn">View</button>
+                                <button class="action-btn message-btn">Message</button>
+                            </section>
+                        </article>
+                        <article class="patient-item">
+                            <figure class="patient-avatar">AS</figure>
+                            <section class="patient-info">
+                                <h4>Anna Smith</h4>
+                                <p class="patient-status">Session today: 2:00 PM</p>
+                                <span class="priority-badge priority-high">Urgent</span>
+                            </section>
+                            <section class="patient-actions">
+                                <button class="action-btn view-btn">View</button>
+                                <button class="action-btn message-btn">Message</button>
+                            </section>
+                        </article>
+                        <article class="patient-item">
+                            <figure class="patient-avatar">MJ</figure>
+                            <section class="patient-info">
+                                <h4>Mike Johnson</h4>
+                                <p class="patient-status">Completed session yesterday</p>
+                                <span class="priority-badge priority-low">Stable</span>
+                            </section>
+                            <section class="patient-actions">
+                                <button class="action-btn view-btn">View</button>
+                                <button class="action-btn message-btn">Message</button>
+                            </section>
+                        </article>
+                        <article class="patient-item">
+                            <figure class="patient-avatar">LW</figure>
+                            <section class="patient-info">
+                                <h4>Lisa Wilson</h4>
+                                <p class="patient-status">Missed last appointment</p>
+                                <span class="priority-badge priority-high">Needs contact</span>
+                            </section>
+                            <section class="patient-actions">
+                                <button class="action-btn view-btn">View</button>
+                                <button class="action-btn message-btn">Message</button>
+                            </section>
+                        </article>
+                    </section>
+                </article>
+
+                <!-- Today's Schedule -->
+                <article class="card">
+                    <header class="card-header">
+                        <h3>Today's Schedule</h3>
+                        <button class="refresh-btn" id="refreshSchedule">
+                            <i class="fas fa-sync-alt"></i>
+                        </button>
+                    </header>
+                    <section class="schedule-list">
+                        <article class="schedule-item">
+                            <section class="schedule-time">9:00 AM</section>
+                            <section class="schedule-content">
+                                <h4>Initial Consultation</h4>
+                                <p>New patient - Anxiety assessment</p>
+                            </section>
+                        </article>
+                        <article class="schedule-item">
+                            <section class="schedule-time">10:30 AM</section>
+                            <section class="schedule-content">
+                                <h4>Follow-up Session</h4>
+                                <p>John Doe - CBT for depression</p>
+                            </section>
+                        </article>
+                        <article class="schedule-item">
+                            <section class="schedule-time">2:00 PM</section>
+                            <section class="schedule-content">
+                                <h4>Crisis Intervention</h4>
+                                <p>Anna Smith - Emergency session</p>
+                            </section>
+                        </article>
+                        <article class="schedule-item">
+                            <section class="schedule-time">3:30 PM</section>
+                            <section class="schedule-content">
+                                <h4>Group Therapy</h4>
+                                <p>Anxiety Support Group (6 participants)</p>
+                            </section>
+                        </article>
+                        <article class="schedule-item">
+                            <section class="schedule-time">5:00 PM</section>
+                            <section class="schedule-content">
+                                <h4>Administrative</h4>
+                                <p>Patient notes and reports</p>
+                            </section>
+                        </article>
+                    </section>
+                </article>
+
+                <!-- Community Insights -->
+                <article class="card">
+                    <header class="card-header">
+                        <h3>Community Insights</h3>
+                        <button class="view-all-btn" onclick="showCommunity()">Manage Community</button>
+                    </header>
+                    <section class="community-stats">
+                        <article class="community-stat">
+                            <section class="community-stat-value">342</section>
+                            <p class="community-stat-label">Active Members</p>
+                        </article>
+                        <article class="community-stat">
+                            <section class="community-stat-value">28</section>
+                            <p class="community-stat-label">New Posts Today</p>
+                        </article>
+                        <article class="community-stat">
+                            <section class="community-stat-value">95%</section>
+                            <p class="community-stat-label">Positive Sentiment</p>
+                        </article>
+                    </section>
+                    <h4 style="margin: 1rem 0 0.5rem 0; color: #333;">Recent Community Activity</h4>
+                    <section class="recent-activity">
+                        <article class="activity-item">
+                            <figure class="activity-icon">
+                                <i class="fas fa-comment"></i>
+                            </figure>
+                            <section class="activity-content">
+                                <h4>New discussion started</h4>
+                                <p>"Coping with Work Stress" in Anxiety Support</p>
+                            </section>
+                            <time class="activity-time">2 hours ago</time>
+                        </article>
+                        <article class="activity-item">
+                            <figure class="activity-icon">
+                                <i class="fas fa-heart"></i>
+                            </figure>
+                            <section class="activity-content">
+                                <h4>Success story shared</h4>
+                                <p>Member shared breakthrough in Depression Support</p>
+                            </section>
+                            <time class="activity-time">4 hours ago</time>
+                        </article>
+                        <article class="activity-item">
+                            <figure class="activity-icon">
+                                <i class="fas fa-flag"></i>
+                            </figure>
+                            <section class="activity-content">
+                                <h4>Post flagged for review</h4>
+                                <p>Requires moderator attention</p>
+                            </section>
+                            <time class="activity-time">6 hours ago</time>
+                        </article>
+                    </section>
+                </article>
+            </article>
+        </section>
+    </main>
+
+    <!-- Emergency Modal -->
+    <dialog class="modal" id="emergencyModal">
+        <article class="modal-content emergency-modal">
+            <header class="modal-header">
+                <h2>Emergency Resources</h2>
+                <button class="modal-close" id="closeEmergencyModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </header>
+            <section class="modal-body">
+                <p class="emergency-text">Critical mental health emergency resources for your patients:</p>
+                <section class="emergency-list">
+                    <article class="emergency-item">
+                        <h3>Crisis Hotline</h3>
+                        <p>24/7 Confidential Support</p>
+                        <a href="tel:0800567567" class="emergency-call-link">
+                            <i class="fas fa-phone"></i>
+                            0800 567 567
+                        </a>
+                    </article>
+                    <article class="emergency-item">
+                        <h3>SADAG Helpline</h3>
+                        <p>South African Depression & Anxiety Group</p>
+                        <a href="tel:0800121314" class="emergency-call-link">
+                            <i class="fas fa-phone"></i>
+                            0800 121 314
+                        </a>
+                    </article>
+                    <article class="emergency-item">
+                        <h3>Emergency Services</h3>
+                        <p>Medical Emergency</p>
+                        <a href="tel:10177" class="emergency-call-link">
+                            <i class="fas fa-phone"></i>
+                            10177
+                        </a>
+                    </article>
+                </section>
+                <p class="emergency-note">Quick reference for patient emergencies</p>
+            </section>
+        </article>
+    </dialog>
+
+    <script>
+        // Dashboard functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            // Navigation
+            const navButtons = document.querySelectorAll('.nav-button');
+            const pageTitle = document.getElementById('pageTitle');
+            
+            navButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    navButtons.forEach(btn => btn.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    const page = this.dataset.page;
+                    updatePageContent(page);
+                });
+            });
+
+            // Emergency modal
+            const emergencyBtn = document.getElementById('emergencyBtn');
+            const emergencyModal = document.getElementById('emergencyModal');
+            const closeEmergencyModal = document.getElementById('closeEmergencyModal');
+
+            emergencyBtn.addEventListener('click', () => {
+                emergencyModal.classList.add('active');
+            });
+
+            closeEmergencyModal.addEventListener('click', () => {
+                emergencyModal.classList.remove('active');
+            });
+
+            // Settings button
+            const settingsBtn = document.getElementById('settingsBtn');
+            settingsBtn.addEventListener('click', () => {
+                alert('Settings panel would open here');
+            });
+
+            // Notification button
+            const notificationBtn = document.getElementById('notificationBtn');
+            notificationBtn.addEventListener('click', () => {
+                alert('Notifications panel would open here');
+            });
+
+            // Patient search
+            const patientSearch = document.getElementById('patientSearch');
+            patientSearch.addEventListener('input', function() {
+                const searchTerm = this.value.toLowerCase();
+                const patientItems = document.querySelectorAll('.patient-item');
+                
+                patientItems.forEach(item => {
+                    const patientName = item.querySelector('h4').textContent.toLowerCase();
+                    if (patientName.includes(searchTerm)) {
+                        item.style.display = 'flex';
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+            });
+
+            // Refresh functionality
+            const refreshSchedule = document.getElementById('refreshSchedule');
+            refreshSchedule.addEventListener('click', function() {
+                this.style.transform = 'rotate(360deg)';
+                setTimeout(() => {
+                    this.style.transform = 'rotate(0deg)';
+                }, 500);
+            });
+
+            // Action buttons
+            document.querySelectorAll('.action-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const action = this.textContent.trim();
+                    alert(`${action} functionality would be implemented here`);
+                });
+            });
+
+            // Modal backdrop click to close
+            document.querySelectorAll('.modal').forEach(modal => {
+                modal.addEventListener('click', function(e) {
+                    if (e.target === this) {
+                        this.classList.remove('active');
+                    }
+                });
+            });
+        });
+
+        function updatePageContent(page) {
+            const pageTitle = document.getElementById('pageTitle');
+            
+            switch(page) {
+                case 'dashboard':
+                    pageTitle.textContent = 'Psychologist Dashboard';
+                    break;
+                case 'patients':
+                    pageTitle.textContent = 'Patient Management';
+                    break;
+                case 'community':
+                    pageTitle.textContent = 'Community Management';
+                    break;
+                default:
+                    pageTitle.textContent = 'Psychologist Dashboard';
+            }
+        }
+
+        function showPatients() {
+            document.querySelector('[data-page="patients"]').click();
+        }
+
+        function showCommunity() {
+            document.querySelector('[data-page="community"]').click();
+        }
+
+        // Simulate real-time updates
+        setInterval(() => {
+            const badge = document.querySelector('.notification-badge');
+            const currentCount = parseInt(badge.textContent);
+            if (Math.random() < 0.1) { // 10% chance every 5 seconds
+                badge.textContent = currentCount + 1;
+                badge.style.animation = 'pulse 0.5s ease-in-out';
+                setTimeout(() => {
+                    badge.style.animation = '';
+                }, 500);
+            }
+        }, 5000);
+    </script>
+
+    <style>
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+
+        .view-all-btn, .refresh-btn {
+            background: rgba(102, 126, 234, 0.1);
+            color: #667eea;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .view-all-btn:hover, .refresh-btn:hover {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .refresh-btn {
+            padding: 0.5rem;
+            border-radius: 50%;
+        }
+
+        .emergency-text {
+            margin-bottom: 1.5rem;
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .emergency-note {
+            margin-top: 1.5rem;
+            text-align: center;
+            color: #666;
+            font-style: italic;
+        }
+    </style>
+</body>
+</html>

@@ -249,6 +249,10 @@ app.get('/dashboard', (req, res) => {
   res.sendFile(path.join(__dirname, '../frontend/html/dashboard.html'));
 });
 
+app.get('/psy-dashboard', (req, res) => {
+  res.sendFile(path.join(__dirname, '../frontend/html/pys-dashboard.html'));
+});
+
 app.get('/ai-support', (req, res) => {
   res.sendFile(path.join(__dirname, '../frontend/html/ai-support.html'));
 });
