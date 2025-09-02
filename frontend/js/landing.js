@@ -69,39 +69,33 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Button click handlers for navigation
-    function initButtonHandlers() {
-        // Sign up buttons
-        const signupButtons = [
-            document.getElementById('signupBtn'),
-            document.getElementById('ctaPrimary'),
-            document.getElementById('finalCta')
-        ];
+    // In your initButtonHandlers function in landing.js
+function initButtonHandlers() {
+    // Sign up buttons
+    const signupButtons = [
+        document.getElementById('signupBtn'),
+        document.getElementById('ctaPrimary'),
+        document.getElementById('finalCta')
+    ];
 
-        signupButtons.forEach(btn => {
-            if (btn) {
-                btn.addEventListener('click', function() {
-                    // Add loading animation
-                    addLoadingState(this);
-                    
-                    // Simulate navigation to signup/dashboard
-                    setTimeout(() => {
-                        window.location.href = 'dashboard.html';
-                    }, 1000);
-                });
-            }
-        });
+    signupButtons.forEach(btn => {
+        if (btn) {
+            btn.addEventListener('click', function() {
+                // ✅ Redirect to signup page instead of dashboard
+                window.location.href = '/signup';
+            });
+        }
+    });
 
         // Login button
         const loginBtn = document.getElementById('loginBtn');
         if (loginBtn) {
             loginBtn.addEventListener('click', function() {
-                addLoadingState(this);
                 
-                setTimeout(() => {
+        
                     // For demo, we'll redirect to dashboard
-                    window.location.href = 'dashboard.html';
-                }, 1000);
+                    window.location.href = '/login';
+                
             });
         }
 
