@@ -581,6 +581,7 @@ select[multiple] option:checked {
     background: rgba(255, 255, 255, 0.05);
 }
 
+/* Patient row colors */
 .patient-row.high-risk {
     border-left: 4px solid #F56565;
 }
@@ -607,6 +608,7 @@ select[multiple] option:checked {
     gap: 0.75rem;
 }
 
+/* Patient avatar colors */
 .patient-avatar {
     width: 40px;
     height: 40px;
@@ -637,19 +639,35 @@ select[multiple] option:checked {
     font-weight: 500;
 }
 
+/* Status badge colors */
 .status-badge.active {
     background: rgba(72, 187, 120, 0.2);
     color: #48BB78;
+    padding: 0.25rem 0.75rem;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    display: inline-block;
 }
 
 .status-badge.intake {
     background: rgba(66, 153, 225, 0.2);
     color: #4299E1;
+    padding: 0.25rem 0.75rem;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    display: inline-block;
 }
 
 .status-badge.archived {
     background: rgba(160, 174, 192, 0.2);
     color: #A0AEC0;
+    padding: 0.25rem 0.75rem;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    display: inline-block;
 }
 
 .risk-badge {
@@ -659,19 +677,35 @@ select[multiple] option:checked {
     font-weight: 500;
 }
 
+/* Risk badge colors */
 .risk-badge.high {
     background: rgba(245, 101, 101, 0.2);
     color: #F56565;
+    padding: 0.25rem 0.75rem;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    display: inline-block;
 }
 
 .risk-badge.medium {
     background: rgba(246, 173, 85, 0.2);
     color: #F6AD55;
+    padding: 0.25rem 0.75rem;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    display: inline-block;
 }
 
 .risk-badge.low {
     background: rgba(72, 187, 120, 0.2);
     color: #48BB78;
+    padding: 0.25rem 0.75rem;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    display: inline-block;
 }
 
 .tags {
@@ -680,11 +714,13 @@ select[multiple] option:checked {
     flex-wrap: wrap;
 }
 
+/* Tag colors */
 .tag {
     padding: 0.25rem 0.5rem;
     border-radius: 12px;
     font-size: 0.7rem;
     font-weight: 500;
+    display: inline-block;
 }
 
 .tag.suicide-risk {
@@ -783,7 +819,59 @@ select[multiple] option:checked {
     color: rgba(255, 255, 255, 0.7);
     font-size: 0.9rem;
 }
+/* Notification styles */
+.notification {
+    position: fixed;
+    top: 100px;
+    right: 20px;
+    padding: 1rem 1.5rem;
+    border-radius: var(--border-radius);
+    background: var(--pacer-navy);
+    color: white;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    z-index: 3000;
+    transform: translateX(100%);
+    transition: transform 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    max-width: 350px;
+}
 
+.notification.show {
+    transform: translateX(0);
+}
+
+.notification-success {
+    background: rgba(72, 187, 120, 0.9);
+    border-left: 4px solid #48BB78;
+}
+
+.notification-info {
+    background: rgba(66, 153, 225, 0.9);
+    border-left: 4px solid #4299E1;
+}
+
+.notification-error {
+    background: rgba(245, 101, 101, 0.9);
+    border-left: 4px solid #F56565;
+}
+
+.notification-close {
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    padding: 0.25rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.notification-close:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
 .pagination {
     display: flex;
     gap: 0.5rem;
@@ -1047,9 +1135,11 @@ select[multiple] option:checked {
 
 .patient-card-footer {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end;
     align-items: center;
-    margin-top: auto;
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--glass-border);
 }
 
 .form-group input,

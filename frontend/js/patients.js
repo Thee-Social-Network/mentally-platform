@@ -322,6 +322,7 @@ function handleAddPatientForm(e) {
     patientData.id = patients.length > 0 ? Math.max(...patients.map(p => p.id)) + 1 : 1;
     
     // Set default values
+    patientData.status = "active";
     patientData.lastSession = null;
     
     // Convert tags to array if it's a string
@@ -487,41 +488,46 @@ function renderPatientsList(patientsArray) {
     
     patientsArray.forEach(patient => {
         const row = document.createElement('tr');
+        row.className = `patient-row ${patient.riskLevel}-risk ${patient.status}`;
+        
         row.innerHTML = `
             <td>
-                <strong>${patient.firstName} ${patient.lastName}</strong>
-                <br>
-                <small>${patient.email}</small>
+                <section class="patient-info">
+                    <figure class="patient-avatar">
+                        <i class="fas fa-user"></i>
+                    </figure>
+                    <section class="patient-details">
+                        <h3>${patient.firstName} ${patient.lastName}</h3>
+                        <p>ID: PT-${patient.id.toString().padStart(3, '0')}</p>
+                    </section>
+                </section>
             </td>
             <td>${patient.age}</td>
+            <td><span class="status-badge ${patient.status}">${formatStatus(patient.status)}</span></td>
+            <td><span class="risk-badge ${patient.riskLevel}">${formatRiskLevel(patient.riskLevel)}</span></td>
+            <td>${patient.lastSession ? formatDate(patient.lastSession) : '-'}</td>
             <td>
-                <span class="status-badge status-${patient.status}">
-                    ${formatStatus(patient.status)}
-                </span>
-            </td>
-            <td>
-                <span class="risk-badge risk-${patient.riskLevel}">
-                    ${formatRiskLevel(patient.riskLevel)}
-                </span>
-            </td>
-            <td>${patient.lastSession ? formatDate(patient.lastSession) : 'No sessions'}</td>
-            <td>
-                <div class="tags-container">
+                <section class="tags">
                     ${renderTags(patient.tags)}
-                </div>
+                </section>
             </td>
             <td>
-                <div class="action-buttons">
+                <section class="action-buttons">
                     <button class="action-btn view-btn" data-patient-id="${patient.id}" title="View Profile">
                         <i class="fas fa-eye"></i>
                     </button>
                     <button class="action-btn edit-btn" data-patient-id="${patient.id}" title="Edit Patient">
                         <i class="fas fa-edit"></i>
                     </button>
-                    <button class="action-btn archive-btn" data-patient-id="${patient.id}" title="Archive Patient">
-                        <i class="fas fa-archive"></i>
-                    </button>
-                </div>
+                    ${patient.status === 'archived' ? 
+                        `<button class="action-btn restore-btn" data-patient-id="${patient.id}" title="Restore Patient">
+                            <i class="fas fa-undo"></i>
+                         </button>` : 
+                        `<button class="action-btn archive-btn" data-patient-id="${patient.id}" title="Archive Patient">
+                            <i class="fas fa-archive"></i>
+                         </button>`
+                    }
+                </section>
             </td>
         `;
         
@@ -542,7 +548,7 @@ function renderPatientsGrid(patientsArray) {
     
     patientsArray.forEach(patient => {
         const card = document.createElement('article');
-        card.className = `patient-card ${patient.status} ${patient.riskLevel}-risk`;
+        card.className = `patient-card ${patient.riskLevel}-risk ${patient.status}`;
         
         card.innerHTML = `
             <header class="patient-card-header">
@@ -551,7 +557,7 @@ function renderPatientsGrid(patientsArray) {
                 </figure>
                 <section class="patient-card-details">
                     <h3>${patient.firstName} ${patient.lastName}</h3>
-                    <p>${patient.email}</p>
+                    <p>ID: PT-${patient.id.toString().padStart(3, '0')}</p>
                     <p>${patient.phone}</p>
                 </section>
             </header>
@@ -564,17 +570,13 @@ function renderPatientsGrid(patientsArray) {
                 <section class="patient-card-info-item">
                     <span class="patient-card-info-label">Status:</span>
                     <span class="patient-card-info-value">
-                        <span class="status-badge status-${patient.status}">
-                            ${formatStatus(patient.status)}
-                        </span>
+                        <span class="status-badge ${patient.status}">${formatStatus(patient.status)}</span>
                     </span>
                 </section>
                 <section class="patient-card-info-item">
                     <span class="patient-card-info-label">Risk Level:</span>
                     <span class="patient-card-info-value">
-                        <span class="risk-badge risk-${patient.riskLevel}">
-                            ${formatRiskLevel(patient.riskLevel)}
-                        </span>
+                        <span class="risk-badge ${patient.riskLevel}">${formatRiskLevel(patient.riskLevel)}</span>
                     </span>
                 </section>
                 <section class="patient-card-info-item">
@@ -597,9 +599,14 @@ function renderPatientsGrid(patientsArray) {
                     <button class="action-btn edit-btn" data-patient-id="${patient.id}" title="Edit Patient">
                         <i class="fas fa-edit"></i>
                     </button>
-                    <button class="action-btn archive-btn" data-patient-id="${patient.id}" title="Archive Patient">
-                        <i class="fas fa-archive"></i>
-                    </button>
+                    ${patient.status === 'archived' ? 
+                        `<button class="action-btn restore-btn" data-patient-id="${patient.id}" title="Restore Patient">
+                            <i class="fas fa-undo"></i>
+                         </button>` : 
+                        `<button class="action-btn archive-btn" data-patient-id="${patient.id}" title="Archive Patient">
+                            <i class="fas fa-archive"></i>
+                         </button>`
+                    }
                 </section>
             </footer>
         `;
@@ -636,7 +643,16 @@ function addActionButtonListeners() {
     archiveButtons.forEach(button => {
         button.addEventListener('click', function() {
             const patientId = parseInt(this.dataset.patientId);
-            toggleArchivePatient(patientId);
+            toggleArchivePatient(patientId, true);
+        });
+    });
+    
+    // Restore buttons
+    const restoreButtons = document.querySelectorAll('.restore-btn');
+    restoreButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const patientId = parseInt(this.dataset.patientId);
+            toggleArchivePatient(patientId, false);
         });
     });
 }
@@ -658,8 +674,8 @@ function openPatientProfile(patientId) {
                 <h2>${patient.firstName} ${patient.lastName}</h2>
                 <p>${patient.email} | ${patient.phone}</p>
                 <section class="patient-status-info">
-                    <span class="status-badge status-${patient.status}">${formatStatus(patient.status)}</span>
-                    <span class="risk-badge risk-${patient.riskLevel}">${formatRiskLevel(patient.riskLevel)}</span>
+                    <span class="status-badge ${patient.status}">${formatStatus(patient.status)}</span>
+                    <span class="risk-badge ${patient.riskLevel}">${formatRiskLevel(patient.riskLevel)}</span>
                 </section>
             </section>
         </section>
@@ -797,20 +813,18 @@ function openEditPatient(patientId) {
 }
 
 // Toggle patient archive status
-function toggleArchivePatient(patientId) {
+function toggleArchivePatient(patientId, archive) {
     const patientIndex = patients.findIndex(p => p.id === patientId);
     
     if (patientIndex !== -1) {
-        const currentStatus = patients[patientIndex].status;
-        patients[patientIndex].status = currentStatus === 'archived' ? 'active' : 'archived';
+        patients[patientIndex].status = archive ? 'archived' : 'active';
         
         // Update the UI
         loadPatientData();
         updateStats();
         
         // Show notification
-        const newStatus = patients[patientIndex].status;
-        showNotification(`Patient ${newStatus === 'archived' ? 'archived' : 'restored'} successfully!`, 'success');
+        showNotification(`Patient ${archive ? 'archived' : 'restored'} successfully!`, 'success');
     }
 }
 
@@ -891,8 +905,21 @@ function renderTags(tags) {
     
     return tags.map(tag => {
         const tagClass = tag.toLowerCase().replace(/\s+/g, '-');
-        return `<span class="tag tag-${tagClass}">${tag}</span>`;
+        return `<span class="tag ${tagClass}">${formatTagName(tag)}</span>`;
     }).join('');
+}
+
+// Helper function to format tag names for display
+function formatTagName(tag) {
+    const tagMap = {
+        'suicide-risk': 'Suicide Risk',
+        'self-harm': 'Self-Harm',
+        'consent-needed': 'Consent Needed',
+        'treatment-plan': 'Treatment Plan Due',
+        'completed': 'Completed'
+    };
+    
+    return tagMap[tag] || tag;
 }
 
 // Helper function to format date
