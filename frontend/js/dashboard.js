@@ -369,14 +369,22 @@ function initProgressCharts() {
 }
 
 // Load user data
+// ... existing code ...
+
+// Load user data
 function loadUserData() {
-    // In a real app, this would fetch data from an API
-    // For now, we'll use mock data
+    // Get user data from localStorage
+    const userData = JSON.parse(localStorage.getItem('user'));
     
-    // Load user profile
-    const username = localStorage.getItem('username') || 'Anonymous User';
-    const usernameElement = document.querySelector('.username');
-    if (usernameElement) {
+    // Display user's real name if available
+    const usernameElement = document.getElementById('usernameDisplay');
+    if (userData && userData.first_name && userData.last_name) {
+        usernameElement.textContent = `${userData.first_name} ${userData.last_name}`;
+    } else if (userData && userData.first_name) {
+        usernameElement.textContent = userData.first_name;
+    } else {
+        // Fallback to stored username or default
+        const username = localStorage.getItem('username') || 'Anonymous User';
         usernameElement.textContent = username;
     }
     
@@ -388,6 +396,7 @@ function loadUserData() {
     }
 }
 
+// ... rest of the code remains the same ...
 // Show emergency modal
 function showEmergencyModal() {
     const modal = document.getElementById('emergencyModal');
@@ -449,13 +458,13 @@ function showSettingsTab(tabId) {
 function handleQuickAction(action) {
     switch(action) {
         case 'ai-support':
-            navigateToPage('ai-support');
+            navigateToPage('./html/ai-support');
             break;
         case 'mood-log':
-            navigateToPage('mood-tracker');
+            navigateToPage('./html/mood-tracker');
             break;
         case 'breathing':
-            startWellnessTool('breathing');
+            startWellnessTool('./html/breathing');
             break;
         case 'journal':
             startWellnessTool('journal');
@@ -464,7 +473,7 @@ function handleQuickAction(action) {
             startWellnessTool('meditation');
             break;
         case 'community':
-            navigateToPage('community');
+            navigateToPage('./html/community');
             break;
         default:
             console.log('Action not implemented:', action);
@@ -848,7 +857,7 @@ function loadMoodHistory() {
 function startWellnessTool(tool) {
     switch(tool) {
         case 'breathing':
-            alert('Starting breathing exercise...');
+            navigateToPage('./html/wellnrdd-tools')
             // In a real app, this would open a breathing exercise interface
             break;
         case 'meditation':
