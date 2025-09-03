@@ -1,0 +1,559 @@
+<!-- patients.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mentaly - Patient Management</title>
+    <link rel="stylesheet" href="../css/patients.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="top-navbar">
+        <section class="nav-container">
+            <a href="../html/dashboard.html" class="logo-link">
+                <h1 class="logo">Mentaly</h1>
+            </a>
+            
+            <menu class="nav-menu">
+                <li class="nav-item">
+                    <a href="../html/dashboard.html" class="nav-button" data-page="dashboard">
+                        <i class="fas fa-chart-line"></i>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="../html/patients.html" class="nav-button active" data-page="patients">
+                        <i class="fas fa-user-friends"></i>
+                        <span>Patients</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="../html/notes.html" class="nav-button" data-page="notes">
+                        <i class="fas fa-file-medical"></i>
+                        <span>Progress Notes</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="../html/telehealth.html" class="nav-button" data-page="telehealth">
+                        <i class="fas fa-video"></i>
+                        <span>Telehealth</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="../html/messages.html" class="nav-button" data-page="messages">
+                        <i class="fas fa-comments"></i>
+                        <span>Messages</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="../html/tasks.html" class="nav-button" data-page="tasks">
+                        <i class="fas fa-tasks"></i>
+                        <span>Tasks</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="../html/resources.html" class="nav-button" data-page="resources">
+                        <i class="fas fa-book-medical"></i>
+                        <span>Resources</span>
+                    </a>
+                </li>
+            </menu>
+
+            <section class="nav-actions">
+                <button class="emergency-btn" id="emergencyBtn">
+                    <i class="fas fa-phone"></i>
+                    <span>Emergency</span>
+                </button>
+                
+                <section class="accessibility-toggles">
+                    <button class="accessibility-btn" id="fontSizeToggle" title="Increase font size">
+                        <i class="fas fa-text-height"></i>
+                    </button>
+                    <button class="accessibility-btn" id="contrastToggle" title="High contrast mode">
+                        <i class="fas fa-adjust"></i>
+                    </button>
+                </section>
+                
+                <section class="user-profile">
+                    <button class="profile-btn" id="profileBtn">
+                        <figure class="avatar">
+                            <i class="fas fa-user-md"></i>
+                        </figure>
+                        <span class="username">Dr. Sarah Johnson</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                </section>
+                
+                <button class="menu-toggle" id="menuToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </section>
+        </section>
+    </nav>
+
+    <main class="main-content">
+        <header class="content-header">
+            <h1 class="page-title" id="pageTitle">Patient Management</h1>
+            <section class="header-actions">
+                <button class="primary-btn" id="addPatientBtn">
+                    <i class="fas fa-plus"></i>
+                    Add New Patient
+                </button>
+                <time class="date-info">Today, September 2, 2025</time>
+            </section>
+        </header>
+
+        <section class="content-area">
+            <!-- Patient Stats Overview -->
+            <article class="stats-overview">
+                <section class="stat-card">
+                    <figure class="stat-icon">
+                        <i class="fas fa-user-friends"></i>
+                    </figure>
+                    <section class="stat-content">
+                        <h3 class="stat-value" id="totalPatients">47</h3>
+                        <p class="stat-label">Total Patients</p>
+                    </section>
+                </section>
+                
+                <section class="stat-card">
+                    <figure class="stat-icon">
+                        <i class="fas fa-user-clock"></i>
+                    </figure>
+                    <section class="stat-content">
+                        <h3 class="stat-value" id="intakePatients">12</h3>
+                        <p class="stat-label">Intake Process</p>
+                    </section>
+                </section>
+                
+                <section class="stat-card">
+                    <figure class="stat-icon">
+                        <i class="fas fa-user-check"></i>
+                    </figure>
+                    <section class="stat-content">
+                        <h3 class="stat-value" id="activePatients">32</h3>
+                        <p class="stat-label">Active Patients</p>
+                    </section>
+                </section>
+                
+                <section class="stat-card">
+                    <figure class="stat-icon">
+                        <i class="fas fa-user-slash"></i>
+                    </figure>
+                    <section class="stat-content">
+                        <h3 class="stat-value" id="archivedPatients">3</h3>
+                        <p class="stat-label">Archived</p>
+                    </section>
+                </section>
+            </article>
+
+            <!-- Patient Search and Filters -->
+            <article class="card filters-card">
+                <section class="search-section">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="patientSearch" placeholder="Search patients by name, ID, or contact info...">
+                </section>
+                
+                <section class="filters-section">
+                    <section class="filter-group">
+                        <label for="statusFilter">Status</label>
+                        <select id="statusFilter">
+                            <option value="all">All Statuses</option>
+                            <option value="active">Active</option>
+                            <option value="intake">Intake Process</option>
+                            <option value="archived">Archived</option>
+                        </select>
+                    </section>
+                    
+                    <section class="filter-group">
+                        <label for="riskFilter">Risk Level</label>
+                        <select id="riskFilter">
+                            <option value="all">All Risk Levels</option>
+                            <option value="high">High Risk</option>
+                            <option value="medium">Medium Risk</option>
+                            <option value="low">Low Risk</option>
+                        </select>
+                    </section>
+                    
+                    <section class="filter-group">
+                        <label for="tagFilter">Tags</label>
+                        <select id="tagFilter">
+                            <option value="all">All Tags</option>
+                            <option value="suicide-risk">Suicide Risk</option>
+                            <option value="self-harm">Self-Harm Indicators</option>
+                            <option value="consent-needed">Consent Needed</option>
+                            <option value="treatment-plan">Treatment Plan Due</option>
+                        </select>
+                    </section>
+                    
+                    <button class="filter-btn" id="clearFilters">
+                        <i class="fas fa-times"></i>
+                        Clear Filters
+                    </button>
+                </section>
+            </article>
+
+            <!-- Patients List -->
+            <article class="card patients-list-card">
+                <header class="card-header">
+                    <h2>Patients</h2>
+                    <section class="view-options">
+                        <button class="view-option active" data-view="list">
+                            <i class="fas fa-list"></i>
+                        </button>
+                        <button class="view-option" data-view="grid">
+                            <i class="fas fa-th"></i>
+                        </button>
+                    </section>
+                </header>
+                
+                <!-- List View -->
+                <section class="table-container" id="listView">
+                    <table class="patients-table">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Age</th>
+                                <th>Status</th>
+                                <th>Risk Level</th>
+                                <th>Last Session</th>
+                                <th>Tags</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="patientsTableBody">
+                            <!-- Patient rows will be populated by JavaScript -->
+                        </tbody>
+                    </table>
+                </section>
+                
+                <!-- Grid View -->
+                <section class="grid-container" id="gridView" style="display: none;">
+                    <section class="patients-grid" id="patientsGrid">
+                        <!-- Patient cards will be populated by JavaScript -->
+                    </section>
+                </section>
+                
+                <footer class="table-footer">
+                    <p id="showingCount">Showing 0 of 0 patients</p>
+                    <section class="pagination">
+                        <button class="pagination-btn" id="prevPage" disabled>
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+                        <button class="pagination-btn active">1</button>
+                        <button class="pagination-btn">2</button>
+                        <button class="pagination-btn">3</button>
+                        <button class="pagination-btn" id="nextPage">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                    </section>
+                </footer>
+            </article>
+        </section>
+    </main>
+
+    <!-- Patient Profile Modal -->
+    <dialog class="modal" id="patientProfileModal">
+        <article class="modal-content patient-profile-modal">
+            <header class="modal-header">
+                <h2>Patient Profile</h2>
+                <button class="modal-close" id="closePatientModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </header>
+            <section class="modal-body" id="patientProfileContent">
+                <!-- Patient Profile content will be loaded here dynamically -->
+            </section>
+        </article>
+    </dialog>
+
+    <!-- Edit Patient Modal -->
+    <dialog class="modal" id="editPatientModal">
+        <article class="modal-content edit-patient-modal">
+            <header class="modal-header">
+                <h2>Edit Patient</h2>
+                <button class="modal-close" id="closeEditPatientModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </header>
+            <section class="modal-body">
+                <form id="editPatientForm" class="patient-form">
+                    <input type="hidden" id="editPatientId" name="id">
+                    
+                    <section class="form-section">
+                        <h3>Basic Information</h3>
+                        <section class="form-row">
+                            <section class="form-group">
+                                <label for="editFirstName">First Name *</label>
+                                <input type="text" id="editFirstName" name="firstName" required>
+                            </section>
+                            <section class="form-group">
+                                <label for="editLastName">Last Name *</label>
+                                <input type="text" id="editLastName" name="lastName" required>
+                            </section>
+                        </section>
+                        
+                        <section class="form-row">
+                            <section class="form-group">
+                                <label for="editDateOfBirth">Date of Birth *</label>
+                                <input type="date" id="editDateOfBirth" name="dateOfBirth" required>
+                            </section>
+                            <section class="form-group">
+                                <label for="editGender">Gender</label>
+                                <select id="editGender" name="gender">
+                                    <option value="">Select Gender</option>
+                                    <option value="male">Male</option>
+                                    <option value="female">Female</option>
+                                    <option value="non-binary">Non-binary</option>
+                                    <option value="other">Other</option>
+                                    <option value="prefer-not-to-say">Prefer not to say</option>
+                                </select>
+                            </section>
+                        </section>
+                    </section>
+                    
+                    <section class="form-section">
+                        <h3>Contact Information</h3>
+                        <section class="form-row">
+                            <section class="form-group">
+                                <label for="editEmail">Email Address</label>
+                                <input type="email" id="editEmail" name="email">
+                            </section>
+                            <section class="form-group">
+                                <label for="editPhone">Phone Number *</label>
+                                <input type="tel" id="editPhone" name="phone" required>
+                            </section>
+                        </section>
+                        
+                        <section class="form-group">
+                            <label for="editAddress">Address</label>
+                            <input type="text" id="editAddress" name="address">
+                        </section>
+                        
+                        <section class="form-row">
+                            <section class="form-group">
+                                <label for="editCity">City</label>
+                                <input type="text" id="editCity" name="city">
+                            </section>
+                            <section class="form-group">
+                                <label for="editZipCode">ZIP Code</label>
+                                <input type="text" id="editZipCode" name="zipCode">
+                            </section>
+                        </section>
+                    </section>
+                    
+                    <section class="form-section">
+                        <h3>Clinical Information</h3>
+                        <section class="form-group">
+                            <label for="editStatus">Status</label>
+                            <select id="editStatus" name="status">
+                                <option value="active">Active</option>
+                                <option value="intake">Intake Process</option>
+                                <option value="archived">Archived</option>
+                            </select>
+                        </section>
+                        
+                        <section class="form-group">
+                            <label for="editRiskLevel">Risk Level</label>
+                            <select id="editRiskLevel" name="riskLevel">
+                                <option value="low">Low Risk</option>
+                                <option value="medium">Medium Risk</option>
+                                <option value="high">High Risk</option>
+                            </select>
+                        </section>
+                        
+                        <section class="form-group">
+                            <label for="editTags">Tags (Select multiple)</label>
+                            <select id="editTags" name="tags" multiple>
+                                <option value="suicide-risk">Suicide Risk</option>
+                                <option value="self-harm">Self-Harm Indicators</option>
+                                <option value="consent-needed">Consent Needed</option>
+                                <option value="treatment-plan">Treatment Plan Due</option>
+                                <option value="completed">Treatment Completed</option>
+                            </select>
+                        </section>
+                        
+                        <section class="form-group">
+                            <label for="editPresentingProblem">Presenting Problem *</label>
+                            <textarea id="editPresentingProblem" name="presentingProblem" rows="3" required></textarea>
+                        </section>
+                    </section>
+                    
+                    <section class="form-actions">
+                        <button type="button" class="cancel-btn" id="cancelEditPatient">Cancel</button>
+                        <button type="submit" class="save-btn">Save Changes</button>
+                    </section>
+                </form>
+            </section>
+        </article>
+    </dialog>
+
+    <!-- Add Patient Modal -->
+    <dialog class="modal" id="addPatientModal">
+        <article class="modal-content add-patient-modal">
+            <header class="modal-header">
+                <h2>Add New Patient</h2>
+                <button class="modal-close" id="closeAddPatientModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </header>
+            <section class="modal-body">
+                <form id="addPatientForm" class="patient-form">
+                    <section class="form-section">
+                        <h3>Basic Information</h3>
+                        <section class="form-row">
+                            <section class="form-group">
+                                <label for="firstName">First Name *</label>
+                                <input type="text" id="firstName" name="firstName" required>
+                            </section>
+                            <section class="form-group">
+                                <label for="lastName">Last Name *</label>
+                                <input type="text" id="lastName" name="lastName" required>
+                            </section>
+                        </section>
+                        
+                        <section class="form-row">
+                            <section class="form-group">
+                                <label for="dateOfBirth">Date of Birth *</label>
+                                <input type="date" id="dateOfBirth" name="dateOfBirth" required>
+                            </section>
+                            <section class="form-group">
+                                <label for="gender">Gender</label>
+                                <select id="gender" name="gender">
+                                    <option value="">Select Gender</option>
+                                    <option value="male">Male</option>
+                                    <option value="female">Female</option>
+                                    <option value="non-binary">Non-binary</option>
+                                    <option value="other">Other</option>
+                                    <option value="prefer-not-to-say">Prefer not to say</option>
+                                </select>
+                            </section>
+                        </section>
+                    </section>
+                    
+                    <section class="form-section">
+                        <h3>Contact Information</h3>
+                        <section class="form-row">
+                            <section class="form-group">
+                                <label for="email">Email Address</label>
+                                <input type="email" id="email" name="email">
+                            </section>
+                            <section class="form-group">
+                                <label for="phone">Phone Number *</label>
+                                <input type="tel" id="phone" name="phone" required>
+                            </section>
+                        </section>
+                        
+                        <section class="form-group">
+                            <label for="address">Address</label>
+                            <input type="text" id="address" name="address">
+                        </section>
+                        
+                        <section class="form-row">
+                            <section class="form-group">
+                                <label for="city">City</label>
+                                <input type="text" id="city" name="city">
+                            </section>
+                            <section class="form-group">
+                                <label for="zipCode">ZIP Code</label>
+                                <input type="text" id="zipCode" name="zipCode">
+                            </section>
+                        </section>
+                    </section>
+                    
+                    <section class="form-section">
+                        <h3>Initial Assessment</h3>
+                        <section class="form-group">
+                            <label for="referralSource">Referral Source</label>
+                            <select id="referralSource" name="referralSource">
+                                <option value="">Select Source</option>
+                                <option value="self">Self</option>
+                                <option value="physician">Physician</option>
+                                <option value="other-provider">Other Healthcare Provider</option>
+                                <option value="family">Family/Friend</option>
+                                <option value="community">Community Organization</option>
+                            </select>
+                        </section>
+                        
+                        <section class="form-group">
+                            <label for="presentingProblem">Presenting Problem *</label>
+                            <textarea id="presentingProblem" name="presentingProblem" rows="3" required></textarea>
+                        </section>
+                        
+                        <section class="form-group">
+                            <label for="riskLevel">Initial Risk Assessment</label>
+                            <select id="riskLevel" name="riskLevel">
+                                <option value="low">Low Risk</option>
+                                <option value="medium">Medium Risk</option>
+                                <option value="high">High Risk</option>
+                            </select>
+                        </section>
+                        
+                        <section class="form-group">
+                            <label for="tags">Tags (Select multiple)</label>
+                            <select id="tags" name="tags" multiple>
+                                <option value="suicide-risk">Suicide Risk</option>
+                                <option value="self-harm">Self-Harm Indicators</option>
+                                <option value="consent-needed">Consent Needed</option>
+                                <option value="treatment-plan">Treatment Plan Due</option>
+                            </select>
+                        </section>
+                    </section>
+                    
+                    <section class="form-actions">
+                        <button type="button" class="cancel-btn" id="cancelAddPatient">Cancel</button>
+                        <button type="submit" class="save-btn">Save Patient</button>
+                    </section>
+                </form>
+            </section>
+        </article>
+    </dialog>
+
+    <!-- Emergency Modal -->
+    <dialog class="modal" id="emergencyModal">
+        <article class="modal-content emergency-modal">
+            <header class="modal-header">
+                <h2>Emergency Resources</h2>
+                <button class="modal-close" id="closeEmergencyModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </header>
+            <section class="modal-body">
+                <p class="emergency-text">Critical mental health emergency resources for your patients:</p>
+                <section class="emergency-list">
+                    <article class="emergency-item">
+                        <h3>Crisis Hotline</h3>
+                        <p>24/7 Confidential Support</p>
+                        <a href="tel:0800567567" class="emergency-call-link">
+                            <i class="fas fa-phone"></i>
+                            0800 567 567
+                        </a>
+                    </article>
+                    <article class="emergency-item">
+                        <h3>SADAG Helpline</h3>
+                        <p>South African Depression & Anxiety Group</p>
+                        <a href="tel:0800121314" class="emergency-call-link">
+                            <i class="fas fa-phone"></i>
+                            0800 121 314
+                        </a>
+                    </article>
+                    <article class="emergency-item">
+                        <h3>Emergency Services</h3>
+                        <p>Medical Emergency</p>
+                        <a href="tel:10177" class="emergency-call-link">
+                            <i class="fas fa-phone"></i>
+                            10177
+                        </a>
+                    </article>
+                </section>
+                <p class="emergency-note">Quick reference for patient emergencies</p>
+            </section>
+        </article>
+    </dialog>
+
+    <script src="../js/patients.js"></script>
+</body>
+</html>
