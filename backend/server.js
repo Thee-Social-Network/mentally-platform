@@ -321,6 +321,9 @@ app.get('/ai-support', (req, res) => {
   res.sendFile(path.join(__dirname, '../frontend/html/ai-support.html'));
 });
 
+app.get('/ai-notlogged', (req, res) => {
+  res.sendFile(path.join(__dirname, '../frontend/html/ai-notlogged.html'));
+});
 app.get('/mood-tracker', (req, res) => {
   res.sendFile(path.join(__dirname, '../frontend/html/mood-tracker.html'));
 });
