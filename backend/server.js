@@ -769,4 +769,5 @@ app.listen(PORT, () =>{
     connectDB();
     console.log(`Server started on http://localhost:${PORT}`);
     console.log(`AI Configuration: ${process.env.GEMINI_API_KEY ? 'Configured ✅' : 'Missing GEMINI_API_KEY ❌'}`);
+
 });
