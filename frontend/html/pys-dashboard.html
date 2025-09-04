@@ -1,0 +1,483 @@
+<!-- psy-dashboard.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mentaly - Psychologist Dashboard</title>
+    <link rel="stylesheet" href="../css/psy-dashboard.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="top-navbar">
+        <section class="nav-container">
+            <a href="#" class="logo-link">
+                <h1 class="logo">Mentaly</h1>
+            </a>
+            
+            <menu class="nav-menu">
+                <li class="nav-item">
+                    <button class="nav-button active" data-page="psy-dashboard">
+                        <i class="fas fa-chart-line"></i>
+                        <span>Dashboard</span>
+                    </button>
+                </li>
+                <li class="nav-item">
+                    <button class="nav-button" data-page="patients">
+                        <i class="fas fa-user-friends"></i>
+                        <span>Patients</span>
+                    </button>
+                </li>
+                <li class="nav-item">
+                    <button class="nav-button" data-page="notes">
+                        <i class="fas fa-file-medical"></i>
+                        <span>Progress Notes</span>
+                    </button>
+                </li>
+                <li class="nav-item">
+                    <button class="nav-button" data-page="telehealth">
+                        <i class="fas fa-video"></i>
+                        <span>Telehealth</span>
+                    </button>
+                </li>
+                <li class="nav-item">
+                    <button class="nav-button" data-page="messages">
+                        <i class="fas fa-comments"></i>
+                        <span>Messages</span>
+                    </button>
+                </li>
+                <li class="nav-item">
+                    <button class="nav-button" data-page="tasks">
+                        <i class="fas fa-tasks"></i>
+                        <span>Tasks</span>
+                    </button>
+                </li>
+                <li class="nav-item">
+                    <button class="nav-button" data-page="resources">
+                        <i class="fas fa-book-medical"></i>
+                        <span>Resources</span>
+                    </button>
+                </li>
+            </menu>
+
+            <section class="nav-actions">
+                <button class="emergency-btn" id="emergencyBtn">
+                    <i class="fas fa-phone"></i>
+                    <span>Emergency</span>
+                </button>
+                
+                <section class="accessibility-toggles">
+                    <button class="accessibility-btn" id="fontSizeToggle" title="Increase font size">
+                        <i class="fas fa-text-height"></i>
+                    </button>
+                    <button class="accessibility-btn" id="contrastToggle" title="High contrast mode">
+                        <i class="fas fa-adjust"></i>
+                    </button>
+                </section>
+                
+                <section class="user-profile">
+                    <button class="profile-btn" id="profileBtn">
+                        <figure class="avatar">
+                            <i class="fas fa-user-md"></i>
+                        </figure>
+                        <span class="username">Dr. Sarah Johnson</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                </section>
+                
+                <button class="menu-toggle" id="menuToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </section>
+        </section>
+    </nav>
+
+    <main class="main-content">
+        <header class="content-header">
+            <h1 class="page-title" id="pageTitle">My Day</h1>
+            <section class="header-actions">
+                <section class="role-filter">
+                    <button class="filter-btn active" data-filter="my-day">My Day</button>
+                    <button class="filter-btn" data-filter="all">All Clinicians</button>
+                </section>
+                <time class="date-info">Today, September 2, 2025</time>
+            </section>
+        </header>
+
+        <section class="content-area">
+            <!-- Two-column layout -->
+            <article class="dashboard-columns">
+                <!-- Left Column - Today's Sessions -->
+                <section class="column-left">
+                    <article class="card sessions-card">
+                        <header class="card-header">
+                            <h2>Today's Sessions</h2>
+                            <button class="card-action-btn">
+                                <i class="fas fa-ellipsis-h"></i>
+                            </button>
+                        </header>
+                        <section class="sessions-list">
+                            <article class="session-item">
+                                <section class="session-time">
+                                    <time datetime="09:00">9:00 AM</time>
+                                    <span class="session-duration">45 min</span>
+                                </section>
+                                <section class="session-info">
+                                    <h3>Initial Consultation</h3>
+                                    <p>John Doe - Anxiety assessment</p>
+                                    <span class="session-status upcoming">Upcoming</span>
+                                </section>
+                                <section class="session-actions">
+                                    <button class="session-btn join-btn">
+                                        <i class="fas fa-video"></i>
+                                        Join
+                                    </button>
+                                    <button class="session-btn note-btn">
+                                        <i class="fas fa-file-medical"></i>
+                                        Note
+                                    </button>
+                                </section>
+                            </article>
+                            
+                            <article class="session-item">
+                                <section class="session-time">
+                                    <time datetime="10:30">10:30 AM</time>
+                                    <span class="session-duration">45 min</span>
+                                </section>
+                                <section class="session-info">
+                                    <h3>CBT Session</h3>
+                                    <p>Anna Smith - Depression</p>
+                                    <span class="session-status in-progress">In Progress</span>
+                                </section>
+                                <section class="session-actions">
+                                    <button class="session-btn join-btn">
+                                        <i class="fas fa-video"></i>
+                                        Join
+                                    </button>
+                                    <button class="session-btn note-btn">
+                                        <i class="fas fa-file-medical"></i>
+                                        Note
+                                    </button>
+                                </section>
+                            </article>
+                            
+                            <article class="session-item">
+                                <section class="session-time">
+                                    <time datetime="14:00">2:00 PM</time>
+                                    <span class="session-duration">60 min</span>
+                                </section>
+                                <section class="session-info">
+                                    <h3>Group Therapy</h3>
+                                    <p>Anxiety Support Group</p>
+                                    <span class="session-status upcoming">Upcoming</span>
+                                </section>
+                                <section class="session-actions">
+                                    <button class="session-btn join-btn">
+                                        <i class="fas fa-video"></i>
+                                        Join
+                                    </button>
+                                    <button class="session-btn note-btn">
+                                        <i class="fas fa-file-medical"></i>
+                                        Note
+                                    </button>
+                                </section>
+                            </article>
+                            
+                            <article class="session-item">
+                                <section class="session-time">
+                                    <time datetime="16:00">4:00 PM</time>
+                                    <span class="session-duration">30 min</span>
+                                </section>
+                                <section class="session-info">
+                                    <h3>Follow-up</h3>
+                                    <p>Mike Johnson - Progress review</p>
+                                    <span class="session-status upcoming">Upcoming</span>
+                                </section>
+                                <section class="session-actions">
+                                    <button class="session-btn join-btn">
+                                        <i class="fas fa-video"></i>
+                                        Join
+                                    </button>
+                                    <button class="session-btn note-btn">
+                                        <i class="fas fa-file-medical"></i>
+                                        Note
+                                    </button>
+                                </section>
+                            </article>
+                        </section>
+                    </article>
+                </section>
+                
+                <!-- Right Column - Multiple Cards -->
+                <section class="column-right">
+                    <!-- Docs Due Panel -->
+                    <article class="card docs-due-card">
+                        <header class="card-header">
+                            <h2>Documents Due</h2>
+                            <button class="card-action-btn">
+                                <i class="fas fa-ellipsis-h"></i>
+                            </button>
+                        </header>
+                        <section class="docs-list">
+                            <article class="doc-item overdue">
+                                <i class="fas fa-exclamation-circle"></i>
+                                <section class="doc-info">
+                                    <h3>Progress Note - Anna Smith</h3>
+                                    <p>Due yesterday</p>
+                                </section>
+                                <button class="doc-action-btn">Complete</button>
+                            </article>
+                            
+                            <article class="doc-item due-soon">
+                                <i class="fas fa-clock"></i>
+                                <section class="doc-info">
+                                    <h3>Consent Form - John Doe</h3>
+                                    <p>Expires in 3 days</p>
+                                </section>
+                                <button class="doc-action-btn">Review</button>
+                            </article>
+                            
+                            <article class="doc-item due-soon">
+                                <i class="fas fa-clock"></i>
+                                <section class="doc-info">
+                                    <h3>Treatment Plan - Lisa Wilson</h3>
+                                    <p>Due in 2 days</p>
+                                </section>
+                                <button class="doc-action-btn">Update</button>
+                            </article>
+                        </section>
+                    </article>
+                    
+                    <!-- MBC Snapshot -->
+                    <article class="card mbc-card">
+                        <header class="card-header">
+                            <h2>Measurement-Based Care</h2>
+                            <button class="card-action-btn">
+                                <i class="fas fa-ellipsis-h"></i>
+                            </button>
+                        </header>
+                        <section class="mbc-data">
+                            <article class="mbc-item">
+                                <h3>PHQ-9 Scores</h3>
+                                <section class="mbc-progress">
+                                    <section class="progress-bar">
+                                        <section class="progress-fill" style="width: 60%"></section>
+                                    </section>
+                                    <section class="progress-labels">
+                                        <span>Current: 15</span>
+                                        <span class="progress-change negative">
+                                            <i class="fas fa-arrow-down"></i> 3 from last week
+                                        </span>
+                                    </section>
+                                </section>
+                            </article>
+                            
+                            <article class="mbc-item">
+                                <h3>GAD-7 Scores</h3>
+                                <section class="mbc-progress">
+                                    <section class="progress-bar">
+                                        <section class="progress-fill" style="width: 40%"></section>
+                                    </section>
+                                    <section class="progress-labels">
+                                        <span>Current: 10</span>
+                                        <span class="progress-change positive">
+                                            <i class="fas fa-arrow-up"></i> 2 from last week
+                                        </span>
+                                    </section>
+                                </section>
+                            </article>
+                        </section>
+                    </article>
+                    
+                    <!-- Risk Alerts -->
+                    <article class="card risk-card">
+                        <header class="card-header">
+                            <h2>Risk Alerts</h2>
+                            <button class="card-action-btn">
+                                <i class="fas fa-ellipsis-h"></i>
+                            </button>
+                        </header>
+                        <section class="alerts-list">
+                            <article class="alert-item high-risk">
+                                <i class="fas fa-exclamation-triangle"></i>
+                                <section class="alert-info">
+                                    <h3>High Suicide Risk</h3>
+                                    <p>Anna Smith - Reported during last session</p>
+                                </section>
+                                <button class="alert-action-btn">View Safety Plan</button>
+                            </article>
+                            
+                            <article class="alert-item medium-risk">
+                                <i class="fas fa-exclamation-circle"></i>
+                                <section class="alert-info">
+                                    <h3>Self-Harm Indicators</h3>
+                                    <p>John Doe - PHQ-9 question 9 positive</p>
+                                </section>
+                                <button class="alert-action-btn">Assess</button>
+                            </article>
+                        </section>
+                    </article>
+                    
+                    <!-- Task Inbox -->
+                    <article class="card tasks-card">
+                        <header class="card-header">
+                            <h2>Task Inbox</h2>
+                            <button class="card-action-btn">
+                                <i class="fas fa-ellipsis-h"></i>
+                            </button>
+                        </header>
+                        <section class="tasks-list">
+                            <article class="task-item">
+                                <input type="checkbox" id="task1">
+                                <label for="task1">
+                                    <span class="task-title">Complete progress note for Anna Smith</span>
+                                    <span class="task-due">Due today</span>
+                                </label>
+                            </article>
+                            
+                            <article class="task-item">
+                                <input type="checkbox" id="task2">
+                                <label for="task2">
+                                    <span class="task-title">Call Mike Johnson for follow-up</span>
+                                    <span class="task-due">Due tomorrow</span>
+                                </label>
+                            </article>
+                            
+                            <article class="task-item">
+                                <input type="checkbox" id="task3">
+                                <label for="task3">
+                                    <span class="task-title">Send resources to Lisa Wilson</span>
+                                    <span class="task-due">Due in 2 days</span>
+                                </label>
+                            </article>
+                            
+                            <article class="task-item">
+                                <input type="checkbox" id="task4">
+                                <label for="task4">
+                                    <span class="task-title">Review consent forms</span>
+                                    <span class="task-due">Due in 3 days</span>
+                                </label>
+                            </article>
+                        </section>
+                    </article>
+                    
+                    <!-- Intake Pipeline -->
+                    <article class="card intake-card">
+                        <header class="card-header">
+                            <h2>Intake Pipeline</h2>
+                            <button class="card-action-btn">
+                                <i class="fas fa-ellipsis-h"></i>
+                            </button>
+                        </header>
+                        <section class="pipeline-stages">
+                            <section class="pipeline-stage">
+                                <h3>New Requests</h3>
+                                <span class="stage-count">5</span>
+                            </section>
+                            <section class="pipeline-stage">
+                                <h3>Scheduled</h3>
+                                <span class="stage-count">3</span>
+                            </section>
+                            <section class="pipeline-stage">
+                                <h3>Forms Complete</h3>
+                                <span class="stage-count">2</span>
+                            </section>
+                        </section>
+                    </article>
+                    
+                    <!-- Secure Messages -->
+                    <article class="card messages-card">
+                        <header class="card-header">
+                            <h2>Secure Messages</h2>
+                            <button class="card-action-btn">
+                                <i class="fas fa-ellipsis-h"></i>
+                            </button>
+                        </header>
+                        <section class="messages-list">
+                            <article class="message-item unread">
+                                <figure class="message-avatar">
+                                    <i class="fas fa-user"></i>
+                                </figure>
+                                <section class="message-info">
+                                    <h3>Anna Smith</h3>
+                                    <p>I've been struggling with the exercises...</p>
+                                    <time>30 minutes ago</time>
+                                </section>
+                            </article>
+                            
+                            <article class="message-item">
+                                <figure class="message-avatar">
+                                    <i class="fas fa-user"></i>
+                                </figure>
+                                <section class="message-info">
+                                    <h3>John Doe</h3>
+                                    <p>Thank you for the resources!</p>
+                                    <time>2 hours ago</time>
+                                </section>
+                            </article>
+                            
+                            <article class="message-item">
+                                <figure class="message-avatar">
+                                    <i class="fas fa-user-md"></i>
+                                </figure>
+                                <section class="message-info">
+                                    <h3>Dr. Michael Chen</h3>
+                                    <p>Can we discuss the Johnson case?</p>
+                                    <time>Yesterday</time>
+                                </section>
+                            </article>
+                        </section>
+                    </article>
+                </section>
+            </article>
+        </section>
+    </main>
+
+    <!-- Emergency Modal -->
+    <dialog class="modal" id="emergencyModal">
+        <article class="modal-content emergency-modal">
+            <header class="modal-header">
+                <h2>Emergency Resources</h2>
+                <button class="modal-close" id="closeEmergencyModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </header>
+            <section class="modal-body">
+                <p class="emergency-text">Critical mental health emergency resources for your patients:</p>
+                <section class="emergency-list">
+                    <article class="emergency-item">
+                        <h3>Crisis Hotline</h3>
+                        <p>24/7 Confidential Support</p>
+                        <a href="tel:0800567567" class="emergency-call-link">
+                            <i class="fas fa-phone"></i>
+                            0800 567 567
+                        </a>
+                    </article>
+                    <article class="emergency-item">
+                        <h3>SADAG Helpline</h3>
+                        <p>South African Depression & Anxiety Group</p>
+                        <a href="tel:0800121314" class="emergency-call-link">
+                            <i class="fas fa-phone"></i>
+                            0800 121 314
+                        </a>
+                    </article>
+                    <article class="emergency-item">
+                        <h3>Emergency Services</h3>
+                        <p>Medical Emergency</p>
+                        <a href="tel:10177" class="emergency-call-link">
+                            <i class="fas fa-phone"></i>
+                            10177
+                        </a>
+                    </article>
+                </section>
+                <p class="emergency-note">Quick reference for patient emergencies</p>
+            </section>
+        </article>
+    </dialog>
+
+    <script src="../js/psy-dashboard.js"></script>
+    <script src="../js/shared.js"></script>
+</body>
+</html>

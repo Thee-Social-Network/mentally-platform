@@ -1,0 +1,388 @@
+<!-- messages.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mentaly - Secure Messages</title>
+    <link rel="stylesheet" href="../css/messages.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="top-navbar">
+    <section class="nav-container">
+        <a href="../html/pys-dashboard.html" class="logo-link">
+            <h1 class="logo">Mentaly</h1>
+        </a>
+        
+        <menu class="nav-menu">
+            <li class="nav-item">
+                <button class="nav-button" data-page="psy-dashboard" onclick="window.location.href='../html/pys-dashboard.html'">
+                    <i class="fas fa-chart-line"></i>
+                    <span>Dashboard</span>
+                </button>
+            </li>
+            <li class="nav-item">
+                <button class="nav-button active" data-page="patients" onclick="window.location.href='../html/patients.html'">
+                    <i class="fas fa-user-friends"></i>
+                    <span>Patients</span>
+                </button>
+            </li>
+            <li class="nav-item">
+                <button class="nav-button" data-page="notes" onclick="window.location.href='../html/progress-notes.html'">
+                    <i class="fas fa-file-medical"></i>
+                    <span>Progress Notes</span>
+                </button>
+            </li>
+            <li class="nav-item">
+                <button class="nav-button" data-page="telehealth" onclick="window.location.href='../html/telehealth.html'">
+                    <i class="fas fa-video"></i>
+                    <span>Telehealth</span>
+                </button>
+            </li>
+            <li class="nav-item">
+                <button class="nav-button" data-page="messages" onclick="window.location.href='../html/messages.html'">
+                    <i class="fas fa-comments"></i>
+                    <span>Messages</span>
+                </button>
+            </li>
+            <li class="nav-item">
+                <button class="nav-button" data-page="tasks" onclick="window.location.href='../html/tasks.html'">
+                    <i class="fas fa-tasks"></i>
+                    <span>Tasks</span>
+                </button>
+            </li>
+            <li class="nav-item">
+                <button class="nav-button" data-page="resources" onclick="window.location.href='../html/resources.html'">
+                    <i class="fas fa-book-medical"></i>
+                    <span>Resources</span>
+                </button>
+            </li>
+        </menu>
+
+        <section class="nav-actions">
+            <button class="emergency-btn" id="emergencyBtn">
+                <i class="fas fa-phone"></i>
+                <span>Emergency</span>
+            </button>
+            
+            <section class="accessibility-toggles">
+                <button class="accessibility-btn" id="fontSizeToggle" title="Increase font size">
+                    <i class="fas fa-text-height"></i>
+                </button>
+                <button class="accessibility-btn" id="contrastToggle" title="High contrast mode">
+                    <i class="fas fa-adjust"></i>
+                </button>
+            </section>
+            
+            <section class="user-profile">
+                <button class="profile-btn" id="profileBtn">
+                    <figure class="avatar">
+                        <i class="fas fa-user-md"></i>
+                    </figure>
+                    <span class="username">Dr. Sarah Johnson</span>
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+            </section>
+            
+            <button class="menu-toggle" id="menuToggle">
+                <i class="fas fa-bars"></i>
+            </button>
+        </section>
+    </section>
+</nav>
+
+    <main class="main-content">
+        <header class="content-header">
+            <h1 class="page-title" id="pageTitle">Secure Messages</h1>
+            <section class="header-actions">
+                <button class="primary-btn" id="newMessageBtn">
+                    <i class="fas fa-plus"></i>
+                    New Message
+                </button>
+                <time class="date-info">Today, September 2, 2025</time>
+            </section>
+        </header>
+
+        <section class="content-area">
+            <!-- Messages Layout -->
+            <article class="messages-layout">
+                <!-- Conversations Sidebar -->
+                <aside class="conversations-sidebar">
+                    <section class="search-section">
+                        <i class="fas fa-search"></i>
+                        <input type="text" id="conversationSearch" placeholder="Search conversations...">
+                    </section>
+                    
+                    <section class="filters-section">
+                        <section class="filter-group">
+                            <label for="patientFilter">Filter by Patient</label>
+                            <select id="patientFilter">
+                                <option value="all">All Patients</option>
+                                <option value="anna-smith">Anna Smith</option>
+                                <option value="john-doe">John Doe</option>
+                                <option value="mike-johnson">Mike Johnson</option>
+                                <option value="lisa-wilson">Lisa Wilson</option>
+                            </select>
+                        </section>
+                        
+                        <section class="filter-group">
+                            <label for="dateFilter">Filter by Date</label>
+                            <select id="dateFilter">
+                                <option value="all">All Dates</option>
+                                <option value="today">Today</option>
+                                <option value="week">This Week</option>
+                                <option value="month">This Month</option>
+                            </select>
+                        </section>
+                        
+                        <button class="filter-btn" id="clearFilters">
+                            <i class="fas fa-times"></i>
+                            Clear Filters
+                        </button>
+                    </section>
+                    
+                    <section class="conversations-list" id="conversationsList">
+                        <!-- Conversation items will be populated by JavaScript -->
+                    </section>
+                </aside>
+                
+                <!-- Messages Main Area -->
+                <section class="messages-main">
+                    <article class="card conversation-card" id="conversationCard">
+                        <header class="conversation-header" id="conversationHeader">
+                            <section class="conversation-info">
+                                <figure class="conversation-avatar">
+                                    <i class="fas fa-user"></i>
+                                </figure>
+                                <section class="conversation-details">
+                                    <h2 id="conversationTitle">Select a conversation</h2>
+                                    <p id="conversationSubtitle">Choose a conversation from the sidebar to view messages</p>
+                                </section>
+                            </section>
+                            <section class="conversation-actions">
+                                <button class="action-btn archive-conversation-btn" id="archiveConversationBtn" title="Archive Conversation">
+                                    <i class="fas fa-archive"></i>
+                                </button>
+                                <button class="action-btn more-options-btn" id="moreOptionsBtn" title="More Options">
+                                    <i class="fas fa-ellipsis-h"></i>
+                                </button>
+                            </section>
+                        </header>
+                        
+                        <section class="messages-container" id="messagesContainer">
+                            <!-- Messages will be populated by JavaScript -->
+                            <section class="no-conversation-selected">
+                                <i class="fas fa-comments"></i>
+                                <h3>Select a conversation to start messaging</h3>
+                                <p>Your secure messages will appear here</p>
+                            </section>
+                        </section>
+                        
+                        <footer class="message-input-container" id="messageInputContainer">
+                            <section class="message-input-actions">
+                                <button class="action-btn attach-btn" id="attachBtn" title="Attach File">
+                                    <i class="fas fa-paperclip"></i>
+                                </button>
+                                <button class="action-btn task-btn" id="convertToTaskBtn" title="Convert to Task" disabled>
+                                    <i class="fas fa-tasks"></i>
+                                </button>
+                            </section>
+                            <section class="message-input">
+                                <textarea id="messageText" placeholder="Type your message here..." disabled></textarea>
+                            </section>
+                            <button class="send-btn" id="sendBtn" disabled>
+                                <i class="fas fa-paper-plane"></i>
+                            </button>
+                        </footer>
+                    </article>
+                </section>
+            </article>
+        </section>
+    </main>
+
+    <!-- New Message Modal -->
+    <dialog class="modal" id="newMessageModal">
+        <article class="modal-content new-message-modal">
+            <header class="modal-header">
+                <h2>New Message</h2>
+                <button class="modal-close" id="closeNewMessageModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </header>
+            <section class="modal-body">
+                <form id="newMessageForm" class="message-form">
+                    <section class="form-group">
+                        <label for="recipientSelect">Recipient</label>
+                        <select id="recipientSelect" required>
+                            <option value="">Select a recipient</option>
+                            <option value="anna-smith">Anna Smith</option>
+                            <option value="john-doe">John Doe</option>
+                            <option value="mike-johnson">Mike Johnson</option>
+                            <option value="lisa-wilson">Lisa Wilson</option>
+                            <option value="dr-chen">Dr. Michael Chen</option>
+                        </select>
+                    </section>
+                    
+                    <section class="form-group">
+                        <label for="messageSubject">Subject</label>
+                        <input type="text" id="messageSubject" placeholder="Enter message subject">
+                    </section>
+                    
+                    <section class="form-group">
+                        <label for="newMessageText">Message</label>
+                        <textarea id="newMessageText" rows="5" placeholder="Type your message here..." required></textarea>
+                    </section>
+                    
+                    <section class="form-group">
+                        <label for="messageAttachments">Attachments</label>
+                        <input type="file" id="messageAttachments" multiple>
+                        <p class="help-text">You can attach multiple files (max 5MB each)</p>
+                    </section>
+                    
+                    <section class="form-actions">
+                        <button type="button" class="cancel-btn" id="cancelNewMessage">Cancel</button>
+                        <button type="submit" class="save-btn">Send Message</button>
+                    </section>
+                </form>
+            </section>
+        </article>
+    </dialog>
+
+    <!-- Auto-Reply Settings Modal -->
+    <dialog class="modal" id="autoReplyModal">
+        <article class="modal-content auto-reply-modal">
+            <header class="modal-header">
+                <h2>Auto-Reply Settings</h2>
+                <button class="modal-close" id="closeAutoReplyModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </header>
+            <section class="modal-body">
+                <form id="autoReplyForm" class="auto-reply-form">
+                    <section class="form-group toggle-group">
+                        <label class="toggle-label">
+                            <input type="checkbox" id="autoReplyEnabled">
+                            <span class="toggle-slider"></span>
+                            Enable Auto-Reply
+                        </label>
+                    </section>
+                    
+                    <section class="form-group">
+                        <label for="autoReplyMessage">Auto-Reply Message</label>
+                        <textarea id="autoReplyMessage" rows="4" placeholder="Your automatic reply message..." disabled></textarea>
+                    </section>
+                    
+                    <section class="form-group">
+                        <label for="autoReplyStart">Start Date</label>
+                        <input type="datetime-local" id="autoReplyStart" disabled>
+                    </section>
+                    
+                    <section class="form-group">
+                        <label for="autoReplyEnd">End Date</label>
+                        <input type="datetime-local" id="autoReplyEnd" disabled>
+                    </section>
+                    
+                    <section class="form-actions">
+                        <button type="button" class="cancel-btn" id="cancelAutoReply">Cancel</button>
+                        <button type="submit" class="save-btn" disabled>Save Settings</button>
+                    </section>
+                </form>
+            </section>
+        </article>
+    </dialog>
+
+    <!-- Convert to Task Modal -->
+    <dialog class="modal" id="convertToTaskModal">
+        <article class="modal-content convert-task-modal">
+            <header class="modal-header">
+                <h2>Convert to Task</h2>
+                <button class="modal-close" id="closeConvertTaskModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </header>
+            <section class="modal-body">
+                <form id="convertToTaskForm" class="task-form">
+                    <input type="hidden" id="messageIdForTask">
+                    
+                    <section class="form-group">
+                        <label for="taskTitle">Task Title</label>
+                        <input type="text" id="taskTitle" required>
+                    </section>
+                    
+                    <section class="form-group">
+                        <label for="taskDescription">Description</label>
+                        <textarea id="taskDescription" rows="3"></textarea>
+                    </section>
+                    
+                    <section class="form-group">
+                        <label for="taskDueDate">Due Date</label>
+                        <input type="date" id="taskDueDate">
+                    </section>
+                    
+                    <section class="form-group">
+                        <label for="taskPriority">Priority</label>
+                        <select id="taskPriority">
+                            <option value="low">Low</option>
+                            <option value="medium" selected>Medium</option>
+                            <option value="high">High</option>
+                        </select>
+                    </section>
+                    
+                    <section class="form-actions">
+                        <button type="button" class="cancel-btn" id="cancelConvertTask">Cancel</button>
+                        <button type="submit" class="save-btn">Create Task</button>
+                    </section>
+                </form>
+            </section>
+        </article>
+    </dialog>
+
+    <!-- Emergency Modal -->
+    <dialog class="modal" id="emergencyModal">
+        <article class="modal-content emergency-modal">
+            <header class="modal-header">
+                <h2>Emergency Resources</h2>
+                <button class="modal-close" id="closeEmergencyModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </header>
+            <section class="modal-body">
+                <p class="emergency-text">Critical mental health emergency resources for your patients:</p>
+                <section class="emergency-list">
+                    <article class="emergency-item">
+                        <h3>Crisis Hotline</h3>
+                        <p>24/7 Confidential Support</p>
+                        <a href="tel:0800567567" class="emergency-call-link">
+                            <i class="fas fa-phone"></i>
+                            0800 567 567
+                        </a>
+                    </article>
+                    <article class="emergency-item">
+                        <h3>SADAG Helpline</h3>
+                        <p>South African Depression & Anxiety Group</p>
+                        <a href="tel:0800121314" class="emergency-call-link">
+                            <i class="fas fa-phone"></i>
+                            0800 121 314
+                        </a>
+                    </article>
+                    <article class="emergency-item">
+                        <h3>Emergency Services</h3>
+                        <p>Medical Emergency</p>
+                        <a href="tel:10177" class="emergency-call-link">
+                            <i class="fas fa-phone"></i>
+                            10177
+                        </a>
+                    </article>
+                </section>
+                <p class="emergency-note">Quick reference for patient emergencies</p>
+            </section>
+        </article>
+    </dialog>
+
+    <script src="../js/messages.js"></script>
+    <script src="../js/shared.js"></script>
+</body>
+</html>

@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notifications - Mentaly</title>
+    <link rel="stylesheet" href="../css/dashboard.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        /* Additional styles specific to notifications page */
+        .notifications-container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .notifications-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--glass-border);
+        }
+        
+        .notifications-title {
+            font-size: 1.8rem;
+            color: var(--white);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        
+        .notifications-actions {
+            display: flex;
+            gap: 0.75rem;
+        }
+        
+        .filter-btn, .mark-all-read-btn {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            color: rgba(255, 255, 255, 0.8);
+            padding: 0.5rem 1rem;
+            border-radius: var(--border-radius-sm);
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 0.9rem;
+            backdrop-filter: var(--glass-backdrop);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .filter-btn:hover, .filter-btn.active, 
+        .mark-all-read-btn:hover {
+            background: rgba(253, 187, 48, 0.1);
+            color: var(--primary-gold);
+            border-color: var(--primary-gold);
+        }
+        
+        .notification-filters {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .notification-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        
+        .notification-item {
+            background: var(--glass-bg);
+            backdrop-filter: var(--glass-backdrop);
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            box-shadow: var(--glass-shadow);
+            border: 1px solid var(--glass-border);
+            transition: var(--transition);
+            position: relative;
+        }
+        
+        .notification-item.unread {
+            border-left: 4px solid var(--primary-gold);
+            background: rgba(253, 187, 48, 0.05);
+        }
+        
+        .notification-item:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-md);
+        }
+        
+        .notification-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 0.75rem;
+        }
+        
+        .patient-info {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        
+        .patient-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(253, 187, 48, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-gold);
+            font-weight: 600;
+            flex-shrink: 0;
+        }
+        
+        .patient-details h3 {
+            font-size: 1.1rem;
+            color: var(--white);
+            margin-bottom: 0.25rem;
+        }
+        
+        .contact-method {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.85rem;
+        }
+        
+        .contact-method i {
+            color: var(--primary-gold);
+        }
+        
+        .notification-meta {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 0.5rem;
+        }
+        
+        .notification-time {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.8rem;
+        }
+        
+        .urgency-badge {
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+        
+        .urgency-high {
+            background: rgba(245, 101, 101, 0.2);
+            color: #F56565;
+        }
+        
+        .urgency-medium {
+            background: rgba(246, 173, 85, 0.2);
+            color: #F6AD55;
+        }
+        
+        .urgency-low {
+            background: rgba(72, 187, 120, 0.2);
+            color: #48BB78;
+        }
+        
+        .notification-content {
+            margin-bottom: 1rem;
+        }
+        
+        .notification-message {
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 1.5;
+            margin-bottom: 1rem;
+        }
+        
+        .booking-details {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 1rem;
+            border-radius: var(--border-radius-sm);
+            margin-bottom: 1rem;
+        }
+        
+        .booking-title {
+            font-weight: 600;
+            color: var(--white);
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .booking-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 0.75rem;
+        }
+        
+        .booking-detail {
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+        }
+        
+        .booking-label {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.8rem;
+        }
+        
+        .booking-value {
+            color: var(--white);
+            font-weight: 500;
+        }
+        
+        .notification-actions {
+            display: flex;
+            gap: 0.75rem;
+            justify-content: flex-end;
+        }
+        
+        .action-btn {
+            padding: 0.5rem 1rem;
+            border-radius: var(--border-radius-sm);
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .accept-btn {
+            background: var(--primary-gold);
+            color: var(--primary-navy);
+            border: none;
+        }
+        
+        .accept-btn:hover {
+            background: #FFD700;
+        }
+        
+        .decline-btn {
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: rgba(255, 255, 255, 0.8);
+        }
+        
+        .decline-btn:hover {
+            background: rgba(245, 101, 101, 0.1);
+            border-color: #F56565;
+            color: #F56565;
+        }
+        
+        .view-btn {
+            background: transparent;
+            border: 1px solid var(--glass-border);
+            color: rgba(255, 255, 255, 0.8);
+        }
+        
+        .view-btn:hover {
+            background: rgba(253, 187, 48, 0.1);
+            border-color: var(--primary-gold);
+            color: var(--primary-gold);
+        }
+        
+        .empty-state {
+            text-align: center;
+            padding: 3rem 1rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        .empty-state i {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: var(--primary-gold);
+        }
+        
+        .empty-state h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--white);
+        }
+        
+        @media (max-width: 768px) {
+            .notifications-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+            
+            .notifications-actions {
+                width: 100%;
+                justify-content: space-between;
+            }
+            
+            .notification-header {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .notification-meta {
+                flex-direction: row;
+                align-items: center;
+                width: 100%;
+                justify-content: space-between;
+            }
+            
+            .booking-info {
+                grid-template-columns: 1fr;
+            }
+            
+            .notification-actions {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .action-btn {
+                flex: 1;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Top Navigation Bar -->
+    <nav class="top-navbar">
+        <section class="nav-container">
+            <a href="../html/landing.html" class="logo-link">
+                <h1 class="logo">Mentaly</h1>
+            </a>
+            
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <button class="nav-button" data-page="../html/dashboard">
+                        <i class="fas fa-chart-line"></i>
+                        <span>Dashboard</span>
+                    </button>
+                </li>
+                <li class="nav-item">
+                    <button class="nav-button" data-page="../html/ai-support">
+                        <i class="fas fa-robot"></i>
+                        <span>AI Support</span>
+                    </button>
+                </li>
+                <li class="nav-item">
+                    <button class="nav-button" data-page="../html/mood-tracker">
+                        <i class="fas fa-heart"></i>
+                        <span>Mood Tracker</span>
+                    </button>
+                </li>
+                <li class="nav-item">
+                    <button class="nav-button" data-page="../html/community">
+                        <i class="fas fa-users"></i>
+                        <span>Community</span>
+                    </button>
+                </li>
+                <li class="nav-item">
+                    <button class="nav-button" data-page="../html/pys-dashboard">
+                        <i class="fas fa-users"></i>
+                        <span>Prof Dashboard</span>
+                    </button>
+                </li>
+                <li class="nav-item">
+                    <button class="nav-button" data-page="../html/wellness-tools">
+                        <i class="fas fa-leaf"></i>
+                        <span>Wellness Tools</span>
+                    </button>
+                </li>
+                <li class="nav-item">
+                    <button class="nav-button" data-page="../html/professionals">
+                        <i class="fas fa-user-md"></i>
+                        <span>Find Help</span>
+                    </button>
+                </li>
+                <li class="nav-item">
+                    <button class="nav-button" data-page="../html/progress">
+                        <i class="fas fa-trophy"></i>
+                        <span>Progress</span>
+                    </button>
+                </li>
+            </ul>
+
+            <section class="nav-actions">
+                <button class="emergency-btn" id="dashboardEmergencyBtn">
+                    <i class="fas fa-phone"></i>
+                    <span>Emergency</span>
+                </button>
+                
+                <a href="notification.html" class="notification-btn" id="notificationBtn">
+                    <i class="fas fa-bell"></i>
+                    <span class="notification-badge">3</span>
+                </a>
+                
+                <section class="user-profile">
+                    <button class="profile-btn" id="profileBtn">
+                        <figure class="avatar">
+                            <i class="fas fa-user"></i>
+                        </figure>
+                        <span class="username" id="usernameDisplay">Anonymous User</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                </section>
+                
+                <button class="settings-btn" id="settingsBtn">
+                    <i class="fas fa-cog"></i>
+                </button>
+                
+                <button class="menu-toggle" id="menuToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </section>
+        </section>
+    </nav>
+
+    <main class="main-content">
+        <div class="notifications-container">
+            <div class="notifications-header">
+                <h1 class="notifications-title">
+                    <i class="fas fa-bell"></i>
+                    Notifications
+                </h1>
+                <div class="notifications-actions">
+                    <button class="filter-btn" id="filterBtn">
+                        <i class="fas fa-filter"></i>
+                        Filter
+                    </button>
+                    <button class="mark-all-read-btn" id="markAllReadBtn">
+                        <i class="fas fa-check-double"></i>
+                        Mark all as read
+                    </button>
+                </div>
+            </div>
+
+            <div class="notification-filters" id="notificationFilters" style="display: none;">
+                <button class="filter-btn active">All</button>
+                <button class="filter-btn">Unread</button>
+                <button class="filter-btn">Appointments</button>
+                <button class="filter-btn">Messages</button>
+                <button class="filter-btn">High Priority</button>
+            </div>
+
+            <div class="notification-list" id="notificationList">
+                <!-- Notification 1 -->
+                <div class="notification-item unread">
+                    <div class="notification-header">
+                        <div class="patient-info">
+                            <div class="patient-avatar">JS</div>
+                            <div class="patient-details">
+                                <h3>John Smith</h3>
+                                <div class="contact-method">
+                                    <i class="fas fa-comment"></i>
+                                    <span>Message</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="notification-meta">
+                            <span class="notification-time">10 minutes ago</span>
+                            <span class="urgency-badge urgency-high">High Urgency</span>
+                        </div>
+                    </div>
+                    <div class="notification-content">
+                        <p class="notification-message">
+                            "I'm experiencing increased anxiety and panic attacks since yesterday. I would really appreciate if we could schedule an emergency session as soon as possible."
+                        </p>
+                        <div class="booking-details">
+                            <div class="booking-title">
+                                <i class="fas fa-calendar-alt"></i>
+                                <span>Booking Request</span>
+                            </div>
+                            <div class="booking-info">
+                                <div class="booking-detail">
+                                    <span class="booking-label">Preferred Date</span>
+                                    <span class="booking-value">Tomorrow, 10:00 AM</span>
+                                </div>
+                                <div class="booking-detail">
+                                    <span class="booking-label">Duration</span>
+                                    <span class="booking-value">60 minutes</span>
+                                </div>
+                                <div class="booking-detail">
+                                    <span class="booking-label">Mode</span>
+                                    <span class="booking-value">Video Call</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="notification-actions">
+                        <button class="action-btn accept-btn">
+                            <i class="fas fa-check"></i>
+                            Accept
+                        </button>
+                        <button class="action-btn decline-btn">
+                            <i class="fas fa-times"></i>
+                            Decline
+                        </button>
+                        <button class="action-btn view-btn">
+                            <i class="fas fa-eye"></i>
+                            View Details
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Notification 2 -->
+                <div class="notification-item unread">
+                    <div class="notification-header">
+                        <div class="patient-info">
+                            <div class="patient-avatar">EM</div>
+                            <div class="patient-details">
+                                <h3>Emma Miller</h3>
+                                <div class="contact-method">
+                                    <i class="fas fa-phone"></i>
+                                    <span>Phone Call Request</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="notification-meta">
+                            <span class="notification-time">2 hours ago</span>
+                            <span class="urgency-badge urgency-medium">Medium Urgency</span>
+                        </div>
+                    </div>
+                    <div class="notification-content">
+                        <p class="notification-message">
+                            "Following up on our last session, I've been practicing the breathing techniques but still struggling with sleep. Can we have a brief check-in call this week?"
+                        </p>
+                        <div class="booking-details">
+                            <div class="booking-title">
+                                <i class="fas fa-clock"></i>
+                                <span>Call Request</span>
+                            </div>
+                            <div class="booking-info">
+                                <div class="booking-detail">
+                                    <span class="booking-label">Preferred Time</span>
+                                    <span class="booking-value">Thursday, 3:00 PM - 5:00 PM</span>
+                                </div>
+                                <div class="booking-detail">
+                                    <span class="booking-label">Duration</span>
+                                    <span class="booking-value">15-20 minutes</span>
+                                </div>
+                                <div class="booking-detail">
+                                    <span class="booking-label">Contact</span>
+                                    <span class="booking-value">+1 (555) 123-4567</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="notification-actions">
+                        <button class="action-btn accept-btn">
+                            <i class="fas fa-phone"></i>
+                            Call Back
+                        </button>
+                        <button class="action-btn decline-btn">
+                            <i class="fas fa-times"></i>
+                            Decline
+                        </button>
+                        <button class="action-btn view-btn">
+                            <i class="fas fa-eye"></i>
+                            View Details
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Notification 3 -->
+                <div class="notification-item">
+                    <div class="notification-header">
+                        <div class="patient-info">
+                            <div class="patient-avatar">RJ</div>
+                            <div class="patient-details">
+                                <h3>Robert Johnson</h3>
+                                <div class="contact-method">
+                                    <i class="fas fa-video"></i>
+                                    <span>Session Reminder</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="notification-meta">
+                            <span class="notification-time">5 hours ago</span>
+                            <span class="urgency-badge urgency-low">Low Urgency</span>
+                        </div>
+                    </div>
+                    <div class="notification-content">
+                        <p class="notification-message">
+                            "Friendly reminder about our scheduled session tomorrow. I've completed the mood journal you suggested and would like to discuss it."
+                        </p>
+                        <div class="booking-details">
+                            <div class="booking-title">
+                                <i class="fas fa-calendar-check"></i>
+                                <span>Confirmed Appointment</span>
+                            </div>
+                            <div class="booking-info">
+                                <div class="booking-detail">
+                                    <span class="booking-label">Date & Time</span>
+                                    <span class="booking-value">Tomorrow, 2:00 PM</span>
+                                </div>
+                                <div class="booking-detail">
+                                    <span class="booking-label">Duration</span>
+                                    <span class="booking-value">45 minutes</span>
+                                </div>
+                                <div class="booking-detail">
+                                    <span class="booking-label">Mode</span>
+                                    <span class="booking-value">Video Conference</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="notification-actions">
+                        <button class="action-btn accept-btn">
+                            <i class="fas fa-check"></i>
+                            Confirm
+                        </button>
+                        <button class="action-btn decline-btn">
+                            <i class="fas fa-times"></i>
+                            Reschedule
+                        </button>
+                        <button class="action-btn view-btn">
+                            <i class="fas fa-eye"></i>
+                            View Details
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Notification 4 -->
+                <div class="notification-item">
+                    <div class="notification-header">
+                        <div class="patient-info">
+                            <div class="patient-avatar">SD</div>
+                            <div class="patient-details">
+                                <h3>Sarah Davis</h3>
+                                <div class="contact-method">
+                                    <i class="fas fa-envelope"></i>
+                                    <span>Email Message</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="notification-meta">
+                            <span class="notification-time">Yesterday</span>
+                            <span class="urgency-badge urgency-medium">Medium Urgency</span>
+                        </div>
+                    </div>
+                    <div class="notification-content">
+                        <p class="notification-message">
+                            "I wanted to share that I've had a breakthrough with the cognitive restructuring techniques we discussed. However, I'm now facing challenges with implementing them in social situations. Could we focus on this in our next session?"
+                        </p>
+                        <div class="booking-details">
+                            <div class="booking-title">
+                                <i class="fas fa-calendar-plus"></i>
+                                <span>Session Topic Request</span>
+                            </div>
+                            <div class="booking-info">
+                                <div class="booking-detail">
+                                    <span class="booking-label">Next Session</span>
+                                    <span class="booking-value">Friday, 11:00 AM</span>
+                                </div>
+                                <div class="booking-detail">
+                                    <span class="booking-label">Focus Area</span>
+                                    <span class="booking-value">Social Anxiety</span>
+                                </div>
+                                <div class="booking-detail">
+                                    <span class="booking-label">Contact</span>
+                                    <span class="booking-value">sarah.d@email.com</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="notification-actions">
+                        <button class="action-btn accept-btn">
+                            <i class="fas fa-reply"></i>
+                            Reply
+                        </button>
+                        <button class="action-btn view-btn">
+                            <i class="fas fa-eye"></i>
+                            View Message
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Load user data
+            const userData = JSON.parse(localStorage.getItem('user'));
+            const usernameElement = document.getElementById('usernameDisplay');
+            if (userData && userData.first_name && userData.last_name) {
+                usernameElement.textContent = `${userData.first_name} ${userData.last_name}`;
+            } else if (userData && userData.first_name) {
+                usernameElement.textContent = userData.first_name;
+            }
+
+            // Toggle filter visibility
+            const filterBtn = document.getElementById('filterBtn');
+            const notificationFilters = document.getElementById('notificationFilters');
+            
+            filterBtn.addEventListener('click', function() {
+                notificationFilters.style.display = notificationFilters.style.display === 'none' ? 'flex' : 'none';
+            });
+
+            // Mark all as read
+            const markAllReadBtn = document.getElementById('markAllReadBtn');
+            markAllReadBtn.addEventListener('click', function() {
+                const unreadNotifications = document.querySelectorAll('.notification-item.unread');
+                unreadNotifications.forEach(notification => {
+                    notification.classList.remove('unread');
+                });
+                
+                // Update badge count (in a real app, this would update via API)
+                const badge = document.querySelector('.notification-badge');
+                badge.textContent = '0';
+                
+                // Show confirmation
+                alert('All notifications marked as read');
+            });
+
+            // Filter functionality
+            const filterButtons = document.querySelectorAll('.notification-filters .filter-btn');
+            filterButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // Remove active class from all buttons
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    // Add active class to clicked button
+                    this.classList.add('active');
+                    
+                    // In a real app, this would filter the notifications
+                    // For this example, we'll just show a message
+                    const filterText = this.textContent.trim();
+                    alert(`Filtering by: ${filterText}`);
+                });
+            });
+
+            // Handle notification actions
+            const actionButtons = document.querySelectorAll('.action-btn');
+            actionButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const action = this.textContent.trim();
+                    alert(`Action: ${action} clicked`);
+                    
+                    // If it's an accept action, mark as read
+                    if (this.classList.contains('accept-btn')) {
+                        this.closest('.notification-item').classList.remove('unread');
+                    }
+                });
+            });
+
+            // Navigation
+            const navButtons = document.querySelectorAll('.nav-button');
+            navButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const page = this.getAttribute('data-page');
+                    window.location.href = `${page}.html`;
+                });
+            });
+        });
+    </script>
+</body>
+</html>
