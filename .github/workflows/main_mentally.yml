@@ -24,23 +24,23 @@ jobs:
           npm install
           npm run build --if-present
 
-      - name: Create web.config
+      - name: Create web.config with correct server path
         run: |
           echo '<?xml version="1.0" encoding="utf-8"?>' > web.config
           echo '<configuration>' >> web.config
           echo '  <system.webServer>' >> web.config
           echo '    <handlers>' >> web.config
-          echo '      <add name="iisnode" path="src/server.js" verb="*" modules="iisnode" />' >> web.config
+          echo '      <add name="iisnode" path="backend/server.js" verb="*" modules="iisnode" />' >> web.config
           echo '    </handlers>' >> web.config
           echo '    <rewrite>' >> web.config
           echo '      <rules>' >> web.config
           echo '        <rule name="nodejs">' >> web.config
           echo '          <match url="/*" />' >> web.config
-          echo '          <action type="Rewrite" url="src/server.js" />' >> web.config
+          echo '          <action type="Rewrite" url="backend/server.js" />' >> web.config
           echo '        </rule>' >> web.config
           echo '      </rules>' >> web.config
           echo '    </rewrite>' >> web.config
-          echo '    <iisnode watchedFiles=".js;node_modules\;routes\.js;views\.js" />' >> web.config
+          echo '    <iisnode nodeProcessCommandLine="%ProgramFiles%\nodejs\node.exe" nodeEnv="production" interceptor="&quot;%programfiles%\iisnode\interceptor.js&quot;" />' >> web.config
           echo '  </system.webServer>' >> web.config
           echo '</configuration>' >> web.config
 
@@ -54,8 +54,21 @@ jobs:
           echo "GOOGLE_CLIENT_SECRET=${{ secrets.GOOGLE_CLIENT_SECRET }}" >> .env
           echo "GOOGLE_CALLBACK_URL=https://mentally.azurewebsites.net/auth/google/callback" >> .env
           echo "BASE_URL=https://mentally.azurewebsites.net" >> .env
-          echo "PORT=3000" >> .env
+          echo "PORT=8080" >> .env
           echo "NODE_ENV=production" >> .env
+
+      - name: Create startup script for Azure
+        run: |
+          echo '#!/bin/bash' > startup.sh
+          echo '# Exit on error' >> startup.sh
+          echo 'set -e' >> startup.sh
+          echo '' >> startup.sh
+          echo '# Install dependencies' >> startup.sh
+          echo 'npm install' >> startup.sh
+          echo '' >> startup.sh
+          echo '# Start the application' >> startup.sh
+          echo 'node backend/server.js' >> startup.sh
+          chmod +x startup.sh
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
@@ -84,7 +97,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: deploy
     permissions:
-      contents: write  # Required to create releases
+      contents: write
     steps:
       - name: Download artifact from build job
         uses: actions/download-artifact@v4
