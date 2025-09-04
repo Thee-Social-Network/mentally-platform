@@ -19,10 +19,8 @@ jobs:
         with:
           node-version: '20.x'
 
-      - name: npm install and build
-        run: |
-          npm install
-          npm run build --if-present
+      - name: npm install
+        run: npm install
 
       - name: Create web.config
         run: |
@@ -40,7 +38,16 @@ jobs:
           echo '        </rule>' >> web.config
           echo '      </rules>' >> web.config
           echo '    </rewrite>' >> web.config
-          echo '    <iisnode watchedFiles=".js;node_modules\;routes\.js;views\.js" />' >> web.config
+          echo '    <iisnode watchedFiles=".js;node_modules\;routes\.js;views\.js" nodeProcessCommandLine="node --max-old-space-size=4096" loggingEnabled="true" debuggingEnabled="false" devErrorsEnabled="true" />' >> web.config
+          echo '    <staticContent>' >> web.config
+          echo '      <mimeMap fileExtension=".json" mimeType="application/json" />' >> web.config
+          echo '      <mimeMap fileExtension=".css" mimeType="text/css" />' >> web.config
+          echo '      <mimeMap fileExtension=".js" mimeType="application/javascript" />' >> web.config
+          echo '      <mimeMap fileExtension=".svg" mimeType="image/svg+xml" />' >> web.config
+          echo '      <mimeMap fileExtension=".woff" mimeType="application/font-woff" />' >> web.config
+          echo '      <mimeMap fileExtension=".woff2" mimeType="application/font-woff2" />' >> web.config
+          echo '    </staticContent>' >> web.config
+          echo '    <httpErrors existingResponse="PassThrough" />' >> web.config
           echo '  </system.webServer>' >> web.config
           echo '</configuration>' >> web.config
 
@@ -75,36 +82,3 @@ jobs:
           slot-name: 'Production'
           package: .
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_MENTALLY }}
-
-  create-release:
-    runs-on: ubuntu-latest
-    needs: deploy
-    permissions:
-      contents: write  # Required to create releases
-    steps:
-      - name: Download artifact from build job
-        uses: actions/download-artifact@v4
-        with:
-          name: node-app
-
-      - name: Get version from package.json
-        id: package_version
-        run: |
-          VERSION=$(node -p "require('./package.json').version")
-          TIMESTAMP=$(date +'%Y%m%d-%H%M%S')
-          echo "version=$VERSION" >> $GITHUB_OUTPUT
-          echo "timestamp=$TIMESTAMP" >> $GITHUB_OUTPUT
-
-      - name: Create GitHub Release
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          tag_name: v${{ steps.package_version.outputs.version }}-${{ steps.package_version.outputs.timestamp }}
-          release_name: Release v${{ steps.package_version.outputs.version }} (${{ steps.package_version.outputs.timestamp }})
-          body: |
-            Deployment timestamp: ${{ steps.package_version.outputs.timestamp }}
-            * Automatic release from CI/CD pipeline
-            * Deployed to Azure Web App - Mentally
-          draft: false
-          prerelease: false
