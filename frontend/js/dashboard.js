@@ -522,7 +522,7 @@ function startSessionTimer() {
     
     if (!timerElement || !progressElement) return;
     
-    let timeLeft = 15 * 60; // 15 minutes in seconds
+    let timeLeft = 1 * 60; // 15 minutes in seconds
     const totalTime = timeLeft;
     
     const timerInterval = setInterval(() => {

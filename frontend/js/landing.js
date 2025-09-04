@@ -90,7 +90,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const loginBtn = document.getElementById('loginBtn');
         if (loginBtn) {
             loginBtn.addEventListener('click', function() {
-                window.location.href = 'login.html';
+                window.location.href = '../html/login.html';
             });
         }
 
@@ -234,7 +234,7 @@ document.addEventListener('DOMContentLoaded', function() {
                             <li style="margin-bottom: 0.5rem;"><i class="fas fa-check" style="color: #28A745; margin-right: 0.5rem;"></i> Moderated discussions</li>
                             <li style="margin-bottom: 0.5rem;"><i class="fas fa-check" style="color: #28A745; margin-right: 0.5rem;"></i> Local meetups</li>
                         </ul>
-                        <button onclick="window.location.href='../html/login.html?redirect=../html/community.html'" style="width: 100%; background: linear-gradient(45deg, #FDBB30, #FFD700); border: none; color: #002D62; padding: 1rem; border-radius: 25px; font-weight: 600; cursor: pointer;">
+                        <button onclick="window.location.href='../html/login.html?redirect=../html/chat.html'" style="width: 100%; background: linear-gradient(45deg, #FDBB30, #FFD700); border: none; color: #002D62; padding: 1rem; border-radius: 25px; font-weight: 600; cursor: pointer;">
                             Join Community
                         </button>
                     </div>
