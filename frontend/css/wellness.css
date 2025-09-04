@@ -1,0 +1,660 @@
+/* Wellness Tools Specific Styles */
+.wellness-tools-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.tools-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.tools-header h2 {
+    font-size: 2.2rem;
+    color: #fff;
+    margin-bottom: 10px;
+}
+
+.tools-header p {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 1.1rem;
+}
+
+.tools-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 25px;
+    margin-bottom: 40px;
+}
+
+.tool-card {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 15px;
+    padding: 25px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.tool-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    border-color: rgba(253, 187, 48, 0.3);
+}
+
+.tool-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.tool-header i {
+    font-size: 2rem;
+    color: #FDBB30;
+    margin-right: 15px;
+}
+
+.tool-header h3 {
+    color: #fff;
+    font-size: 1.4rem;
+    margin: 0;
+}
+
+.tool-description {
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 20px;
+    line-height: 1.5;
+}
+
+.tool-preview {
+    height: 120px;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 10px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.tool-options {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.tool-option, .music-category, .exercise-option, .sleep-option {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 20px;
+    padding: 8px 16px;
+    color: #fff;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 0.9rem;
+}
+
+.tool-option:hover, .tool-option.active,
+.music-category:hover, .music-category.active,
+.exercise-option:hover, .exercise-option.active,
+.sleep-option:hover, .sleep-option.active {
+    background: rgba(253, 187, 48, 0.2);
+    border-color: #FDBB30;
+}
+
+.start-tool-btn {
+    width: 100%;
+    background: linear-gradient(45deg, #FDBB30, #FFD700);
+    border: none;
+    color: #002D62;
+    padding: 12px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.start-tool-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(253, 187, 48, 0.3);
+}
+
+.start-tool-btn.small {
+    padding: 8px 16px;
+    width: auto;
+}
+
+/* Breathing Animation */
+.breathing-animation {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: rgba(253, 187, 48, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: breathe 8s infinite ease-in-out;
+}
+
+.breathing-animation::before {
+    content: '';
+    width: 60%;
+    height: 60%;
+    border-radius: 50%;
+    background: rgba(253, 187, 48, 0.4);
+}
+
+@keyframes breathe {
+    0%, 100% { transform: scale(0.8); }
+    50% { transform: scale(1.2); }
+}
+
+/* Meditation Waves */
+.meditation-waves {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+.meditation-waves::before,
+.meditation-waves::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    animation: ripple 3s infinite;
+}
+
+.meditation-waves::before {
+    width: 80px;
+    height: 80px;
+    animation-delay: 0.5s;
+}
+
+.meditation-waves::after {
+    width: 100px;
+    height: 100px;
+    animation-delay: 1s;
+}
+
+@keyframes ripple {
+    0% { 
+        width: 0; 
+        height: 0; 
+        opacity: 0.7;
+    }
+    100% { 
+        width: 120px; 
+        height: 120px; 
+        opacity: 0;
+    }
+}
+
+/* Journal Stats */
+.journal-stats {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.journal-stat {
+    text-align: center;
+    flex: 1;
+}
+
+.stat-number {
+    display: block;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #FDBB30;
+}
+
+.stat-label {
+    display: block;
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+/* Wellness Game Styles */
+.game-container {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 15px;
+    padding: 25px;
+    margin-bottom: 25px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.game-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.game-title {
+    color: #fff;
+    font-size: 1.5rem;
+    margin: 0;
+}
+
+.game-points {
+    background: rgba(253, 187, 48, 0.2);
+    color: #FDBB30;
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.game-content {
+    margin-bottom: 20px;
+}
+
+.game-controls {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+.game-btn {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.game-btn:hover {
+    background: rgba(253, 187, 48, 0.2);
+    border-color: #FDBB30;
+}
+
+.game-btn.primary {
+    background: linear-gradient(45deg, #FDBB30, #FFD700);
+    color: #002D62;
+    font-weight: 600;
+}
+
+/* Puzzle Game */
+.puzzle-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 5px;
+    margin: 0 auto;
+    max-width: 300px;
+}
+
+.puzzle-piece {
+    aspect-ratio: 1;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.puzzle-piece:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.puzzle-piece.empty {
+    background: transparent;
+    cursor: default;
+}
+
+/* Coloring Game */
+.coloring-canvas {
+    width: 100%;
+    height: 200px;
+    background: #fff;
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+
+.color-palette {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.color-btn {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: all 0.3s ease;
+}
+
+.color-btn.active {
+    border-color: #fff;
+    transform: scale(1.2);
+}
+
+/* Gratitude Game */
+.gratitude-input {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    padding: 12px;
+    color: #fff;
+    margin-bottom: 15px;
+    font-family: 'Inter', sans-serif;
+}
+
+.gratitude-input:focus {
+    outline: none;
+    border-color: #FDBB30;
+}
+
+.gratitude-list {
+    max-height: 200px;
+    overflow-y: auto;
+    margin-bottom: 15px;
+}
+
+.gratitude-item {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 10px 15px;
+    border-radius: 8px;
+    margin-bottom: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.gratitude-item span {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.gratitude-item .delete-btn {
+    background: none;
+    border: none;
+    color: rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.gratitude-item .delete-btn:hover {
+    color: #FDBB30;
+}
+
+/* Shop Styles */
+.shop-container {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 15px;
+    padding: 25px;
+    margin-bottom: 25px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.shop-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.shop-title {
+    color: #fff;
+    font-size: 1.5rem;
+    margin: 0;
+}
+
+.user-points {
+    background: rgba(76, 175, 80, 0.2);
+    color: #4CAF50;
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.user-points i {
+    font-size: 0.9rem;
+}
+
+.shop-items {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 15px;
+}
+
+.shop-item {
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 10px;
+    padding: 15px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+}
+
+.shop-item:hover {
+    transform: translateY(-3px);
+    border-color: rgba(253, 187, 48, 0.3);
+}
+
+.shop-item-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.shop-item-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    background: rgba(253, 187, 48, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 10px;
+    color: #FDBB30;
+    font-size: 1.2rem;
+}
+
+.shop-item-name {
+    color: #fff;
+    font-size: 1rem;
+    margin: 0;
+    flex: 1;
+}
+
+.shop-item-desc {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.85rem;
+    margin-bottom: 15px;
+    line-height: 1.4;
+}
+
+.shop-item-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.shop-item-price {
+    color: #FDBB30;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.shop-item-price i {
+    font-size: 0.9rem;
+}
+
+.buy-btn {
+    background: rgba(76, 175, 80, 0.2);
+    color: #4CAF50;
+    border: 1px solid rgba(76, 175, 80, 0.3);
+    padding: 5px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    transition: all 0.3s ease;
+}
+
+.buy-btn:hover {
+    background: rgba(76, 175, 80, 0.3);
+}
+
+.buy-btn.owned {
+    background: rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.5);
+    cursor: default;
+}
+
+/* Achievement Styles */
+.achievements-container {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 15px;
+    padding: 25px;
+    margin-bottom: 25px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.achievements-header {
+    color: #fff;
+    font-size: 1.5rem;
+    margin: 0 0 20px 0;
+}
+
+.achievements-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 15px;
+}
+
+.achievement-item {
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 10px;
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.achievement-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: rgba(253, 187, 48, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #FDBB30;
+    font-size: 1.5rem;
+}
+
+.achievement-icon.locked {
+    background: rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.3);
+}
+
+.achievement-info {
+    flex: 1;
+}
+
+.achievement-name {
+    color: #fff;
+    font-size: 1rem;
+    margin: 0 0 5px 0;
+}
+
+.achievement-desc {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.85rem;
+    margin: 0;
+}
+
+.achievement-progress {
+    height: 5px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 5px;
+    margin-top: 8px;
+    overflow: hidden;
+}
+
+.progress-bar {
+    height: 100%;
+    background: #FDBB30;
+    border-radius: 5px;
+    transition: width 0.3s ease;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .tools-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .journal-stats {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .shop-items {
+        grid-template-columns: 1fr;
+    }
+    
+    .achievements-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .puzzle-grid {
+        grid-template-columns: repeat(3, 1fr);
+        max-width: 240px;
+    }
+}
+
+@media (max-width: 480px) {
+    .wellness-tools-container {
+        padding: 15px;
+    }
+    
+    .tools-header h2 {
+        font-size: 1.8rem;
+    }
+    
+    .tool-card {
+        padding: 20px;
+    }
+    
+    .tool-header i {
+        font-size: 1.8rem;
+    }
+    
+    .tool-header h3 {
+        font-size: 1.2rem;
+    }
+    
+    .game-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+    
+    .shop-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+}

@@ -722,6 +722,146 @@ app.get("/api/health", (req, res) => {
     });
 });
 
+// Wellness Tools API endpoints
+
+// Get user wellness progress
+app.get("/api/wellness/:userId", async (req, res) => {
+    try {
+        const { userId } = req.params;
+        
+        const wellnessData = await Wellness.findOne({ userId });
+        
+        if (!wellnessData) {
+            // Create initial wellness profile
+            const newWellness = new Wellness({
+                userId,
+                points: 100, // Starting points
+                unlockedTools: ['breathing', 'journal'],
+                purchasedItems: [],
+                lastCheckIn: new Date(),
+                streak: 0
+            });
+            await newWellness.save();
+            
+            return res.json({ success: true, data: newWellness });
+        }
+        
+        res.json({ success: true, data: wellnessData });
+        
+    } catch (error) {
+        console.error("Error fetching wellness data:", error);
+        res.status(500).json({ success: false, message: "Server error" });
+    }
+});
+
+// Update wellness progress
+app.post("/api/wellness/:userId", async (req, res) => {
+    try {
+        const { userId } = req.params;
+        const { pointsEarned, toolUsed, purchase } = req.body;
+        
+        let wellnessData = await Wellness.findOne({ userId });
+        
+        if (!wellnessData) {
+            wellnessData = new Wellness({ userId });
+        }
+        
+        // Update points if earned
+        if (pointsEarned) {
+            wellnessData.points += pointsEarned;
+        }
+        
+        // Record tool usage
+        if (toolUsed && !wellnessData.unlockedTools.includes(toolUsed)) {
+            wellnessData.unlockedTools.push(toolUsed);
+        }
+        
+        // Process purchase
+        if (purchase) {
+            const shopItem = SHOP_ITEMS.find(item => item.id === purchase);
+            if (shopItem && wellnessData.points >= shopItem.price) {
+                wellnessData.points -= shopItem.price;
+                wellnessData.purchasedItems.push(purchase);
+            } else {
+                return res.status(400).json({ 
+                    success: false, 
+                    message: "Not enough points or invalid item" 
+                });
+            }
+        }
+        
+        // Update streak if they've used a tool today
+        const lastCheckIn = new Date(wellnessData.lastCheckIn);
+        const today = new Date();
+        
+        if (lastCheckIn.toDateString() !== today.toDateString()) {
+            // Check if yesterday was consecutive
+            const yesterday = new Date();
+            yesterday.setDate(yesterday.getDate() - 1);
+            
+            if (lastCheckIn.toDateString() === yesterday.toDateString()) {
+                wellnessData.streak += 1;
+            } else {
+                wellnessData.streak = 1; // Reset streak
+            }
+            
+            wellnessData.lastCheckIn = today;
+        }
+        
+        await wellnessData.save();
+        
+        res.json({ success: true, data: wellnessData });
+        
+    } catch (error) {
+        console.error("Error updating wellness data:", error);
+        res.status(500).json({ success: false, message: "Server error" });
+    }
+});
+
+// Get shop items
+app.get("/api/wellness/shop/items", async (req, res) => {
+    res.json({ success: true, data: SHOP_ITEMS });
+});
+
+// Define shop items (could move to a separate file)
+const SHOP_ITEMS = [
+    {
+        id: "premium_themes",
+        name: "Premium Themes",
+        description: "Unlock beautiful color themes for your wellness tools",
+        price: 200,
+        type: "cosmetic"
+    },
+    {
+        id: "guided_meditations",
+        name: "Premium Meditations",
+        description: "Access exclusive guided meditation sessions",
+        price: 300,
+        type: "content"
+    },
+    {
+        id: "relaxation_music",
+        name: "Relaxation Music Pack",
+        description: "Get full access to therapeutic music library",
+        price: 250,
+        type: "content"
+    },
+    {
+        id: "streak_freeze",
+        name: "Streak Freeze",
+        description: "Protect your streak if you miss a day",
+        price: 150,
+        type: "utility"
+    },
+    {
+        id: "double_points",
+        name: "Double Points (7 days)",
+        description: "Earn double points on all activities for 7 days",
+        price: 350,
+        type: "boost"
+    }
+];
+
 // Route to serve landing page
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '../frontend/html/landing.html'));
@@ -769,6 +909,9 @@ app.get('/professionals', (req, res) => {
   res.sendFile(path.join(__dirname, '../frontend/html/professionals.html'));
 });
 
+app.get('/wellness-tools', (req, res) => {
+  res.sendFile(path.join(__dirname, '../frontend/html/wellness-tools.html'));
+});
 app.listen(PORT, () =>{
     connectDB();
     console.log(`Server started on http://localhost:${PORT}`);
