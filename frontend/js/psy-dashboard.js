@@ -173,14 +173,33 @@ function handleNavigation(page) {
         pageTitle.textContent = getPageTitle(page);
     }
     
-    // Here you would typically load the content for the selected page
-    // For this demo, we'll just log the page change
+    // Redirect to the appropriate page
+    redirectToPage(page);
+}
+
+// Redirect to the appropriate HTML page
+function redirectToPage(page) {
+    const pageMap = {
+        'psy-dashboard': 'pys-dashboard.html',
+        'patients': 'patients.html',
+        'notes': 'progress-notes.html',
+        'telehealth': 'telehealth.html',
+        'messages': 'messages.html',
+        'tasks': 'tasks.html',
+        'resources': 'resources.html'
+    };
+    
+    const targetPage = pageMap[page];
+    if (targetPage) {
+        // Use relative path from the current location
+        window.location.href = `../html/${targetPage}`;
+    }
 }
 
 // Get page title based on page identifier
 function getPageTitle(page) {
     const titles = {
-        'dashboard': 'My Day',
+        'psy-dashboard': 'My Day',
         'patients': 'Patients',
         'notes': 'Progress Notes',
         'telehealth': 'Telehealth',
@@ -266,7 +285,7 @@ function animateCards() {
 function setActiveNavigation() {
     // For this demo, we'll set the dashboard as active by default
     // In a real application, you would determine the current page from the URL
-    const dashboardButton = document.querySelector('[data-page="dashboard"]');
+    const dashboardButton = document.querySelector('[data-page="psy-dashboard"]');
     if (dashboardButton) {
         dashboardButton.classList.add('active');
     }
@@ -286,10 +305,46 @@ function formatTime(date) {
     return date.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' });
 }
 
+// Show notification
+function showNotification(message, type = 'info') {
+    // Create notification element
+    const notification = document.createElement('div');
+    notification.className = `notification ${type}`;
+    notification.innerHTML = `
+        <span>${message}</span>
+        <button class="notification-close">&times;</button>
+    `;
+    
+    // Add to page
+    document.body.appendChild(notification);
+    
+    // Animate in
+    setTimeout(() => {
+        notification.classList.add('show');
+    }, 10);
+    
+    // Remove after delay
+    setTimeout(() => {
+        notification.classList.remove('show');
+        setTimeout(() => {
+            document.body.removeChild(notification);
+        }, 300);
+    }, 3000);
+    
+    // Close button
+    notification.querySelector('.notification-close').addEventListener('click', () => {
+        notification.classList.remove('show');
+        setTimeout(() => {
+            document.body.removeChild(notification);
+        }, 300);
+    });
+}
+
 // Export functions for use in other modules (if needed)
 window.MentalyDashboard = {
     initDashboard,
     handleNavigation,
     formatDate,
-    formatTime
+    formatTime,
+    showNotification
 };
