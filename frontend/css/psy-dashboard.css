@@ -1118,3 +1118,123 @@ body.large-font .alert-info h3,
 body.large-font .message-info h3 {
     font-size: 1.2rem;
 }
+
+/* Enhanced High Contrast Mode */
+body.high-contrast {
+    background: #000 !important;
+    color: #fff !important;
+}
+
+body.high-contrast .card,
+body.high-contrast .stat-card {
+    background: #111 !important;
+    border: 1px solid #fff !important;
+    border-radius: 12px !important;
+}
+
+body.high-contrast .nav-button.active {
+    background: #fff !important;
+    color: #000 !important;
+}
+
+body.high-contrast .glass-bg,
+body.high-contrast .glass-border {
+    background: rgba(255, 255, 255, 0.1) !important;
+    border-color: #fff !important;
+}
+
+body.high-contrast select,
+body.high-contrast .dropdown-content {
+    background: #000 !important;
+    color: #fff !important;
+    border: 1px solid #fff !important;
+}
+
+body.high-contrast input,
+body.high-contrast textarea {
+    background: #000 !important;
+    color: #fff !important;
+    border: 1px solid #fff !important;
+}
+
+body.high-contrast input::placeholder,
+body.high-contrast textarea::placeholder {
+    color: #ccc !important;
+}
+
+/* Notification styles */
+.notification {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: var(--pacer-navy);
+    color: white;
+    padding: 1rem 1.5rem;
+    border-radius: var(--border-radius);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    z-index: 10000;
+    transform: translateY(100px);
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+
+.notification.show {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.notification-success {
+    background: #28a745;
+}
+
+.notification-error {
+    background: #dc3545;
+}
+
+.notification-info {
+    background: var(--pacer-navy);
+}
+
+.notification-content {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.notification-close {
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    padding: 0.25rem;
+    border-radius: 50%;
+    transition: var(--transition);
+}
+
+.notification-close:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+/* Dropdown styles for normal mode */
+select {
+    background: var(--pacer-navy);
+    color: white;
+    border: 1px solid var(--glass-border);
+    border-radius: var(--border-radius-sm);
+    padding: 0.5rem;
+}
+
+/* Ensure all pages use the same high contrast mode */
+body.high-contrast .session-item,
+body.high-contrast .doc-item,
+body.high-contrast .alert-item,
+body.high-contrast .task-item,
+body.high-contrast .message-item,
+body.high-contrast .pipeline-stage {
+    background: #111 !important;
+    border: 1px solid #fff !important;
+    border-radius: 12px !important;
+}

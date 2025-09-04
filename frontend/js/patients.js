@@ -11,6 +11,8 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Setup accessibility features
     setupAccessibility();
+
+    setupNavigation();
 });
 
 // Patient data structure
@@ -1010,6 +1012,16 @@ function setupAccessibility() {
     const fontSizeToggle = document.getElementById('fontSizeToggle');
     const contrastToggle = document.getElementById('contrastToggle');
     
+    // Check if high contrast mode was previously enabled
+    if (localStorage.getItem('highContrast') === 'true') {
+        document.body.classList.add('high-contrast');
+    }
+    
+    // Check if large font mode was previously enabled
+    if (localStorage.getItem('largeFont') === 'true') {
+        document.body.classList.add('large-font');
+    }
+    
     if (fontSizeToggle) {
         fontSizeToggle.addEventListener('click', toggleFontSize);
     }
@@ -1024,6 +1036,7 @@ function toggleFontSize() {
     document.body.classList.toggle('large-font');
     
     const isLargeFont = document.body.classList.contains('large-font');
+    localStorage.setItem('largeFont', isLargeFont);
     showNotification(isLargeFont ? 'Large font enabled' : 'Large font disabled', 'info');
 }
 
@@ -1032,5 +1045,22 @@ function toggleContrast() {
     document.body.classList.toggle('high-contrast');
     
     const isHighContrast = document.body.classList.contains('high-contrast');
+    localStorage.setItem('highContrast', isHighContrast);
     showNotification(isHighContrast ? 'High contrast mode enabled' : 'High contrast mode disabled', 'info');
+}
+// Add to patients.js and psy-dashboard.js
+function setupNavigation() {
+    const navButtons = document.querySelectorAll('.nav-button');
+    
+    navButtons.forEach(button => {
+        button.addEventListener('click', function(e) {
+            // Remove active class from all buttons
+            navButtons.forEach(btn => btn.classList.remove('active'));
+            
+            // Add active class to clicked button
+            this.classList.add('active');
+            
+            // The actual navigation is handled by the onclick attribute
+        });
+    });
 }

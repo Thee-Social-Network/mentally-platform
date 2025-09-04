@@ -202,26 +202,25 @@ function handleFilterChange(filter) {
 
 // Setup accessibility features
 function setupAccessibility() {
-    // Font size toggle
     const fontSizeToggle = document.getElementById('fontSizeToggle');
-    if (fontSizeToggle) {
-        fontSizeToggle.addEventListener('click', () => {
-            document.body.classList.toggle('large-font');
-            const isLarge = document.body.classList.contains('large-font');
-            fontSizeToggle.title = isLarge ? 'Decrease font size' : 'Increase font size';
-            fontSizeToggle.setAttribute('aria-pressed', isLarge);
-        });
+    const contrastToggle = document.getElementById('contrastToggle');
+    
+    // Check if high contrast mode was previously enabled
+    if (localStorage.getItem('highContrast') === 'true') {
+        document.body.classList.add('high-contrast');
     }
     
-    // Contrast toggle
-    const contrastToggle = document.getElementById('contrastToggle');
+    // Check if large font mode was previously enabled
+    if (localStorage.getItem('largeFont') === 'true') {
+        document.body.classList.add('large-font');
+    }
+    
+    if (fontSizeToggle) {
+        fontSizeToggle.addEventListener('click', toggleFontSize);
+    }
+    
     if (contrastToggle) {
-        contrastToggle.addEventListener('click', () => {
-            document.body.classList.toggle('high-contrast');
-            const isHighContrast = document.body.classList.contains('high-contrast');
-            contrastToggle.title = isHighContrast ? 'Normal contrast mode' : 'High contrast mode';
-            contrastToggle.setAttribute('aria-pressed', isHighContrast);
-        });
+        contrastToggle.addEventListener('click', toggleContrast);
     }
     
     // Keyboard navigation
@@ -235,6 +234,24 @@ function setupAccessibility() {
             }
         }
     });
+}
+
+// Toggle font size for accessibility
+function toggleFontSize() {
+    document.body.classList.toggle('large-font');
+    
+    const isLargeFont = document.body.classList.contains('large-font');
+    localStorage.setItem('largeFont', isLargeFont);
+    showNotification(isLargeFont ? 'Large font enabled' : 'Large font disabled', 'info');
+}
+
+// Toggle contrast for accessibility
+function toggleContrast() {
+    document.body.classList.toggle('high-contrast');
+    
+    const isHighContrast = document.body.classList.contains('high-contrast');
+    localStorage.setItem('highContrast', isHighContrast);
+    showNotification(isHighContrast ? 'High contrast mode enabled' : 'High contrast mode disabled', 'info');
 }
 
 // Animate cards on page load

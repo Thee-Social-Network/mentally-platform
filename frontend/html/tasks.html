@@ -1,0 +1,512 @@
+<!-- tasks.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mentaly - Task Management</title>
+    <link rel="stylesheet" href="../css/tasks.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="top-navbar">
+    <section class="nav-container">
+        <a href="../html/pys-dashboard.html" class="logo-link">
+            <h1 class="logo">Mentaly</h1>
+        </a>
+        
+        <menu class="nav-menu">
+            <li class="nav-item">
+                <button class="nav-button" data-page="psy-dashboard" onclick="window.location.href='../html/pys-dashboard.html'">
+                    <i class="fas fa-chart-line"></i>
+                    <span>Dashboard</span>
+                </button>
+            </li>
+            <li class="nav-item">
+                <button class="nav-button active" data-page="patients" onclick="window.location.href='../html/patients.html'">
+                    <i class="fas fa-user-friends"></i>
+                    <span>Patients</span>
+                </button>
+            </li>
+            <li class="nav-item">
+                <button class="nav-button" data-page="notes" onclick="window.location.href='../html/progress-notes.html'">
+                    <i class="fas fa-file-medical"></i>
+                    <span>Progress Notes</span>
+                </button>
+            </li>
+            <li class="nav-item">
+                <button class="nav-button" data-page="telehealth" onclick="window.location.href='../html/telehealth.html'">
+                    <i class="fas fa-video"></i>
+                    <span>Telehealth</span>
+                </button>
+            </li>
+            <li class="nav-item">
+                <button class="nav-button" data-page="messages" onclick="window.location.href='../html/messages.html'">
+                    <i class="fas fa-comments"></i>
+                    <span>Messages</span>
+                </button>
+            </li>
+            <li class="nav-item">
+                <button class="nav-button" data-page="tasks" onclick="window.location.href='../html/tasks.html'">
+                    <i class="fas fa-tasks"></i>
+                    <span>Tasks</span>
+                </button>
+            </li>
+            <li class="nav-item">
+                <button class="nav-button" data-page="resources" onclick="window.location.href='../html/resources.html'">
+                    <i class="fas fa-book-medical"></i>
+                    <span>Resources</span>
+                </button>
+            </li>
+        </menu>
+
+        <section class="nav-actions">
+            <button class="emergency-btn" id="emergencyBtn">
+                <i class="fas fa-phone"></i>
+                <span>Emergency</span>
+            </button>
+            
+            <section class="accessibility-toggles">
+                <button class="accessibility-btn" id="fontSizeToggle" title="Increase font size">
+                    <i class="fas fa-text-height"></i>
+                </button>
+                <button class="accessibility-btn" id="contrastToggle" title="High contrast mode">
+                    <i class="fas fa-adjust"></i>
+                </button>
+            </section>
+            
+            <section class="user-profile">
+                <button class="profile-btn" id="profileBtn">
+                    <figure class="avatar">
+                        <i class="fas fa-user-md"></i>
+                    </figure>
+                    <span class="username">Dr. Sarah Johnson</span>
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+            </section>
+            
+            <button class="menu-toggle" id="menuToggle">
+                <i class="fas fa-bars"></i>
+            </button>
+        </section>
+    </section>
+</nav>
+
+    <main class="main-content">
+        <header class="content-header">
+            <h1 class="page-title" id="pageTitle">Task Management</h1>
+            <section class="header-actions">
+                <button class="primary-btn" id="addTaskBtn">
+                    <i class="fas fa-plus"></i>
+                    Add New Task
+                </button>
+                <time class="date-info">Today, September 2, 2025</time>
+            </section>
+        </header>
+
+        <section class="content-area">
+            <!-- Task Stats Overview -->
+            <article class="stats-overview">
+                <section class="stat-card">
+                    <figure class="stat-icon">
+                        <i class="fas fa-tasks"></i>
+                    </figure>
+                    <section class="stat-content">
+                        <h3 class="stat-value" id="totalTasks">0</h3>
+                        <p class="stat-label">Total Tasks</p>
+                    </section>
+                </section>
+                
+                <section class="stat-card">
+                    <figure class="stat-icon">
+                        <i class="fas fa-exclamation-circle"></i>
+                    </figure>
+                    <section class="stat-content">
+                        <h3 class="stat-value" id="overdueTasks">0</h3>
+                        <p class="stat-label">Overdue</p>
+                    </section>
+                </section>
+                
+                <section class="stat-card">
+                    <figure class="stat-icon">
+                        <i class="fas fa-user-clock"></i>
+                    </figure>
+                    <section class="stat-content">
+                        <h3 class="stat-value" id="assignedTasks">0</h3>
+                        <p class="stat-label">Assigned to Me</p>
+                    </section>
+                </section>
+                
+                <section class="stat-card">
+                    <figure class="stat-icon">
+                        <i class="fas fa-check-circle"></i>
+                    </figure>
+                    <section class="stat-content">
+                        <h3 class="stat-value" id="completedTasks">0</h3>
+                        <p class="stat-label">Completed</p>
+                    </section>
+                </section>
+            </article>
+
+            <!-- Task Search and Filters -->
+            <article class="card filters-card">
+                <section class="search-section">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="taskSearch" placeholder="Search tasks by title, description, or client...">
+                </section>
+                
+                <section class="filters-section">
+                    <section class="filter-group">
+                        <label for="statusFilter">Status</label>
+                        <select id="statusFilter">
+                            <option value="all">All Statuses</option>
+                            <option value="pending">Pending</option>
+                            <option value="in-progress">In Progress</option>
+                            <option value="completed">Completed</option>
+                        </select>
+                    </section>
+                    
+                    <section class="filter-group">
+                        <label for="assigneeFilter">Assignee</label>
+                        <select id="assigneeFilter">
+                            <option value="all">All Assignees</option>
+                            <option value="me">Assigned to Me</option>
+                            <option value="others">Assigned to Others</option>
+                        </select>
+                    </section>
+                    
+                    <section class="filter-group">
+                        <label for="priorityFilter">Priority</label>
+                        <select id="priorityFilter">
+                            <option value="all">All Priorities</option>
+                            <option value="high">High</option>
+                            <option value="medium">Medium</option>
+                            <option value="low">Low</option>
+                        </select>
+                    </section>
+                    
+                    <section class="filter-group">
+                        <label for="clientFilter">Client</label>
+                        <select id="clientFilter">
+                            <option value="all">All Clients</option>
+                            <!-- Client options will be populated by JavaScript -->
+                        </select>
+                    </section>
+                    
+                    <button class="filter-btn" id="clearFilters">
+                        <i class="fas fa-times"></i>
+                        Clear Filters
+                    </button>
+                </section>
+            </article>
+
+            <!-- Tasks List -->
+            <article class="card tasks-list-card">
+                <header class="card-header">
+                    <h2>Tasks</h2>
+                    <section class="view-options">
+                        <button class="view-option active" data-view="list">
+                            <i class="fas fa-list"></i>
+                        </button>
+                        <button class="view-option" data-view="grid">
+                            <i class="fas fa-th"></i>
+                        </button>
+                    </section>
+                </header>
+                
+                <!-- List View -->
+                <section class="table-container" id="listView">
+                    <table class="tasks-table">
+                        <thead>
+                            <tr>
+                                <th>Title</th>
+                                <th>Client</th>
+                                <th>Assignee</th>
+                                <th>Due Date</th>
+                                <th>Priority</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tasksTableBody">
+                            <!-- Task rows will be populated by JavaScript -->
+                        </tbody>
+                    </table>
+                </section>
+                
+                <!-- Grid View -->
+                <section class="grid-container" id="gridView" style="display: none;">
+                    <section class="tasks-grid" id="tasksGrid">
+                        <!-- Task cards will be populated by JavaScript -->
+                    </section>
+                </section>
+                
+                <footer class="table-footer">
+                    <p id="showingCount">Showing 0 of 0 tasks</p>
+                    <section class="pagination">
+                        <button class="pagination-btn" id="prevPage" disabled>
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+                        <button class="pagination-btn active">1</button>
+                        <button class="pagination-btn">2</button>
+                        <button class="pagination-btn">3</button>
+                        <button class="pagination-btn" id="nextPage">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                    </section>
+                </footer>
+            </article>
+        </section>
+    </main>
+
+    <!-- Add Task Modal -->
+    <dialog class="modal" id="addTaskModal">
+        <article class="modal-content add-task-modal">
+            <header class="modal-header">
+                <h2>Add New Task</h2>
+                <button class="modal-close" id="closeAddTaskModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </header>
+            <section class="modal-body">
+                <form id="addTaskForm" class="task-form">
+                    <section class="form-section">
+                        <h3>Basic Information</h3>
+                        <section class="form-group">
+                            <label for="taskTitle">Title *</label>
+                            <input type="text" id="taskTitle" name="title" required>
+                        </section>
+                        
+                        <section class="form-group">
+                            <label for="taskDescription">Description</label>
+                            <textarea id="taskDescription" name="description" rows="3"></textarea>
+                        </section>
+                    </section>
+                    
+                    <section class="form-section">
+                        <h3>Assignment & Timing</h3>
+                        <section class="form-row">
+                            <section class="form-group">
+                                <label for="taskAssignee">Assignee</label>
+                                <select id="taskAssignee" name="assignee">
+                                    <option value="self">Assign to Me</option>
+                                    <option value="sarah">Dr. Sarah Johnson</option>
+                                    <option value="michael">Dr. Michael Chen</option>
+                                    <option value="emma">Dr. Emma Wilson</option>
+                                </select>
+                            </section>
+                            
+                            <section class="form-group">
+                                <label for="taskPriority">Priority</label>
+                                <select id="taskPriority" name="priority">
+                                    <option value="low">Low</option>
+                                    <option value="medium" selected>Medium</option>
+                                    <option value="high">High</option>
+                                </select>
+                            </section>
+                        </section>
+                        
+                        <section class="form-row">
+                            <section class="form-group">
+                                <label for="taskDueDate">Due Date</label>
+                                <input type="date" id="taskDueDate" name="dueDate">
+                            </section>
+                            
+                            <section class="form-group">
+                                <label for="taskReminder">Set Reminder</label>
+                                <select id="taskReminder" name="reminder">
+                                    <option value="none">No Reminder</option>
+                                    <option value="15">15 minutes before</option>
+                                    <option value="30">30 minutes before</option>
+                                    <option value="60">1 hour before</option>
+                                    <option value="1440">1 day before</option>
+                                </select>
+                            </section>
+                        </section>
+                        
+                        <section class="form-group">
+                            <label for="taskRecurrence">Recurrence</label>
+                            <select id="taskRecurrence" name="recurrence">
+                                <option value="none">Does not repeat</option>
+                                <option value="daily">Daily</option>
+                                <option value="weekly">Weekly</option>
+                                <option value="monthly">Monthly</option>
+                            </select>
+                        </section>
+                    </section>
+                    
+                    <section class="form-section">
+                        <h3>Client Association</h3>
+                        <section class="form-group">
+                            <label for="taskClient">Associate with Client (Optional)</label>
+                            <select id="taskClient" name="clientId">
+                                <option value="">Select a client</option>
+                                <!-- Client options will be populated by JavaScript -->
+                            </select>
+                        </section>
+                    </section>
+                    
+                    <section class="form-actions">
+                        <button type="button" class="cancel-btn" id="cancelAddTask">Cancel</button>
+                        <button type="submit" class="save-btn">Create Task</button>
+                    </section>
+                </form>
+            </section>
+        </article>
+    </dialog>
+
+    <!-- Edit Task Modal -->
+    <dialog class="modal" id="editTaskModal">
+        <article class="modal-content edit-task-modal">
+            <header class="modal-header">
+                <h2>Edit Task</h2>
+                <button class="modal-close" id="closeEditTaskModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </header>
+            <section class="modal-body">
+                <form id="editTaskForm" class="task-form">
+                    <input type="hidden" id="editTaskId" name="id">
+                    
+                    <section class="form-section">
+                        <h3>Basic Information</h3>
+                        <section class="form-group">
+                            <label for="editTaskTitle">Title *</label>
+                            <input type="text" id="editTaskTitle" name="title" required>
+                        </section>
+                        
+                        <section class="form-group">
+                            <label for="editTaskDescription">Description</label>
+                            <textarea id="editTaskDescription" name="description" rows="3"></textarea>
+                        </section>
+                    </section>
+                    
+                    <section class="form-section">
+                        <h3>Assignment & Timing</h3>
+                        <section class="form-row">
+                            <section class="form-group">
+                                <label for="editTaskAssignee">Assignee</label>
+                                <select id="editTaskAssignee" name="assignee">
+                                    <option value="self">Assign to Me</option>
+                                    <option value="sarah">Dr. Sarah Johnson</option>
+                                    <option value="michael">Dr. Michael Chen</option>
+                                    <option value="emma">Dr. Emma Wilson</option>
+                                </select>
+                            </section>
+                            
+                            <section class="form-group">
+                                <label for="editTaskPriority">Priority</label>
+                                <select id="editTaskPriority" name="priority">
+                                    <option value="low">Low</option>
+                                    <option value="medium">Medium</option>
+                                    <option value="high">High</option>
+                                </select>
+                            </section>
+                        </section>
+                        
+                        <section class="form-row">
+                            <section class="form-group">
+                                <label for="editTaskDueDate">Due Date</label>
+                                <input type="date" id="editTaskDueDate" name="dueDate">
+                            </section>
+                            
+                            <section class="form-group">
+                                <label for="editTaskReminder">Set Reminder</label>
+                                <select id="editTaskReminder" name="reminder">
+                                    <option value="none">No Reminder</option>
+                                    <option value="15">15 minutes before</option>
+                                    <option value="30">30 minutes before</option>
+                                    <option value="60">1 hour before</option>
+                                    <option value="1440">1 day before</option>
+                                </select>
+                            </section>
+                        </section>
+                        
+                        <section class="form-group">
+                            <label for="editTaskRecurrence">Recurrence</label>
+                            <select id="editTaskRecurrence" name="recurrence">
+                                <option value="none">Does not repeat</option>
+                                <option value="daily">Daily</option>
+                                <option value="weekly">Weekly</option>
+                                <option value="monthly">Monthly</option>
+                            </select>
+                        </section>
+                        
+                        <section class="form-group">
+                            <label for="editTaskStatus">Status</label>
+                            <select id="editTaskStatus" name="status">
+                                <option value="pending">Pending</option>
+                                <option value="in-progress">In Progress</option>
+                                <option value="completed">Completed</option>
+                            </select>
+                        </section>
+                    </section>
+                    
+                    <section class="form-section">
+                        <h3>Client Association</h3>
+                        <section class="form-group">
+                            <label for="editTaskClient">Associate with Client (Optional)</label>
+                            <select id="editTaskClient" name="clientId">
+                                <option value="">Select a client</option>
+                                <!-- Client options will be populated by JavaScript -->
+                            </select>
+                        </section>
+                    </section>
+                    
+                    <section class="form-actions">
+                        <button type="button" class="cancel-btn" id="cancelEditTask">Cancel</button>
+                        <button type="submit" class="save-btn">Save Changes</button>
+                    </section>
+                </form>
+            </section>
+        </article>
+    </dialog>
+
+    <!-- Emergency Modal -->
+    <dialog class="modal" id="emergencyModal">
+        <article class="modal-content emergency-modal">
+            <header class="modal-header">
+                <h2>Emergency Resources</h2>
+                <button class="modal-close" id="closeEmergencyModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </header>
+            <section class="modal-body">
+                <p class="emergency-text">Critical mental health emergency resources for your patients:</p>
+                <section class="emergency-list">
+                    <article class="emergency-item">
+                        <h3>Crisis Hotline</h3>
+                        <p>24/7 Confidential Support</p>
+                        <a href="tel:0800567567" class="emergency-call-link">
+                            <i class="fas fa-phone"></i>
+                            0800 567 567
+                        </a>
+                    </article>
+                    <article class="emergency-item">
+                        <h3>SADAG Helpline</h3>
+                        <p>South African Depression & Anxiety Group</p>
+                        <a href="tel:0800121314" class="emergency-call-link">
+                            <i class="fas fa-phone"></i>
+                            0800 121 314
+                        </a>
+                    </article>
+                    <article class="emergency-item">
+                        <h3>Emergency Services</h3>
+                        <p>Medical Emergency</p>
+                        <a href="tel:10177" class="emergency-call-link">
+                            <i class="fas fa-phone"></i>
+                            10177
+                        </a>
+                    </article>
+                </section>
+                <p class="emergency-note">Quick reference for patient emergencies</p>
+            </section>
+        </article>
+    </dialog>
+
+    <script src="../js/tasks.js"></script>
+    <script src="../js/shared.js"></script>
+</body>
+</html>

@@ -10,89 +10,89 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 </head>
 <body>
-    <!-- Navigation -->
-    <nav class="top-navbar">
-        <section class="nav-container">
-            <a href="../html/dashboard.html" class="logo-link">
-                <h1 class="logo">Mentaly</h1>
-            </a>
-            
-            <menu class="nav-menu">
-                <li class="nav-item">
-                    <a href="../html/dashboard.html" class="nav-button" data-page="dashboard">
-                        <i class="fas fa-chart-line"></i>
-                        <span>Dashboard</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="../html/patients.html" class="nav-button active" data-page="patients">
-                        <i class="fas fa-user-friends"></i>
-                        <span>Patients</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="../html/notes.html" class="nav-button" data-page="notes">
-                        <i class="fas fa-file-medical"></i>
-                        <span>Progress Notes</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="../html/telehealth.html" class="nav-button" data-page="telehealth">
-                        <i class="fas fa-video"></i>
-                        <span>Telehealth</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="../html/messages.html" class="nav-button" data-page="messages">
-                        <i class="fas fa-comments"></i>
-                        <span>Messages</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="../html/tasks.html" class="nav-button" data-page="tasks">
-                        <i class="fas fa-tasks"></i>
-                        <span>Tasks</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="../html/resources.html" class="nav-button" data-page="resources">
-                        <i class="fas fa-book-medical"></i>
-                        <span>Resources</span>
-                    </a>
-                </li>
-            </menu>
-
-            <section class="nav-actions">
-                <button class="emergency-btn" id="emergencyBtn">
-                    <i class="fas fa-phone"></i>
-                    <span>Emergency</span>
+<!-- patients.html - Updated Navigation -->
+<nav class="top-navbar">
+    <section class="nav-container">
+        <a href="../html/pys-dashboard.html" class="logo-link">
+            <h1 class="logo">Mentaly</h1>
+        </a>
+        
+        <menu class="nav-menu">
+            <li class="nav-item">
+                <button class="nav-button" data-page="psy-dashboard" onclick="window.location.href='../html/pys-dashboard.html'">
+                    <i class="fas fa-chart-line"></i>
+                    <span>Dashboard</span>
                 </button>
-                
-                <section class="accessibility-toggles">
-                    <button class="accessibility-btn" id="fontSizeToggle" title="Increase font size">
-                        <i class="fas fa-text-height"></i>
-                    </button>
-                    <button class="accessibility-btn" id="contrastToggle" title="High contrast mode">
-                        <i class="fas fa-adjust"></i>
-                    </button>
-                </section>
-                
-                <section class="user-profile">
-                    <button class="profile-btn" id="profileBtn">
-                        <figure class="avatar">
-                            <i class="fas fa-user-md"></i>
-                        </figure>
-                        <span class="username">Dr. Sarah Johnson</span>
-                        <i class="fas fa-chevron-down"></i>
-                    </button>
-                </section>
-                
-                <button class="menu-toggle" id="menuToggle">
-                    <i class="fas fa-bars"></i>
+            </li>
+            <li class="nav-item">
+                <button class="nav-button active" data-page="patients" onclick="window.location.href='../html/patients.html'">
+                    <i class="fas fa-user-friends"></i>
+                    <span>Patients</span>
+                </button>
+            </li>
+            <li class="nav-item">
+                <button class="nav-button" data-page="notes" onclick="window.location.href='../html/progress-notes.html'">
+                    <i class="fas fa-file-medical"></i>
+                    <span>Progress Notes</span>
+                </button>
+            </li>
+            <li class="nav-item">
+                <button class="nav-button" data-page="telehealth" onclick="window.location.href='../html/telehealth.html'">
+                    <i class="fas fa-video"></i>
+                    <span>Telehealth</span>
+                </button>
+            </li>
+            <li class="nav-item">
+                <button class="nav-button" data-page="messages" onclick="window.location.href='../html/messages.html'">
+                    <i class="fas fa-comments"></i>
+                    <span>Messages</span>
+                </button>
+            </li>
+            <li class="nav-item">
+                <button class="nav-button" data-page="tasks" onclick="window.location.href='../html/tasks.html'">
+                    <i class="fas fa-tasks"></i>
+                    <span>Tasks</span>
+                </button>
+            </li>
+            <li class="nav-item">
+                <button class="nav-button" data-page="resources" onclick="window.location.href='../html/resources.html'">
+                    <i class="fas fa-book-medical"></i>
+                    <span>Resources</span>
+                </button>
+            </li>
+        </menu>
+
+        <section class="nav-actions">
+            <button class="emergency-btn" id="emergencyBtn">
+                <i class="fas fa-phone"></i>
+                <span>Emergency</span>
+            </button>
+            
+            <section class="accessibility-toggles">
+                <button class="accessibility-btn" id="fontSizeToggle" title="Increase font size">
+                    <i class="fas fa-text-height"></i>
+                </button>
+                <button class="accessibility-btn" id="contrastToggle" title="High contrast mode">
+                    <i class="fas fa-adjust"></i>
                 </button>
             </section>
+            
+            <section class="user-profile">
+                <button class="profile-btn" id="profileBtn">
+                    <figure class="avatar">
+                        <i class="fas fa-user-md"></i>
+                    </figure>
+                    <span class="username">Dr. Sarah Johnson</span>
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+            </section>
+            
+            <button class="menu-toggle" id="menuToggle">
+                <i class="fas fa-bars"></i>
+            </button>
         </section>
-    </nav>
+    </section>
+</nav>
 
     <main class="main-content">
         <header class="content-header">
