@@ -35,12 +35,22 @@ jobs:
           echo '    </handlers>' >> web.config
           echo '    <rewrite>' >> web.config
           echo '      <rules>' >> web.config
+          echo '        <rule name="StaticFiles" stopProcessing="true">' >> web.config
+          echo '          <match url="\.(ico|css|js|jpg|jpeg|png|gif|svg|woff|woff2|ttf|eot)$" />' >> web.config
+          echo '          <action type="None" />' >> web.config
+          echo '        </rule>' >> web.config
           echo '        <rule name="nodejs">' >> web.config
           echo '          <match url="/*" />' >> web.config
           echo '          <action type="Rewrite" url="src/server.js" />' >> web.config
           echo '        </rule>' >> web.config
           echo '      </rules>' >> web.config
           echo '    </rewrite>' >> web.config
+          echo '    <staticContent>' >> web.config
+          echo '      <mimeMap fileExtension=".ico" mimeType="image/x-icon" />' >> web.config
+          echo '      <mimeMap fileExtension=".svg" mimeType="image/svg+xml" />' >> web.config
+          echo '      <mimeMap fileExtension=".woff" mimeType="application/font-woff" />' >> web.config
+          echo '      <mimeMap fileExtension=".woff2" mimeType="application/font-woff2" />' >> web.config
+          echo '    </staticContent>' >> web.config
           echo '    <iisnode watchedFiles=".js;node_modules\;routes\.js;views\.js" />' >> web.config
           echo '  </system.webServer>' >> web.config
           echo '</configuration>' >> web.config
