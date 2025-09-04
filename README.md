@@ -1,4 +1,7 @@
-# lost-and-found
+# Mentally
+
+link to the deolyed app:
+mentally-e2gjbjebfpebdqcb.southafricanorth-01.azurewebsites.net
 
 build a USSD /messaging for a website so that people who dont have smart phones can book psychologist
 Thinking
