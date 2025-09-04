@@ -9,8 +9,10 @@ import { getMood } from './controllers/moods-controller.js';
 import { GoogleGenerativeAI } from '@google/generative-ai';
 import africastalking from 'africastalking';
 import bodyParser from 'body-parser';
+import { Wellness } from './models/wellness_model.js'
 
 //API entry point
+
 
 dotenv.config();
 
@@ -38,7 +40,8 @@ try {
 }
 
 // Serve static files from frontend folder
-app.use(express.static(path.join(__dirname, '../frontend')));
+app.use(express.static(path.join(__dirname, '../frontend/html')));
+
 
 app.use(express.json()); // allow json data on request body
 
@@ -830,6 +833,15 @@ app.listen(PORT, () =>{
     console.log(`AI Configuration: ${process.env.GEMINI_API_KEY ? 'Configured ✅' : 'Missing GEMINI_API_KEY ❌'}`);
 
 });
+connectDB().then(() => {
+    app.listen(PORT, () => {
+        console.log(`Server running on port ${PORT}`);
+    });
+}).catch((err) => {
+    console.error("❌ Database connection failed:", err.message);
+    process.exit(1);
+});
+
 // Initialize Africa's Talking SDK
 const AT = africastalking({
   apiKey: process.env.AT_API_KEY,
