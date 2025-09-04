@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mentaly - Mood Tracker</title>
     <link rel="stylesheet" href="../css/dashboard.css">
+    <link rel="stylesheet" href="../css/mood-tracker.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 </head>
@@ -41,7 +42,12 @@
                         <span>Community</span>
                     </button>
                 </li>
-                
+                <li class="nav-item">
+                    <button class="nav-button" data-page="../html/pys-dashboard">
+                        <i class="fas fa-users"></i>
+                        <span>Prof Dashboard</span>
+                    </button>
+                </li>
                 <li class="nav-item">
                     <button class="nav-button" data-page="../html/wellness-tools">
                         <i class="fas fa-leaf"></i>
@@ -68,13 +74,13 @@
                     <span>Emergency</span>
                 </button>
                 
-                <a href="../html/notification.html" class="notification-btn" id="notificationBtn">
-    <i class="fas fa-bell"></i>
-    <span class="notification-badge">3</span>
-</a>
-
+                <button class="notification-btn" id="notificationBtn">
+                    <i class="fas fa-bell"></i>
+                    <span class="notification-badge">3</span>
+                </button>
                 
-                <section class="user-profile">
+               
+                   <section class="user-profile">
                     <button class="profile-btn" id="profileBtn">
                         <figure class="avatar">
                             <i class="fas fa-user"></i>
@@ -83,6 +89,7 @@
                         <i class="fas fa-chevron-down"></i>
                     </button>
                 </section>
+                
                 
                 <button class="settings-btn" id="settingsBtn">
                     <i class="fas fa-cog"></i>
@@ -98,7 +105,7 @@
     <main class="main-content">
         <header class="content-header">
             <h1 class="page-title" id="pageTitle">Mood Tracker</h1>
-            <time class="date-info">Today, August 31, 2025</time>
+            <time class="date-info">Today, 05 September, 2025</time>
         </header>
 
         <section class="content-area">
@@ -153,7 +160,7 @@
                             
                             <section class="form-group">
                                 <label class="form-label">Add any notes about your day (optional)</label>
-                                <textarea class="mood-notes" placeholder="What made you feel this way? Any particular events or thoughts?"></textarea>
+                                <textarea class="mood-notes" id="moodNotes" placeholder="What made you feel this way? Any particular events or thoughts?"></textarea>
                             </section>
                             
                             <section class="form-actions">
@@ -166,8 +173,8 @@
                         <header class="history-header">
                             <h3>Your Mood History</h3>
                             <select class="time-selector" id="moodHistoryRange">
-                                <option value="7">Last 7 Days</option>
-                                <option value="30" selected>Last 30 Days</option>
+                                <option value="7" selected>Last 7 Days</option>
+                                <option value="30">Last 30 Days</option>
                                 <option value="90">Last 3 Months</option>
                             </select>
                         </header>
@@ -176,29 +183,24 @@
                             <canvas class="mood-history-chart" id="moodHistoryChart"></canvas>
                         </section>
                         
-                        <section class="mood-insights">
-                            <h4>Your Mood Insights</h4>
-                            <article class="insight-card">
+                        <section class="factors-chart-container">
+                            <h4>What's Affecting Your Mood</h4>
+                            <canvas id="factorsChart"></canvas>
+                        </section>
+
+                        <section class="mood-suggestions" id="moodSuggestions">
+                            <h4>Suggestions Based on Your Mood</h4>
+                            <div class="suggestions-content" id="suggestionsContent">
+                                <p>Track your mood to get personalized suggestions</p>
+                            </div>
+                        </section>
+                        
+                        <section class="advanced-analytics" id="advancedAnalytics">
+                            <h3>Advanced Mood Analytics</h3>
+                            <div class="analytics-placeholder">
                                 <i class="fas fa-chart-line"></i>
-                                <section class="insight-content">
-                                    <h5>Weekly Average: 7.2</h5>
-                                    <p>Your mood has improved by 0.8 points compared to last week</p>
-                                </section>
-                            </article>
-                            <article class="insight-card">
-                                <i class="fas fa-calendar"></i>
-                                <section class="insight-content">
-                                    <h5>Best Day: Wednesday</h5>
-                                    <p>You consistently report higher mood scores on Wednesdays</p>
-                                </section>
-                            </article>
-                            <article class="insight-card">
-                                <i class="fas fa-lightbulb"></i>
-                                <section class="insight-content">
-                                    <h5>Pattern Detected</h5>
-                                    <p>Your mood tends to be better on days when you log exercise</p>
-                                </section>
-                            </article>
+                                <p>Your advanced analytics will appear here as you track more moods</p>
+                            </div>
                         </section>
                     </section>
                 </section>
@@ -244,6 +246,62 @@
                     </article>
                 </section>
                 <p class="emergency-note">You are not alone. Please reach out for support.</p>
+            </section>
+        </article>
+    </dialog>
+
+    <!-- Psychologist Support Modal -->
+    <dialog class="modal" id="supportModal">
+        <article class="modal-content support-modal">
+            <header class="modal-header">
+                <h2>We're Here to Help</h2>
+                <button class="modal-close" id="closeSupportModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </header>
+            <section class="modal-body">
+                <i class="fas fa-hands-helping" style="font-size: 3rem; color: #FDBB30; margin-bottom: 1rem;"></i>
+                <p class="support-text">It seems like you might be going through a difficult time. Would you like to speak with a mental health professional?</p>
+                <section class="support-options">
+                    <button class="support-option-btn" id="connectWithProfessional">
+                        <i class="fas fa-user-md"></i>
+                        <span>Connect with a Psychologist</span>
+                    </button>
+                    <button class="support-option-btn" id="aiSupport">
+                        <i class="fas fa-robot"></i>
+                        <span>Talk to AI Support</span>
+                    </button>
+                    <button class="support-option-btn secondary" id="dismissSupport">
+                        <i class="fas fa-times"></i>
+                        <span>I'm okay for now</span>
+                    </button>
+                </section>
+            </section>
+        </article>
+    </dialog>
+
+    <!-- Share Tips Modal -->
+    <dialog class="modal" id="shareModal">
+        <article class="modal-content share-modal">
+            <header class="modal-header">
+                <h2>Share Your Positivity</h2>
+                <button class="modal-close" id="closeShareModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </header>
+            <section class="modal-body">
+                <i class="fas fa-smile-beam" style="font-size: 3rem; color: #FDBB30; margin-bottom: 1rem;"></i>
+                <p class="share-text">It's great to see you're feeling positive! Would you like to share what's helping you with our community?</p>
+                <section class="share-options">
+                    <button class="share-option-btn" id="shareToCommunity">
+                        <i class="fas fa-users"></i>
+                        <span>Share on Community Page</span>
+                    </button>
+                    <button class="share-option-btn secondary" id="dismissShare">
+                        <i class="fas fa-times"></i>
+                        <span>Not right now</span>
+                    </button>
+                </section>
             </section>
         </article>
     </dialog>
@@ -364,5 +422,6 @@
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="../js/dashboard.js"></script>
+    <script src="../js/mood-tracker.js"></script>
 </body>
 </html>
