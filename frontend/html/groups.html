@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mentaly - Local Support Groups</title>
+    <link rel="stylesheet" href="../css/groups.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Top Navigation Bar -->
+    <nav class="top-navbar">
+        <section class="nav-container">
+            <a href="../html/landing.html" class="logo-link">
+                <h1 class="logo">Mentaly</h1>
+            </a>
+            
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <button class="nav-button" data-page="dashboard">
+                        <i class="fas fa-chart-line"></i>
+                        <span>Dashboard</span>
+                    </button>
+                </li>
+                <li class="nav-item">
+                    <button class="nav-button" data-page="community">
+                        <i class="fas fa-users"></i>
+                        <span>Community</span>
+                    </button>
+                </li>
+                <li class="nav-item">
+                    <button class="nav-button active" data-page="local-support-groups">
+                        <i class="fas fa-hand-holding-heart"></i>
+                        <span>Support Groups</span>
+                    </button>
+                </li>
+            </ul>
+
+            <aside class="nav-tools">
+                <button id="emergencyButton" class="tool-button" data-tool="emergency">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <span>Emergency</span>
+                </button>
+                <button id="profileButton" class="profile-button">
+                    <img id="profileImage" src="https://placehold.co/100x100/BEC0C2/002D62?text=P" alt="Profile Picture" class="profile-image">
+                </button>
+            </aside>
+        </section>
+    </nav>
+    
+    <!-- Emergency Modal -->
+    <dialog id="emergencyModal" class="modal">
+        <article class="modal-content">
+            <header class="modal-header">
+                <h2>Emergency Support</h2>
+                <button class="close-modal-btn" data-modal="emergencyModal">&times;</button>
+            </header>
+            <section class="modal-body">
+                <p>If you or someone you know is in immediate danger, please contact one of the following emergency services:</p>
+                <ul class="emergency-list">
+                    <li><a href="tel:911" class="emergency-link">Emergency Services: 911</a></li>
+                    <li><a href="tel:800-273-8255" class="emergency-link">National Suicide Prevention Lifeline: 1-800-273-8255</a></li>
+                    <li><a href="tel:741741" class="emergency-link">Crisis Text Line: Text HOME to 741741</a></li>
+                </ul>
+            </section>
+        </article>
+    </dialog>
+
+    <main class="main-content">
+        <header class="page-header">
+            <h2 class="page-title">Local Support Groups</h2>
+            <p class="page-subtitle">Find a community that understands and supports you.</p>
+        </header>
+
+        <section class="group-page-layout">
+            <article class="groups-list">
+                <header class="list-header">
+                    <h3>Available Groups</h3>
+                </header>
+                <ul id="groupList" class="groups-ul">
+                    <!-- Group items will be loaded here by JavaScript -->
+                    <li class="group-card" data-group-id="anxiety">
+                        <header>
+                            <h4 class="group-name">Anxiety & Stress Support</h4>
+                        </header>
+                        <p class="group-meta">
+                            <i class="fas fa-users"></i> Members: <b id="members-anxiety">...</b>
+                            <i class="fas fa-tag"></i> Topic: Anxiety
+                        </p>
+                        <p class="group-description">A safe space to share experiences and coping strategies for anxiety and stress.</p>
+                        <footer class="group-actions">
+                            <button class="action-btn join-btn" data-group-id="anxiety">Join Chat</button>
+                        </footer>
+                    </li>
+                    <li class="group-card" data-group-id="depression">
+                        <header>
+                            <h4 class="group-name">Depression & Mood Disorders</h4>
+                        </header>
+                        <p class="group-meta">
+                            <i class="fas fa-users"></i> Members: <b id="members-depression">...</b>
+                            <i class="fas fa-tag"></i> Topic: Depression
+                        </p>
+                        <p class="group-description">Connect with others navigating the challenges of depression and mood regulation.</p>
+                        <footer class="group-actions">
+                            <button class="action-btn join-btn" data-group-id="depression">Join Chat</button>
+                        </footer>
+                    </li>
+                    <li class="group-card" data-group-id="grief">
+                        <header>
+                            <h4 class="group-name">Grief & Loss Support</h4>
+                        </header>
+                        <p class="group-meta">
+                            <i class="fas fa-users"></i> Members: <b id="members-grief">...</b>
+                            <i class="fas fa-tag"></i> Topic: Grief
+                        </p>
+                        <p class="group-description">A gentle space to support one another through the process of grieving.</p>
+                        <footer class="group-actions">
+                            <button class="action-btn join-btn" data-group-id="grief">Join Chat</button>
+                        </footer>
+                    </li>
+                </ul>
+            </article>
+
+            <article class="chat-container hidden" id="chatContainer">
+                <header class="chat-header">
+                    <button id="leaveChat" class="action-btn leave-btn"><i class="fas fa-arrow-left"></i></button>
+                    <h3 id="chatTitle"></h3>
+                </header>
+                <section class="chat-messages" id="chatMessages">
+                    <!-- Chat messages will be appended here -->
+                </section>
+                <footer class="chat-input-area">
+                    <form id="chatForm">
+                        <input type="text" id="messageInput" placeholder="Type your message..." autocomplete="off">
+                        <button type="submit" class="action-btn send-btn"><i class="fas fa-paper-plane"></i></button>
+                    </form>
+                </footer>
+            </article>
+        </section>
+    </main>
+
+    <script type="module" src="../js/groups.js"></script>
+</body>
+</html>

@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mentaly - Resources Library</title>
+    <link rel="stylesheet" href="../css/resources.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="top-navbar">
+    <section class="nav-container">
+        <a href="../html/pys-dashboard.html" class="logo-link">
+            <h1 class="logo">Mentaly</h1>
+        </a>
+        
+        <menu class="nav-menu">
+            <li class="nav-item">
+                <button class="nav-button" data-page="psy-dashboard" onclick="window.location.href='../html/pys-dashboard.html'">
+                    <i class="fas fa-chart-line"></i>
+                    <span>Dashboard</span>
+                </button>
+            </li>
+            <li class="nav-item">
+                <button class="nav-button active" data-page="patients" onclick="window.location.href='../html/patients.html'">
+                    <i class="fas fa-user-friends"></i>
+                    <span>Patients</span>
+                </button>
+            </li>
+            <li class="nav-item">
+                <button class="nav-button" data-page="notes" onclick="window.location.href='../html/progress-notes.html'">
+                    <i class="fas fa-file-medical"></i>
+                    <span>Progress Notes</span>
+                </button>
+            </li>
+            <li class="nav-item">
+                <button class="nav-button" data-page="telehealth" onclick="window.location.href='../html/telehealth.html'">
+                    <i class="fas fa-video"></i>
+                    <span>Telehealth</span>
+                </button>
+            </li>
+            <li class="nav-item">
+                <button class="nav-button" data-page="messages" onclick="window.location.href='../html/messages.html'">
+                    <i class="fas fa-comments"></i>
+                    <span>Messages</span>
+                </button>
+            </li>
+            <li class="nav-item">
+                <button class="nav-button" data-page="tasks" onclick="window.location.href='../html/tasks.html'">
+                    <i class="fas fa-tasks"></i>
+                    <span>Tasks</span>
+                </button>
+            </li>
+            <li class="nav-item">
+                <button class="nav-button" data-page="resources" onclick="window.location.href='../html/resources.html'">
+                    <i class="fas fa-book-medical"></i>
+                    <span>Resources</span>
+                </button>
+            </li>
+        </menu>
+
+        <section class="nav-actions">
+            <button class="emergency-btn" id="emergencyBtn">
+                <i class="fas fa-phone"></i>
+                <span>Emergency</span>
+            </button>
+            
+            <section class="accessibility-toggles">
+                <button class="accessibility-btn" id="fontSizeToggle" title="Increase font size">
+                    <i class="fas fa-text-height"></i>
+                </button>
+                <button class="accessibility-btn" id="contrastToggle" title="High contrast mode">
+                    <i class="fas fa-adjust"></i>
+                </button>
+            </section>
+            
+            <section class="user-profile">
+                <button class="profile-btn" id="profileBtn">
+                    <figure class="avatar">
+                        <i class="fas fa-user-md"></i>
+                    </figure>
+                    <span class="username">Dr. Sarah Johnson</span>
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+            </section>
+            
+            <button class="menu-toggle" id="menuToggle">
+                <i class="fas fa-bars"></i>
+            </button>
+        </section>
+    </section>
+</nav>
+
+    <main class="main-content">
+        <header class="content-header">
+            <h1 class="page-title" id="pageTitle">Resource Library</h1>
+            <section class="header-actions">
+                <button class="primary-btn" id="uploadResourceBtn">
+                    <i class="fas fa-upload"></i>
+                    Upload Resource
+                </button>
+                <time class="date-info">Today, September 2, 2025</time>
+            </section>
+        </header>
+
+        <section class="content-area">
+            <!-- Resource Stats Overview -->
+            <article class="stats-overview">
+                <section class="stat-card">
+                    <figure class="stat-icon">
+                        <i class="fas fa-book"></i>
+                    </figure>
+                    <section class="stat-content">
+                        <h3 class="stat-value" id="totalResources">127</h3>
+                        <p class="stat-label">Total Resources</p>
+                    </section>
+                </section>
+                
+                <section class="stat-card">
+                    <figure class="stat-icon">
+                        <i class="fas fa-star"></i>
+                    </figure>
+                    <section class="stat-content">
+                        <h3 class="stat-value" id="favoriteResources">23</h3>
+                        <p class="stat-label">Favorites</p>
+                    </section>
+                </section>
+                
+                <section class="stat-card">
+                    <figure class="stat-icon">
+                        <i class="fas fa-share"></i>
+                    </figure>
+                    <section class="stat-content">
+                        <h3 class="stat-value" id="sharedResources">48</h3>
+                        <p class="stat-label">Shared This Month</p>
+                    </section>
+                </section>
+                
+                <section class="stat-card">
+                    <figure class="stat-icon">
+                        <i class="fas fa-eye"></i>
+                    </figure>
+                    <section class="stat-content">
+                        <h3 class="stat-value" id="viewedResources">156</h3>
+                        <p class="stat-label">Views This Month</p>
+                    </section>
+                </section>
+            </article>
+
+            <!-- Resource Search and Filters -->
+            <article class="card filters-card">
+                <section class="search-section">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="resourceSearch" placeholder="Search resources by title, description, or tags...">
+                </section>
+                
+                <section class="filters-section">
+                    <section class="filter-group">
+                        <label for="typeFilter">Type</label>
+                        <select id="typeFilter">
+                            <option value="all">All Types</option>
+                            <option value="pdf">PDF/Worksheet</option>
+                            <option value="video">Video</option>
+                            <option value="article">Article</option>
+                            <option value="link">External Link</option>
+                        </select>
+                    </section>
+                    
+                    <section class="filter-group">
+                        <label for="categoryFilter">Category</label>
+                        <select id="categoryFilter">
+                            <option value="all">All Categories</option>
+                            <option value="anxiety">Anxiety</option>
+                            <option value="depression">Depression</option>
+                            <option value="crisis">Crisis</option>
+                            <option value="mindfulness">Mindfulness</option>
+                            <option value="cbt">CBT</option>
+                            <option value="dbt">DBT</option>
+                        </select>
+                    </section>
+                    
+                    <section class="filter-group">
+                        <label for="audienceFilter">Audience</label>
+                        <select id="audienceFilter">
+                            <option value="all">All Audiences</option>
+                            <option value="clinician">Clinician Resources</option>
+                            <option value="client">Client Resources</option>
+                        </select>
+                    </section>
+                    
+                    <button class="filter-btn" id="showFavorites">
+                        <i class="fas fa-star"></i>
+                        Favorites Only
+                    </button>
+                    
+                    <button class="filter-btn" id="clearFilters">
+                        <i class="fas fa-times"></i>
+                        Clear Filters
+                    </button>
+                </section>
+            </article>
+
+            <!-- Resources Grid -->
+            <article class="card resources-card">
+                <header class="card-header">
+                    <h2>Resources</h2>
+                    <section class="view-options">
+                        <button class="view-option active" data-view="grid">
+                            <i class="fas fa-th"></i>
+                        </button>
+                        <button class="view-option" data-view="list">
+                            <i class="fas fa-list"></i>
+                        </button>
+                    </section>
+                </header>
+                
+                <section class="resources-grid" id="resourcesGrid">
+                    <!-- Resource cards will be populated by JavaScript -->
+                </section>
+                
+                <section class="resources-list" id="resourcesList" style="display: none;">
+                    <table class="resources-table">
+                        <thead>
+                            <tr>
+                                <th>Title</th>
+                                <th>Type</th>
+                                <th>Categories</th>
+                                <th>Views</th>
+                                <th>Shared</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="resourcesTableBody">
+                            <!-- Resource rows will be populated by JavaScript -->
+                        </tbody>
+                    </table>
+                </section>
+                
+                <footer class="table-footer">
+                    <p id="showingCount">Showing 0 of 0 resources</p>
+                    <section class="pagination">
+                        <button class="pagination-btn" id="prevPage" disabled>
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+                        <button class="pagination-btn active">1</button>
+                        <button class="pagination-btn">2</button>
+                        <button class="pagination-btn">3</button>
+                        <button class="pagination-btn" id="nextPage">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                    </section>
+                </footer>
+            </article>
+        </section>
+    </main>
+
+    <!-- Upload Resource Modal -->
+    <dialog class="modal" id="uploadResourceModal">
+        <article class="modal-content upload-resource-modal">
+            <header class="modal-header">
+                <h2>Upload New Resource</h2>
+                <button class="modal-close" id="closeUploadModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </header>
+            <section class="modal-body">
+                <form id="uploadResourceForm" class="resource-form">
+                    <section class="form-section">
+                        <h3>Resource Information</h3>
+                        <section class="form-group">
+                            <label for="resourceTitle">Title *</label>
+                            <input type="text" id="resourceTitle" name="title" required>
+                        </section>
+                        
+                        <section class="form-group">
+                            <label for="resourceDescription">Description</label>
+                            <textarea id="resourceDescription" name="description" rows="3"></textarea>
+                        </section>
+                        
+                        <section class="form-row">
+                            <section class="form-group">
+                                <label for="resourceType">Type *</label>
+                                <select id="resourceType" name="type" required>
+                                    <option value="">Select Type</option>
+                                    <option value="pdf">PDF/Worksheet</option>
+                                    <option value="video">Video</option>
+                                    <option value="article">Article</option>
+                                    <option value="link">External Link</option>
+                                </select>
+                            </section>
+                            
+                            <section class="form-group">
+                                <label for="resourceAudience">Audience *</label>
+                                <select id="resourceAudience" name="audience" required>
+                                    <option value="">Select Audience</option>
+                                    <option value="clinician">Clinician</option>
+                                    <option value="client">Client</option>
+                                </select>
+                            </section>
+                        </section>
+                        
+                        <section class="form-group" id="fileUploadGroup">
+                            <label for="resourceFile">File *</label>
+                            <input type="file" id="resourceFile" name="file" accept=".pdf,.doc,.docx,.txt">
+                            <p class="form-help">Maximum file size: 10MB</p>
+                        </section>
+                        
+                        <section class="form-group" id="videoUrlGroup" style="display: none;">
+                            <label for="videoUrl">Video URL *</label>
+                            <input type="url" id="videoUrl" name="videoUrl" placeholder="https://...">
+                        </section>
+                        
+                        <section class="form-group" id="externalUrlGroup" style="display: none;">
+                            <label for="externalUrl">External URL *</label>
+                            <input type="url" id="externalUrl" name="externalUrl" placeholder="https://...">
+                        </section>
+                    </section>
+                    
+                    <section class="form-section">
+                        <h3>Categories & Tags</h3>
+                        <section class="form-group">
+                            <label for="resourceCategories">Categories (Select multiple)</label>
+                            <select id="resourceCategories" name="categories" multiple>
+                                <option value="anxiety">Anxiety</option>
+                                <option value="depression">Depression</option>
+                                <option value="crisis">Crisis</option>
+                                <option value="mindfulness">Mindfulness</option>
+                                <option value="cbt">CBT</option>
+                                <option value="dbt">DBT</option>
+                                <option value="trauma">Trauma</option>
+                                <option value="relationships">Relationships</option>
+                                <option value="sleep">Sleep</option>
+                                <option value="stress">Stress</option>
+                            </select>
+                        </section>
+                        
+                        <section class="form-group">
+                            <label for="resourceTags">Custom Tags (comma separated)</label>
+                            <input type="text" id="resourceTags" name="tags" placeholder="tag1, tag2, tag3">
+                        </section>
+                    </section>
+                    
+                    <section class="form-actions">
+                        <button type="button" class="cancel-btn" id="cancelUpload">Cancel</button>
+                        <button type="submit" class="save-btn">Upload Resource</button>
+                    </section>
+                </form>
+            </section>
+        </article>
+    </dialog>
+
+    <!-- Share Resource Modal -->
+    <dialog class="modal" id="shareResourceModal">
+        <article class="modal-content share-resource-modal">
+            <header class="modal-header">
+                <h2>Share Resource</h2>
+                <button class="modal-close" id="closeShareModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </header>
+            <section class="modal-body">
+                <form id="shareResourceForm" class="resource-form">
+                    <input type="hidden" id="shareResourceId" name="resourceId">
+                    
+                    <section class="form-section">
+                        <h3>Select Patients</h3>
+                        <section class="form-group">
+                            <label for="patientSearchShare">Search Patients</label>
+                            <input type="text" id="patientSearchShare" placeholder="Search patients...">
+                        </section>
+                        
+                        <section class="patients-list-share" id="patientsListShare">
+                            <!-- Patients will be populated by JavaScript -->
+                        </section>
+                    </section>
+                    
+                    <section class="form-section">
+                        <h3>Message (Optional)</h3>
+                        <section class="form-group">
+                            <textarea id="shareMessage" name="message" rows="3" placeholder="Add a personal message..."></textarea>
+                        </section>
+                    </section>
+                    
+                    <section class="form-actions">
+                        <button type="button" class="cancel-btn" id="cancelShare">Cancel</button>
+                        <button type="submit" class="save-btn">Share Resource</button>
+                    </section>
+                </form>
+            </section>
+        </article>
+    </dialog>
+
+    <!-- Link to Task Modal -->
+    <dialog class="modal" id="linkTaskModal">
+        <article class="modal-content link-task-modal">
+            <header class="modal-header">
+                <h2>Link Resource to Task</h2>
+                <button class="modal-close" id="closeLinkTaskModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </header>
+            <section class="modal-body">
+                <form id="linkTaskForm" class="resource-form">
+                    <input type="hidden" id="linkResourceId" name="resourceId">
+                    
+                    <section class="form-section">
+                        <section class="form-group">
+                            <label for="taskTitle">Task Title *</label>
+                            <input type="text" id="taskTitle" name="taskTitle" required>
+                        </section>
+                        
+                        <section class="form-group">
+                            <label for="taskDueDate">Due Date</label>
+                            <input type="date" id="taskDueDate" name="dueDate">
+                        </section>
+                        
+                        <section class="form-group">
+                            <label for="taskPatient">Assign to Patient</label>
+                            <select id="taskPatient" name="patientId">
+                                <option value="">Select Patient</option>
+                                <!-- Patients will be populated by JavaScript -->
+                            </select>
+                        </section>
+                        
+                        <section class="form-group">
+                            <label for="taskNotes">Notes</label>
+                            <textarea id="taskNotes" name="notes" rows="3"></textarea>
+                        </section>
+                    </section>
+                    
+                    <section class="form-actions">
+                        <button type="button" class="cancel-btn" id="cancelLinkTask">Cancel</button>
+                        <button type="submit" class="save-btn">Create Task</button>
+                    </section>
+                </form>
+            </section>
+        </article>
+    </dialog>
+
+    <!-- Resource Preview Modal -->
+    <dialog class="modal" id="resourcePreviewModal">
+        <article class="modal-content preview-resource-modal">
+            <header class="modal-header">
+                <h2 id="previewResourceTitle">Resource Preview</h2>
+                <button class="modal-close" id="closePreviewModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </header>
+            <section class="modal-body" id="previewResourceContent">
+                <!-- Resource preview will be loaded here dynamically -->
+            </section>
+        </article>
+    </dialog>
+
+    <!-- Emergency Modal -->
+    <dialog class="modal" id="emergencyModal">
+        <article class="modal-content emergency-modal">
+            <header class="modal-header">
+                <h2>Emergency Resources</h2>
+                <button class="modal-close" id="closeEmergencyModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </header>
+            <section class="modal-body">
+                <p class="emergency-text">Critical mental health emergency resources for your patients:</p>
+                <section class="emergency-list">
+                    <article class="emergency-item">
+                        <h3>Crisis Hotline</h3>
+                        <p>24/7 Confidential Support</p>
+                        <a href="tel:0800567567" class="emergency-call-link">
+                            <i class="fas fa-phone"></i>
+                            0800 567 567
+                        </a>
+                    </article>
+                    <article class="emergency-item">
+                        <h3>SADAG Helpline</h3>
+                        <p>South African Depression & Anxiety Group</p>
+                        <a href="tel:0800121314" class="emergency-call-link">
+                            <i class="fas fa-phone"></i>
+                            0800 121 314
+                        </a>
+                    </article>
+                    <article class="emergency-item">
+                        <h3>Emergency Services</h3>
+                        <p>Medical Emergency</p>
+                        <a href="tel:10177" class="emergency-call-link">
+                            <i class="fas fa-phone"></i>
+                            10177
+                        </a>
+                    </article>
+                </section>
+                <p class="emergency-note">Quick reference for patient emergencies</p>
+            </section>
+        </article>
+    </dialog>
+
+    <script src="../js/resources.js"></script>
+    <script src="../js/shared.js"></script>
+</body>
+</html>

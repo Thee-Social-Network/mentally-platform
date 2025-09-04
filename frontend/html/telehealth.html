@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mentaly - Telehealth</title>
+    <link rel="stylesheet" href="../css/telehealth.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+   <nav class="top-navbar">
+    <section class="nav-container">
+        <a href="../html/pys-dashboard.html" class="logo-link">
+            <h1 class="logo">Mentaly</h1>
+        </a>
+        
+        <menu class="nav-menu">
+            <li class="nav-item">
+                <button class="nav-button" data-page="psy-dashboard" onclick="window.location.href='../html/pys-dashboard.html'">
+                    <i class="fas fa-chart-line"></i>
+                    <span>Dashboard</span>
+                </button>
+            </li>
+            <li class="nav-item">
+                <button class="nav-button active" data-page="patients" onclick="window.location.href='../html/patients.html'">
+                    <i class="fas fa-user-friends"></i>
+                    <span>Patients</span>
+                </button>
+            </li>
+            <li class="nav-item">
+                <button class="nav-button" data-page="notes" onclick="window.location.href='../html/progress-notes.html'">
+                    <i class="fas fa-file-medical"></i>
+                    <span>Progress Notes</span>
+                </button>
+            </li>
+            <li class="nav-item">
+                <button class="nav-button" data-page="telehealth" onclick="window.location.href='../html/telehealth.html'">
+                    <i class="fas fa-video"></i>
+                    <span>Telehealth</span>
+                </button>
+            </li>
+            <li class="nav-item">
+                <button class="nav-button" data-page="messages" onclick="window.location.href='../html/messages.html'">
+                    <i class="fas fa-comments"></i>
+                    <span>Messages</span>
+                </button>
+            </li>
+            <li class="nav-item">
+                <button class="nav-button" data-page="tasks" onclick="window.location.href='../html/tasks.html'">
+                    <i class="fas fa-tasks"></i>
+                    <span>Tasks</span>
+                </button>
+            </li>
+            <li class="nav-item">
+                <button class="nav-button" data-page="resources" onclick="window.location.href='../html/resources.html'">
+                    <i class="fas fa-book-medical"></i>
+                    <span>Resources</span>
+                </button>
+            </li>
+        </menu>
+
+        <section class="nav-actions">
+            <button class="emergency-btn" id="emergencyBtn">
+                <i class="fas fa-phone"></i>
+                <span>Emergency</span>
+            </button>
+            
+            <section class="accessibility-toggles">
+                <button class="accessibility-btn" id="fontSizeToggle" title="Increase font size">
+                    <i class="fas fa-text-height"></i>
+                </button>
+                <button class="accessibility-btn" id="contrastToggle" title="High contrast mode">
+                    <i class="fas fa-adjust"></i>
+                </button>
+            </section>
+            
+            <section class="user-profile">
+                <button class="profile-btn" id="profileBtn">
+                    <figure class="avatar">
+                        <i class="fas fa-user-md"></i>
+                    </figure>
+                    <span class="username">Dr. Sarah Johnson</span>
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+            </section>
+            
+            <button class="menu-toggle" id="menuToggle">
+                <i class="fas fa-bars"></i>
+            </button>
+        </section>
+    </section>
+</nav>
+
+    <main class="main-content">
+        <header class="content-header">
+            <h1 class="page-title" id="pageTitle">Telehealth Sessions</h1>
+            <section class="header-actions">
+                <button class="primary-btn" id="startSessionBtn">
+                    <i class="fas fa-plus"></i>
+                    Start New Session
+                </button>
+                <time class="date-info">Today, September 2, 2025</time>
+            </section>
+        </header>
+
+        <section class="content-area">
+            <!-- Upcoming Sessions -->
+            <article class="card upcoming-sessions-card">
+                <header class="card-header">
+                    <h2>Upcoming Sessions</h2>
+                    <button class="card-action-btn">
+                        <i class="fas fa-ellipsis-h"></i>
+                    </button>
+                </header>
+                <section class="sessions-list" id="upcomingSessionsList">
+                    <!-- Sessions will be populated by JavaScript -->
+                </section>
+            </article>
+
+            <!-- Active Sessions -->
+            <article class="card active-sessions-card">
+                <header class="card-header">
+                    <h2>Active Sessions</h2>
+                    <button class="card-action-btn">
+                        <i class="fas fa-ellipsis-h"></i>
+                    </button>
+                </header>
+                <section class="sessions-list" id="activeSessionsList">
+                    <!-- Active sessions will be populated by JavaScript -->
+                </section>
+            </article>
+
+            <!-- Session Controls (Visible when in a session) -->
+            <article class="card session-controls-card" id="sessionControls" style="display: none;">
+                <header class="card-header">
+                    <h2>Session Controls</h2>
+                    <button class="card-action-btn" id="minimizeControls">
+                        <i class="fas fa-minus"></i>
+                    </button>
+                </header>
+                <section class="controls-grid">
+                    <button class="control-btn" id="toggleVideo">
+                        <i class="fas fa-video"></i>
+                        <span>Video On</span>
+                    </button>
+                    <button class="control-btn" id="toggleAudio">
+                        <i class="fas fa-microphone"></i>
+                        <span>Audio On</span>
+                    </button>
+                    <button class="control-btn" id="shareScreen">
+                        <i class="fas fa-desktop"></i>
+                        <span>Share Screen</span>
+                    </button>
+                    <button class="control-btn" id="openChat">
+                        <i class="fas fa-comment"></i>
+                        <span>Chat</span>
+                    </button>
+                    <button class="control-btn" id="shareResource">
+                        <i class="fas fa-paperclip"></i>
+                        <span>Share Resource</span>
+                    </button>
+                    <button class="control-btn danger" id="endSession">
+                        <i class="fas fa-phone-slash"></i>
+                        <span>End Session</span>
+                    </button>
+                </section>
+            </article>
+
+            <!-- Video Container (Visible when in a session) -->
+            <article class="card video-container-card" id="videoContainer" style="display: none;">
+                <header class="card-header">
+                    <h2 id="sessionTitle">Session with Patient</h2>
+                    <button class="card-action-btn" id="fullscreenToggle">
+                        <i class="fas fa-expand"></i>
+                    </button>
+                </header>
+                <section class="video-grid" id="videoGrid">
+                    <section class="video-item local-video">
+                        <video id="localVideo" autoplay muted></video>
+                        <section class="video-overlay">
+                            <span class="participant-name">You</span>
+                            <section class="video-controls">
+                                <button class="control-indicator video-off" id="localVideoIndicator">
+                                    <i class="fas fa-video-slash"></i>
+                                </button>
+                                <button class="control-indicator audio-off" id="localAudioIndicator">
+                                    <i class="fas fa-microphone-slash"></i>
+                                </button>
+                            </section>
+                        </section>
+                    </section>
+                    <section class="video-item remote-video">
+                        <video id="remoteVideo" autoplay></video>
+                        <section class="video-overlay">
+                            <span class="participant-name" id="remoteParticipantName">Patient</span>
+                            <section class="connection-status" id="connectionStatus">
+                                <i class="fas fa-circle"></i>
+                                <span>Connected</span>
+                            </section>
+                        </section>
+                    </section>
+                </section>
+            </article>
+
+            <!-- Waiting Room (Visible when session is created but not started) -->
+            <article class="card waiting-room-card" id="waitingRoom" style="display: none;">
+                <header class="card-header">
+                    <h2>Waiting Room</h2>
+                    <button class="card-action-btn" id="closeWaitingRoom">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </header>
+                <section class="waiting-room-content">
+                    <section class="waiting-room-info">
+                        <i class="fas fa-clock"></i>
+                        <h3>Session Ready</h3>
+                        <p>Share this link with your patient to allow them to join:</p>
+                        <section class="session-link-container">
+                            <input type="text" id="sessionLink" readonly>
+                            <button class="copy-link-btn" id="copyLinkBtn">
+                                <i class="fas fa-copy"></i>
+                            </button>
+                        </section>
+                        <p class="waiting-notice">Waiting for patient to join...</p>
+                    </section>
+                    <section class="waiting-participants" id="waitingParticipants">
+                        <!-- Participants waiting to join will appear here -->
+                    </section>
+                    <section class="waiting-room-actions">
+                        <button class="secondary-btn" id="startWithoutPatient">
+                            Start Session Without Patient
+                        </button>
+                        <button class="primary-btn" id="admitAllPatients" disabled>
+                            Admit All (0)
+                        </button>
+                    </section>
+                </section>
+            </article>
+
+            <!-- Session History -->
+            <article class="card session-history-card">
+                <header class="card-header">
+                    <h2>Recent Sessions</h2>
+                    <button class="card-action-btn">
+                        <i class="fas fa-ellipsis-h"></i>
+                    </button>
+                </header>
+                <section class="history-filters">
+                    <section class="filter-group">
+                        <label for="dateFilter">Date Range</label>
+                        <select id="dateFilter">
+                            <option value="today">Today</option>
+                            <option value="week">This Week</option>
+                            <option value="month">This Month</option>
+                            <option value="all">All Time</option>
+                        </select>
+                    </section>
+                    <section class="filter-group">
+                        <label for="statusFilter">Status</label>
+                        <select id="statusFilter">
+                            <option value="all">All Statuses</option>
+                            <option value="completed">Completed</option>
+                            <option value="cancelled">Cancelled</option>
+                            <option value="no-show">No Show</option>
+                        </select>
+                    </section>
+                </section>
+                <section class="sessions-table-container">
+                    <table class="sessions-table">
+                        <thead>
+                            <tr>
+                                <th>Date & Time</th>
+                                <th>Patient</th>
+                                <th>Duration</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="sessionsTableBody">
+                            <!-- Session history will be populated by JavaScript -->
+                        </tbody>
+                    </table>
+                </section>
+            </article>
+        </section>
+    </main>
+
+    <!-- Session Modal -->
+    <dialog class="modal" id="sessionModal">
+        <article class="modal-content session-modal">
+            <header class="modal-header">
+                <h2>Start New Session</h2>
+                <button class="modal-close" id="closeSessionModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </header>
+            <section class="modal-body">
+                <form id="sessionForm" class="session-form">
+                    <section class="form-group">
+                        <label for="patientSelect">Select Patient</label>
+                        <select id="patientSelect" required>
+                            <option value="">Choose a patient...</option>
+                            <!-- Patients will be populated by JavaScript -->
+                        </select>
+                    </section>
+                    <section class="form-group">
+                        <label for="sessionType">Session Type</label>
+                        <select id="sessionType" required>
+                            <option value="individual">Individual Therapy</option>
+                            <option value="couples">Couples Therapy</option>
+                            <option value="family">Family Therapy</option>
+                            <option value="group">Group Therapy</option>
+                        </select>
+                    </section>
+                    <section class="form-group">
+                        <label for="sessionDuration">Duration (minutes)</label>
+                        <input type="number" id="sessionDuration" min="15" max="120" value="45" required>
+                    </section>
+                    <section class="form-group">
+                        <label for="sessionNotes">Notes (Optional)</label>
+                        <textarea id="sessionNotes" rows="3" placeholder="Add any notes for this session..."></textarea>
+                    </section>
+                    <section class="form-checkbox">
+                        <input type="checkbox" id="sendInvite" checked>
+                        <label for="sendInvite">Send invitation to patient</label>
+                    </section>
+                    <section class="form-actions">
+                        <button type="button" class="cancel-btn" id="cancelSession">Cancel</button>
+                        <button type="submit" class="primary-btn">Start Session</button>
+                    </section>
+                </form>
+            </section>
+        </article>
+    </dialog>
+
+    <!-- Attendance Modal -->
+    <dialog class="modal" id="attendanceModal">
+        <article class="modal-content attendance-modal">
+            <header class="modal-header">
+                <h2>Mark Attendance</h2>
+                <button class="modal-close" id="closeAttendanceModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </header>
+            <section class="modal-body">
+                <form id="attendanceForm">
+                    <input type="hidden" id="attendanceSessionId">
+                    <section class="form-group">
+                        <label>Attendance Status</label>
+                        <section class="attendance-options">
+                            <label class="attendance-option">
+                                <input type="radio" name="attendance" value="attended" checked>
+                                <span class="attendance-label attended">
+                                    <i class="fas fa-check-circle"></i>
+                                    Attended
+                                </span>
+                            </label>
+                            <label class="attendance-option">
+                                <input type="radio" name="attendance" value="cancelled">
+                                <span class="attendance-label cancelled">
+                                    <i class="fas fa-times-circle"></i>
+                                    Cancelled
+                                </span>
+                            </label>
+                            <label class="attendance-option">
+                                <input type="radio" name="attendance" value="no-show">
+                                <span class="attendance-label no-show">
+                                    <i class="fas fa-user-slash"></i>
+                                    No Show
+                                </span>
+                            </label>
+                        </section>
+                    </section>
+                    <section class="form-group" id="cancellationReasonGroup" style="display: none;">
+                        <label for="cancellationReason">Cancellation Reason</label>
+                        <textarea id="cancellationReason" rows="2" placeholder="Reason for cancellation..."></textarea>
+                    </section>
+                    <section class="form-actions">
+                        <button type="button" class="cancel-btn" id="cancelAttendance">Cancel</button>
+                        <button type="submit" class="primary-btn">Save Attendance</button>
+                    </section>
+                </form>
+            </section>
+        </article>
+    </dialog>
+
+    <!-- Chat Modal -->
+    <dialog class="modal" id="chatModal">
+        <article class="modal-content chat-modal">
+            <header class="modal-header">
+                <h2>Session Chat</h2>
+                <button class="modal-close" id="closeChatModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </header>
+            <section class="modal-body">
+                <section class="chat-messages" id="chatMessages">
+                    <!-- Chat messages will appear here -->
+                </section>
+                <section class="chat-input-container">
+                    <input type="text" id="chatInput" placeholder="Type a message...">
+                    <button class="chat-send-btn" id="chatSendBtn">
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </section>
+                <section class="chat-resources">
+                    <button class="resource-btn" id="sendResourceBtn">
+                        <i class="fas fa-paperclip"></i>
+                        Send Resource
+                    </button>
+                </section>
+            </section>
+        </article>
+    </dialog>
+
+    <!-- Resource Modal -->
+    <dialog class="modal" id="resourceModal">
+        <article class="modal-content resource-modal">
+            <header class="modal-header">
+                <h2>Share Resource</h2>
+                <button class="modal-close" id="closeResourceModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </header>
+            <section class="modal-body">
+                <form id="resourceForm">
+                    <section class="form-group">
+                        <label for="resourceType">Resource Type</label>
+                        <select id="resourceType">
+                            <option value="pdf">PDF Document</option>
+                            <option value="link">Web Link</option>
+                            <option value="exercise">Therapeutic Exercise</option>
+                        </select>
+                    </section>
+                    <section class="form-group" id="resourceFileGroup">
+                        <label for="resourceFile">Select File</label>
+                        <input type="file" id="resourceFile" accept=".pdf">
+                    </section>
+                    <section class="form-group" id="resourceLinkGroup" style="display: none;">
+                        <label for="resourceLink">Web Address</label>
+                        <input type="url" id="resourceLink" placeholder="https://...">
+                    </section>
+                    <section class="form-group">
+                        <label for="resourceMessage">Message (Optional)</label>
+                        <textarea id="resourceMessage" rows="2" placeholder="Add a message with this resource..."></textarea>
+                    </section>
+                    <section class="form-actions">
+                        <button type="button" class="cancel-btn" id="cancelResource">Cancel</button>
+                        <button type="submit" class="primary-btn">Send Resource</button>
+                    </section>
+                </form>
+            </section>
+        </article>
+    </dialog>
+
+    <!-- Follow-up Modal -->
+    <dialog class="modal" id="followupModal">
+        <article class="modal-content followup-modal">
+            <header class="modal-header">
+                <h2>Send Follow-up Message</h2>
+                <button class="modal-close" id="closeFollowupModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </header>
+            <section class="modal-body">
+                <form id="followupForm">
+                    <input type="hidden" id="followupSessionId">
+                    <section class="form-group">
+                        <label for="followupPatient">Patient</label>
+                        <input type="text" id="followupPatient" readonly>
+                    </section>
+                    <section class="form-group">
+                        <label for="followupMessage">Message</label>
+                        <textarea id="followupMessage" rows="4" required placeholder="Write a follow-up message..."></textarea>
+                    </section>
+                    <section class="form-checkbox">
+                        <input type="checkbox" id="includeSummary" checked>
+                        <label for="includeSummary">Include session summary</label>
+                    </section>
+                    <section class="form-checkbox">
+                        <input type="checkbox" id="scheduleNext" checked>
+                        <label for="scheduleNext">Schedule next session</label>
+                    </section>
+                    <section class="form-actions">
+                        <button type="button" class="cancel-btn" id="cancelFollowup">Cancel</button>
+                        <button type="submit" class="primary-btn">Send Message</button>
+                    </section>
+                </form>
+            </section>
+        </article>
+    </dialog>
+    
+
+    <!-- Emergency Modal -->
+    <dialog class="modal" id="emergencyModal">
+        <article class="modal-content emergency-modal">
+            <header class="modal-header">
+                <h2>Emergency Resources</h2>
+                <button class="modal-close" id="closeEmergencyModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </header>
+            <section class="modal-body">
+                <p class="emergency-text">Critical mental health emergency resources for your patients:</p>
+                <section class="emergency-list">
+                    <article class="emergency-item">
+                        <h3>Crisis Hotline</h3>
+                        <p>24/7 Confidential Support</p>
+                        <a href="tel:0800567567" class="emergency-call-link">
+                            <i class="fas fa-phone"></i>
+                            0800 567 567
+                        </a>
+                    </article>
+                    <article class="emergency-item">
+                        <h3>SADAG Helpline</h3>
+                        <p>South African Depression & Anxiety Group</p>
+                        <a href="tel:0800121314" class="emergency-call-link">
+                            <i class="fas fa-phone"></i>
+                            0800 121 314
+                        </a>
+                    </article>
+                    <article class="emergency-item">
+                        <h3>Emergency Services</h3>
+                        <p>Medical Emergency</p>
+                        <a href="tel:10177" class="emergency-call-link">
+                            <i class="fas fa-phone"></i>
+                            10177
+                        </a>
+                    </article>
+                </section>
+                <p class="emergency-note">Quick reference for patient emergencies</p>
+            </section>
+        </article>
+    </dialog>
+
+    <script src="../js/telehealth.js"></script>
+    <script src="../js/shared.js"></script>
+</body>
+</html>

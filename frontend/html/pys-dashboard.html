@@ -1,0 +1,814 @@
+<!-- psy-dashboard.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mentaly - Psychologist Dashboard</title>
+    <link rel="stylesheet" href="../css/psy-dashboard.css">
+    <link rel="stylesheet" href="../css/telehealth.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="top-navbar">
+        <section class="nav-container">
+            <a href="#" class="logo-link">
+                <h1 class="logo">Mentaly</h1>
+            </a>
+            
+            <menu class="nav-menu">
+                <li class="nav-item">
+                    <button class="nav-button active" data-page="psy-dashboard">
+                        <i class="fas fa-chart-line"></i>
+                        <span>Dashboard</span>
+                    </button>
+                </li>
+                <li class="nav-item">
+                    <button class="nav-button" data-page="patients">
+                        <i class="fas fa-user-friends"></i>
+                        <span>Patients</span>
+                    </button>
+                </li>
+                <li class="nav-item">
+                    <button class="nav-button" data-page="notes">
+                        <i class="fas fa-file-medical"></i>
+                        <span>Progress Notes</span>
+                    </button>
+                </li>
+                <li class="nav-item">
+                    <button class="nav-button" data-page="telehealth">
+                        <i class="fas fa-video"></i>
+                        <span>Telehealth</span>
+                    </button>
+                </li>
+                <li class="nav-item">
+                    <button class="nav-button" data-page="messages">
+                        <i class="fas fa-comments"></i>
+                        <span>Messages</span>
+                    </button>
+                </li>
+                <li class="nav-item">
+                    <button class="nav-button" data-page="tasks">
+                        <i class="fas fa-tasks"></i>
+                        <span>Tasks</span>
+                    </button>
+                </li>
+                <li class="nav-item">
+                    <button class="nav-button" data-page="resources">
+                        <i class="fas fa-book-medical"></i>
+                        <span>Resources</span>
+                    </button>
+                </li>
+            </menu>
+
+            <section class="nav-actions">
+                <button class="emergency-btn" id="emergencyBtn">
+                    <i class="fas fa-phone"></i>
+                    <span>Emergency</span>
+                </button>
+                
+                <section class="accessibility-toggles">
+                    <button class="accessibility-btn" id="fontSizeToggle" title="Increase font size">
+                        <i class="fas fa-text-height"></i>
+                    </button>
+                    <button class="accessibility-btn" id="contrastToggle" title="High contrast mode">
+                        <i class="fas fa-adjust"></i>
+                    </button>
+                </section>
+                
+                <section class="user-profile">
+                    <button class="profile-btn" id="profileBtn">
+                        <figure class="avatar">
+                            <i class="fas fa-user-md"></i>
+                        </figure>
+                        <span class="username">Dr. Sarah Johnson</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                </section>
+                
+                <button class="menu-toggle" id="menuToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <button class="logout-btn"  data-page="dashboard">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Logout</span>
+                </button>
+            </section>
+        </section>
+    </nav>
+
+    <main class="main-content">
+        <header class="content-header">
+            <h1 class="page-title" id="pageTitle">My Day</h1>
+            <section class="header-actions">
+                <section class="role-filter">
+                    <button class="filter-btn active" data-filter="my-day">My Day</button>
+                    <button class="filter-btn" data-filter="all">All Clinicians</button>
+                </section>
+                <time class="date-info">Today, September 2, 2025</time>
+            </section>
+        </header>
+
+        <section class="content-area">
+            <!-- Two-column layout -->
+            <article class="dashboard-columns">
+                <!-- Left Column - Today's Sessions -->
+                <section class="column-left">
+                    <article class="card sessions-card">
+                        <header class="card-header">
+                            <h2>Today's Sessions</h2>
+                            <button class="card-action-btn">
+                                <i class="fas fa-ellipsis-h"></i>
+                            </button>
+                        </header>
+                        <section class="sessions-list">
+                            <article class="session-item">
+                                <section class="session-time">
+                                    <time datetime="09:00">9:00 AM</time>
+                                    <span class="session-duration">45 min</span>
+                                </section>
+                                <section class="session-info">
+                                    <h3>Initial Consultation</h3>
+                                    <p>John Doe - Anxiety assessment</p>
+                                    <span class="session-status upcoming">Upcoming</span>
+                                </section>
+                                <section class="session-actions">
+                                    <button class="session-btn join-btn">
+                                        <i class="fas fa-video"></i>
+                                        Join
+                                    </button>
+                                    <button class="session-btn note-btn" data-patient="John Doe" data-type="Initial Consultation">
+                                        <i class="fas fa-file-medical"></i>
+                                        Note
+                                    </button>
+                                </section>
+                            </article>
+                            
+                            <article class="session-item">
+                                <section class="session-time">
+                                    <time datetime="10:30">10:30 AM</time>
+                                    <span class="session-duration">45 min</span>
+                                </section>
+                                <section class="session-info">
+                                    <h3>CBT Session</h3>
+                                    <p>Anna Smith - Depression</p>
+                                    <span class="session-status in-progress">In Progress</span>
+                                </section>
+                                <section class="session-actions">
+                                    <button class="session-btn join-btn">
+                                        <i class="fas fa-video"></i>
+                                        Join
+                                    </button>
+                                    <button class="session-btn note-btn" data-patient="Anna Smith" data-type="CBT Session">
+                                        <i class="fas fa-file-medical"></i>
+                                        Note
+                                    </button>
+                                </section>
+                            </article>
+                            
+                            <article class="session-item">
+                                <section class="session-time">
+                                    <time datetime="14:00">2:00 PM</time>
+                                    <span class="session-duration">60 min</span>
+                                </section>
+                                <section class="session-info">
+                                    <h3>Group Therapy</h3>
+                                    <p>Anxiety Support Group</p>
+                                    <span class="session-status upcoming">Upcoming</span>
+                                </section>
+                                <section class="session-actions">
+                                    <button class="session-btn join-btn">
+                                        <i class="fas fa-video"></i>
+                                        Join
+                                    </button>
+                                    <button class="session-btn note-btn" data-patient="Anxiety Support Group" data-type="Group Therapy">
+                                        <i class="fas fa-file-medical"></i>
+                                        Note
+                                    </button>
+                                </section>
+                            </article>
+                            
+                            <article class="session-item">
+                                <section class="session-time">
+                                    <time datetime="16:00">4:00 PM</time>
+                                    <span class="session-duration">30 min</span>
+                                </section>
+                                <section class="session-info">
+                                    <h3>Follow-up</h3>
+                                    <p>Mike Johnson - Progress review</p>
+                                    <span class="session-status upcoming">Upcoming</span>
+                                </section>
+                                <section class="session-actions">
+                                    <button class="session-btn join-btn">
+                                        <i class="fas fa-video"></i>
+                                        Join
+                                    </button>
+                                    <button class="session-btn note-btn" data-patient="Mike Johnson" data-type="Follow-up">
+                                        <i class="fas fa-file-medical"></i>
+                                        Note
+                                    </button>
+                                </session>
+                            </article>
+                        </section>
+                    </article>
+                    
+                    <!-- Task Inbox moved under Today's Sessions -->
+                    <article class="card tasks-card">
+                        <header class="card-header">
+                            <h2>Task Inbox</h2>
+                            <button class="card-action-btn">
+                                <i class="fas fa-ellipsis-h"></i>
+                            </button>
+                        </header>
+                        <section class="tasks-list">
+                            <article class="task-item">
+                                <input type="checkbox" id="task1">
+                                <label for="task1">
+                                    <span class="task-title">Complete progress note for Anna Smith</span>
+                                    <span class="task-due">Due today</span>
+                                </label>
+                            </article>
+                            
+                            <article class="task-item">
+                                <input type="checkbox" id="task2">
+                                <label for="task2">
+                                    <span class="task-title">Call Mike Johnson for follow-up</span>
+                                    <span class="task-due">Due tomorrow</span>
+                                </label>
+                            </article>
+                            
+                            <article class="task-item">
+                                <input type="checkbox" id="task3">
+                                <label for="task3">
+                                    <span class="task-title">Send resources to Lisa Wilson</span>
+                                    <span class="task-due">Due in 2 days</span>
+                                </label>
+                            </article>
+                            
+                            <article class="task-item">
+                                <input type="checkbox" id="task4">
+                                <label for="task4">
+                                    <span class="task-title">Review consent forms</span>
+                                    <span class="task-due">Due in 3 days</span>
+                                </label>
+                            </article>
+                        </section>
+                    </article>
+                </section>
+                
+                <!-- Right Column - Multiple Cards -->
+                <section class="column-right">
+                    <!-- Docs Due Panel -->
+                    <article class="card docs-due-card">
+                        <header class="card-header">
+                            <h2>Documents Due</h2>
+                            <button class="card-action-btn">
+                                <i class="fas fa-ellipsis-h"></i>
+                            </button>
+                        </header>
+                        <section class="docs-list">
+                            <article class="doc-item overdue">
+                                <i class="fas fa-exclamation-circle"></i>
+                                <section class="doc-info">
+                                    <h3>Progress Note - Anna Smith</h3>
+                                    <p>Due yesterday</p>
+                                </section>
+                                <button class="doc-action-btn">Complete</button>
+                            </article>
+                            
+                            <article class="doc-item due-soon">
+                                <i class="fas fa-clock"></i>
+                                <section class="doc-info">
+                                    <h3>Consent Form - John Doe</h3>
+                                    <p>Expires in 3 days</p>
+                                </section>
+                                <button class="doc-action-btn">Review</button>
+                            </article>
+                            
+                            <article class="doc-item due-soon">
+                                <i class="fas fa-clock"></i>
+                                <section class="doc-info">
+                                    <h3>Treatment Plan - Lisa Wilson</h3>
+                                    <p>Due in 2 days</p>
+                                </section>
+                                <button class="doc-action-btn">Update</button>
+                            </article>
+                        </section>
+                    </article>
+                    
+                    <!-- Risk Alerts moved under Documents Due -->
+                    <article class="card risk-card">
+                        <header class="card-header">
+                            <h2>Risk Alerts</h2>
+                            <button class="card-action-btn">
+                                <i class="fas fa-ellipsis-h"></i>
+                            </button>
+                        </header>
+                        <section class="alerts-list">
+                            <article class="alert-item high-risk">
+                                <i class="fas fa-exclamation-triangle"></i>
+                                <section class="alert-info">
+                                    <h3>High Suicide Risk</h3>
+                                    <p>Anna Smith - Reported during last session</p>
+                                </section>
+                                <button class="alert-action-btn">View Safety Plan</button>
+                            </article>
+                            
+                            <article class="alert-item medium-risk">
+                                <i class="fas fa-exclamation-circle"></i>
+                                <section class="alert-info">
+                                    <h3>Self-Harm Indicators</h3>
+                                    <p>John Doe - PHQ-9 question 9 positive</p>
+                                </section>
+                                <button class="alert-action-btn">Assess</button>
+                            </article>
+                        </section>
+                    </article>
+                    
+                    <!-- Intake Pipeline -->
+                    <article class="card intake-card">
+                        <header class="card-header">
+                            <h2>Intake Pipeline</h2>
+                            <button class="card-action-btn">
+                                <i class="fas fa-ellipsis-h"></i>
+                            </button>
+                        </header>
+                        <section class="pipeline-stages">
+                            <section class="pipeline-stage">
+                                <h3>New Requests</h3>
+                                <span class="stage-count">5</span>
+                            </section>
+                            <section class="pipeline-stage">
+                                <h3>Scheduled</h3>
+                                <span class="stage-count">3</span>
+                            </section>
+                            <section class="pipeline-stage">
+                                <h3>Forms Complete</h3>
+                                <span class="stage-count">2</span>
+                            </section>
+                        </section>
+                    </article>
+                    
+                    <!-- New Notes Created Card -->
+                    <article class="card new-notes-card">
+                        <header class="card-header">
+                            <h2>Recent Notes</h2>
+                            <button class="card-action-btn">
+                                <i class="fas fa-ellipsis-h"></i>
+                            </button>
+                        </header>
+                        <section class="new-notes-list" id="newNotesList">
+                            <!-- New notes will be populated here by JavaScript -->
+                            <p class="no-notes">No recent notes. Create your first note!</p>
+                        </section>
+                    </article>
+                </section>
+            </article>
+        </section>
+        <article class="card session-controls-card" id="sessionControls" style="display: none;">
+    <header class="card-header">
+        <h2>Session Controls</h2>
+        <button class="card-action-btn" id="minimizeControls">
+            <i class="fas fa-minus"></i>
+        </button>
+    </header>
+    <section class="controls-grid">
+        <button class="control-btn" id="toggleVideo">
+            <i class="fas fa-video"></i>
+            <span>Video On</span>
+        </button>
+        <button class="control-btn" id="toggleAudio">
+            <i class="fas fa-microphone"></i>
+            <span>Audio On</span>
+        </button>
+        <button class="control-btn" id="shareScreen">
+            <i class="fas fa-desktop"></i>
+            <span>Share Screen</span>
+        </button>
+        <button class="control-btn" id="openChat">
+            <i class="fas fa-comment"></i>
+            <span>Chat</span>
+        </button>
+        <button class="control-btn" id="shareResource">
+            <i class="fas fa-paperclip"></i>
+            <span>Share Resource</span>
+        </button>
+        <button class="control-btn danger" id="endSession">
+            <i class="fas fa-phone-slash"></i>
+            <span>End Session</span>
+        </button>
+    </section>
+</article>
+
+<!-- Video Container (Visible when in a session) -->
+<article class="card video-container-card" id="videoContainer" style="display: none;">
+    <header class="card-header">
+        <h2 id="sessionTitle">Session with Patient</h2>
+        <button class="card-action-btn" id="fullscreenToggle">
+            <i class="fas fa-expand"></i>
+        </button>
+    </header>
+    <section class="video-grid" id="videoGrid">
+        <section class="video-item local-video">
+            <video id="localVideo" autoplay muted></video>
+            <section class="video-overlay">
+                <span class="participant-name">You</span>
+                <section class="video-controls">
+                    <button class="control-indicator video-off" id="localVideoIndicator">
+                        <i class="fas fa-video-slash"></i>
+                    </button>
+                    <button class="control-indicator audio-off" id="localAudioIndicator">
+                        <i class="fas fa-microphone-slash"></i>
+                    </button>
+                </section>
+            </section>
+        </section>
+        <section class="video-item remote-video">
+            <video id="remoteVideo" autoplay></video>
+            <section class="video-overlay">
+                <span class="participant-name" id="remoteParticipantName">Patient</span>
+                <section class="connection-status" id="connectionStatus">
+                    <i class="fas fa-circle"></i>
+                    <span>Connected</span>
+                </section>
+            </section>
+        </section>
+    </section>
+</article>
+
+<!-- Waiting Room (Visible when session is created but not started) -->
+<article class="card waiting-room-card" id="waitingRoom" style="display: none;">
+    <header class="card-header">
+        <h2>Waiting Room</h2>
+        <button class="card-action-btn" id="closeWaitingRoom">
+            <i class="fas fa-times"></i>
+        </button>
+    </header>
+    <section class="waiting-room-content">
+        <section class="waiting-room-info">
+            <i class="fas fa-clock"></i>
+            <h3>Session Ready</h3>
+            <p>Share this link with your patient to allow them to join:</p>
+            <section class="session-link-container">
+                <input type="text" id="sessionLink" readonly>
+                <button class="copy-link-btn" id="copyLinkBtn">
+                    <i class="fas fa-copy"></i>
+                </button>
+            </section>
+            <p class="waiting-notice">Waiting for patient to join...</p>
+        </section>
+        <section class="waiting-participants" id="waitingParticipants">
+            <!-- Participants waiting to join will appear here -->
+        </section>
+        <section class="waiting-room-actions">
+            <button class="secondary-btn" id="startWithoutPatient">
+                Start Session Without Patient
+            </button>
+            <button class="primary-btn" id="admitAllPatients" disabled>
+                Admit All (0)
+            </button>
+        </section>
+    </section>
+</article>
+    </main>
+
+    <!-- Create/Edit Note Modal (Same as in Progress Notes) -->
+    <dialog class="modal" id="noteModal">
+        <article class="modal-content note-modal">
+            <header class="modal-header">
+                <h2 id="noteModalTitle">Create Progress Note</h2>
+                <button class="modal-close" id="closeNoteModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </header>
+            <section class="modal-body">
+                <form id="noteForm" class="note-form">
+                    <input type="hidden" id="noteId" name="id">
+                    <input type="hidden" id="noteStatus" name="status">
+                    
+                    <section class="form-section">
+                        <h3>Session Information</h3>
+                        <section class="form-row">
+                            <section class="form-group">
+                                <label for="patientSelect">Patient *</label>
+                                <select id="patientSelect" name="patientId" required>
+                                    <option value="">Select a patient</option>
+                                    <!-- Patient options will be populated by JavaScript -->
+                                </select>
+                            </section>
+                            <section class="form-group">
+                                <label for="sessionDate">Date *</label>
+                                <input type="date" id="sessionDate" name="date" required>
+                            </section>
+                        </section>
+                        
+                        <section class="form-row">
+                            <section class="form-group">
+                                <label for="treatmentTimeStart">Treatment Time *</label>
+                                <section class="time-input-group">
+                                    <input type="time" id="treatmentTimeStart" name="timeStart" required>
+                                    <span>to</span>
+                                    <input type="time" id="treatmentTimeEnd" name="timeEnd" required>
+                                </section>
+                            </section>
+                            <section class="form-group">
+                                <label for="attended">Attended</label>
+                                <section class="checkbox-group">
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" id="attended" name="attended" value="yes">
+                                        <span class="checkmark"></span>
+                                        Yes
+                                    </label>
+                                </section>
+                            </section>
+                        </section>
+                        
+                        <section class="form-group">
+                            <label for="sessionType">Session Type *</label>
+                            <section class="radio-group">
+                                <label class="radio-label">
+                                    <input type="radio" name="sessionType" value="individual" required>
+                                    <span class="radiomark"></span>
+                                    Individual
+                                </label>
+                                <label class="radio-label">
+                                    <input type="radio" name="sessionType" value="family">
+                                    <span class="radiomark"></span>
+                                    Family
+                                </label>
+                                <label class="radio-label">
+                                    <input type="radio" name="sessionType" value="group">
+                                    <span class="radiomark"></span>
+                                    Group
+                                </label>
+                                <label class="radio-label">
+                                    <input type="radio" name="sessionType" value="other">
+                                    <span class="radiomark"></span>
+                                    Other
+                                </label>
+                            </section>
+                            <input type="text" id="otherSessionType" name="otherType" placeholder="Specify other type" style="display: none; margin-top: 0.5rem;">
+                        </section>
+                    </section>
+                    
+                    <section class="form-section">
+                        <h3>Note Template</h3>
+                        <section class="form-group">
+                            <label for="noteTemplate">Select Template</label>
+                            <select id="noteTemplate" name="template">
+                                <option value="soap">SOAP (Subjective, Objective, Assessment, Plan)</option>
+                                <option value="dap">DAP (Data, Assessment, Plan)</option>
+                                <option value="freeform">Free Form</option>
+                                <option value="custom">Custom (Mentaly Template)</option>
+                            </select>
+                        </section>
+                    </section>
+                    
+                    <section class="form-section" id="soapTemplate">
+                        <h3>SOAP Note</h3>
+                        
+                        <section class="form-group">
+                            <label for="subjective">Subjective</label>
+                            <textarea id="subjective" name="subjective" rows="4" placeholder="Client's presenting issue/chief complaint, mood/affect, reported progress or challenges since last session..."></textarea>
+                        </section>
+                        
+                        <section class="form-group">
+                            <label for="objective">Objective</label>
+                            <textarea id="objective" name="objective" rows="4" placeholder="Behavioral observations, mental status exam, interventions used..."></textarea>
+                        </section>
+                        
+                        <section class="form-group">
+                            <label for="assessment">Assessment</label>
+                            <textarea id="assessment" name="assessment" rows="4" placeholder="Progress on treatment goals, assessment of risk, diagnosis if applicable..."></textarea>
+                        </section>
+                        
+                        <section class="form-group">
+                            <label for="plan">Plan</label>
+                            <textarea id="plan" name="plan" rows="4" placeholder="Next steps/homework, next session scheduled, referrals/consultations if any..."></textarea>
+                        </section>
+                    </section>
+                    
+                    <section class="form-section" id="mentalyTemplate" style="display: none;">
+                        <h3>Mentaly Progress Note</h3>
+                        
+                        <section class="form-group">
+                            <label for="presentingIssue">Client's presenting issue/chief complaint</label>
+                            <textarea id="presentingIssue" name="presentingIssue" rows="3"></textarea>
+                        </section>
+                        
+                        <section class="form-group">
+                            <label for="moodAffect">Mood/Affect</label>
+                            <textarea id="moodAffect" name="moodAffect" rows="2"></textarea>
+                        </section>
+                        
+                        <section class="form-group">
+                            <label for="reportedProgress">Reported progress or challenges since last session</label>
+                            <textarea id="reportedProgress" name="reportedProgress" rows="2"></textarea>
+                        </section>
+                        
+                        <section class="form-group">
+                            <label for="behavioralObservations">Behavioral Observations</label>
+                            <textarea id="behavioralObservations" name="behavioralObservations" rows="2"></textarea>
+                        </section>
+                        
+                        <section class="form-group">
+                            <label for="mentalStatusExam">Mental Status Exam (MSE)</label>
+                            <textarea id="mentalStatusExam" name="mentalStatusExam" rows="2"></textarea>
+                        </section>
+                        
+                        <section class="form-group">
+                            <label for="interventionsUsed">Interventions Used</label>
+                            <textarea id="interventionsUsed" name="interventionsUsed" rows="2"></textarea>
+                        </section>
+                        
+                        <section class="form-group">
+                            <label for="progressGoals">Progress on Treatment Goals</label>
+                            <textarea id="progressGoals" name="progressGoals" rows="2"></textarea>
+                        </section>
+                        
+                        <section class="form-group">
+                            <label for="riskAssessment">Assessment of Risk</label>
+                            <section class="checkbox-group">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" id="hasRisk" name="hasRisk" value="yes">
+                                    <span class="checkmark"></span>
+                                    Yes (If yes, specify)
+                                </label>
+                            </section>
+                            <textarea id="riskDetails" name="riskDetails" rows="2" placeholder="Specify risk details" style="display: none; margin-top: 0.5rem;"></textarea>
+                        </section>
+                        
+                        <section class="form-group">
+                            <label for="diagnosis">Diagnosis (if applicable)</label>
+                            <textarea id="diagnosis" name="diagnosis" rows="2"></textarea>
+                        </section>
+                        
+                        <section class="form-group">
+                            <label for="nextSteps">Next Steps/Homework</label>
+                            <textarea id="nextSteps" name="nextSteps" rows="2"></textarea>
+                        </section>
+                        
+                        <section class="form-row">
+                            <section class="form-group">
+                                <label for="nextSession">Next Session Scheduled</label>
+                                <input type="date" id="nextSession" name="nextSession">
+                            </section>
+                            <section class="form-group">
+                                <label for="referrals">Referrals/Consultations (if any)</label>
+                                <input type="text" id="referrals" name="referrals">
+                            </section>
+                        </section>
+                    </section>
+                    
+                    <section class="form-section">
+                        <h3>Attachments</h3>
+                        <section class="form-group">
+                            <label for="assessments">Attach Assessments</label>
+                            <section class="checkbox-group">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" name="assessments" value="phq9">
+                                    <span class="checkmark"></span>
+                                    PHQ-9
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" name="assessments" value="gad7">
+                                    <span class="checkmark"></span>
+                                    GAD-7
+                                </label>
+                            </section>
+                        </section>
+                        
+                        <section class="form-group">
+                            <label for="fileUpload">Upload Files</label>
+                            <input type="file" id="fileUpload" name="files" multiple>
+                        </section>
+                    </section>
+                    
+                    <section class="form-actions">
+                        <button type="button" class="cancel-btn" id="cancelNote">Cancel</button>
+                        <button type="submit" name="saveAction" value="draft" class="save-draft-btn">Save Draft</button>
+                        <button type="submit" name="saveAction" value="complete" class="save-btn">Complete Note</button>
+                    </section>
+                </form>
+            </section>
+        </article>
+    </dialog>
+    <!-- Add these modals right before the closing </body> tag in psy-dashboard.html -->
+
+<!-- Chat Modal -->
+<dialog class="modal" id="chatModal">
+    <article class="modal-content chat-modal">
+        <header class="modal-header">
+            <h2>Session Chat</h2>
+            <button class="modal-close" id="closeChatModal">
+                <i class="fas fa-times"></i>
+            </button>
+        </header>
+        <section class="modal-body">
+            <section class="chat-messages" id="chatMessages">
+                <!-- Chat messages will appear here -->
+            </section>
+            <section class="chat-input-container">
+                <input type="text" id="chatInput" placeholder="Type a message...">
+                <button class="chat-send-btn" id="chatSendBtn">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </section>
+            <section class="chat-resources">
+                <button class="resource-btn" id="sendResourceBtn">
+                    <i class="fas fa-paperclip"></i>
+                    Send Resource
+                </button>
+            </section>
+        </section>
+    </article>
+</dialog>
+
+<!-- Resource Modal -->
+<dialog class="modal" id="resourceModal">
+    <article class="modal-content resource-modal">
+        <header class="modal-header">
+            <h2>Share Resource</h2>
+            <button class="modal-close" id="closeResourceModal">
+                <i class="fas fa-times"></i>
+            </button>
+        </header>
+        <section class="modal-body">
+            <form id="resourceForm">
+                <section class="form-group">
+                    <label for="resourceType">Resource Type</label>
+                    <select id="resourceType">
+                        <option value="pdf">PDF Document</option>
+                        <option value="link">Web Link</option>
+                        <option value="exercise">Therapeutic Exercise</option>
+                    </select>
+                </section>
+                <section class="form-group" id="resourceFileGroup">
+                    <label for="resourceFile">Select File</label>
+                    <input type="file" id="resourceFile" accept=".pdf">
+                </section>
+                <section class="form-group" id="resourceLinkGroup" style="display: none;">
+                    <label for="resourceLink">Web Address</label>
+                    <input type="url" id="resourceLink" placeholder="https://...">
+                </section>
+                <section class="form-group">
+                    <label for="resourceMessage">Message (Optional)</label>
+                    <textarea id="resourceMessage" rows="2" placeholder="Add a message with this resource..."></textarea>
+                </section>
+                <section class="form-actions">
+                    <button type="button" class="cancel-btn" id="cancelResource">Cancel</button>
+                    <button type="submit" class="primary-btn">Send Resource</button>
+                </section>
+            </form>
+        </section>
+    </article>
+</dialog>
+
+    <!-- Emergency Modal -->
+    <dialog class="modal" id="emergencyModal">
+        <article class="modal-content emergency-modal">
+            <header class="modal-header">
+                <h2>Emergency Resources</h2>
+                <button class="modal-close" id="closeEmergencyModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </header>
+            <section class="modal-body">
+                <p class="emergency-text">Critical mental health emergency resources for your patients:</p>
+                <section class="emergency-list">
+                    <article class="emergency-item">
+                        <h3>Crisis Hotline</h3>
+                        <p>24/7 Confidential Support</p>
+                        <a href="tel:0800567567" class="emergency-call-link">
+                            <i class="fas fa-phone"></i>
+                            0800 567 567
+                        </a>
+                    </article>
+                    <article class="emergency-item">
+                        <h3>SADAG Helpline</h3>
+                        <p>South African Depression & Anxiety Group</p>
+                        <a href="tel:0800121314" class="emergency-call-link">
+                            <i class="fas fa-phone"></i>
+                            0800 121 314
+                        </a>
+                    </article>
+                    <article class="emergency-item">
+                        <h3>Emergency Services</h3>
+                        <p>Medical Emergency</p>
+                        <a href="tel:10177" class="emergency-call-link">
+                            <i class="fas fa-phone"></i>
+                            10177
+                        </a>
+                    </article>
+                </section>
+                <p class="emergency-note">Quick reference for patient emergencies</p>
+            </section>
+        </article>
+    </dialog>
+
+    <script src="../js/psy-dashboard.js"></script>
+    <script src="../js/shared.js"></script>
+</body>
+</html>

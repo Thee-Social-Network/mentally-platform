@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mentaly - Anonymous Chat Rooms</title>
+    <link rel="stylesheet" href="../css/dashboard.css">
+    <link rel="stylesheet" href="../css/chat.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Top Navigation Bar -->
+    <nav class="top-navbar">
+        <section class="nav-container">
+            <a href="../html/landing.html" class="logo-link">
+                <h1 class="logo">Mentaly</h1>
+            </a>
+            
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <button class="nav-button" data-page="dashboard">
+                        <i class="fas fa-chart-line"></i>
+                        <span>Dashboard</span>
+                    </button>
+                </li>
+                <li class="nav-item">
+                    <button class="nav-button" data-page="ai-support">
+                        <i class="fas fa-robot"></i>
+                        <span>AI Support</span>
+                    </button>
+                </li>
+                <li class="nav-item">
+                    <button class="nav-button" data-page="mood-tracker">
+                        <i class="fas fa-heart"></i>
+                        <span>Mood Tracker</span>
+                    </button>
+                </li>
+                <li class="nav-item">
+                    <button class="nav-button" data-page="community">
+                        <i class="fas fa-users"></i>
+                        <span>Community</span>
+                    </button>
+                </li>
+                <li class="nav-item">
+                    <button class="nav-button active" data-page="anonymous-chatroom">
+                        <i class="fas fa-comments"></i>
+                        <span>Chat Rooms</span>
+                    </button>
+                </li>
+                <li class="nav-item">
+                    <button class="nav-button" data-page="wellness-tools">
+                        <i class="fas fa-leaf"></i>
+                        <span>Wellness Tools</span>
+                    </button>
+                </li>
+                <li class="nav-item">
+                    <button class="nav-button" data-page="professionals">
+                        <i class="fas fa-user-md"></i>
+                        <span>Find Help</span>
+                    </button>
+                </li>
+                <li class="nav-item">
+                    <button class="nav-button" data-page="progress">
+                        <i class="fas fa-trophy"></i>
+                        <span>Progress</span>
+                    </button>
+                </li>
+            </ul>
+
+            <section class="nav-actions">
+                <button class="emergency-btn" id="dashboardEmergencyBtn">
+                    <i class="fas fa-phone"></i>
+                    <span>Emergency</span>
+                </button>
+                
+                <button class="notification-btn" id="notificationBtn">
+                    <i class="fas fa-bell"></i>
+                    <span class="notification-badge">3</span>
+                </button>
+                
+                <section class="user-profile">
+                    <button class="profile-btn" id="profileBtn">
+                        <figure class="avatar">
+                            <i class="fas fa-user"></i>
+                        </figure>
+                        <span class="username">Anonymous User</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                </section>
+                
+                <button class="settings-btn" id="settingsBtn">
+                    <i class="fas fa-cog"></i>
+                </button>
+                
+                <button class="menu-toggle" id="menuToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </section>
+        </section>
+    </nav>
+
+    <main class="main-content">
+        <header class="content-header">
+            <h1 class="page-title" id="pageTitle">Anonymous Chat Rooms</h1>
+            <time class="date-info">Today, August 31, 2025</time>
+        </header>
+
+        <section class="content-area">
+            <!-- Chatroom Container -->
+            <section class="chatroom-container">
+                <!-- Sidebar for Chat Rooms -->
+                <aside class="chatroom-sidebar">
+                    <header class="sidebar-header">
+                        <h2><i class="fas fa-comments"></i> Chat Rooms</h2>
+                        <button class="btn btn-primary new-chat-btn" id="newRoomBtn">
+                            <i class="fas fa-plus"></i>
+                        </button>
+                    </header>
+                    
+                    <!-- Search Bar -->
+                    <section class="search-container">
+                        <input type="text" placeholder="Search chat rooms..." class="search-input" id="searchInput">
+                        <i class="fas fa-search search-icon"></i>
+                    </section>
+                    
+                    <!-- Room List -->
+                    <section class="chat-list" id="roomList">
+                        <article class="chat-item active">
+                            <figure class="chat-avatar">
+                                <i class="fas fa-users"></i>
+                            </figure>
+                            <section class="chat-info">
+                                <h3 class="chat-name">General Support</h3>
+                                <p class="chat-last-message">Anonymous: Feeling better today after talking...</p>
+                            </section>
+                            <section class="chat-meta">
+                                <time class="chat-time">2 min ago</time>
+                                <span class="unread-badge">23</span>
+                            </section>
+                        </article>
+                        
+                        <article class="chat-item">
+                            <figure class="chat-avatar">
+                                <i class="fas fa-heart"></i>
+                            </figure>
+                            <section class="chat-info">
+                                <h3 class="chat-name">Anxiety Circle</h3>
+                                <p class="chat-last-message">Anonymous: Anyone else dealing with panic...</p>
+                            </section>
+                            <section class="chat-meta">
+                                <time class="chat-time">15 min ago</time>
+                                <span class="unread-badge">15</span>
+                            </section>
+                        </article>
+                        
+                        <article class="chat-item">
+                            <figure class="chat-avatar">
+                                <i class="fas fa-cloud-sun"></i>
+                            </figure>
+                            <section class="chat-info">
+                                <h3 class="chat-name">Depression Support</h3>
+                                <p class="chat-last-message">Anonymous: It's been a tough week but I'm...</p>
+                            </section>
+                            <section class="chat-meta">
+                                <time class="chat-time">1 hour ago</time>
+                                <span class="unread-badge">31</span>
+                            </section>
+                        </article>
+                        
+                        <article class="chat-item">
+                            <figure class="chat-avatar">
+                                <i class="fas fa-moon"></i>
+                            </figure>
+                            <section class="chat-info">
+                                <h3 class="chat-name">Sleep Issues</h3>
+                                <p class="chat-last-message">Anonymous: Finally got some rest after...</p>
+                            </section>
+                            <section class="chat-meta">
+                                <time class="chat-time">3 hours ago</time>
+                            </section>
+                        </article>
+                        
+                        <article class="chat-item">
+                            <figure class="chat-avatar">
+                                <i class="fas fa-hands-helping"></i>
+                            </figure>
+                            <section class="chat-info">
+                                <h3 class="chat-name">Coping Strategies</h3>
+                                <p class="chat-last-message">Anonymous: The breathing technique really...</p>
+                            </section>
+                            <section class="chat-meta">
+                                <time class="chat-time">5 hours ago</time>
+                            </section>
+                        </article>
+                    </section>
+                </aside>
+                
+                <!-- Main Chat Area -->
+                <section class="chat-main">
+                    <!-- Chat Header -->
+                    <header class="chat-header" id="chatHeader">
+                        <section class="chat-user-info">
+                            <figure class="user-avatar">
+                                <i class="fas fa-users"></i>
+                            </figure>
+                            <section class="user-details">
+                                <h3 class="user-name">General Support</h3>
+                                <span class="user-status">23 anonymous users active</span>
+                            </section>
+                        </section>
+                        
+                        <section class="chat-actions">
+                            <button class="action-btn" id="roomInfoBtn" title="Room Info">
+                                <i class="fas fa-info-circle"></i>
+                            </button>
+                            <button class="action-btn" id="leaveRoomBtn" title="Leave Room">
+                                <a href="community.html"><i class="fas fa-sign-out-alt"></i></a>
+                            </button>
+                        </section>
+                    </header>
+                    
+                    <!-- Messages Container -->
+                    <section class="messages-container" id="messagesContainer">
+                        <article class="welcome-message">
+                            <figure class="welcome-icon">
+                                <i class="fas fa-comments"></i>
+                            </figure>
+                            <h3>Welcome to General Support</h3>
+                            <p>This is a safe space to share and connect with others. Remember to be kind and respectful.</p>
+                        </article>
+                        
+                        <article class="message received">
+                            <figure class="message-avatar">
+                                <i class="fas fa-user-secret"></i>
+                            </figure>
+                            <section class="message-content">
+                                <p class="message-text">Hi everyone, I've been struggling with anxiety this week. Anyone else feeling the same?</p>
+                                <time class="message-time">10:15 AM</time>
+                            </section>
+                        </article>
+                        
+                        <article class="message received">
+                            <figure class="message-avatar">
+                                <i class="fas fa-user-ninja"></i>
+                            </figure>
+                            <section class="message-content">
+                                <p class="message-text">I can relate. My anxiety has been through the roof lately. What's been helping me is taking short walks when I feel overwhelmed.</p>
+                                <time class="message-time">10:18 AM</time>
+                            </section>
+                        </article>
+                        
+                        <article class="message sent">
+                            <section class="message-content">
+                                <p class="message-text">I've been there too. The 5-4-3-2-1 grounding technique has been helpful for me when anxiety hits.</p>
+                                <time class="message-time">10:20 AM</time>
+                            </section>
+                            <figure class="message-avatar">
+                                <i class="fas fa-user-astronaut"></i>
+                            </figure>
+                        </article>
+                        
+                        <article class="message received">
+                            <figure class="message-avatar">
+                                <i class="fas fa-user-secret"></i>
+                            </figure>
+                            <section class="message-content">
+                                <p class="message-text">Thanks for sharing those tips. I'll try them out. It helps just knowing I'm not alone in this.</p>
+                                <time class="message-time">10:22 AM</time>
+                            </section>
+                        </article>
+                    </section>
+                    
+                    <!-- Message Input -->
+                    <section class="message-input-container" id="messageInputContainer">
+                        <section class="message-input-wrapper">
+                            <button class="attachment-btn" id="attachmentBtn" title="Attach File">
+                                <i class="fas fa-paperclip"></i>
+                            </button>
+                            <input type="file" id="fileInput" multiple accept="image/*,video/*,audio/*,.pdf,.doc,.docx,.txt" style="display: none;">
+                            <textarea 
+                                class="message-input" 
+                                id="messageInput" 
+                                placeholder="Type your message..." 
+                                rows="1"
+                            ></textarea>
+                            <button class="emoji-btn" id="emojiBtn" title="Add Emoji">
+                                <i class="fas fa-smile"></i>
+                            </button>
+                            <button class="send-btn" id="sendBtn" title="Send Message">
+                                <i class="fas fa-paper-plane"></i>
+                            </button>
+                        </section>
+                    </section>
+                </section>
+                
+                <!-- Room Info Panel (Hidden by default) -->
+                <aside class="participants-panel" id="roomInfoPanel">
+                    <header class="panel-header">
+                        <h3><i class="fas fa-info-circle"></i> Room Information</h3>
+                        <button class="close-panel-btn" id="closePanelBtn">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </header>
+                    
+                    <section class="room-info-content">
+                        <h4>General Support</h4>
+                        <p>A safe space for general mental health discussions and support. Share your experiences and connect with others who understand.</p>
+                        
+                        <section class="room-stats">
+                            <article class="stat-item">
+                                <span class="stat-number">23</span>
+                                <span class="stat-label">Active Users</span>
+                            </article>
+                            <article class="stat-item">
+                                <span class="stat-number">156</span>
+                                <span class="stat-label">Total Members</span>
+                            </article>
+                            <article class="stat-item">
+                                <span class="stat-number">4.8</span>
+                                <span class="stat-label">Safety Rating</span>
+                            </article>
+                        </section>
+                        
+                        <h4>Community Guidelines</h4>
+                        <ul class="guidelines-list">
+                            <li><i class="fas fa-check-circle"></i> Be kind and respectful to others</li>
+                            <li><i class="fas fa-check-circle"></i> Maintain anonymity - don't share personal information</li>
+                            <li><i class="fas fa-check-circle"></i> No harassment, bullying, or hate speech</li>
+                            <li><i class="fas fa-check-circle"></i> Report any concerning behavior to moderators</li>
+                            <li><i class="fas fa-check-circle"></i> This is a support space, not a replacement for professional help</li>
+                        </ul>
+                        
+                        <button class="btn btn-outline report-btn">
+                            <i class="fas fa-flag"></i>
+                            <span>Report Issue</span>
+                        </button>
+                    </section>
+                </aside>
+            </section>
+        </section>
+    </main>
+
+    <!-- Emergency Modal -->
+    <dialog class="modal" id="emergencyModal">
+        <article class="modal-content emergency-modal">
+            <header class="modal-header">
+                <h2>Immediate Help Resources</h2>
+                <button class="modal-close" id="closeEmergencyModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </header>
+            <section class="modal-body">
+                <p class="emergency-text">If you're in crisis or experiencing thoughts of self-harm, please reach out to these resources immediately:</p>
+                <section class="emergency-list">
+                    <article class="emergency-item">
+                        <h3>Crisis Hotline</h3>
+                        <p>24/7 Confidential Support</p>
+                        <a href="tel:0800567567" class="emergency-call-link">
+                            <i class="fas fa-phone"></i>
+                            0800 567 567
+                        </a>
+                    </article>
+                    <article class="emergency-item">
+                        <h3>SADAG Helpline</h3>
+                        <p>South African Depression & Anxiety Group</p>
+                        <a href="tel:0800121314" class="emergency-call-link">
+                            <i class="fas fa-phone"></i>
+                            0800 121 314
+                        </a>
+                    </article>
+                    <article class="emergency-item">
+                        <h3>Emergency Services</h3>
+                        <p>Medical Emergency</p>
+                        <a href="tel:10177" class="emergency-call-link">
+                            <i class="fas fa-phone"></i>
+                            10177
+                        </a>
+                    </article>
+                </section>
+                <p class="emergency-note">You are not alone. Please reach out for support.</p>
+            </section>
+        </article>
+    </dialog>
+
+    <!-- Settings Modal -->
+    <dialog class="modal" id="settingsModal">
+        <article class="modal-content settings-modal">
+            <header class="modal-header">
+                <h2>Settings</h2>
+                <button class="modal-close" id="closeSettingsModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </header>
+            <section class="modal-body">
+                <nav class="settings-nav">
+                    <button class="settings-nav-btn active" data-tab="account">Account</button>
+                    <button class="settings-nav-btn" data-tab="privacy">Privacy</button>
+                    <button class="settings-nav-btn" data-tab="notifications">Notifications</button>
+                    <button class="settings-nav-btn" data-tab="appearance">Appearance</button>
+                </nav>
+                <section class="settings-content">
+                    <article class="settings-tab active" id="account-tab">
+                        <h3>Account Settings</h3>
+                        <form class="settings-form">
+                            <section class="form-group">
+                                <label class="form-label">Display Name</label>
+                                <input type="text" class="form-input" value="Anonymous User">
+                            </section>
+                            <section class="form-group">
+                                <label class="form-label">Email Address</label>
+                                <input type="email" class="form-input" value="user@example.com">
+                            </section>
+                            <section class="form-group">
+                                <label class="form-label">Password</label>
+                                <input type="password" class="form-input" value="********">
+                            </section>
+                            <button type="submit" class="save-settings-btn">Save Changes</button>
+                        </form>
+                    </article>
+                    <article class="settings-tab" id="privacy-tab">
+                        <h3>Privacy Settings</h3>
+                        <form class="settings-form">
+                            <section class="form-group checkbox-group">
+                                <input type="checkbox" id="dataCollection" checked>
+                                <label for="dataCollection">Allow anonymous data collection to improve services</label>
+                            </section>
+                            <section class="form-group checkbox-group">
+                                <input type="checkbox" id="personalizedInsights" checked>
+                                <label for="personalizedInsights">Receive personalized insights based on my data</label>
+                            </section>
+                            <section class="form-group">
+                                <label class="form-label">Data Retention</label>
+                                <select class="form-select">
+                                    <option>Keep data indefinitely</option>
+                                    <option>Delete after 1 year</option>
+                                    <option>Delete after 6 months</option>
+                                </select>
+                            </section>
+                            <button type="submit" class="save-settings-btn">Save Preferences</button>
+                        </form>
+                    </article>
+                    <article class="settings-tab" id="notifications-tab">
+                        <h3>Notification Settings</h3>
+                        <form class="settings-form">
+                            <section class="form-group checkbox-group">
+                                <input type="checkbox" id="dailyReminders" checked>
+                                <label for="dailyReminders">Daily check-in reminders</label>
+                            </section>
+                            <section class="form-group checkbox-group">
+                                <input type="checkbox" id="weeklyReports" checked>
+                                <label for="weeklyReports">Weekly progress reports</label>
+                            </section>
+                            <section class="form-group checkbox-group">
+                                <input type="checkbox" id="communityUpdates">
+                                <label for="communityUpdates">Community updates and events</label>
+                            </section>
+                            <section class="form-group">
+                                <label class="form-label">Notification Frequency</label>
+                                <select class="form-select">
+                                    <option>Only important updates</option>
+                                    <option>Regular (recommended)</option>
+                                    <option>All notifications</option>
+                                </select>
+                            </section>
+                            <button type="submit" class="save-settings-btn">Save Preferences</button>
+                        </form>
+                    </article>
+                    <article class="settings-tab" id="appearance-tab">
+                        <h3>Appearance Settings</h3>
+                        <form class="settings-form">
+                            <section class="form-group">
+                                <label class="form-label">Theme</label>
+                                <select class="form-select">
+                                    <option>Light (Default)</option>
+                                    <option>Dark</option>
+                                    <option>Auto (System)</option>
+                                </select>
+                            </section>
+                            <section class="form-group">
+                                <label class="form-label">Font Size</label>
+                                <select class="form-select">
+                                    <option>Small</option>
+                                    <option>Medium (Default)</option>
+                                    <option>Large</option>
+                                </select>
+                            </section>
+                            <section class="form-group checkbox-group">
+                                <input type="checkbox" id="reduceAnimations">
+                                <label for="reduceAnimations">Reduce animations and transitions</label>
+                            </section>
+                            <button type="submit" class="save-settings-btn">Save Preferences</button>
+                        </form>
+                    </article>
+                </section>
+            </section>
+        </article>
+    </dialog>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="../js/dashboard.js"></script>
+    <script src="../js/chat.js"></script>
+</body>
+</html>

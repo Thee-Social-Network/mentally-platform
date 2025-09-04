@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mentaly - Mental Health Support Community</title>
+    <link rel="stylesheet" href="../css/landing.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+        <section class="nav-container">
+            <a href="#dashboard" class="logo-link">
+                <h1 class="logo">Mentaly</h1>
+            </a>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="#features" class="nav-link">Features</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#community" class="nav-link">Community</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/ai-notlogged" class="nav-link">Support</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#about" class="nav-link">About</a>
+                </li>
+                <li class="nav-item emergency-nav">
+                    <button class="emergency-btn" id="emergencyBtn" >
+                        <i class="fas fa-phone"></i>
+                        Emergency
+                    </button>
+                </li>
+            </ul>
+            <section class="nav-actions">
+                <button class="login-btn" id="loginBtn">Sign In</button>
+                <button class="signup-btn" id="signupBtn" data-page="signup">Get Started</button>
+            </section>
+            <button class="hamburger" id="hamburger">
+                <i class="fas fa-bars"></i>
+            </button>
+        </section>
+    </nav>
+
+    <main>
+        <section class="hero" id="home">
+            <section class="hero-container">
+                <section class="hero-content">
+                    <header class="hero-header">
+                        <h1 class="hero-title">
+                            Your Journey to 
+                            <span class="gradient-text">Better Mental Health</span>
+                            Starts Here
+                        </h1>
+                        <p class="hero-subtitle">
+                            Connect with AI-powered support, find qualified professionals, and join a caring community. 
+                            Take the first step towards healing and growth.
+                        </p>
+                    </header>
+                    <section class="hero-actions">
+                        <button class="cta-primary" id="ctaPrimary">
+                            <i class="fas fa-heart"></i>
+                            Start Your Journey
+                        </button>
+                        <button class="cta-secondary" id="ctaSecondary">
+                            <i class="fas fa-play"></i>
+                            Watch Demo
+                        </button>
+                    </section>
+                    <section class="hero-stats">
+                        <article class="stat-item">
+                            <h3 class="stat-number">50K+</h3>
+                            <p class="stat-label">Lives Supported</p>
+                        </article>
+                        <article class="stat-item">
+                            <h3 class="stat-number">24/7</h3>
+                            <p class="stat-label">AI Support</p>
+                        </article>
+                        <article class="stat-item">
+                            <h3 class="stat-number">1000+</h3>
+                            <p class="stat-label">Qualified Professionals</p>
+                        </article>
+                    </section>
+                </section>
+                <figure class="hero-visual">
+                    <section class="floating-cards">
+                        <article class="floating-card card-1">
+                            <i class="fas fa-brain"></i>
+                            <h4>AI Support</h4>
+                            <p>24/7 intelligent assistance</p>
+                        </article>
+                        <article class="floating-card card-2">
+                            <i class="fas fa-users"></i>
+                            <h4>Community</h4>
+                            <p>Connect with others</p>
+                        </article>
+                        <article class="floating-card card-3">
+                            <i class="fas fa-user-md"></i>
+                            <h4>Professionals</h4>
+                            <p>Licensed therapists</p>
+                        </article>
+                        <article class="floating-card card-4">
+                            <i class="fas fa-chart-line"></i>
+                            <h4>Progress</h4>
+                            <p>Track your journey</p>
+                        </article>
+                    </section>
+                    <section class="hero-orb"></section>
+                </figure>
+            </section>
+        </section>
+
+        <section class="features" id="features">
+            <header class="section-header">
+                <h2 class="section-title">Everything You Need for Mental Wellness</h2>
+                <p class="section-subtitle">Comprehensive tools designed with your wellbeing in mind</p>
+            </header>
+            <section class="features-grid">
+                <article class="feature-card">
+                    <figure class="feature-icon">
+                        <i class="fas fa-robot"></i>
+                    </figure>
+                    <header class="feature-content">
+                        <h3 class="feature-title">AI-Powered Support</h3>
+                        <p class="feature-description">
+                            Get instant emotional support and guidance through our advanced AI that understands your needs
+                        </p>
+                    </header>
+                    <button class="feature-btn" data-feature="ai">Learn More</button>
+                </article>
+
+                <article class="feature-card">
+                    <figure class="feature-icon">
+                        <i class="fas fa-user-friends"></i>
+                    </figure>
+                    <header class="feature-content">
+                        <h3 class="feature-title">Anonymous Community</h3>
+                        <p class="feature-description">
+                            Connect safely with others who understand your journey in our supportive community spaces
+                        </p>
+                    </header>
+                    <button class="feature-btn" data-feature="community">Learn More</button>
+                </article>
+
+                <article class="feature-card">
+                    <figure class="feature-icon">
+                        <i class="fas fa-stethoscope"></i>
+                    </figure>
+                    <header class="feature-content">
+                        <h3 class="feature-title">Professional Connections</h3>
+                        <p class="feature-description">
+                            Access qualified therapists and counselors when you're ready to take the next step
+                        </p>
+                    </header>
+                    <button class="feature-btn" data-feature="professionals">Learn More</button>
+                </article>
+
+                <article class="feature-card">
+                    <figure class="feature-icon">
+                        <i class="fas fa-chart-bar"></i>
+                    </figure>
+                    <header class="feature-content">
+                        <h3 class="feature-title">Progress Tracking</h3>
+                        <p class="feature-description">
+                            Monitor your mental health journey with personalized insights and mood tracking tools
+                        </p>
+                    </header>
+                    <button class="feature-btn" data-feature="tracking">Learn More</button>
+                </article>
+
+                <article class="feature-card">
+                    <figure class="feature-icon">
+                        <i class="fas fa-globe-africa"></i>
+                    </figure>
+                    <header class="feature-content">
+                        <h3 class="feature-title">Local Language Support</h3>
+                        <p class="feature-description">
+                            Get support in your native language with culturally sensitive assistance
+                        </p>
+                    </header>
+                    <button class="feature-btn" data-feature="language">Learn More</button>
+                </article>
+
+                <article class="feature-card">
+                    <figure class="feature-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </figure>
+                    <header class="feature-content">
+                        <h3 class="feature-title">Emergency Support</h3>
+                        <p class="feature-description">
+                            Instant access to crisis hotlines and emergency services when you need them most
+                        </p>
+                    </header>
+                    <button class="feature-btn" data-feature="emergency">Learn More</button>
+                </article>
+            </section>
+        </section>
+
+        <section class="wellness-tools" id="wellness">
+            <header class="section-header">
+                <h2 class="section-title">Daily Wellness Tools</h2>
+                <p class="section-subtitle">Small steps that lead to big changes</p>
+            </header>
+            <section class="tools-grid">
+                <article class="tool-card">
+                    <figure class="tool-visual">
+                        <section class="breath-animation"></section>
+                    </figure>
+                    <header class="tool-content">
+                        <h3 class="tool-title">Breathing Exercises</h3>
+                        <p class="tool-description">Guided breathing sessions to reduce anxiety and stress</p>
+                        <button class="tool-btn" data-tool="breathing">Try Now</button>
+                    </header>
+                </article>
+
+                <article class="tool-card">
+                    <figure class="tool-visual">
+                        <section class="meditation-waves"></section>
+                    </figure>
+                    <header class="tool-content">
+                        <h3 class="tool-title">Meditation Sessions</h3>
+                        <p class="tool-description">Mindfulness practices for inner peace and clarity</p>
+                        <button class="tool-btn" data-tool="meditation">Start Session</button>
+                    </header>
+                </article>
+
+                <article class="tool-card">
+                    <figure class="tool-visual">
+                        <section class="journal-pages"></section>
+                    </figure>
+                    <header class="tool-content">
+                        <h3 class="tool-title">Gratitude Journaling</h3>
+                        <p class="tool-description">Daily reflection exercises for positive mindset</p>
+                        <button class="tool-btn" data-tool="journal">Start Writing</button>
+                    </header>
+                </article>
+            </section>
+        </section>
+
+        <section class="community-section" id="community">
+            <header class="section-header">
+                <h2 class="section-title">You are not alone</h2>
+                <p class="section-subtitle">Join a supportive community that understands your journey</p>
+            </header>
+            <section class="community-features">
+                <article class="community-card">
+                    <figure class="community-icon">
+                        <i class="fas fa-comments"></i>
+                    </figure>
+                    <header class="community-content">
+                        <h3 class="community-title">Anonymous Chat Rooms</h3>
+                        <p class="community-description">Safe spaces to share and connect without judgment</p>
+                        <button class="community-btn" data-community="chat">Join Chat</button>
+                    </header>
+                </article>
+
+                <article class="community-card">
+                    <figure class="community-icon">
+                        <i class="fas fa-calendar-alt"></i>
+                    </figure>
+                    <header class="community-content">
+                        <h3 class="community-title">Local Support Groups</h3>
+                        <p class="community-description">Find and attend support meetings in your area</p>
+                        <button class="community-btn" data-community="groups">Find Groups</button>
+                    </header>
+                </article>
+
+                <article class="community-card">
+                    <figure class="community-icon">
+                        <i class="fas fa-handshake"></i>
+                    </figure>
+                    <header class="community-content">
+                        <h3 class="community-title">Peer Support</h3>
+                        <p class="community-description">Connect with others who share similar experiences</p>
+                        <button class="community-btn" data-community="peer">Connect Now</button>
+                    </header>
+                </article>
+            </section>
+        </section>
+
+        <section class="cta-section" id="about">
+            <section class="cta-container">
+                <header class="cta-content">
+                    <h2 class="cta-title">Ready to Start Your Healing Journey?</h2>
+                    <p class="cta-subtitle">Join thousands who have found hope, support, and healing through our platform</p>
+                    <section class="cta-actions">
+                        <button class="cta-btn-primary" id="finalCta">Get Started Free</button>
+                        <button class="cta-btn-secondary" id="learnMore">Learn More</button>
+                    </section>
+                </header>
+                <figure class="cta-visual">
+                    <section class="success-stories">
+                        <article class="story-bubble story-1">
+                            <p>"Found hope again"</p>
+                            <cite>- Sarah M.</cite>
+                        </article>
+                        <article class="story-bubble story-2">
+                            <p>"Amazing support"</p>
+                            <cite>- John D.</cite>
+                        </article>
+                        <article class="story-bubble story-3">
+                            <p>"Life changing"</p>
+                            <cite>- Alex K.</cite>
+                        </article>
+                    </section>
+                </figure>
+            </section>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <section class="footer-container">
+            <section class="footer-brand">
+                <h3 class="footer-logo">Mentaly</h3>
+                <p class="footer-description">
+                    Empowering mental health through technology, community, and professional care.
+                </p>
+                <section class="social-links">
+                    <a href="#" class="social-link" aria-label="Facebook">
+                        <i class="fab fa-facebook"></i>
+                    </a>
+                    <a href="#" class="social-link" aria-label="Twitter">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="#" class="social-link" aria-label="Instagram">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="#" class="social-link" aria-label="LinkedIn">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+                </section>
+            </section>
+
+            <nav class="footer-nav">
+                <section class="footer-column">
+                    <h4 class="footer-title">Platform</h4>
+                    <ul class="footer-links">
+                        <li><a href="#features" class="footer-link">Features</a></li>
+                        <li><a href="#community" class="footer-link">Community</a></li>
+                        <li><a href="#professionals" class="footer-link">Find Professionals</a></li>
+                        <li><a href="#pricing" class="footer-link">Pricing</a></li>
+                    </ul>
+                </section>
+
+                <section class="footer-column">
+                    <h4 class="footer-title">Resources</h4>
+                    <ul class="footer-links">
+                        <li><a href="#blog" class="footer-link">Blog</a></li>
+                        <li><a href="#help" class="footer-link">Help Center</a></li>
+                        <li><a href="#guides" class="footer-link">Wellness Guides</a></li>
+                        <li><a href="#crisis" class="footer-link">Crisis Resources</a></li>
+                    </ul>
+                </section>
+
+                <section class="footer-column">
+                    <h4 class="footer-title">Company</h4>
+                    <ul class="footer-links">
+                        <li><a href="#about" class="footer-link">About Us</a></li>
+                        <li><a href="#careers" class="footer-link">Careers</a></li>
+                        <li><a href="#press" class="footer-link">Press</a></li>
+                        <li><a href="#contact" class="footer-link">Contact</a></li>
+                    </ul>
+                </section>
+
+                <section class="footer-column">
+                    <h4 class="footer-title">Legal</h4>
+                    <ul class="footer-links">
+                        <li><a href="#privacy" class="footer-link">Privacy Policy</a></li>
+                        <li><a href="#terms" class="footer-link">Terms of Service</a></li>
+                        <li><a href="#cookies" class="footer-link">Cookie Policy</a></li>
+                        <li><a href="#disclaimer" class="footer-link">Medical Disclaimer</a></li>
+                    </ul>
+                </section>
+            </nav>
+        </section>
+
+        <section class="footer-bottom">
+            <p class="copyright">© 2025 Mentaly. All rights reserved.</p>
+            <section class="emergency-footer">
+                <p class="emergency-text">Crisis? Call immediately:</p>
+                <a href="tel:0800567567" class="emergency-link">0800 567 567</a>
+            </section>
+        </section>
+    </footer>
+
+    <script src="../js/landing.js"></script>
+</body>
+</html>

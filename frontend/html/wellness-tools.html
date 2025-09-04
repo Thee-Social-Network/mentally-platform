@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mentaly - Wellness Tools</title>
+    <link rel="stylesheet" href="../css/dashboard.css">
+    <link rel="stylesheet" href="../css/wellness.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Top Navigation Bar -->
+    <nav class="top-navbar">
+        <section class="nav-container">
+            <a href="../html/landing.html" class="logo-link">
+                <h1 class="logo">Mentaly</h1>
+            </a>
+            
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <button class="nav-button" data-page="../html/dashboard">
+                        <i class="fas fa-chart-line"></i>
+                        <span>Dashboard</span>
+                    </button>
+                </li>
+                <li class="nav-item">
+                    <button class="nav-button" data-page="../html/ai-support">
+                        <i class="fas fa-robot"></i>
+                        <span>AI Support</span>
+                    </button>
+                </li>
+                <li class="nav-item">
+                    <button class="nav-button" data-page="../html/mood-tracker">
+                        <i class="fas fa-heart"></i>
+                        <span>Mood Tracker</span>
+                    </button>
+                </li>
+                <li class="nav-item">
+                    <button class="nav-button" data-page="../html/community">
+                        <i class="fas fa-users"></i>
+                        <span>Community</span>
+                    </button>
+                </li>
+                
+                <li class="nav-item">
+                    <button class="nav-button active" data-page="../html/wellness-tools">
+                        <i class="fas fa-leaf"></i>
+                        <span>Wellness Tools</span>
+                    </button>
+                </li>
+                <li class="nav-item">
+                    <button class="nav-button" data-page="../html/professionals">
+                        <i class="fas fa-user-md"></i>
+                        <span>Find Help</span>
+                    </button>
+                </li>
+                <li class="nav-item">
+                    <button class="nav-button" data-page="../html/progress">
+                        <i class="fas fa-trophy"></i>
+                        <span>Progress</span>
+                    </button>
+                </li>
+            </ul>
+
+            <section class="nav-actions">
+                <button class="emergency-btn" id="dashboardEmergencyBtn">
+                    <i class="fas fa-phone"></i>
+                    <span>Emergency</span>
+                </button>
+                
+                <a href="../html/notification.html" class="notification-btn" id="notificationBtn">
+                    <i class="fas fa-bell"></i>
+                    <span class="notification-badge">3</span>
+                </a>
+                
+                <section class="user-profile">
+                    <button class="profile-btn" id="profileBtn">
+                        <figure class="avatar">
+                            <i class="fas fa-user"></i>
+                        </figure>
+                        <span class="username" id="usernameDisplay">Anonymous User</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                </section>
+                
+                <button class="settings-btn" id="settingsBtn">
+                    <i class="fas fa-cog"></i>
+                </button>
+                
+                <button class="menu-toggle" id="menuToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </section>
+        </section>
+    </nav>
+
+    <main class="main-content">
+        <header class="content-header">
+            <h1 class="page-title" id="pageTitle">Wellness Tools</h1>
+            <time class="date-info">Today, August 31, 2025</time>
+        </header>
+
+        <section class="content-area">
+            <!-- Wellness Tools Page -->
+            <article class="page active" id="wellness-tools-page">
+                <section class="wellness-tools-container">
+                    <header class="tools-header">
+                        <h2>Wellness Tools</h2>
+                        <p>Interactive tools to support your daily mental health practice</p>
+                    </header>
+
+                    <section class="tools-grid">
+                        <article class="tool-card breathing-tool">
+                            <header class="tool-header">
+                                <i class="fas fa-wind"></i>
+                                <h3>Breathing Exercises</h3>
+                            </header>
+                            <p class="tool-description">Guided breathing techniques to reduce stress and anxiety</p>
+                            <section class="tool-preview">
+                                <section class="breathing-animation"></section>
+                            </section>
+                            <section class="tool-options">
+                                <button class="tool-option" data-exercise="4-7-8">4-7-8 Breathing</button>
+                                <button class="tool-option" data-exercise="box">Box Breathing</button>
+                                <button class="tool-option" data-exercise="calm">Calming Breath</button>
+                            </section>
+                            <button class="start-tool-btn" data-tool="breathing">Start Exercise</button>
+                        </article>
+
+                        <article class="tool-card meditation-tool">
+                            <header class="tool-header">
+                                <i class="fas fa-om"></i>
+                                <h3>Guided Meditation</h3>
+                            </header>
+                            <p class="tool-description">Mindfulness sessions for inner peace and mental clarity</p>
+                            <section class="tool-preview">
+                                <section class="meditation-waves"></section>
+                            </section>
+                            <section class="tool-options">
+                                <button class="tool-option" data-duration="5">5 Minutes</button>
+                                <button class="tool-option" data-duration="10">10 Minutes</button>
+                                <button class="tool-option" data-duration="20">20 Minutes</button>
+                            </section>
+                            <button class="start-tool-btn" data-tool="meditation">Start Session</button>
+                        </article>
+
+                        <article class="tool-card journal-tool">
+                            <header class="tool-header">
+                                <i class="fas fa-pen"></i>
+                                <h3>Gratitude Journal</h3>
+                            </header>
+                            <p class="tool-description">Daily reflection and gratitude practice</p>
+                            <section class="journal-stats">
+                                <article class="journal-stat">
+                                    <span class="stat-number">12</span>
+                                    <span class="stat-label">Entries This Month</span>
+                                </article>
+                                <article class="journal-stat">
+                                    <span class="stat-number">7</span>
+                                    <span class="stat-label">Day Streak</span>
+                                </article>
+                            </section>
+                            <button class="start-tool-btn" data-tool="journal">Write Entry</button>
+                        </article>
+
+                        <article class="tool-card music-tool">
+                            <header class="tool-header">
+                                <i class="fas fa-music"></i>
+                                <h3>Therapeutic Music</h3>
+                            </header>
+                            <p class="tool-description">Curated soundscapes for relaxation and focus</p>
+                            <section class="music-categories">
+                                <button class="music-category" data-category="nature">Nature Sounds</button>
+                                <button class="music-category" data-category="ambient">Ambient</button>
+                                <button class="music-category" data-category="classical">Classical</button>
+                            </section>
+                            <button class="start-tool-btn" data-tool="music">Browse Music</button>
+                        </article>
+
+                        <article class="tool-card exercise-tool">
+                            <header class="tool-header">
+                                <i class="fas fa-dumbbell"></i>
+                                <h3>Mindful Movement</h3>
+                            </header>
+                            <p class="tool-description">Gentle exercises and stretches for mental wellbeing</p>
+                            <section class="exercise-options">
+                                <button class="exercise-option" data-type="yoga">Yoga</button>
+                                <button class="exercise-option" data-type="stretch">Stretching</button>
+                                <button class="exercise-option" data-type="walk">Walking</button>
+                            </section>
+                            <button class="start-tool-btn" data-tool="exercise">Start Movement</button>
+                        </article>
+
+                        <article class="tool-card sleep-tool">
+                            <header class="tool-header">
+                                <i class="fas fa-moon"></i>
+                                <h3>Sleep Support</h3>
+                            </header>
+                            <p class="tool-description">Tools and techniques for better sleep quality</p>
+                            <section class="sleep-options">
+                                <button class="sleep-option" data-type="story">Sleep Stories</button>
+                                <button class="sleep-option" data-type="sounds">Sleep Sounds</button>
+                                <button class="sleep-option" data-type="meditation">Sleep Meditation</button>
+                            </section>
+                            <button class="start-tool-btn" data-tool="sleep">Prepare for Sleep</button>
+                        </article>
+
+                        <!-- New Wellness Games -->
+                        <article class="tool-card puzzle-tool">
+                            <header class="tool-header">
+                                <i class="fas fa-puzzle-piece"></i>
+                                <h3>Mindful Puzzle</h3>
+                            </header>
+                            <p class="tool-description">Relaxing puzzles to focus your mind and reduce anxiety</p>
+                            <section class="tool-preview">
+                                <section class="puzzle-grid">
+                                    <div class="puzzle-piece">1</div>
+                                    <div class="puzzle-piece">2</div>
+                                    <div class="puzzle-piece">3</div>
+                                    <div class="puzzle-piece empty"></div>
+                                </section>
+                            </section>
+                            <section class="tool-options">
+                                <button class="tool-option" data-difficulty="easy">Easy</button>
+                                <button class="tool-option" data-difficulty="medium">Medium</button>
+                                <button class="tool-option" data-difficulty="hard">Hard</button>
+                            </section>
+                            <button class="start-tool-btn" data-tool="puzzle">Start Puzzle</button>
+                        </article>
+
+                        <article class="tool-card coloring-tool">
+                            <header class="tool-header">
+                                <i class="fas fa-palette"></i>
+                                <h3>Calm Coloring</h3>
+                            </header>
+                            <p class="tool-description">Therapeutic coloring to reduce stress and improve focus</p>
+                            <section class="tool-preview">
+                                <canvas class="coloring-canvas" width="200" height="120"></canvas>
+                            </section>
+                            <section class="color-palette">
+                                <div class="color-btn" style="background-color: #FF5252;" data-color="#FF5252"></div>
+                                <div class="color-btn" style="background-color: #FFD700;" data-color="#FFD700"></div>
+                                <div class="color-btn" style="background-color: #4CAF50;" data-color="#4CAF50"></div>
+                                <div class="color-btn" style="background-color: #2196F3;" data-color="#2196F3"></div>
+                            </section>
+                            <button class="start-tool-btn" data-tool="coloring">Start Coloring</button>
+                        </article>
+
+                        <article class="tool-card gratitude-tool">
+                            <header class="tool-header">
+                                <i class="fas fa-heart"></i>
+                                <h3>Gratitude Game</h3>
+                            </header>
+                            <p class="tool-description">Build positive thinking by collecting things you're grateful for</p>
+                            <section class="tool-preview">
+                                <input type="text" class="gratitude-input" placeholder="What are you grateful for today?">
+                                <section class="gratitude-list">
+                                    <div class="gratitude-item">
+                                        <span>My family</span>
+                                        <button class="delete-btn"><i class="fas fa-times"></i></button>
+                                    </div>
+                                    <div class="gratitude-item">
+                                        <span>Good weather</span>
+                                        <button class="delete-btn"><i class="fas fa-times"></i></button>
+                                    </div>
+                                </section>
+                            </section>
+                            <button class="start-tool-btn" data-tool="gratitude">Play Now</button>
+                        </article>
+                    </section>
+
+                    <!-- Wellness Shop -->
+                    <section class="shop-container">
+                        <header class="shop-header">
+                            <h3 class="shop-title">Wellness Shop</h3>
+                            <div class="user-points">
+                                <i class="fas fa-coins"></i>
+                                <span id="userPoints">100</span> Points
+                            </div>
+                        </header>
+                        <section class="shop-items">
+                            <article class="shop-item">
+                                <header class="shop-item-header">
+                                    <div class="shop-item-icon">
+                                        <i class="fas fa-paint-brush"></i>
+                                    </div>
+                                    <h4 class="shop-item-name">Premium Themes</h4>
+                                </header>
+                                <p class="shop-item-desc">Unlock beautiful color themes for your wellness tools</p>
+                                <footer class="shop-item-footer">
+                                    <div class="shop-item-price">
+                                        <i class="fas fa-coins"></i>
+                                        <span>200</span>
+                                    </div>
+                                    <button class="buy-btn" data-item="premium_themes">Buy Now</button>
+                                </footer>
+                            </article>
+
+                            <article class="shop-item">
+                                <header class="shop-item-header">
+                                    <div class="shop-item-icon">
+                                        <i class="fas fa-headphones"></i>
+                                    </div>
+                                    <h4 class="shop-item-name">Premium Meditations</h4>
+                                </header>
+                                <p class="shop-item-desc">Access exclusive guided meditation sessions</p>
+                                <footer class="shop-item-footer">
+                                    <div class="shop-item-price">
+                                        <i class="fas fa-coins"></i>
+                                        <span>300</span>
+                                    </div>
+                                    <button class="buy-btn" data-item="guided_meditations">Buy Now</button>
+                                </footer>
+                            </article>
+
+                            <article class="shop-item">
+                                <header class="shop-item-header">
+                                    <div class="shop-item-icon">
+                                        <i class="fas fa-music"></i>
+                                    </div>
+                                    <h4 class="shop-item-name">Relaxation Music</h4>
+                                </header>
+                                <p class="shop-item-desc">Get full access to therapeutic music library</p>
+                                <footer class="shop-item-footer">
+                                    <div class="shop-item-price">
+                                        <i class="fas fa-coins"></i>
+                                        <span>250</span>
+                                    </div>
+                                    <button class="buy-btn" data-item="relaxation_music">Buy Now</button>
+                                </footer>
+                            </article>
+
+                            <article class="shop-item">
+                                <header class="shop-item-header">
+                                    <div class="shop-item-icon">
+                                        <i class="fas fa-snowflake"></i>
+                                    </div>
+                                    <h4 class="shop-item-name">Streak Freeze</h4>
+                                </header>
+                                <p class="shop-item-desc">Protect your streak if you miss a day</p>
+                                <footer class="shop-item-footer">
+                                    <div class="shop-item-price">
+                                        <i class="fas fa-coins"></i>
+                                        <span>150</span>
+                                    </div>
+                                    <button class="buy-btn" data-item="streak_freeze">Buy Now</button>
+                                </footer>
+                            </article>
+
+                            <article class="shop-item">
+                                <header class="shop-item-header">
+                                    <div class="shop-item-icon">
+                                        <i class="fas fa-bolt"></i>
+                                    </div>
+                                    <h4 class="shop-item-name">Double Points</h4>
+                                </header>
+                                <p class="shop-item-desc">Earn double points on all activities for 7 days</p>
+                                <footer class="shop-item-footer">
+                                    <div class="shop-item-price">
+                                        <i class="fas fa-coins"></i>
+                                        <span>350</span>
+                                    </div>
+                                    <button class="buy-btn" data-item="double_points">Buy Now</button>
+                                </footer>
+                            </article>
+                        </section>
+                    </section>
+
+                    <!-- Achievements Section -->
+                    <section class="achievements-container">
+                        <h3 class="achievements-header">Achievements</h3>
+                        <section class="achievements-grid">
+                            <article class="achievement-item">
+                                <div class="achievement-icon">
+                                    <i class="fas fa-fire"></i>
+                                </div>
+                                <div class="achievement-info">
+                                    <h4 class="achievement-name">7-Day Streak</h4>
+                                    <p class="achievement-desc">Use wellness tools for 7 consecutive days</p>
+                                    <div class="achievement-progress">
+                                        <div class="progress-bar" style="width: 57%"></div>
+                                    </div>
+                                </div>
+                            </article>
+
+                            <article class="achievement-item">
+                                <div class="achievement-icon">
+                                    <i class="fas fa-wind"></i>
+                                </div>
+                                <div class="achievement-info">
+                                    <h4 class="achievement-name">Breathing Master</h4>
+                                    <p class="achievement-desc">Complete 10 breathing exercises</p>
+                                    <div class="achievement-progress">
+                                        <div class="progress-bar" style="width: 30%"></div>
+                                    </div>
+                                </div>
+                            </article>
+
+                            <article class="achievement-item">
+                                <div class="achievement-icon locked">
+                                    <i class="fas fa-journal-whills"></i>
+                                </div>
+                                <div class="achievement-info">
+                                    <h4 class="achievement-name">Journal Keeper</h4>
+                                    <p class="achievement-desc">Write 20 journal entries</p>
+                                    <div class="achievement-progress">
+                                        <div class="progress-bar" style="width: 15%"></div>
+                                    </div>
+                                </div>
+                            </article>
+
+                            <article class="achievement-item">
+                                <div class="achievement-icon locked">
+                                    <i class="fas fa-medal"></i>
+                                </div>
+                                <div class="achievement-info">
+                                    <h4 class="achievement-name">Wellness Explorer</h4>
+                                    <p class="achievement-desc">Try all wellness tools at least once</p>
+                                    <div class="achievement-progress">
+                                        <div class="progress-bar" style="width: 45%"></div>
+                                    </div>
+                                </div>
+                            </article>
+                        </section>
+                    </section>
+                </section>
+            </article>
+        </section>
+    </main>
+
+    <!-- Emergency Modal -->
+    <section class="modal" id="emergencyModal">
+        <section class="modal-content emergency-modal">
+            <h2>Emergency Support</h2>
+            <p>If you're in crisis, please contact one of these resources immediately:</p>
+            <ul class="emergency-contacts">
+                <li>
+                    <i class="fas fa-phone"></i>
+                    <span>National Suicide Prevention Lifeline</span>
+                    <a href="tel:988">988</a>
+                </li>
+                <li>
+                    <i class="fas fa-phone"></i>
+                    <span>Crisis Text Line</span>
+                    <a href="sms:741741">Text HOME to 741741</a>
+                </li>
+                <li>
+                    <i class="fas fa-phone"></i>
+                    <span>Emergency Services</span>
+                    <a href="tel:911">911</a>
+                </li>
+            </ul>
+            <button class="modal-close" id="emergencyModalClose">Close</button>
+        </section>
+    </section>
+
+    <script src="../js/dashboard.js"></script>
+    <script src="../js/wellness.js"></script>
+</body>
+</html>

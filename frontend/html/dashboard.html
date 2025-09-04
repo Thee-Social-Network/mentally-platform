@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mentaly - Your Wellness Dashboard</title>
+    <link rel="stylesheet" href="../css/dashboard.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Top Navigation Bar -->
+    <nav class="top-navbar">
+        <section class="nav-container">
+            <a href="../html/landing.html" class="logo-link">
+                <h1 class="logo">Mentaly</h1>
+            </a>
+            
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <button class="nav-button active" data-page="../html/dashboard">
+                        <i class="fas fa-chart-line"></i>
+                        <span>Dashboard</span>
+                    </button>
+                </li>
+                <li class="nav-item">
+                    <button class="nav-button" data-page="../html/ai-support">
+                        <i class="fas fa-robot"></i>
+                        <span>AI Support</span>
+                    </button>
+                </li>
+                <li class="nav-item">
+                    <button class="nav-button" data-page="../html/mood-tracker">
+                        <i class="fas fa-heart"></i>
+                        <span>Mood Tracker</span>
+                    </button>
+                </li>
+                <li class="nav-item">
+                    <button class="nav-button" data-page="../html/community">
+                        <i class="fas fa-users"></i>
+                        <span>Community</span>
+                    </button>
+                </li>
+                
+                <li class="nav-item">
+                    <button class="nav-button" data-page="../html/wellness-tools">
+                        <i class="fas fa-leaf"></i>
+                        <span>Wellness Tools</span>
+                    </button>
+                </li>
+                <li class="nav-item">
+                    <button class="nav-button" data-page="../html/professionals">
+                        <i class="fas fa-user-md"></i>
+                        <span>Find Help</span>
+                    </button>
+                </li>
+                <li class="nav-item">
+                    <button class="nav-button" data-page="../html/progress">
+                        <i class="fas fa-trophy"></i>
+                        <span>Progress</span>
+                    </button>
+                </li>
+            </ul>
+
+            <section class="nav-actions">
+                <button class="emergency-btn" id="dashboardEmergencyBtn">
+                    <i class="fas fa-phone"></i>
+                    <span>Emergency</span>
+                </button>
+                
+                <a href="../html/notification.html" class="notification-btn" id="notificationBtn">
+    <i class="fas fa-bell"></i>
+    <span class="notification-badge">3</span>
+</a>
+
+                
+                <section class="user-profile">
+                    <button class="profile-btn" id="profileBtn">
+                        <figure class="avatar">
+                            <i class="fas fa-user"></i>
+                        </figure>
+                        <span class="username" id="usernameDisplay">Anonymous User</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                </section>
+                
+                <button class="settings-btn" id="settingsBtn">
+                    <i class="fas fa-cog"></i>
+                </button>
+                
+                <button class="menu-toggle" id="menuToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </section>
+        </section>
+    </nav>
+
+    <main class="main-content">
+        <header class="content-header">
+            <h1 class="page-title" id="pageTitle">Dashboard</h1>
+            <time class="date-info">Today, August 31, 2025</time>
+        </header>
+
+        <section class="content-area">
+            <!-- Dashboard Page -->
+            <article class="page active" id="dashboard-page">
+                <section class="dashboard-grid">
+                    <article class="stats-overview">
+                        <header class="card-header">
+                            <h2>Your Wellness Overview</h2>
+                        </header>
+                        <section class="stats-grid">
+                            <article class="stat-card">
+                                <figure class="stat-icon mood">
+                                    <i class="fas fa-smile"></i>
+                                </figure>
+                                <section class="stat-content">
+                                    <h3 class="stat-value">7.2</h3>
+                                    <p class="stat-label">Average Mood</p>
+                                    <small class="stat-trend positive">+0.5 from yesterday</small>
+                                </section>
+                            </article>
+                            <article class="stat-card">
+                                <figure class="stat-icon streak">
+                                    <i class="fas fa-fire"></i>
+                                </figure>
+                                <section class="stat-content">
+                                    <h3 class="stat-value">14</h3>
+                                    <p class="stat-label">Day Streak</p>
+                                    <small class="stat-trend positive">Keep it up!</small>
+                                </section>
+                            </article>
+                            <article class="stat-card">
+                                <figure class="stat-icon sessions">
+                                    <i class="fas fa-meditation"></i>
+                                </figure>
+                                <section class="stat-content">
+                                    <h3 class="stat-value">23</h3>
+                                    <p class="stat-label">Sessions This Week</p>
+                                    <small class="stat-trend positive">+5 from last week</small>
+                                </section>
+                            </article>
+                            <article class="stat-card">
+                                <figure class="stat-icon goals">
+                                    <i class="fas fa-target"></i>
+                                </figure>
+                                <section class="stat-content">
+                                    <h3 class="stat-value">8/10</h3>
+                                    <p class="stat-label">Goals Achieved</p>
+                                    <small class="stat-trend neutral">2 remaining</small>
+                                </section>
+                            </article>
+                        </section>
+                    </article>
+
+                    <article class="mood-chart-card">
+                        <header class="card-header">
+                            <h3>Mood Trends (Last 30 Days)</h3>
+                            <select class="time-selector">
+                                <option>Last 30 Days</option>
+                                <option>Last 7 Days</option>
+                                <option>Last 3 Months</option>
+                            </select>
+                        </header>
+                        <figure class="chart-container">
+                            <canvas class="mood-chart" id="moodChart"></canvas>
+                        </figure>
+                    </article>
+
+                    <article class="quick-actions-card">
+                        <header class="card-header">
+                            <h3>Quick Actions</h3>
+                        </header>
+                        <section class="quick-actions-grid">
+                            <button class="action-btn chat-ai" data-action="ai-support">
+                                <i class="fas fa-robot"></i>
+                                <span>Chat with AI</span>
+                            </button>
+                            <button class="action-btn log-mood" data-action="mood-log">
+                                <i class="fas fa-heart"></i>
+                                <span>Log Mood</span>
+                            </button>
+                            <button class="action-btn breathing" data-action="breathing">
+                                <i class="fas fa-wind"></i>
+                                <span>Breathing Exercise</span>
+                            </button>
+                            <button class="action-btn journal" data-action="journal">
+                                <i class="fas fa-pen"></i>
+                                <span>Journal Entry</span>
+                            </button>
+                            <button class="action-btn meditation" data-action="meditation">
+                                <i class="fas fa-om"></i>
+                                <span>Meditate</span>
+                            </button>
+                            <button class="action-btn community" data-action="community">
+                                <i class="fas fa-users"></i>
+                                <span>Join Community</span>
+                            </button>
+                        </section>
+                    </article>
+
+                    <article class="daily-insights-card">
+                        <header class="card-header">
+                            <h3>Today's Insights</h3>
+                            <button class="refresh-btn" id="refreshInsights">
+                                <i class="fas fa-sync-alt"></i>
+                            </button>
+                        </header>
+                        <section class="insights-list">
+                            <article class="insight-item">
+                                <figure class="insight-icon">
+                                    <i class="fas fa-lightbulb"></i>
+                                </figure>
+                                <section class="insight-content">
+                                    <h4>You're doing great!</h4>
+                                    <p>Your mood has been consistently positive this week. Keep up the good work with your daily practices.</p>
+                                </section>
+                            </article>
+                            <article class="insight-item">
+                                <figure class="insight-icon">
+                                    <i class="fas fa-calendar-check"></i>
+                                </figure>
+                                <section class="insight-content">
+                                    <h4>Consistency Matters</h4>
+                                    <p>You've maintained your wellness streak for 14 days. Regular practice leads to lasting positive changes.</p>
+                                </section>
+                            </article>
+                            <article class="insight-item">
+                                <figure class="insight-icon">
+                                    <i class="fas fa-user-friends"></i>
+                                </figure>
+                                <section class="insight-content">
+                                    <h4>Community Connection</h4>
+                                    <p>Consider joining a support group discussion today. Social connection can boost your wellbeing.</p>
+                                </section>
+                            </article>
+                        </section>
+                    </article>
+
+                    <article class="wellness-activities-card">
+                        <header class="card-header">
+                            <h3>Recommended Activities</h3>
+                            <button class="view-all-btn">View All</button>
+                        </header>
+                        <section class="activities-list">
+                            <article class="activity-item">
+                                <figure class="activity-image">
+                                    <i class="fas fa-walking"></i>
+                                </figure>
+                                <section class="activity-content">
+                                    <h4>Morning Walk</h4>
+                                    <p>Delta Park - 15 min walk</p>
+                                    <small class="activity-distance">2.3 km away</small>
+                                </section>
+                                <button class="activity-btn">Start</button>
+                            </article>
+                            <article class="activity-item">
+                                <figure class="activity-image">
+                                    <i class="fas fa-users"></i>
+                                </figure>
+                                <section class="activity-content">
+                                    <h4>Support Group</h4>
+                                    <p>Anxiety Support Circle</p>
+                                    <small class="activity-time">Starts in 2 hours</small>
+                                </section>
+                                <button class="activity-btn">Join</button>
+                            </article>
+                            <article class="activity-item">
+                                <figure class="activity-image">
+                                    <i class="fas fa-music"></i>
+                                </figure>
+                                <section class="activity-content">
+                                    <h4>Music Therapy</h4>
+                                    <p>Calming Nature Sounds</p>
+                                    <small class="activity-duration">20 minutes</small>
+                                </section>
+                                <button class="activity-btn">Listen</button>
+                            </article>
+                        </section>
+                    </article>
+                </section>
+            </article>
+        </section>
+    </main>
+
+    <!-- Emergency Modal -->
+    <dialog class="modal" id="emergencyModal">
+        <article class="modal-content emergency-modal">
+            <header class="modal-header">
+                <h2>Immediate Help Resources</h2>
+                <button class="modal-close" id="closeEmergencyModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </header>
+            <section class="modal-body">
+                <p class="emergency-text">If you're in crisis or experiencing thoughts of self-harm, please reach out to these resources immediately:</p>
+                <section class="emergency-list">
+                    <article class="emergency-item">
+                        <h3>Crisis Hotline</h3>
+                        <p>24/7 Confidential Support</p>
+                        <a href="tel:0800567567" class="emergency-call-link">
+                            <i class="fas fa-phone"></i>
+                            0800 567 567
+                        </a>
+                    </article>
+                    <article class="emergency-item">
+                        <h3>SADAG Helpline</h3>
+                        <p>South African Depression & Anxiety Group</p>
+                        <a href="tel:0800121314" class="emergency-call-link">
+                            <i class="fas fa-phone"></i>
+                            0800 121 314
+                        </a>
+                    </article>
+                    <article class="emergency-item">
+                        <h3>Emergency Services</h3>
+                        <p>Medical Emergency</p>
+                        <a href="tel:10177" class="emergency-call-link">
+                            <i class="fas fa-phone"></i>
+                            10177
+                        </a>
+                    </article>
+                </section>
+                <p class="emergency-note">You are not alone. Please reach out for support.</p>
+            </section>
+        </article>
+    </dialog>
+
+    <!-- Settings Modal -->
+    <dialog class="modal" id="settingsModal">
+        <article class="modal-content settings-modal">
+            <header class="modal-header">
+                <h2>Settings</h2>
+                <button class="modal-close" id="closeSettingsModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </header>
+            <section class="modal-body">
+                <nav class="settings-nav">
+                    <button class="settings-nav-btn active" data-tab="account">Account</button>
+                    <button class="settings-nav-btn" data-tab="privacy">Privacy</button>
+                    <button class="settings-nav-btn" data-tab="notifications">Notifications</button>
+                    <button class="settings-nav-btn" data-tab="appearance">Appearance</button>
+                </nav>
+                <section class="settings-content">
+                    <article class="settings-tab active" id="account-tab">
+                        <h3>Account Settings</h3>
+                        <form class="settings-form">
+                            <section class="form-group">
+                                <label class="form-label">Display Name</label>
+                                <input type="text" class="form-input" value="Anonymous User">
+                            </section>
+                            <section class="form-group">
+                                <label class="form-label">Email Address</label>
+                                <input type="email" class="form-input" value="user@example.com">
+                            </section>
+                            <section class="form-group">
+                                <label class="form-label">Password</label>
+                                <input type="password" class="form-input" value="********">
+                            </section>
+                            <button type="submit" class="save-settings-btn">Save Changes</button>
+                        </form>
+                    </article>
+                    <article class="settings-tab" id="privacy-tab">
+                        <h3>Privacy Settings</h3>
+                        <form class="settings-form">
+                            <section class="form-group checkbox-group">
+                                <input type="checkbox" id="dataCollection" checked>
+                                <label for="dataCollection">Allow anonymous data collection to improve services</label>
+                            </section>
+                            <section class="form-group checkbox-group">
+                                <input type="checkbox" id="personalizedInsights" checked>
+                                <label for="personalizedInsights">Receive personalized insights based on my data</label>
+                            </section>
+                            <section class="form-group">
+                                <label class="form-label">Data Retention</label>
+                                <select class="form-select">
+                                    <option>Keep data indefinitely</option>
+                                    <option>Delete after 1 year</option>
+                                    <option>Delete after 6 months</option>
+                                </select>
+                            </section>
+                            <button type="submit" class="save-settings-btn">Save Preferences</button>
+                        </form>
+                    </article>
+                    <article class="settings-tab" id="notifications-tab">
+                        <h3>Notification Settings</h3>
+                        <form class="settings-form">
+                            <section class="form-group checkbox-group">
+                                <input type="checkbox" id="dailyReminders" checked>
+                                <label for="dailyReminders">Daily check-in reminders</label>
+                            </section>
+                            <section class="form-group checkbox-group">
+                                <input type="checkbox" id="weeklyReports" checked>
+                                <label for="weeklyReports">Weekly progress reports</label>
+                            </section>
+                            <section class="form-group checkbox-group">
+                                <input type="checkbox" id="communityUpdates">
+                                <label for="communityUpdates">Community updates and events</label>
+                            </section>
+                            <section class="form-group">
+                                <label class="form-label">Notification Frequency</label>
+                                <select class="form-select">
+                                    <option>Only important updates</option>
+                                    <option>Regular (recommended)</option>
+                                    <option>All notifications</option>
+                                </select>
+                            </section>
+                            <button type="submit" class="save-settings-btn">Save Preferences</button>
+                        </form>
+                    </article>
+                    <article class="settings-tab" id="appearance-tab">
+                        <h3>Appearance Settings</h3>
+                        <form class="settings-form">
+                            <section class="form-group">
+                                <label class="form-label">Theme</label>
+                                <select class="form-select">
+                                    <option>Light (Default)</option>
+                                    <option>Dark</option>
+                                    <option>Auto (System)</option>
+                                </select>
+                            </section>
+                            <section class="form-group">
+                                <label class="form-label">Font Size</label>
+                                <select class="form-select">
+                                    <option>Small</option>
+                                    <option>Medium (Default)</option>
+                                    <option>Large</option>
+                                </select>
+                            </section>
+                            <section class="form-group checkbox-group">
+                                <input type="checkbox" id="reduceAnimations">
+                                <label for="reduceAnimations">Reduce animations and transitions</label>
+                            </section>
+                            <button type="submit" class="save-settings-btn">Save Preferences</button>
+                        </form>
+                    </article>
+                </section>
+            </section>
+        </article>
+    </dialog>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="../js/dashboard.js"></script>
+</body>
+</html>
