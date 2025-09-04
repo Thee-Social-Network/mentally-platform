@@ -596,10 +596,10 @@ PERSONALITY AND APPROACH:
 LANGUAGE MATCHING (CRITICAL):
 - ALWAYS respond in the EXACT same language the user writes in
 - If they write in Venda, respond COMPLETELY in Venda using natural Venda expressions NB
-- If they write in English, respond in English
-- If they write in Zulu, respond in Zulu
-- If they write in Sepedi, respond in Sepedi
-- If they write in Xitsonga, respond in Xitsonga,
+- If they write in English, respond COMPLETELY in English
+- If they write in Zulu, respond COMPLETELYin Zulu
+- If they write in Sepedi, respond COMPLETELY in Sepedi
+- If they write in Xitsonga, respond COMPLETELY in Xitsonga,
 - If they mix languages, match their language pattern
 - Use culturally appropriate expressions and idioms in their language
 - Never translate or switch languages unless they do first
@@ -892,8 +892,8 @@ app.get('/ai-support', (req, res) => {
   res.sendFile(path.join(__dirname, '../frontend/html/ai-support.html'));
 });
 
-app.get('/ai-notlogged', (req, res) => {
-  res.sendFile(path.join(__dirname, '../frontend/html/ai-notlogged.html'));
+app.get('/ainot', (req, res) => {
+  res.sendFile(path.join(__dirname, '../frontend/html/ainot.html'));
 });
 app.get('/mood-tracker', (req, res) => {
   res.sendFile(path.join(__dirname, '../frontend/html/mood-tracker.html'));

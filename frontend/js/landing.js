@@ -194,14 +194,14 @@ document.addEventListener('DOMContentLoaded', function() {
     function showFeatureModal(feature) {
         const featureContent = {
             ai: {
-                title: 'AI-Powered Support',
+                title: 'Budy Support',
                 content: `
                     <div style="padding: 2rem;">
                         <div style="text-align: center; margin-bottom: 2rem;">
                             <i class="fas fa-robot" style="font-size: 3rem; color: #FDBB30; margin-bottom: 1rem;"></i>
-                            <h3 style="margin-bottom: 1rem;">24/7 AI Companion</h3>
+                            <h3 style="margin-bottom: 1rem;">24/7 Buddy Companion</h3>
                             <p style="color: rgba(255,255,255,0.8); line-height: 1.6;">
-                                Our AI provides instant emotional support, active listening, and personalized guidance. 
+                                Our Buddy provides instant emotional support, active listening, and personalized guidance. 
                                 It's designed to be your first step toward healing, not a replacement for human connection.
                             </p>
                         </div>
@@ -212,7 +212,7 @@ document.addEventListener('DOMContentLoaded', function() {
                             <li style="margin-bottom: 0.5rem;"><i class="fas fa-check" style="color: #28A745; margin-right: 0.5rem;"></i> Bridge to professional help</li>
                         </ul>
                         <button onclick="window.location.href='../html/ai-support.html'" style="width: 100%; background: linear-gradient(45deg, #FDBB30, #FFD700); border: none; color: #002D62; padding: 1rem; border-radius: 25px; font-weight: 600; cursor: pointer;">
-                            Try AI Support Now
+                            Try Buddy Support Now
                         </button>
                     </div>
                 `

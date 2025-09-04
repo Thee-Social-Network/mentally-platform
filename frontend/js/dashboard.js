@@ -1,4 +1,4 @@
-// Mentaly Dashboard JavaScript - Multi-Page Version
+// Mentaly Dashboard JavaScript - Multi-Page Version with Professional Notification
 document.addEventListener('DOMContentLoaded', function() {
     // Initialize the dashboard
     initDashboard();
@@ -19,6 +19,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // Store conversation history for AI context
 let conversationHistory = [];
+let chatStartTime = null;
+let professionalNotificationTimer = null;
+let professionalNotificationShown = false;
 
 // Initialize the dashboard
 function initDashboard() {
@@ -369,9 +372,6 @@ function initProgressCharts() {
 }
 
 // Load user data
-// ... existing code ...
-
-// Load user data
 function loadUserData() {
     // Get user data from localStorage
     const userData = JSON.parse(localStorage.getItem('user'));
@@ -396,7 +396,6 @@ function loadUserData() {
     }
 }
 
-// ... rest of the code remains the same ...
 // Show emergency modal
 function showEmergencyModal() {
     const modal = document.getElementById('emergencyModal');
@@ -484,20 +483,42 @@ function handleQuickAction(action) {
 function initAIChat() {
     console.log('🚀 Frontend: Initializing AI Chat');
     
+    // Set chat start time for professional notification
+    chatStartTime = Date.now();
+    
+    // Start professional notification timer (1 minute = 60000ms)
+    professionalNotificationTimer = setTimeout(() => {
+        if (!professionalNotificationShown) {
+            showProfessionalNotification();
+        }
+    }, 60000);
+    
     // Start the session timer
     startSessionTimer();
     
     // Focus on the chat input
+    // Inside initAIChat()
     const chatInput = document.getElementById('chatInput');
-    if (chatInput) {
-        chatInput.focus();
-        
-        // Auto-resize textarea
-        chatInput.addEventListener('input', function() {
-            this.style.height = 'auto';
-            this.style.height = (this.scrollHeight) + 'px';
-        });
-    }
+if (chatInput) {
+    chatInput.focus();
+
+    // Auto-resize textarea
+    chatInput.addEventListener('input', function() {
+        this.style.height = 'auto';
+        this.style.height = (this.scrollHeight) + 'px';
+    });
+
+    // ✅ Enter to send, Shift+Enter for newline
+    chatInput.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter' && !e.shiftKey) {
+            e.preventDefault(); // stop newline
+            document.getElementById('chatForm')
+                .dispatchEvent(new Event('submit', { cancelable: true }));
+        }
+    });
+}
+
+
     
     // Add welcome message if chat is empty
     const chatMessages = document.getElementById('chatMessages');
@@ -515,6 +536,357 @@ function initAIChat() {
     console.log('✅ Frontend: AI Chat initialized, conversation history length:', conversationHistory.length);
 }
 
+// Show Professional Notification - NEW FUNCTION
+function showProfessionalNotification() {
+    if (professionalNotificationShown) return;
+    
+    professionalNotificationShown = true;
+    console.log('🔔 Showing professional notification after 1 minute of chat');
+    
+    // Create the notification modal HTML if it doesn't exist
+    if (!document.getElementById('professionalNotificationModal')) {
+        createProfessionalNotificationModal();
+    }
+    
+    const modal = document.getElementById('professionalNotificationModal');
+    if (modal) {
+        modal.showModal();
+        modal.classList.add('open');
+        document.body.style.overflow = 'hidden';
+        
+        // Add event listeners for the notification
+        setupProfessionalNotificationListeners();
+    }
+}
+
+// Create Professional Notification Modal - NEW FUNCTION
+function createProfessionalNotificationModal() {
+    const modalHTML = `
+    <dialog class="modal professional-notification-modal" id="professionalNotificationModal">
+        <article class="modal-content professional-modal">
+            <header class="modal-header professional-header">
+                <h2>Professional Help Available</h2>
+                <p>A mental health professional is ready to support you</p>
+                <button class="modal-close" id="closeProfessionalNotification">
+                    <i class="fas fa-times"></i>
+                </button>
+            </header>
+            <section class="modal-body professional-body">
+                <article class="professional-card-notification">
+                    <section class="professional-info-header">
+                        <figure class="professional-image">
+                            <i class="fas fa-user-md"></i>
+                        </figure>
+                        <section class="professional-details-main">
+                            <h3>Dr. Sarah Johnson</h3>
+                            <section class="rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <span class="rating-text">4.9 (127 reviews)</span>
+                            </section>
+                            <p class="professional-specialty">Clinical Psychologist • Anxiety & Depression Specialist</p>
+                            <p class="professional-location">Sandton • 2.3 km away</p>
+                        </section>
+                    </section>
+                    
+                    <section class="professional-details">
+                        <span class="detail-item">15+ years experience</span>
+                        <span class="detail-item">Discovery Health accepted</span>
+                        <span class="detail-item">Online sessions available</span>
+                    </section>
+                    
+                    <p class="professional-bio">
+                        Specializing in cognitive-behavioral therapy and mindfulness-based interventions. 
+                        Experienced in treating anxiety disorders, depression, and stress-related conditions.
+                    </p>
+                    
+                    <p class="availability">Available now for immediate consultation</p>
+                    
+                    <section class="notification-actions">
+                        <button class="contact-btn" id="contactProfessional">
+                            <i class="fas fa-phone"></i>
+                            Contact Now
+                        </button>
+                        <button class="book-btn" id="bookAppointment">
+                            <i class="fas fa-calendar"></i>
+                            Book Appointment
+                        </button>
+                        <button class="dismiss-btn" id="dismissNotification">
+                            Continue Chat
+                        </button>
+                    </section>
+                </article>
+            </section>
+        </article>
+    </dialog>
+    
+    <style>
+    .professional-notification-modal {
+        border: none;
+        border-radius: 20px;
+        padding: 0;
+        max-width: 600px;
+        width: 90%;
+        box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+        backdrop-filter: blur(10px);
+        background: transparent;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        opacity: 0;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    .professional-notification-modal.open {
+        opacity: 1;
+    }
+    
+    .professional-notification-modal::backdrop {
+        background: rgba(0, 0, 0, 0.5);
+        backdrop-filter: blur(5px);
+    }
+    
+    .professional-modal {
+        background: white;
+        border-radius: 20px;
+        overflow: hidden;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    }
+    
+    .professional-header {
+        background: linear-gradient(135deg, #61A0AF 0%, #4A90A4 100%);
+        color: white;
+        padding: 2rem;
+        text-align: center;
+        position: relative;
+    }
+    
+    .professional-header h2 {
+        font-size: 1.5rem;
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+    }
+    
+    .professional-header p {
+        font-size: 1rem;
+        opacity: 0.9;
+    }
+    
+    .professional-body {
+        padding: 2rem;
+    }
+    
+    .professional-card-notification {
+        text-align: center;
+    }
+    
+    .professional-info-header {
+        display: flex;
+        align-items: center;
+        gap: 1.5rem;
+        margin-bottom: 1.5rem;
+        text-align: left;
+    }
+    
+    .professional-image {
+        width: 80px;
+        height: 80px;
+        background: linear-gradient(135deg, #61A0AF 0%, #4A90A4 100%);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 2rem;
+        flex-shrink: 0;
+    }
+    
+    .professional-details-main h3 {
+        font-size: 1.3rem;
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+        color: #2D3748;
+    }
+    
+    .rating {
+        display: flex;
+        align-items: center;
+        gap: 0.25rem;
+        margin-bottom: 0.5rem;
+    }
+    
+    .rating i {
+        color: #FDBB30;
+        font-size: 0.9rem;
+    }
+    
+    .rating-text {
+        font-size: 0.9rem;
+        color: #718096;
+        margin-left: 0.5rem;
+    }
+    
+    .professional-specialty {
+        color: #4A5568;
+        font-size: 0.95rem;
+        margin-bottom: 0.25rem;
+        font-weight: 500;
+    }
+    
+    .professional-location {
+        color: #718096;
+        font-size: 0.9rem;
+    }
+    
+    .professional-details {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 0.75rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    .detail-item {
+        background: #F7FAFC;
+        color: #4A5568;
+        padding: 0.5rem 1rem;
+        border-radius: 20px;
+        font-size: 0.85rem;
+        border: 1px solid #E2E8F0;
+    }
+    
+    .professional-bio {
+        color: #4A5568;
+        font-size: 0.95rem;
+        line-height: 1.6;
+        margin-bottom: 1.5rem;
+        text-align: center;
+    }
+    
+    .availability {
+        color: #38A169;
+        font-size: 1rem;
+        font-weight: 600;
+        margin-bottom: 2rem;
+        text-align: center;
+    }
+    
+    .notification-actions {
+        display: flex;
+        gap: 1rem;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+    
+    .contact-btn, .book-btn, .dismiss-btn {
+        padding: 1rem 1.5rem;
+        border-radius: 12px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        border: none;
+        font-size: 0.95rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        min-width: 150px;
+        justify-content: center;
+    }
+    
+    .contact-btn {
+        background: linear-gradient(135deg, #38A169 0%, #2F855A 100%);
+        color: white;
+    }
+    
+    .contact-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(56, 161, 105, 0.3);
+    }
+    
+    .book-btn {
+        background: linear-gradient(135deg, #61A0AF 0%, #4A90A4 100%);
+        color: white;
+    }
+    
+    .book-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(97, 160, 175, 0.3);
+    }
+    
+    .dismiss-btn {
+        background: #F7FAFC;
+        color: #4A5568;
+        border: 1px solid #E2E8F0;
+    }
+    
+    .dismiss-btn:hover {
+        background: #E2E8F0;
+    }
+    
+    @media (max-width: 768px) {
+        .professional-info-header {
+            flex-direction: column;
+            text-align: center;
+        }
+        
+        .notification-actions {
+            flex-direction: column;
+        }
+        
+        .contact-btn, .book-btn, .dismiss-btn {
+            width: 100%;
+        }
+    }
+    </style>
+    `;
+    
+    document.body.insertAdjacentHTML('beforeend', modalHTML);
+}
+
+// Setup Professional Notification Listeners - NEW FUNCTION
+function setupProfessionalNotificationListeners() {
+    const closeBtn = document.getElementById('closeProfessionalNotification');
+    const contactBtn = document.getElementById('contactProfessional');
+    const bookBtn = document.getElementById('bookAppointment');
+    const dismissBtn = document.getElementById('dismissNotification');
+    
+    if (closeBtn) {
+        closeBtn.addEventListener('click', hideProfessionalNotification);
+    }
+    
+    if (contactBtn) {
+        contactBtn.addEventListener('click', function() {
+            alert('Connecting you with Dr. Sarah Johnson...\n\nPhone: +27 11 234 5678\nEmail: dr.sarah@mentalycare.co.za\n\nYou will be contacted within 5 minutes.');
+            hideProfessionalNotification();
+        });
+    }
+    
+    if (bookBtn) {
+        bookBtn.addEventListener('click', function() {
+            alert('Redirecting to booking system...\n\nYou can book an appointment with Dr. Sarah Johnson for today or tomorrow.');
+            // In a real app, this would redirect to the professionals page
+            window.location.href = '../html/professionals.html';
+        });
+    }
+    
+    if (dismissBtn) {
+        dismissBtn.addEventListener('click', hideProfessionalNotification);
+    }
+}
+
+// Hide Professional Notification - NEW FUNCTION
+function hideProfessionalNotification() {
+    const modal = document.getElementById('professionalNotificationModal');
+    if (modal) {
+        modal.classList.remove('open');
+        modal.close();
+        document.body.style.overflow = 'auto';
+    }
+}
+
 // Start session timer
 function startSessionTimer() {
     const timerElement = document.getElementById('sessionTimer');
@@ -522,7 +894,7 @@ function startSessionTimer() {
     
     if (!timerElement || !progressElement) return;
     
-    let timeLeft = 1 * 60; // 15 minutes in seconds
+    let timeLeft = 15 * 60; // 15 minutes in seconds
     const totalTime = timeLeft;
     
     const timerInterval = setInterval(() => {
@@ -930,3 +1302,19 @@ document.addEventListener('DOMContentLoaded', function() {
         observer.observe(card);
     });
 });
+
+document.addEventListener("DOMContentLoaded", () => {
+    // ✅ Logout button logic
+    const logoutBtn = document.getElementById("logoutBtn");
+    if (logoutBtn) {
+        logoutBtn.addEventListener("click", () => {
+            // Clear session data if stored
+            localStorage.clear();
+            sessionStorage.clear();
+
+            // Redirect to landing/login page
+            window.location.href = "../html/landing.html";
+        });
+    }
+});
+
