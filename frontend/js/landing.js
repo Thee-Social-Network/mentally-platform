@@ -69,33 +69,28 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // In your initButtonHandlers function in landing.js
-function initButtonHandlers() {
-    // Sign up buttons
-    const signupButtons = [
-        document.getElementById('signupBtn'),
-        document.getElementById('ctaPrimary'),
-        document.getElementById('finalCta')
-    ];
+    // Button handlers with updated navigation
+    function initButtonHandlers() {
+        // Sign up buttons - redirect to signup page
+        const signupButtons = [
+            document.getElementById('signupBtn'),
+            document.getElementById('ctaPrimary'),
+            document.getElementById('finalCta')
+        ];
 
-    signupButtons.forEach(btn => {
-        if (btn) {
-            btn.addEventListener('click', function() {
-                // ✅ Redirect to signup page instead of dashboard
-                window.location.href = '/signup';
-            });
-        }
-    });
+        signupButtons.forEach(btn => {
+            if (btn) {
+                btn.addEventListener('click', function() {
+                    window.location.href = 'signup.html';
+                });
+            }
+        });
 
-        // Login button
+        // Login button - redirect to login page
         const loginBtn = document.getElementById('loginBtn');
         if (loginBtn) {
             loginBtn.addEventListener('click', function() {
-                
-        
-                    // For demo, we'll redirect to dashboard
-                    window.location.href = '/login';
-                
+                window.location.href = 'login.html';
             });
         }
 
@@ -195,7 +190,7 @@ function initButtonHandlers() {
         document.body.appendChild(modal);
     }
 
-    // Feature modal
+    // Feature modal with updated navigation
     function showFeatureModal(feature) {
         const featureContent = {
             ai: {
@@ -216,7 +211,7 @@ function initButtonHandlers() {
                             <li style="margin-bottom: 0.5rem;"><i class="fas fa-check" style="color: #28A745; margin-right: 0.5rem;"></i> Personalized coping strategies</li>
                             <li style="margin-bottom: 0.5rem;"><i class="fas fa-check" style="color: #28A745; margin-right: 0.5rem;"></i> Bridge to professional help</li>
                         </ul>
-                        <button onclick="window.location.href='dashboard.html'" style="width: 100%; background: linear-gradient(45deg, #FDBB30, #FFD700); border: none; color: #002D62; padding: 1rem; border-radius: 25px; font-weight: 600; cursor: pointer;">
+                        <button onclick="window.location.href='../html/ai-support.html'" style="width: 100%; background: linear-gradient(45deg, #FDBB30, #FFD700); border: none; color: #002D62; padding: 1rem; border-radius: 25px; font-weight: 600; cursor: pointer;">
                             Try AI Support Now
                         </button>
                     </div>
@@ -239,7 +234,7 @@ function initButtonHandlers() {
                             <li style="margin-bottom: 0.5rem;"><i class="fas fa-check" style="color: #28A745; margin-right: 0.5rem;"></i> Moderated discussions</li>
                             <li style="margin-bottom: 0.5rem;"><i class="fas fa-check" style="color: #28A745; margin-right: 0.5rem;"></i> Local meetups</li>
                         </ul>
-                        <button onclick="window.location.href='dashboard.html'" style="width: 100%; background: linear-gradient(45deg, #FDBB30, #FFD700); border: none; color: #002D62; padding: 1rem; border-radius: 25px; font-weight: 600; cursor: pointer;">
+                        <button onclick="window.location.href='../html/login.html?redirect=../html/community.html'" style="width: 100%; background: linear-gradient(45deg, #FDBB30, #FFD700); border: none; color: #002D62; padding: 1rem; border-radius: 25px; font-weight: 600; cursor: pointer;">
                             Join Community
                         </button>
                     </div>
@@ -262,7 +257,7 @@ function initButtonHandlers() {
                             <li style="margin-bottom: 0.5rem;"><i class="fas fa-check" style="color: #28A745; margin-right: 0.5rem;"></i> Local professionals</li>
                             <li style="margin-bottom: 0.5rem;"><i class="fas fa-check" style="color: #28A745; margin-right: 0.5rem;"></i> Insurance accepted</li>
                         </ul>
-                        <button onclick="window.location.href='dashboard.html'" style="width: 100%; background: linear-gradient(45deg, #FDBB30, #FFD700); border: none; color: #002D62; padding: 1rem; border-radius: 25px; font-weight: 600; cursor: pointer;">
+                        <button onclick="window.location.href='../html/login.html?redirect=../html/professionals.html'" style="width: 100%; background: linear-gradient(45deg, #FDBB30, #FFD700); border: none; color: #002D62; padding: 1rem; border-radius: 25px; font-weight: 600; cursor: pointer;">
                             Find Professionals
                         </button>
                     </div>
@@ -285,7 +280,7 @@ function initButtonHandlers() {
                             <li style="margin-bottom: 0.5rem;"><i class="fas fa-check" style="color: #28A745; margin-right: 0.5rem;"></i> Wellness streaks</li>
                             <li style="margin-bottom: 0.5rem;"><i class="fas fa-check" style="color: #28A745; margin-right: 0.5rem;"></i> Personal insights</li>
                         </ul>
-                        <button onclick="window.location.href='dashboard.html'" style="width: 100%; background: linear-gradient(45deg, #FDBB30, #FFD700); border: none; color: #002D62; padding: 1rem; border-radius: 25px; font-weight: 600; cursor: pointer;">
+                        <button onclick="window.location.href='../html/login.html?redirect=../html/progress.html'" style="width: 100%; background: linear-gradient(45deg, #FDBB30, #FFD700); border: none; color: #002D62; padding: 1rem; border-radius: 25px; font-weight: 600; cursor: pointer;">
                             Start Tracking
                         </button>
                     </div>
@@ -308,7 +303,7 @@ function initButtonHandlers() {
                             <li style="margin-bottom: 0.5rem;"><i class="fas fa-check" style="color: #28A745; margin-right: 0.5rem;"></i> Local resources</li>
                             <li style="margin-bottom: 0.5rem;"><i class="fas fa-check" style="color: #28A745; margin-right: 0.5rem;"></i> Community understanding</li>
                         </ul>
-                        <button onclick="window.location.href='dashboard.html'" style="width: 100%; background: linear-gradient(45deg, #FDBB30, #FFD700); border: none; color: #002D62; padding: 1rem; border-radius: 25px; font-weight: 600; cursor: pointer;">
+                        <button onclick="window.location.href='../html/login.html?redirect=../html/dashboard.html'" style="width: 100%; background: linear-gradient(45deg, #FDBB30, #FFD700); border: none; color: #002D62; padding: 1rem; border-radius: 25px; font-weight: 600; cursor: pointer;">
                             Choose Language
                         </button>
                     </div>
@@ -371,7 +366,7 @@ function initButtonHandlers() {
                         <li style="margin-bottom: 0.5rem;"><i class="fas fa-arrow-right" style="color: #FDBB30; margin-right: 0.5rem;"></i> Professional matching</li>
                     </ul>
                 </div>
-                <button onclick="window.location.href='dashboard.html'" style="width: 100%; background: linear-gradient(45deg, #FDBB30, #FFD700); border: none; color: #002D62; padding: 1rem; border-radius: 25px; font-weight: 600; cursor: pointer; margin-bottom: 1rem;">
+                <button onclick="window.location.href='login.html?redirect=dashboard.html'" style="width: 100%; background: linear-gradient(45deg, #FDBB30, #FFD700); border: none; color: #002D62; padding: 1rem; border-radius: 25px; font-weight: 600; cursor: pointer; margin-bottom: 1rem;">
                     Start Interactive Demo
                 </button>
                 <button onclick="this.closest('.modal-overlay').remove()" style="width: 100%; background: transparent; border: 2px solid #FDBB30; color: #FDBB30; padding: 1rem; border-radius: 25px; font-weight: 600; cursor: pointer;">
@@ -406,10 +401,10 @@ function initButtonHandlers() {
                 startBreathingAnimation();
             },
             meditation: () => {
-                window.location.href = 'dashboard.html#meditation';
+                window.location.href = '../html/login.html?redirect=../html/wellness-tools.html#meditation';
             },
             journal: () => {
-                window.location.href = 'dashboard.html#journal';
+                window.location.href = '../html/login.html?redirect=../html/wellness-tools.html#journal';
             }
         };
 
@@ -442,12 +437,12 @@ function initButtonHandlers() {
         nextPhase();
     }
 
-    // Community functions
+    // Community functions with updated navigation
     function joinCommunity(type) {
         const communityActions = {
-            chat: () => window.location.href = 'dashboard.html#community-chat',
-            groups: () => window.location.href = 'dashboard.html#support-groups',
-            peer: () => window.location.href = 'dashboard.html#peer-support'
+            chat: () => window.location.href = '../html/login.html?redirect=../html/community.html#community-chat',
+            groups: () => window.location.href = '../html/login.html?redirect=../html/community.html#support-groups',
+            peer: () => window.location.href = '../html/login.html?redirect=../html/community.html#peer-support'
         };
 
         if (communityActions[type]) {
@@ -592,6 +587,11 @@ function initButtonHandlers() {
                     opacity: 1;
                     transform: translateY(0);
                 }
+            }
+            
+            @keyframes breathe {
+                0%, 100% { transform: scale(1); }
+                50% { transform: scale(1.1); }
             }
             
             .animate-in {

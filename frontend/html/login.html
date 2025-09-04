@@ -143,7 +143,7 @@
                 
                 <p class="auth-switch">
                     Don't have an account? 
-                    <a href="../html/signup.html">Create one here</a>
+                    <a href="signup.html">Create one here</a>
                 </p>
                 
                 <div class="emergency-support">
@@ -173,11 +173,18 @@
         }
     }
 
+    // Get redirect URL from query parameters
+    function getRedirectUrl() {
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get('redirect') || 'dashboard.html';
+    }
+
     // Handle login form submission
     document.getElementById('loginForm').addEventListener('submit', async function(e) {
         e.preventDefault();
         const button = this.querySelector('.auth-btn');
         const originalText = button.innerHTML;
+        const redirectUrl = getRedirectUrl();
 
         const email = document.getElementById('email').value.trim();
         const password = document.getElementById('password').value.trim();
@@ -195,15 +202,16 @@
             const data = await res.json();
 
             if (res.ok && data.success) {
-                // ✅ store user info (later replace with JWT token storage)
+                // Store user info
                 localStorage.setItem('user', JSON.stringify(data.user));
 
-                // Redirect to dashboard
-               if (data.user.role === 'counselor') {
-                window.location.href = '/psy-dashboard';
-            } else {
-                window.location.href = '/dashboard';
-            }
+                // Redirect based on user role or redirect parameter
+                if (data.user.role === 'counselor') {
+                    window.location.href = '/psy-dashboard';
+                } else {
+                    // Redirect to the intended page or dashboard
+                    window.location.href = redirectUrl;
+                }
             } else {
                 alert('❌ ' + data.message);
             }
