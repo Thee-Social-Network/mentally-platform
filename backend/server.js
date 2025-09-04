@@ -6,6 +6,7 @@ import {User} from './models/user_model.js';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { Mood } from './models/mood_model.js';
+import { Wellness } from './models/wellness_model.js';
 import { GoogleGenerativeAI } from '@google/generative-ai';
 import africastalking from 'africastalking';
 import bodyParser from 'body-parser';
