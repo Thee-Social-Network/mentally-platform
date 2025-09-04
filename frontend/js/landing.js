@@ -445,9 +445,9 @@ function initButtonHandlers() {
     // Community functions
     function joinCommunity(type) {
         const communityActions = {
-            chat: () => window.location.href = 'dashboard.html#community-chat',
-            groups: () => window.location.href = 'dashboard.html#support-groups',
-            peer: () => window.location.href = 'dashboard.html#peer-support'
+            chat: () => window.location.href = window.location.href = '../html/login.html?redirect=../html/community.html#community-chat',
+            groups: () => window.location.href = '../html/login.html?redirect=../html/community.html#support-groups',
+            peer: () => window.location.href = '../html/login.html?redirect=../html/community.html#peer-support'
         };
 
         if (communityActions[type]) {

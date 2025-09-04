@@ -174,49 +174,57 @@
     }
 
     // Handle login form submission
-    document.getElementById('loginForm').addEventListener('submit', async function(e) {
-        e.preventDefault();
-        const button = this.querySelector('.auth-btn');
-        const originalText = button.innerHTML;
+   // Get redirect param from URL query string once at the top
+const urlParams = new URLSearchParams(window.location.search);
+const redirectTarget = urlParams.get('redirect'); // e.g. '../html/community.html#community-chat'
 
-        const email = document.getElementById('email').value.trim();
-        const password = document.getElementById('password').value.trim();
+document.getElementById('loginForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const button = this.querySelector('.auth-btn');
+    const originalText = button.innerHTML;
 
-        button.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Signing in...';
-        button.disabled = true;
+    const email = document.getElementById('email').value.trim();
+    const password = document.getElementById('password').value.trim();
 
-        try {
-            const res = await fetch('/api/login', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ email, password })
-            });
+    button.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Signing in...';
+    button.disabled = true;
 
-            const data = await res.json();
+    try {
+        const res = await fetch('/api/login', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email, password })
+        });
 
-            if (res.ok && data.success) {
-                // ✅ store user info (later replace with JWT token storage)
-                localStorage.setItem('user', JSON.stringify(data.user));
+        const data = await res.json();
 
-                // Redirect to dashboard
-               if (data.user.role === 'counselor') {
-                window.location.href = '/psy-dashboard';
+        if (res.ok && data.success) {
+            // Store user info (later replace with JWT token storage)
+            localStorage.setItem('user', JSON.stringify(data.user));
+
+            // Redirect according to redirectTarget if present, else default dashboard
+            if (redirectTarget) {
+                window.location.href = redirectTarget;
             } else {
-                window.location.href = '/dashboard';
+                if (data.user.role === 'counselor') {
+                    window.location.href = '/psy-dashboard';
+                } else {
+                    window.location.href = '/dashboard';
+                }
             }
-            } else {
-                alert('❌ ' + data.message);
-            }
-        } catch (err) {
-            console.error('Login error:', err);
-            alert('⚠️ Server error. Please try again.');
-        } finally {
-            button.innerHTML = originalText;
-            button.disabled = false;
+        } else {
+            alert('❌ ' + data.message);
         }
-    });
+    } catch (err) {
+        console.error('Login error:', err);
+        alert('⚠️ Server error. Please try again.');
+    } finally {
+        button.innerHTML = originalText;
+        button.disabled = false;
+    }
+});
 
-    // Add floating animation to cards
+
     document.addEventListener('DOMContentLoaded', function() {
         const cards = document.querySelectorAll('.float-card');
         cards.forEach((card, index) => {
