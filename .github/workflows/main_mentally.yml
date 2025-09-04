@@ -19,8 +19,10 @@ jobs:
         with:
           node-version: '20.x'
 
-      - name: npm install
-        run: npm install
+      - name: npm install and build
+        run: |
+          npm install
+          npm run build --if-present
 
       - name: Create web.config
         run: |
@@ -38,16 +40,7 @@ jobs:
           echo '        </rule>' >> web.config
           echo '      </rules>' >> web.config
           echo '    </rewrite>' >> web.config
-          echo '    <iisnode watchedFiles=".js;node_modules\;routes\.js;views\.js" nodeProcessCommandLine="node --max-old-space-size=4096" loggingEnabled="false" debuggingEnabled="false" devErrorsEnabled="true" />' >> web.config
-          echo '    <staticContent>' >> web.config
-          echo '      <mimeMap fileExtension=".json" mimeType="application/json" />' >> web.config
-          echo '      <mimeMap fileExtension=".css" mimeType="text/css" />' >> web.config
-          echo '      <mimeMap fileExtension=".js" mimeType="application/javascript" />' >> web.config
-          echo '      <mimeMap fileExtension=".svg" mimeType="image/svg+xml" />' >> web.config
-          echo '      <mimeMap fileExtension=".woff" mimeType="application/font-woff" />' >> web.config
-          echo '      <mimeMap fileExtension=".woff2" mimeType="application/font-woff2" />' >> web.config
-          echo '    </staticContent>' >> web.config
-          echo '    <httpErrors existingResponse="PassThrough" />' >> web.config
+          echo '    <iisnode watchedFiles=".js;node_modules\;backend\server.js" />' >> web.config
           echo '  </system.webServer>' >> web.config
           echo '</configuration>' >> web.config
 
@@ -87,7 +80,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: deploy
     permissions:
-      contents: write
+      contents: write  # Required to create releases
     steps:
       - name: Download artifact from build job
         uses: actions/download-artifact@v4
