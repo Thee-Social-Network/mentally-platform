@@ -3,58 +3,17 @@
 // import { showToast, formatDate, formatTime } from './utils.js';
 
 // DOM Elements
-const startSessionBtn = document.getElementById('startSessionBtn');
-const sessionModal = document.getElementById('sessionModal');
-const closeSessionModal = document.getElementById('closeSessionModal');
-const sessionForm = document.getElementById('sessionForm');
-const patientSelect = document.getElementById('patientSelect');
-const attendanceModal = document.getElementById('attendanceModal');
-const closeAttendanceModal = document.getElementById('closeAttendanceModal');
-const attendanceForm = document.getElementById('attendanceForm');
-const chatModal = document.getElementById('chatModal');
-const closeChatModal = document.getElementById('closeChatModal');
-const resourceModal = document.getElementById('resourceModal');
-const closeResourceModal = document.getElementById('closeResourceModal');
-const resourceForm = document.getElementById('resourceForm');
-const followupModal = document.getElementById('followupModal');
-const closeFollowupModal = document.getElementById('closeFollowupModal');
-const followupForm = document.getElementById('followupForm');
-const emergencyBtn = document.getElementById('emergencyBtn');
-const emergencyModal = document.getElementById('emergencyModal');
-const closeEmergencyModal = document.getElementById('closeEmergencyModal');
-const sessionControls = document.getElementById('sessionControls');
-const videoContainer = document.getElementById('videoContainer');
-const waitingRoom = document.getElementById('waitingRoom');
-const closeWaitingRoom = document.getElementById('closeWaitingRoom');
-const copyLinkBtn = document.getElementById('copyLinkBtn');
-const sessionLink = document.getElementById('sessionLink');
-const admitAllPatients = document.getElementById('admitAllPatients');
-const startWithoutPatient = document.getElementById('startWithoutPatient');
-const toggleVideo = document.getElementById('toggleVideo');
-const toggleAudio = document.getElementById('toggleAudio');
-const shareScreen = document.getElementById('shareScreen');
-const openChat = document.getElementById('openChat');
-const shareResource = document.getElementById('shareResource');
-const endSession = document.getElementById('endSession');
-const localVideo = document.getElementById('localVideo');
-const remoteVideo = document.getElementById('remoteVideo');
-const localVideoIndicator = document.getElementById('localVideoIndicator');
-const localAudioIndicator = document.getElementById('localAudioIndicator');
-const connectionStatus = document.getElementById('connectionStatus');
-const chatSendBtn = document.getElementById('chatSendBtn');
-const chatInput = document.getElementById('chatInput');
-const chatMessages = document.getElementById('chatMessages');
-const sendResourceBtn = document.getElementById('sendResourceBtn');
-const resourceType = document.getElementById('resourceType');
-const resourceFileGroup = document.getElementById('resourceFileGroup');
-const resourceLinkGroup = document.getElementById('resourceLinkGroup');
-const attendanceOptions = document.querySelectorAll('input[name="attendance"]');
-const cancellationReasonGroup = document.getElementById('cancellationReasonGroup');
-const upcomingSessionsList = document.getElementById('upcomingSessionsList');
-const activeSessionsList = document.getElementById('activeSessionsList');
-const sessionsTableBody = document.getElementById('sessionsTableBody');
-const dateFilter = document.getElementById('dateFilter');
-const statusFilter = document.getElementById('statusFilter');
+let startSessionBtn, sessionModal, closeSessionModal, sessionForm, patientSelect;
+let attendanceModal, closeAttendanceModal, attendanceForm, chatModal, closeChatModal;
+let resourceModal, closeResourceModal, resourceForm, followupModal, closeFollowupModal;
+let followupForm, emergencyBtn, emergencyModal, closeEmergencyModal, sessionControls;
+let videoContainer, waitingRoom, closeWaitingRoom, copyLinkBtn, sessionLink;
+let admitAllPatients, startWithoutPatient, toggleVideo, toggleAudio, shareScreen;
+let openChat, shareResource, endSession, localVideo, remoteVideo, localVideoIndicator;
+let localAudioIndicator, connectionStatus, chatSendBtn, chatInput, chatMessages;
+let sendResourceBtn, resourceType, resourceFileGroup, resourceLinkGroup;
+let attendanceOptions, cancellationReasonGroup, upcomingSessionsList;
+let activeSessionsList, sessionsTableBody, dateFilter, statusFilter;
 
 // State management
 let currentSession = null;
@@ -91,10 +50,68 @@ const mockSessionHistory = [
 
 // Initialize the page
 document.addEventListener('DOMContentLoaded', function() {
+    initializeElements();
     initializePage();
     setupEventListeners();
     loadMockData();
+    triggerPreSessionChecks();
 });
+
+function initializeElements() {
+    // Cache DOM elements
+    startSessionBtn = document.getElementById('startSessionBtn');
+    sessionModal = document.getElementById('sessionModal');
+    closeSessionModal = document.getElementById('closeSessionModal');
+    sessionForm = document.getElementById('sessionForm');
+    patientSelect = document.getElementById('patientSelect');
+    attendanceModal = document.getElementById('attendanceModal');
+    closeAttendanceModal = document.getElementById('closeAttendanceModal');
+    attendanceForm = document.getElementById('attendanceForm');
+    chatModal = document.getElementById('chatModal');
+    closeChatModal = document.getElementById('closeChatModal');
+    resourceModal = document.getElementById('resourceModal');
+    closeResourceModal = document.getElementById('closeResourceModal');
+    resourceForm = document.getElementById('resourceForm');
+    followupModal = document.getElementById('followupModal');
+    closeFollowupModal = document.getElementById('closeFollowupModal');
+    followupForm = document.getElementById('followupForm');
+    emergencyBtn = document.getElementById('emergencyBtn');
+    emergencyModal = document.getElementById('emergencyModal');
+    closeEmergencyModal = document.getElementById('closeEmergencyModal');
+    sessionControls = document.getElementById('sessionControls');
+    videoContainer = document.getElementById('videoContainer');
+    waitingRoom = document.getElementById('waitingRoom');
+    closeWaitingRoom = document.getElementById('closeWaitingRoom');
+    copyLinkBtn = document.getElementById('copyLinkBtn');
+    sessionLink = document.getElementById('sessionLink');
+    admitAllPatients = document.getElementById('admitAllPatients');
+    startWithoutPatient = document.getElementById('startWithoutPatient');
+    toggleVideo = document.getElementById('toggleVideo');
+    toggleAudio = document.getElementById('toggleAudio');
+    shareScreen = document.getElementById('shareScreen');
+    openChat = document.getElementById('openChat');
+    shareResource = document.getElementById('shareResource');
+    endSession = document.getElementById('endSession');
+    localVideo = document.getElementById('localVideo');
+    remoteVideo = document.getElementById('remoteVideo');
+    localVideoIndicator = document.getElementById('localVideoIndicator');
+    localAudioIndicator = document.getElementById('localAudioIndicator');
+    connectionStatus = document.getElementById('connectionStatus');
+    chatSendBtn = document.getElementById('chatSendBtn');
+    chatInput = document.getElementById('chatInput');
+    chatMessages = document.getElementById('chatMessages');
+    sendResourceBtn = document.getElementById('sendResourceBtn');
+    resourceType = document.getElementById('resourceType');
+    resourceFileGroup = document.getElementById('resourceFileGroup');
+    resourceLinkGroup = document.getElementById('resourceLinkGroup');
+    attendanceOptions = document.querySelectorAll('input[name="attendance"]');
+    cancellationReasonGroup = document.getElementById('cancellationReasonGroup');
+    upcomingSessionsList = document.getElementById('upcomingSessionsList');
+    activeSessionsList = document.getElementById('activeSessionsList');
+    sessionsTableBody = document.getElementById('sessionsTableBody');
+    dateFilter = document.getElementById('dateFilter');
+    statusFilter = document.getElementById('statusFilter');
+}
 
 function initializePage() {
     // Set current date
@@ -116,60 +133,135 @@ function initializePage() {
 
 function setupEventListeners() {
     // Session modal
-    startSessionBtn.addEventListener('click', openSessionModal);
-    closeSessionModal.addEventListener('click', closeModal.bind(null, sessionModal));
-    sessionForm.addEventListener('submit', handleSessionStart);
+    if (startSessionBtn) {
+        startSessionBtn.addEventListener('click', openSessionModal);
+    }
+    
+    if (closeSessionModal && sessionModal) {
+        closeSessionModal.addEventListener('click', closeModal.bind(null, sessionModal));
+    }
+    
+    if (sessionForm) {
+        sessionForm.addEventListener('submit', handleSessionStart);
+    }
     
     // Attendance modal
-    closeAttendanceModal.addEventListener('click', closeModal.bind(null, attendanceModal));
-    attendanceForm.addEventListener('submit', handleAttendanceSubmit);
+    if (closeAttendanceModal && attendanceModal) {
+        closeAttendanceModal.addEventListener('click', closeModal.bind(null, attendanceModal));
+    }
+    
+    if (attendanceForm) {
+        attendanceForm.addEventListener('submit', handleAttendanceSubmit);
+    }
     
     // Chat modal
-    closeChatModal.addEventListener('click', closeModal.bind(null, chatModal));
-    chatSendBtn.addEventListener('click', sendChatMessage);
-    chatInput.addEventListener('keypress', function(e) {
-        if (e.key === 'Enter') sendChatMessage();
-    });
+    if (closeChatModal && chatModal) {
+        closeChatModal.addEventListener('click', closeModal.bind(null, chatModal));
+    }
+    
+    if (chatSendBtn) {
+        chatSendBtn.addEventListener('click', sendChatMessage);
+    }
+    
+    if (chatInput) {
+        chatInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') sendChatMessage();
+        });
+    }
     
     // Resource modal
-    closeResourceModal.addEventListener('click', closeModal.bind(null, resourceModal));
-    resourceForm.addEventListener('submit', handleResourceShare);
-    resourceType.addEventListener('change', toggleResourceInputs);
+    if (closeResourceModal && resourceModal) {
+        closeResourceModal.addEventListener('click', closeModal.bind(null, resourceModal));
+    }
+    
+    if (resourceForm) {
+        resourceForm.addEventListener('submit', handleResourceShare);
+    }
+    
+    if (resourceType) {
+        resourceType.addEventListener('change', toggleResourceInputs);
+    }
     
     // Follow-up modal
-    closeFollowupModal.addEventListener('click', closeModal.bind(null, followupModal));
-    followupForm.addEventListener('submit', handleFollowupSubmit);
+    if (closeFollowupModal && followupModal) {
+        closeFollowupModal.addEventListener('click', closeModal.bind(null, followupModal));
+    }
+    
+    if (followupForm) {
+        followupForm.addEventListener('submit', handleFollowupSubmit);
+    }
     
     // Emergency modal
-    emergencyBtn.addEventListener('click', openEmergencyModal);
-    closeEmergencyModal.addEventListener('click', closeModal.bind(null, emergencyModal));
+    if (emergencyBtn && emergencyModal) {
+        emergencyBtn.addEventListener('click', openEmergencyModal);
+    }
+    
+    if (closeEmergencyModal && emergencyModal) {
+        closeEmergencyModal.addEventListener('click', closeModal.bind(null, emergencyModal));
+    }
     
     // Session controls
-    closeWaitingRoom.addEventListener('click', closeWaitingRoomHandler);
-    copyLinkBtn.addEventListener('click', copySessionLink);
-    admitAllPatients.addEventListener('click', admitAllParticipants);
-    startWithoutPatient.addEventListener('click', startSessionWithoutPatient);
-    toggleVideo.addEventListener('click', toggleVideoHandler);
-    toggleAudio.addEventListener('click', toggleAudioHandler);
-    shareScreen.addEventListener('click', shareScreenHandler);
-    openChat.addEventListener('click', openChatHandler);
-    shareResource.addEventListener('click', openResourceModal);
-    endSession.addEventListener('click', endSessionHandler);
+    if (closeWaitingRoom && waitingRoom) {
+        closeWaitingRoom.addEventListener('click', closeWaitingRoomHandler);
+    }
+    
+    if (copyLinkBtn && sessionLink) {
+        copyLinkBtn.addEventListener('click', copySessionLink);
+    }
+    
+    if (admitAllPatients) {
+        admitAllPatients.addEventListener('click', admitAllParticipants);
+    }
+    
+    if (startWithoutPatient) {
+        startWithoutPatient.addEventListener('click', startSessionWithoutPatient);
+    }
+    
+    if (toggleVideo) {
+        toggleVideo.addEventListener('click', toggleVideoHandler);
+    }
+    
+    if (toggleAudio) {
+        toggleAudio.addEventListener('click', toggleAudioHandler);
+    }
+    
+    if (shareScreen) {
+        shareScreen.addEventListener('click', shareScreenHandler);
+    }
+    
+    if (openChat && chatModal) {
+        openChat.addEventListener('click', openChatHandler);
+    }
+    
+    if (shareResource && resourceModal) {
+        shareResource.addEventListener('click', openResourceModal);
+    }
+    
+    if (endSession) {
+        endSession.addEventListener('click', endSessionHandler);
+    }
     
     // Attendance options
-    attendanceOptions.forEach(option => {
-        option.addEventListener('change', function() {
-            if (this.value === 'cancelled') {
-                cancellationReasonGroup.style.display = 'block';
-            } else {
-                cancellationReasonGroup.style.display = 'none';
-            }
+    if (attendanceOptions.length > 0 && cancellationReasonGroup) {
+        attendanceOptions.forEach(option => {
+            option.addEventListener('change', function() {
+                if (this.value === 'cancelled') {
+                    cancellationReasonGroup.style.display = 'block';
+                } else {
+                    cancellationReasonGroup.style.display = 'none';
+                }
+            });
         });
-    });
+    }
     
     // Filters
-    dateFilter.addEventListener('change', filterSessions);
-    statusFilter.addEventListener('change', filterSessions);
+    if (dateFilter) {
+        dateFilter.addEventListener('change', filterSessions);
+    }
+    
+    if (statusFilter) {
+        statusFilter.addEventListener('change', filterSessions);
+    }
     
     // Navigation
     setupNavigation();
@@ -177,14 +269,16 @@ function setupEventListeners() {
 
 function setupNavigation() {
     const navButtons = document.querySelectorAll('.nav-button');
-    navButtons.forEach(button => {
-        button.addEventListener('click', function(e) {
-            // Remove active class from all buttons
-            navButtons.forEach(btn => btn.classList.remove('active'));
-            // Add active class to clicked button
-            this.classList.add('active');
+    if (navButtons.length > 0) {
+        navButtons.forEach(button => {
+            button.addEventListener('click', function(e) {
+                // Remove active class from all buttons
+                navButtons.forEach(btn => btn.classList.remove('active'));
+                // Add active class to clicked button
+                this.classList.add('active');
+            });
         });
-    });
+    }
     
     const menuToggle = document.getElementById('menuToggle');
     const navMenu = document.querySelector('.nav-menu');
@@ -198,12 +292,14 @@ function setupNavigation() {
 
 function loadMockData() {
     // Populate patient select
-    mockPatients.forEach(patient => {
-        const option = document.createElement('option');
-        option.value = patient.id;
-        option.textContent = `${patient.name} (${patient.email})`;
-        patientSelect.appendChild(option);
-    });
+    if (patientSelect) {
+        mockPatients.forEach(patient => {
+            const option = document.createElement('option');
+            option.value = patient.id;
+            option.textContent = `${patient.name} (${patient.email})`;
+            patientSelect.appendChild(option);
+        });
+    }
     
     // Load upcoming sessions
     renderUpcomingSessions();
@@ -213,6 +309,8 @@ function loadMockData() {
 }
 
 function renderUpcomingSessions() {
+    if (!upcomingSessionsList) return;
+    
     upcomingSessionsList.innerHTML = '';
     
     mockSessions.forEach(session => {
@@ -225,6 +323,8 @@ function renderUpcomingSessions() {
 }
 
 function renderActiveSessions() {
+    if (!activeSessionsList) return;
+    
     activeSessionsList.innerHTML = '';
     
     if (activeSessions.length === 0) {
@@ -297,30 +397,36 @@ function createSessionElement(session, patient, isActive = false) {
     const joinBtn = sessionItem.querySelector('.session-btn.join');
     const cancelBtn = sessionItem.querySelector('.session-btn.cancel');
     
-    joinBtn.addEventListener('click', function() {
-        const sessionId = this.getAttribute('data-session-id');
-        if (isActive) {
-            joinExistingSession(sessionId);
-        } else {
-            startSessionFromList(sessionId);
-        }
-    });
+    if (joinBtn) {
+        joinBtn.addEventListener('click', function() {
+            const sessionId = this.getAttribute('data-session-id');
+            if (isActive) {
+                joinExistingSession(sessionId);
+            } else {
+                startSessionFromList(sessionId);
+            }
+        });
+    }
     
-    cancelBtn.addEventListener('click', function() {
-        const sessionId = this.getAttribute('data-session-id');
-        cancelSession(sessionId);
-    });
+    if (cancelBtn) {
+        cancelBtn.addEventListener('click', function() {
+            const sessionId = this.getAttribute('data-session-id');
+            cancelSession(sessionId);
+        });
+    }
     
     return sessionItem;
 }
 
 function renderSessionHistory() {
+    if (!sessionsTableBody) return;
+    
     sessionsTableBody.innerHTML = '';
     
     let filteredHistory = [...mockSessionHistory];
     
     // Apply date filter
-    const dateFilterValue = dateFilter.value;
+    const dateFilterValue = dateFilter ? dateFilter.value : 'all';
     const today = new Date();
     
     if (dateFilterValue === 'today') {
@@ -346,7 +452,7 @@ function renderSessionHistory() {
     }
     
     // Apply status filter
-    const statusFilterValue = statusFilter.value;
+    const statusFilterValue = statusFilter ? statusFilter.value : 'all';
     if (statusFilterValue !== 'all') {
         filteredHistory = filteredHistory.filter(session => session.status === statusFilterValue);
     }
@@ -415,62 +521,72 @@ function handleHistoryAction(sessionId, action) {
 }
 
 function openSessionModal() {
-    sessionModal.showModal();
+    if (sessionModal) sessionModal.showModal();
 }
 
 function openAttendanceModal(session, patient) {
     const attendanceSessionId = document.getElementById('attendanceSessionId');
-    attendanceSessionId.value = session.id;
+    if (attendanceSessionId) {
+        attendanceSessionId.value = session.id;
+    }
     
     // Set the correct radio button based on session attendance
     const attendanceValue = session.attendance || 'attended';
-    document.querySelector(`input[name="attendance"][value="${attendanceValue}"]`).checked = true;
-    
-    // Show/hide cancellation reason field
-    if (attendanceValue === 'cancelled') {
-        cancellationReasonGroup.style.display = 'block';
-        document.getElementById('cancellationReason').value = session.reason || '';
-    } else {
-        cancellationReasonGroup.style.display = 'none';
+    const attendanceRadio = document.querySelector(`input[name="attendance"][value="${attendanceValue}"]`);
+    if (attendanceRadio) {
+        attendanceRadio.checked = true;
     }
     
-    attendanceModal.showModal();
+    // Show/hide cancellation reason field
+    if (cancellationReasonGroup) {
+        if (attendanceValue === 'cancelled') {
+            cancellationReasonGroup.style.display = 'block';
+            const cancellationReason = document.getElementById('cancellationReason');
+            if (cancellationReason) cancellationReason.value = session.reason || '';
+        } else {
+            cancellationReasonGroup.style.display = 'none';
+        }
+    }
+    
+    if (attendanceModal) attendanceModal.showModal();
 }
 
 function openFollowupModal(session, patient) {
     const followupSessionId = document.getElementById('followupSessionId');
     const followupPatient = document.getElementById('followupPatient');
     
-    followupSessionId.value = session.id;
-    followupPatient.value = patient.name;
+    if (followupSessionId) followupSessionId.value = session.id;
+    if (followupPatient) followupPatient.value = patient.name;
     
-    followupModal.showModal();
+    if (followupModal) followupModal.showModal();
 }
 
 function openResourceModal() {
-    resourceModal.showModal();
+    if (resourceModal) resourceModal.showModal();
 }
 
 function openEmergencyModal() {
-    emergencyModal.showModal();
+    if (emergencyModal) emergencyModal.showModal();
 }
 
 function openChatHandler() {
-    chatModal.showModal();
+    if (chatModal) chatModal.showModal();
 }
 
 function closeModal(modal) {
-    modal.close();
+    if (modal) modal.close();
 }
 
 function handleSessionStart(e) {
     e.preventDefault();
     
+    if (!patientSelect) return;
+    
     const patientId = parseInt(patientSelect.value);
-    const sessionType = document.getElementById('sessionType').value;
-    const sessionDuration = parseInt(document.getElementById('sessionDuration').value);
-    const sessionNotes = document.getElementById('sessionNotes').value;
-    const sendInvite = document.getElementById('sendInvite').checked;
+    const sessionType = document.getElementById('sessionType') ? document.getElementById('sessionType').value : 'individual';
+    const sessionDuration = document.getElementById('sessionDuration') ? parseInt(document.getElementById('sessionDuration').value) : 45;
+    const sessionNotes = document.getElementById('sessionNotes') ? document.getElementById('sessionNotes').value : '';
+    const sendInvite = document.getElementById('sendInvite') ? document.getElementById('sendInvite').checked : false;
     
     if (!patientId) {
         showToast('Error', 'Please select a patient', 'error');
@@ -499,11 +615,13 @@ function handleSessionStart(e) {
     
     // Generate a unique session link
     const sessionId = generateSessionId();
-    sessionLink.value = `${window.location.origin}/join-session/${sessionId}`;
+    if (sessionLink) {
+        sessionLink.value = `${window.location.origin}/join-session/${sessionId}`;
+    }
     
     // Show waiting room
-    waitingRoom.style.display = 'block';
-    sessionModal.close();
+    if (waitingRoom) waitingRoom.style.display = 'block';
+    if (sessionModal) sessionModal.close();
     
     showToast('Session Created', 'Waiting room is ready. Share the link with your patient.', 'success');
     
@@ -534,17 +652,23 @@ function simulatePatientJoining(patient) {
 
 function updateWaitingRoom() {
     const waitingParticipantsContainer = document.getElementById('waitingParticipants');
+    if (!waitingParticipantsContainer) return;
+    
     waitingParticipantsContainer.innerHTML = '';
     
     if (waitingParticipants.length === 0) {
         waitingParticipantsContainer.innerHTML = '<p class="no-participants">No participants waiting</p>';
-        admitAllPatients.disabled = true;
-        admitAllPatients.textContent = 'Admit All (0)';
+        if (admitAllPatients) {
+            admitAllPatients.disabled = true;
+            admitAllPatients.textContent = 'Admit All (0)';
+        }
         return;
     }
     
-    admitAllPatients.disabled = false;
-    admitAllPatients.textContent = `Admit All (${waitingParticipants.length})`;
+    if (admitAllPatients) {
+        admitAllPatients.disabled = false;
+        admitAllPatients.textContent = `Admit All (${waitingParticipants.length})`;
+    }
     
     waitingParticipants.forEach(participant => {
         const participantElement = document.createElement('article');
@@ -574,13 +698,17 @@ function updateWaitingRoom() {
         const admitBtn = participantElement.querySelector('.admit-btn');
         const denyBtn = participantElement.querySelector('.deny-btn');
         
-        admitBtn.addEventListener('click', function() {
-            admitParticipant(participant.id);
-        });
+        if (admitBtn) {
+            admitBtn.addEventListener('click', function() {
+                admitParticipant(participant.id);
+            });
+        }
         
-        denyBtn.addEventListener('click', function() {
-            denyParticipant(participant.id);
-        });
+        if (denyBtn) {
+            denyBtn.addEventListener('click', function() {
+                denyParticipant(participant.id);
+            });
+        }
     });
 }
 
@@ -634,7 +762,7 @@ function startSessionWithoutPatient() {
 }
 
 function closeWaitingRoomHandler() {
-    waitingRoom.style.display = 'none';
+    if (waitingRoom) waitingRoom.style.display = 'none';
     currentSession = null;
     waitingParticipants = [];
     
@@ -642,27 +770,33 @@ function closeWaitingRoomHandler() {
 }
 
 function copySessionLink() {
-    sessionLink.select();
-    document.execCommand('copy');
-    
-    showToast('Link Copied', 'Session link copied to clipboard', 'success');
+    if (sessionLink) {
+        sessionLink.select();
+        document.execCommand('copy');
+        
+        showToast('Link Copied', 'Session link copied to clipboard', 'success');
+    }
 }
 
 async function startVideoSession(patient) {
     try {
         // Hide waiting room, show video and controls
-        waitingRoom.style.display = 'none';
-        sessionControls.style.display = 'block';
-        videoContainer.style.display = 'block';
+        if (waitingRoom) waitingRoom.style.display = 'none';
+        if (sessionControls) sessionControls.style.display = 'block';
+        if (videoContainer) videoContainer.style.display = 'block';
         
         // Update session title
         const sessionTitle = document.getElementById('sessionTitle');
-        if (patient) {
-            sessionTitle.textContent = `Session with ${patient.name}`;
-            document.getElementById('remoteParticipantName').textContent = patient.name;
-        } else {
-            sessionTitle.textContent = 'Session (No Patient)';
-            document.getElementById('remoteParticipantName').textContent = 'No Patient';
+        if (sessionTitle) {
+            if (patient) {
+                sessionTitle.textContent = `Session with ${patient.name}`;
+                const remoteParticipantName = document.getElementById('remoteParticipantName');
+                if (remoteParticipantName) remoteParticipantName.textContent = patient.name;
+            } else {
+                sessionTitle.textContent = 'Session (No Patient)';
+                const remoteParticipantName = document.getElementById('remoteParticipantName');
+                if (remoteParticipantName) remoteParticipantName.textContent = 'No Patient';
+            }
         }
         
         // Get user media
@@ -672,7 +806,7 @@ async function startVideoSession(patient) {
         });
         
         // Set local video stream
-        localVideo.srcObject = stream;
+        if (localVideo) localVideo.srcObject = stream;
         
         // Simulate remote connection (in a real app, this would use WebRTC)
         simulateRemoteConnection();
@@ -693,16 +827,22 @@ async function startVideoSession(patient) {
 
 function simulateRemoteConnection() {
     // Simulate connection status changes
-    connectionStatus.innerHTML = '<i class="fas fa-circle"></i><span>Connecting...</span>';
+    if (connectionStatus) {
+        connectionStatus.innerHTML = '<i class="fas fa-circle"></i><span>Connecting...</span>';
+    }
     
     setTimeout(() => {
-        connectionStatus.innerHTML = '<i class="fas fa-circle"></i><span>Connected</span>';
+        if (connectionStatus) {
+            connectionStatus.innerHTML = '<i class="fas fa-circle"></i><span>Connected</span>';
+        }
         
         // Simulate remote video (in a real app, this would be the actual remote stream)
         // For demo purposes, we'll use a placeholder
-        remoteVideo.src = 'https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4';
-        remoteVideo.loop = true;
-        remoteVideo.muted = true; // Mute to avoid feedback
+        if (remoteVideo) {
+            remoteVideo.src = 'https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4';
+            remoteVideo.loop = true;
+            remoteVideo.muted = true; // Mute to avoid feedback
+        }
     }, 2000);
 }
 
@@ -716,13 +856,17 @@ function toggleVideoHandler() {
         track.enabled = isVideoEnabled;
     });
     
-    toggleVideo.innerHTML = `
-        <i class="fas fa-video${isVideoEnabled ? '' : '-slash'}"></i>
-        <span>Video ${isVideoEnabled ? 'On' : 'Off'}</span>
-    `;
+    if (toggleVideo) {
+        toggleVideo.innerHTML = `
+            <i class="fas fa-video${isVideoEnabled ? '' : '-slash'}"></i>
+            <span>Video ${isVideoEnabled ? 'On' : 'Off'}</span>
+        `;
+    }
     
-    localVideoIndicator.className = `control-indicator ${isVideoEnabled ? '' : 'video-off'}`;
-    localVideoIndicator.innerHTML = `<i class="fas fa-video${isVideoEnabled ? '' : '-slash'}"></i>`;
+    if (localVideoIndicator) {
+        localVideoIndicator.className = `control-indicator ${isVideoEnabled ? '' : 'video-off'}`;
+        localVideoIndicator.innerHTML = `<i class="fas fa-video${isVideoEnabled ? '' : '-slash'}"></i>`;
+    }
     
     showToast('Video', `Video ${isVideoEnabled ? 'enabled' : 'disabled'}`, 'info');
 }
@@ -737,13 +881,17 @@ function toggleAudioHandler() {
         track.enabled = isAudioEnabled;
     });
     
-    toggleAudio.innerHTML = `
-        <i class="fas fa-microphone${isAudioEnabled ? '' : '-slash'}"></i>
-        <span>Audio ${isAudioEnabled ? 'On' : 'Off'}</span>
-    `;
+    if (toggleAudio) {
+        toggleAudio.innerHTML = `
+            <i class="fas fa-microphone${isAudioEnabled ? '' : '-slash'}"></i>
+            <span>Audio ${isAudioEnabled ? 'On' : 'Off'}</span>
+        `;
+    }
     
-    localAudioIndicator.className = `control-indicator ${isAudioEnabled ? '' : 'audio-off'}`;
-    localAudioIndicator.innerHTML = `<i class="fas fa-microphone${isAudioEnabled ? '' : '-slash'}"></i>`;
+    if (localAudioIndicator) {
+        localAudioIndicator.className = `control-indicator ${isAudioEnabled ? '' : 'audio-off'}`;
+        localAudioIndicator.innerHTML = `<i class="fas fa-microphone${isAudioEnabled ? '' : '-slash'}"></i>`;
+    }
     
     showToast('Audio', `Audio ${isAudioEnabled ? 'enabled' : 'disabled'}`, 'info');
 }
@@ -780,6 +928,8 @@ async function shareScreenHandler() {
 }
 
 function sendChatMessage() {
+    if (!chatInput) return;
+    
     const message = chatInput.value.trim();
     if (!message) return;
     
@@ -796,6 +946,8 @@ function sendChatMessage() {
 }
 
 function addChatMessage(message, type) {
+    if (!chatMessages) return;
+    
     const messageElement = document.createElement('article');
     messageElement.className = `chat-message ${type}`;
     
@@ -814,12 +966,14 @@ function addChatMessage(message, type) {
 function handleResourceShare(e) {
     e.preventDefault();
     
+    if (!resourceType) return;
+    
     const resourceTypeValue = resourceType.value;
-    const resourceMessage = document.getElementById('resourceMessage').value;
+    const resourceMessage = document.getElementById('resourceMessage') ? document.getElementById('resourceMessage').value : '';
     
     if (resourceTypeValue === 'pdf') {
         const fileInput = document.getElementById('resourceFile');
-        if (!fileInput.files.length) {
+        if (!fileInput || !fileInput.files.length) {
             showToast('Error', 'Please select a PDF file', 'error');
             return;
         }
@@ -833,7 +987,7 @@ function handleResourceShare(e) {
         }, 1000);
         
     } else if (resourceTypeValue === 'link') {
-        const link = document.getElementById('resourceLink').value;
+        const link = document.getElementById('resourceLink') ? document.getElementById('resourceLink').value : '';
         if (!link) {
             showToast('Error', 'Please enter a web address', 'error');
             return;
@@ -847,11 +1001,13 @@ function handleResourceShare(e) {
         }, 1000);
     }
     
-    resourceModal.close();
+    if (resourceModal) resourceModal.close();
     showToast('Resource Shared', 'Resource has been sent to the chat', 'success');
 }
 
 function toggleResourceInputs() {
+    if (!resourceType || !resourceFileGroup || !resourceLinkGroup) return;
+    
     const resourceTypeValue = resourceType.value;
     
     if (resourceTypeValue === 'pdf') {
@@ -875,8 +1031,8 @@ function endSessionHandler() {
     }
     
     // Hide video and controls
-    sessionControls.style.display = 'none';
-    videoContainer.style.display = 'none';
+    if (sessionControls) sessionControls.style.display = 'none';
+    if (videoContainer) videoContainer.style.display = 'none';
     
     // Remove from active sessions
     const sessionIndex = activeSessions.findIndex(s => s.id === currentSession.id);
@@ -918,9 +1074,9 @@ function generateNoteStub() {
 function handleAttendanceSubmit(e) {
     e.preventDefault();
     
-    const sessionId = document.getElementById('attendanceSessionId').value;
-    const attendance = document.querySelector('input[name="attendance"]:checked').value;
-    const cancellationReason = document.getElementById('cancellationReason').value;
+    const sessionId = document.getElementById('attendanceSessionId') ? document.getElementById('attendanceSessionId').value : '';
+    const attendance = document.querySelector('input[name="attendance"]:checked') ? document.querySelector('input[name="attendance"]:checked').value : 'attended';
+    const cancellationReason = document.getElementById('cancellationReason') ? document.getElementById('cancellationReason').value : '';
     
     // Update session history
     const sessionIndex = mockSessionHistory.findIndex(s => s.id === parseInt(sessionId));
@@ -931,17 +1087,17 @@ function handleAttendanceSubmit(e) {
         }
     }
     
-    attendanceModal.close();
+    if (attendanceModal) attendanceModal.close();
     showToast('Attendance Updated', 'Attendance status has been saved', 'success');
 }
 
 function handleFollowupSubmit(e) {
     e.preventDefault();
     
-    const sessionId = document.getElementById('followupSessionId').value;
-    const message = document.getElementById('followupMessage').value;
-    const includeSummary = document.getElementById('includeSummary').checked;
-    const scheduleNext = document.getElementById('scheduleNext').checked;
+    const sessionId = document.getElementById('followupSessionId') ? document.getElementById('followupSessionId').value : '';
+    const message = document.getElementById('followupMessage') ? document.getElementById('followupMessage').value : '';
+    const includeSummary = document.getElementById('includeSummary') ? document.getElementById('includeSummary').checked : false;
+    const scheduleNext = document.getElementById('scheduleNext') ? document.getElementById('scheduleNext').checked : false;
     
     // In a real app, this would send a message to the patient
     // For demo purposes, we'll just show a toast
@@ -950,7 +1106,7 @@ function handleFollowupSubmit(e) {
     if (includeSummary) toastMessage += ' with session summary';
     if (scheduleNext) toastMessage += ' and next session scheduled';
     
-    followupModal.close();
+    if (followupModal) followupModal.close();
     showToast('Message Sent', toastMessage, 'success');
 }
 
@@ -965,10 +1121,12 @@ function startSessionFromList(sessionId) {
     
     // Generate a unique session link
     const uniqueSessionId = generateSessionId();
-    sessionLink.value = `${window.location.origin}/join-session/${uniqueSessionId}`;
+    if (sessionLink) {
+        sessionLink.value = `${window.location.origin}/join-session/${uniqueSessionId}`;
+    }
     
     // Show waiting room
-    waitingRoom.style.display = 'block';
+    if (waitingRoom) waitingRoom.style.display = 'block';
     
     showToast('Session Ready', 'Waiting room is ready. Share the link with your patient.', 'success');
     
@@ -1047,9 +1205,11 @@ function showToast(title, message, type = 'info') {
     
     // Add close event
     const closeBtn = toast.querySelector('.toast-close');
-    closeBtn.addEventListener('click', function() {
-        toast.remove();
-    });
+    if (closeBtn) {
+        closeBtn.addEventListener('click', function() {
+            toast.remove();
+        });
+    }
     
     // Auto remove after 5 seconds
     setTimeout(() => {
