@@ -1,0 +1,170 @@
+// shared-telehealth.js - Shared telehealth functionality across pages
+
+// Telehealth session management functions
+const TelehealthManager = {
+    // Generate a unique session ID
+    generateSessionId: function() {
+        return Math.random().toString(36).substring(2, 10) + Math.random().toString(36).substring(2, 10);
+    },
+    
+    // Show waiting room
+    showWaitingRoom: function(sessionLink) {
+        const waitingRoom = document.getElementById('waitingRoom');
+        const sessionLinkInput = document.getElementById('sessionLink');
+        
+        if (waitingRoom && sessionLinkInput) {
+            sessionLinkInput.value = sessionLink;
+            waitingRoom.style.display = 'block';
+        }
+    },
+    
+    // Hide waiting room
+    hideWaitingRoom: function() {
+        const waitingRoom = document.getElementById('waitingRoom');
+        if (waitingRoom) {
+            waitingRoom.style.display = 'none';
+        }
+    },
+    
+    // Start a video session
+    startVideoSession: async function(patient) {
+        try {
+            // Hide waiting room, show video and controls
+            this.hideWaitingRoom();
+            
+            const sessionControls = document.getElementById('sessionControls');
+            const videoContainer = document.getElementById('videoContainer');
+            
+            if (sessionControls && videoContainer) {
+                sessionControls.style.display = 'block';
+                videoContainer.style.display = 'block';
+            }
+            
+            // Update session title
+            const sessionTitle = document.getElementById('sessionTitle');
+            if (patient && sessionTitle) {
+                sessionTitle.textContent = `Session with ${patient.name}`;
+                const remoteParticipantName = document.getElementById('remoteParticipantName');
+                if (remoteParticipantName) {
+                    remoteParticipantName.textContent = patient.name;
+                }
+            } else if (sessionTitle) {
+                sessionTitle.textContent = 'Session (No Patient)';
+                const remoteParticipantName = document.getElementById('remoteParticipantName');
+                if (remoteParticipantName) {
+                    remoteParticipantName.textContent = 'No Patient';
+                }
+            }
+            
+            // Get user media
+            const stream = await navigator.mediaDevices.getUserMedia({ 
+                video: true, 
+                audio: true 
+            });
+            
+            // Set local video stream
+            const localVideo = document.getElementById('localVideo');
+            if (localVideo) {
+                localVideo.srcObject = stream;
+            }
+            
+            // Simulate remote connection (in a real app, this would use WebRTC)
+            this.simulateRemoteConnection();
+            
+            return stream;
+        } catch (error) {
+            console.error('Error starting video session:', error);
+            this.showToast('Error', 'Could not access camera or microphone', 'error');
+            throw error;
+        }
+    },
+    
+    // Simulate remote connection
+    simulateRemoteConnection: function() {
+        const connectionStatus = document.getElementById('connectionStatus');
+        const remoteVideo = document.getElementById('remoteVideo');
+        
+        if (connectionStatus) {
+            connectionStatus.innerHTML = '<i class="fas fa-circle"></i><span>Connecting...</span>';
+        }
+        
+        setTimeout(() => {
+            if (connectionStatus) {
+                connectionStatus.innerHTML = '<i class="fas fa-circle"></i><span>Connected</span>';
+            }
+            
+            // Simulate remote video (in a real app, this would be the actual remote stream)
+            if (remoteVideo) {
+                remoteVideo.src = 'https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4';
+                remoteVideo.loop = true;
+                remoteVideo.muted = true; // Mute to avoid feedback
+            }
+        }, 2000);
+    },
+    
+    // Show toast notification
+    showToast: function(title, message, type = 'info') {
+        // Create toast container if it doesn't exist
+        let toastContainer = document.querySelector('.toast-container');
+        if (!toastContainer) {
+            toastContainer = document.createElement('section');
+            toastContainer.className = 'toast-container';
+            document.body.appendChild(toastContainer);
+        }
+        
+        // Create toast element
+        const toast = document.createElement('article');
+        toast.className = `toast ${type}`;
+        
+        const icons = {
+            success: 'fa-check-circle',
+            error: 'fa-exclamation-circle',
+            warning: 'fa-exclamation-triangle',
+            info: 'fa-info-circle'
+        };
+        
+        toast.innerHTML = `
+            <i class="fas ${icons[type] || 'fa-info-circle'}"></i>
+            <section class="toast-content">
+                <h4>${title}</h4>
+                <p>${message}</p>
+            </section>
+            <button class="toast-close">
+                <i class="fas fa-times"></i>
+            </button>
+        `;
+        
+        toastContainer.appendChild(toast);
+        
+        // Add close event
+        const closeBtn = toast.querySelector('.toast-close');
+        closeBtn.addEventListener('click', function() {
+            toast.remove();
+        });
+        
+        // Auto remove after 5 seconds
+        setTimeout(() => {
+            if (toast.parentNode) {
+                toast.remove();
+            }
+        }, 5000);
+    },
+    
+    // End session
+    endSession: function(stream) {
+        if (stream) {
+            stream.getTracks().forEach(track => track.stop());
+        }
+        
+        const sessionControls = document.getElementById('sessionControls');
+        const videoContainer = document.getElementById('videoContainer');
+        
+        if (sessionControls && videoContainer) {
+            sessionControls.style.display = 'none';
+            videoContainer.style.display = 'none';
+        }
+    }
+};
+
+// Make it available globally
+window.TelehealthManager = TelehealthManager;
