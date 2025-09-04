@@ -1,4 +1,4 @@
-name: Build and deploy Node.js app to Azure Web App - Mentaly
+name: Build and deploy Node.js app to Azure Web App - Mentally
 
 on:
   push:
@@ -46,15 +46,11 @@ jobs:
 
       - name: Create .env file
         run: |
-          echo "SUPABASE_URL=${{ secrets.SUPABASE_URL }}" > .env
-          echo "SUPABASE_ANON_KEY=${{ secrets.SUPABASE_ANON_KEY }}" >> .env
-          echo "SUPABASE_SERVICE_KEY=${{ secrets.SUPABASE_SERVICE_KEY }}" >> .env
-          echo "SESSION_SECRET=${{ secrets.SESSION_SECRET }}" >> .env
-          echo "GOOGLE_CLIENT_ID=${{ secrets.GOOGLE_CLIENT_ID }}" >> .env
-          echo "GOOGLE_CLIENT_SECRET=${{ secrets.GOOGLE_CLIENT_SECRET }}" >> .env
-          echo "GOOGLE_CALLBACK_URL=https://mentally.azurewebsites.net/auth/google/callback" >> .env
-          echo "BASE_URL=https://mentally.azurewebsites.net" >> .env
+          echo "MONGO_URI=${{ secrets.MONGO_URI }}" > .env
+          echo "GEMINI_API_KEY=${{ secrets.GEMINI_API_KEY }}" >> .env
           echo "PORT=5000" >> .env
+          echo "AT_USERNAME=${{ secrets.AT_USERNAME }}" >> .env
+          echo "AT_API_KEY=${{ secrets.AT_API_KEY }}" >> .env
           echo "NODE_ENV=production" >> .env
 
       - name: Upload artifact for deployment job
@@ -109,6 +105,6 @@ jobs:
           body: |
             Deployment timestamp: ${{ steps.package_version.outputs.timestamp }}
             * Automatic release from CI/CD pipeline
-            * Deployed to Azure Web App - mentally
+            * Deployed to Azure Web App - Mentally
           draft: false
           prerelease: false
