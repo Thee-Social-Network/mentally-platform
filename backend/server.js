@@ -340,6 +340,27 @@ app.get('/professionals', (req, res) => {
   res.sendFile(path.join(__dirname, '../frontend/html/professionals.html'));
 });
 
+
+app.get('/chat', (req, res) => {
+  res.sendFile(path.join(__dirname, '../frontend/html/chat.html'));
+});
+
+app.get('/groups', (req, res) => {
+  res.sendFile(path.join(__dirname, '../frontend/html/groups.html'));
+});
+app.get('/notification', (req, res) => {
+  res.sendFile(path.join(__dirname, '../frontend/html/notification.html'));
+});
+
+app.get('/patients', (req, res) => {
+  res.sendFile(path.join(__dirname, '../frontend/html/patients.html'));
+});
+
+app.get('/wellness-tools', (req, res) => {
+  res.sendFile(path.join(__dirname, '../frontend/html/wellness-tool.html'));
+});
+
+
 app.listen(PORT, () =>{
     connectDB();
     console.log(`Server started on http://localhost:${PORT}`);
