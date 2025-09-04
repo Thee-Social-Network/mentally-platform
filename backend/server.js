@@ -16,7 +16,9 @@ import bodyParser from 'body-parser';
 dotenv.config();
 
 const app = express();
-app.use(bodyParser.urlencoded({ extended: false }));
+// parse both JSON and x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -377,11 +379,9 @@ const availableTimes = {
   3: '16:00'
 };
 
-// USSD endpoint (Africa's Talking will POST requests here)
-app.post('/ussd', (req, res) => {
+app.post(['/ussd', '/384'], (req, res) => {
   const { sessionId, phoneNumber, text } = req.body;
-
-  // Initialize session if doesn't exist
+  
   if (!sessions[sessionId]) {
     sessions[sessionId] = { step: 0, booking: {} };
   }
@@ -391,57 +391,56 @@ app.post('/ussd', (req, res) => {
 
   let response = '';
 
-  if (session.step === 0) {
-    response = `CON Welcome to Psych Connect!\n1. Book Appointment\n2. Info`;
-    session.step = 1;
-  } else if (session.step === 1) {
-    if (userResponse === '1') {
-      response = 'CON Select a day:\n1 Mon\n2 Tue\n3 Wed\n4 Thu\n5 Fri';
-      session.step = 2;
-    } else if (userResponse === '2') {
-      response = 'END Psych Connect offers mental health support via phone and app. Thank you!';
-      delete sessions[sessionId];
-    } else {
-      response = 'CON Invalid option. Please enter 1 or 2.';
-    }
-  } else if (session.step === 2) {
-    if (availableDays[userResponse]) {
-      session.booking.day = availableDays[userResponse];
-      response = 'CON Choose a time:\n1 10:00\n2 14:00\n3 16:00';
-      session.step = 3;
-    } else {
-      response = 'CON Invalid day. Please select 1-5.';
-    }
-  } else if (session.step === 3) {
-    if (availableTimes[userResponse]) {
-      session.booking.time = availableTimes[userResponse];
-      response = `CON Confirm booking for ${session.booking.day} at ${session.booking.time}?\n1 Yes\n2 No`;
-      session.step = 4;
-    } else {
-      response = 'CON Invalid time. Please select 1-3.';
-    }
-  } else if (session.step === 4) {
-    if (userResponse === '1') {
-      // In real app: save booking in database here
+  switch (session.step) {
+    case 0:
+      response = `CON Welcome to Psych Connect!\n1. Book Appointment\n2. Info`;
+      session.step = 1;
+      break;
+    case 1:
+      if (userResponse === '1') {
+        response = 'CON Select a day:\n1 Mon\n2 Tue\n3 Wed\n4 Thu\n5 Fri';
+        session.step = 2;
+      } else if (userResponse === '2') {
+        response = 'END Psych Connect offers mental health support via phone and app. Thank you!';
+        delete sessions[sessionId];
+      } else {
+        response = 'CON Invalid option. Please enter 1 or 2.';
+      }
+      break;
+    case 2:
+      if (availableDays[userResponse]) {
+        session.booking.day = availableDays[userResponse];
+        response = 'CON Choose a time:\n1 10:00\n2 14:00\n3 16:00';
+        session.step = 3;
+      } else {
+        response = 'CON Invalid day. Please select 1-5.';
+      }
+      break;
+    case 3:
+      if (availableTimes[userResponse]) {
+        session.booking.time = availableTimes[userResponse];
+        response = `CON Confirm booking for ${session.booking.day} at ${session.booking.time}?\n1 Yes\n2 No`;
+        session.step = 4;
+      } else {
+        response = 'CON Invalid time. Please select 1-3.';
+      }
+      break;
+    case 4:
+      if (userResponse === '1') {
+        const message = `Your appointment is booked for ${session.booking.day} at ${session.booking.time}. Thank you for choosing Psych Connect!`;
+        sms.send({ to: [phoneNumber], message })
+          .then(() => console.log(`SMS sent to ${phoneNumber}`))
+          .catch(console.error);
 
-      // Send confirmation SMS to user (optional)
-      const message = `Your appointment is booked for ${session.booking.day} at ${session.booking.time}. Thank you for choosing Psych Connect!`;
-
-      sms.send({
-        to: [phoneNumber],
-        message
-      }).then(() => {
-        console.log(`SMS sent to ${phoneNumber}`);
-      }).catch(console.error);
-
-      response = `END Booking confirmed for ${session.booking.day} at ${session.booking.time}. You will receive an SMS confirmation.`;
-      delete sessions[sessionId];
-    } else if (userResponse === '2') {
-      response = 'END Booking cancelled. To start again dial *123#';
-      delete sessions[sessionId];
-    } else {
-      response = 'CON Invalid input. Please enter 1 or 2.';
-    }
+        response = `END Booking confirmed for ${session.booking.day} at ${session.booking.time}. You will receive an SMS confirmation.`;
+        delete sessions[sessionId];
+      } else if (userResponse === '2') {
+        response = 'END Booking cancelled. To start again dial *123#';
+        delete sessions[sessionId];
+      } else {
+        response = 'CON Invalid input. Please enter 1 or 2.';
+      }
+      break;
   }
 
   res.set('Content-Type', 'text/plain');
