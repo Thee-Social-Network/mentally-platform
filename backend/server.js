@@ -7,12 +7,16 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import { Mood } from './models/mood_model.js';
 import { GoogleGenerativeAI } from '@google/generative-ai';
+import africastalking from 'africastalking';
+import bodyParser from 'body-parser';
 
 //API entry point
 
 dotenv.config();
 
 const app = express();
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -770,4 +774,141 @@ app.listen(PORT, () =>{
     console.log(`Server started on http://localhost:${PORT}`);
     console.log(`AI Configuration: ${process.env.GEMINI_API_KEY ? 'Configured ✅' : 'Missing GEMINI_API_KEY ❌'}`);
 
+});
+// Initialize Africa's Talking SDK
+const AT = africastalking({
+  apiKey: process.env.AT_API_KEY,
+  username: process.env.AT_USERNAME
+});
+
+// SMS service from Africa's Talking
+const sms = AT.SMS;
+
+// In-memory session store (use Redis or DB for production)
+const sessions = {};
+
+
+const availableDays = {
+  "1": "Monday",
+  "2": "Tuesday",
+  "3": "Wednesday",
+  "4": "Thursday",
+  "5": "Friday",
+};
+
+const availableTimes = {
+  "1":"now",
+  "2": "10:00",
+  "3": "14:00",
+  "4": "16:00",
+};
+
+const psychologists = {
+  "1": "Dr. Smith",
+  "2": "Dr. Johnson",
+  "3": "Dr. Lee",
+};
+
+// --- USSD HANDLER ---
+app.post(["/ussd", "/384"], (req, res) => {
+  const { sessionId, phoneNumber, text } = req.body;
+
+  if (!sessions[sessionId]) {
+    sessions[sessionId] = { step: 0, booking: {} };
+  }
+
+  const session = sessions[sessionId];
+
+  // FIX: always use the last input after "*"
+  const parts = text.trim().split("*");
+  const userResponse = parts[parts.length - 1];
+
+  console.log(
+    "Session:",
+    sessionId,
+    "Step:",
+    session.step,
+    "Input:",
+    userResponse,
+    "Raw text:",
+    text
+  );
+
+  let response = "";
+
+  switch (session.step) {
+    case 0:
+      response = `CON Welcome to Mentaly!\n1. Book Appointment\n2. Info`;
+      session.step = 1;
+      break;
+
+    case 1:
+      if (userResponse === "1") {
+        response = "CON Select a day:\n1 Mon\n2 Tue\n3 Wed\n4 Thu\n5 Fri";
+        session.step = 2;
+      } else if (userResponse === "2") {
+        response =
+          "END Mentaly offers mental health support via phone and app. Thank you!";
+        delete sessions[sessionId];
+      } else {
+        response = "CON Invalid option. Please enter 1 or 2.";
+      }
+      break;
+
+    case 2:
+      if (availableDays[userResponse]) {
+        session.booking.day = availableDays[userResponse];
+        response = "CON Choose a time:\n1 now\n2 10:00\n3 14:00\n4 16:00";
+        session.step = 3;
+      } else {
+        response = "CON Invalid day. Please select 1-5.";
+      }
+      break;
+
+    case 3:
+      if (availableTimes[userResponse]) {
+        session.booking.time = availableTimes[userResponse];
+        response = "CON Choose a psychologist:\n1 Dr. Smith\n2 Dr. Johnson\n3 Dr. Lee";
+        session.step = 4;
+      } else {
+        response = "CON Invalid time. Please select 1-3.";
+      }
+      break;
+
+    case 4:
+      if (psychologists[userResponse]) {
+        session.booking.psychologist = psychologists[userResponse];
+        response = `CON Confirm booking for ${session.booking.day} at ${session.booking.time} with ${session.booking.psychologist}?\n1 Yes\n2 No`;
+        session.step = 5;
+      } else {
+        response = "CON Invalid choice. Please select 1-3.";
+      }
+      break;
+
+    case 5:
+      if (userResponse === "1") {
+        const message = `Your appointment is booked for ${session.booking.day} at ${session.booking.time} with ${session.booking.psychologist}. Thank you for choosing Psych Connect!`;
+
+        sms
+          .send({ to: [phoneNumber], message })
+          .then(() => console.log(`SMS sent to ${phoneNumber}`))
+          .catch(console.error);
+
+        response = `END Booking confirmed for ${session.booking.day} at ${session.booking.time} with ${session.booking.psychologist}. You will receive an SMS confirmation.`;
+        delete sessions[sessionId];
+      } else if (userResponse === "2") {
+        response = "END Booking cancelled. To start again dial *384#";
+        delete sessions[sessionId];
+      } else {
+        response = "CON Invalid input. Please enter 1 or 2.";
+      }
+      break;
+
+    default:
+      response = "END An error occurred. Please try again.";
+      delete sessions[sessionId];
+  }
+
+  res.set("Content-Type", "text/plain");
+  res.send(response);
 });
