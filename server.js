@@ -864,15 +864,26 @@ const SHOP_ITEMS = [
     }
 ];
 
-// Route to serve landing page
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, '../frontend/html/landing.html'));
+const rootDir = path.resolve(__dirname, "..");
+
+// Serve static files (CSS, JS, images)
+app.use(express.static(path.join(rootDir, "frontend")));
+
+// Routes
+app.get("/", (req, res) => {
+  res.sendFile(path.join(rootDir, "frontend/html/landing.html"));
 });
 
-// Specific routes for your HTML pages
-app.get('/dashboard', (req, res) => {
-  res.sendFile(path.join(__dirname, '../frontend/html/dashboard.html'));
+app.get("/dashboard", (req, res) => {
+  res.sendFile(path.join(rootDir, "frontend/html/dashboard.html"));
 });
+
+app.get("/login", (req, res) => {
+  res.sendFile(path.join(rootDir, "frontend/html/login.html"));
+});
+
+// Route to serve landing page
+
 
 // Add this route to your server.js
 app.get('/signup', (req, res) => {
@@ -880,9 +891,6 @@ app.get('/signup', (req, res) => {
 });
 
 // Add this route to your server.js
-app.get('/login', (req, res) => {
-  res.sendFile(path.join(__dirname, '../frontend/html/login.html'));
-});
 
 app.get('/psy-dashboard', (req, res) => {
   res.sendFile(path.join(__dirname, '../frontend/html/pys-dashboard.html'));
