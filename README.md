@@ -71,6 +71,68 @@ Key SMS features:
 5. Test and deploy
 Before going live, conduct thorough testing to ensure a smooth user experience.
 
+Architecture
+
+The application follows a client-server architecture:
+
+Frontend (Client): React.js app running in the browser, handles all UI interactions.
+
+Backend (Server): Node.js + Express API handles data management, authentication, and business logic.
+
+Database: Supabase stores user, counsellor, and session data.
+
+This separation ensures scalability, maintainability, and allows for potential mobile app integration in the future.
+
+Design Patterns
+
+MVC (Model-View-Controller):
+
+Model: Supabase/PostgreSQL manages data and relationships between users and counsellors.
+
+View: React components render dynamic UI based on user actions.
+
+Controller: Express.js routes handle requests, process logic, and respond with JSON.
+
+Singleton Pattern (Authentication Service):
+
+Ensures a single instance of the authentication handler, maintaining consistent user sessions across the application.
+
+Observer Pattern (Mood Tracking):
+
+Updates counsellors in real-time about user mood changes, enhancing responsiveness and user care.
+
+Deployment
+
+Platform: Render
+
+Reasoning: Render provides seamless deployment for both frontend and backend with continuous integration. It supports HTTPS, custom domains, and automatic scaling, which ensures reliability for users seeking mental health support.
+
+Why These Decisions Were Made
+
+React.js & Node.js: Fast development, maintainable, scalable, and widely supported with a strong community.
+
+Supabase: Real-time database and authentication reduce complexity in managing users and counsellors.
+
+Design Patterns: MVC provides clarity and separation of concerns; Singleton and Observer patterns optimize authentication and real-time updates.
+
+Render Deployment: Reliable, cost-effective hosting solution with easy CI/CD for rapid iteration.
+
+Google OAuth: Improves security and reduces friction in the sign-up process.
+
+Future Enhancements
+
+Integration of AI-based sentiment analysis for mood tracking.
+
+Multi-language support to improve accessibility.
+
+Mobile app companion for Android and iOS.
+
+Advanced analytics for counsellors to improve therapy effectiveness.
+
+Getting Started
+
+Clone the repository:
+
     User flow testing: Test the entire USSD menu flow to catch any dead ends or confusing options.
     Load testing: Check that your system can handle a large number of simultaneous USSD sessions.
     Database integration: Verify that bookings are correctly created, updated, and logged in your database.
