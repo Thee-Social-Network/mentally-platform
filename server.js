@@ -864,7 +864,7 @@ const SHOP_ITEMS = [
     }
 ];
 
-const rootDir = path.resolve(__dirname, "..");
+const rootDir = path.resolve(__dirname);
 
 // Serve static files (CSS, JS, images)
 app.use(express.static(path.join(rootDir, "frontend")));
@@ -891,6 +891,7 @@ app.get('/signup', (req, res) => {
 });
 
 // Add this route to your server.js
+
 
 app.get('/psy-dashboard', (req, res) => {
   res.sendFile(path.join(__dirname, '../frontend/html/pys-dashboard.html'));
