@@ -1,12 +1,12 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import bcrypt from 'bcrypt';
-import {connectDB} from './config/db.js'
-import {User} from './models/user_model.js';
+import {connectDB} from './backend/config/db.js'
+import {User} from './backend/models/user_model.js';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import { Mood } from './models/mood_model.js';
-import { Wellness } from './models/wellness_model.js';
+import { Mood } from './backend//models/mood_model.js';
+import { Wellness } from './backend/models/wellness_model.js';
 import { GoogleGenerativeAI } from '@google/generative-ai';
 import africastalking from 'africastalking';
 import bodyParser from 'body-parser';
