@@ -1,3 +1,5 @@
+import API_BASE from "./config.js";
+
 // Mentaly Dashboard JavaScript - Multi-Page Version with Professional Notification
 document.addEventListener('DOMContentLoaded', function() {
     // Initialize the dashboard
@@ -951,7 +953,7 @@ async function handleChatSubmit(e) {
         console.log('📡 Frontend: Making API call to /api/chat');
         
         // Send message to AI backend
-        const response = await fetch('http://localhost:5000/api/chat', {
+        const response = await fetch(`${API_BASE}/api/chat`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
